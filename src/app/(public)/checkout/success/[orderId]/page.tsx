@@ -4,8 +4,10 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { formatRupiah } from "@/lib/currency";
+import { getGatePolicy } from "@/lib/commercial-gates";
 import {
   CheckCircle2,
+  Clock,
   MapPin,
   Truck,
   QrCode,
@@ -15,8 +17,10 @@ import {
   Printer,
   ShieldCheck,
   Package,
+  AlertCircle,
 } from "lucide-react";
 import PrintButton from "./PrintButton";
+import SimulatePaymentButton from "./SimulatePaymentButton";
 
 interface Props {
   params: Promise<{ orderId: string }>;
@@ -29,6 +33,7 @@ export const metadata = {
 
 export default async function OrderSuccessPage({ params }: Props) {
   const { orderId } = await params;
+  const policy = getGatePolicy();
 
   const order = await prisma.order.findUnique({
     where: { id: orderId },
@@ -50,6 +55,7 @@ export default async function OrderSuccessPage({ params }: Props) {
   }
 
   const isPickup = order.deliveryMethod === "PICKUP_VENUE";
+  const isPaid = order.paymentStatus === "PAID";
 
   return (
     <div className="flex-1 flex flex-col w-full min-h-screen text-[#F6F3EC] bg-[#09090b] pt-24 pb-20">
@@ -57,24 +63,43 @@ export default async function OrderSuccessPage({ params }: Props) {
         {/* Success Banner */}
         <div className="bg-[#171719] border border-white/10 rounded-sm p-6 sm:p-10 shadow-2xl relative overflow-hidden space-y-8">
           {/* Ambient Glow */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div
+            className={`absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none ${
+              isPaid ? "bg-emerald-500/10" : "bg-amber-500/10"
+            }`}
+          />
 
           {/* Top Status */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
-                <CheckCircle2 className="w-8 h-8" />
+              <div
+                className={`w-14 h-14 rounded-full border flex items-center justify-center shrink-0 ${
+                  isPaid
+                    ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-400"
+                    : "bg-amber-500/20 border-amber-500/40 text-amber-400"
+                }`}
+              >
+                {isPaid ? <CheckCircle2 className="w-8 h-8" /> : <Clock className="w-8 h-8" />}
               </div>
               <div>
-                <span className="text-[10px] uppercase font-mono font-bold tracking-widest text-emerald-400 block">
-                  PEMBAYARAN TERVERIFIKASI
+                <span
+                  className={`text-[10px] uppercase font-mono font-bold tracking-widest block ${
+                    isPaid ? "text-emerald-400" : "text-amber-400"
+                  }`}
+                >
+                  {isPaid ? "PEMBAYARAN TERVERIFIKASI" : "STATUS: MENUNGGU PEMBAYARAN (UNPAID)"}
                 </span>
                 <h1
                   className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white leading-tight"
                   style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
                 >
-                  TERIMA KASIH ATAS DUKUNGANMU!
+                  {isPaid ? "TERIMA KASIH ATAS DUKUNGANMU!" : "PESANAN BERHASIL DICATAT"}
                 </h1>
+                {!isPaid && (
+                  <p className="text-xs text-[#90929A] mt-1 font-sans">
+                    Pesanan Anda berstatus PENDING. Barang akan disiapkan setelah pembayaran terkonfirmasi.
+                  </p>
+                )}
               </div>
             </div>
 
@@ -86,14 +111,31 @@ export default async function OrderSuccessPage({ params }: Props) {
             </div>
           </div>
 
+          {/* Staging Simulator Component (Dev / Non-Production Only) */}
+          {!isPaid && policy.allowPaymentSimulator && (
+            <SimulatePaymentButton orderId={order.id} />
+          )}
+
           {/* Barcode & Pick-Up / Delivery Pass Card */}
           {isPickup ? (
-            <div className="bg-[#09090b] border-2 border-dashed border-[#D21F2B]/40 p-6 rounded-sm space-y-4">
+            <div
+              className={`p-6 rounded-sm space-y-4 border-2 ${
+                isPaid
+                  ? "bg-[#09090b] border-dashed border-[#D21F2B]/40"
+                  : "bg-[#09090b]/80 border-dashed border-amber-500/30 opacity-90"
+              }`}
+            >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-xs bg-[#D21F2B]/20 border border-[#D21F2B]/40 text-[#D21F2B] text-xs font-bold uppercase tracking-wider mb-2">
+                  <div
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-xs text-xs font-bold uppercase tracking-wider mb-2 border ${
+                      isPaid
+                        ? "bg-[#D21F2B]/20 border-[#D21F2B]/40 text-[#D21F2B]"
+                        : "bg-amber-500/10 border-amber-500/30 text-amber-400"
+                    }`}
+                  >
                     <MapPin className="w-3.5 h-3.5" />
-                    <span>PASS KLAIM MERCHANDISE DI VENUE</span>
+                    <span>{isPaid ? "PASS KLAIM MERCHANDISE DI VENUE" : "PROVISIONAL KLAIM (PENDING PAYMENT)"}</span>
                   </div>
                   <h3
                     className="text-xl font-black uppercase text-white"
@@ -102,7 +144,8 @@ export default async function OrderSuccessPage({ params }: Props) {
                     BOOTH OFFICIAL MERCH — GOR UNY
                   </h3>
                   <p className="text-xs text-[#90929A] max-w-md mt-1">
-                    Hall Barat Lantai 1 (Pintu Masuk Utama). Buka 12–14 Desember 2026, 09:00 - 22:00 WIB. Tunjukkan kode klaim berikut:
+                    Hall Barat Lantai 1 (Pintu Masuk Utama). Buka 12–14 Desember 2026, 09:00 - 22:00 WIB.
+                    {isPaid ? " Tunjukkan kode klaim berikut:" : " Kode klaim akan aktif setelah pembayaran diverifikasi."}
                   </p>
                 </div>
 
@@ -111,6 +154,11 @@ export default async function OrderSuccessPage({ params }: Props) {
                   <span className="text-xs font-mono font-black text-black tracking-widest">
                     {order.claimBarcode || order.orderNumber}
                   </span>
+                  {!isPaid && (
+                    <span className="text-[9px] font-mono text-red-600 font-bold uppercase block mt-0.5">
+                      (UNPAID)
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

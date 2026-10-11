@@ -374,9 +374,9 @@ export default function CheckoutClient() {
               <Info className="w-4 h-4 text-[#D21F2B] shrink-0 mt-0.5" />
               <div>
                 <strong className="text-white block mb-0.5">
-                  Lokasi Booth Pengambilan On-Site:
+                  Lokasi Booth Pengambilan On-Site (Tentatif):
                 </strong>
-                GOR UNY, Hall Barat Lantai 1 (Dekat Pintu Masuk VIP & Media). Jam buka booth: 09:00 - 22:00 WIB selama tanggal 12, 13, dan 14 Desember 2026.
+                GOR UNY, Hall Barat Lantai 1 (Rencana awal dekat Pintu Masuk VIP & Media). Jam buka booth dan titik presisi bersifat unconfirmed dan akan dikonfirmasi secara resmi mendekati 12–14 Desember 2026.
               </div>
             </div>
           )}
@@ -393,7 +393,7 @@ export default function CheckoutClient() {
                 className="text-lg font-black uppercase tracking-wider text-white"
                 style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
               >
-                METODE PEMBAYARAN (SIMULASI STAGING)
+                METODE PEMBAYARAN (STAGING GATE)
               </h2>
             </div>
             <span className="text-[10px] text-amber-400 font-mono font-bold bg-amber-500/10 px-2 py-0.5 rounded-xs">
@@ -449,7 +449,7 @@ export default function CheckoutClient() {
           <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-sm text-[11px] text-amber-300 flex items-start gap-2">
             <Info className="w-4 h-4 shrink-0 mt-0.5" />
             <span>
-              <strong>Lingkungan Demo / Sandbox:</strong> Klik "Konfirmasi & Bayar Pesanan" akan langsung menyetujui transaksi dan mengurangi inventaris secara transaksional di database.
+              <strong>Gerbang Keamanan Pembayaran:</strong> Pesanan dibuat secara aman dengan status PENDING & UNPAID. Di staging environment, simulasi pelunasan dapat diuji di halaman sukses transaksi. Di production, pembayaran nyata ditahan hingga integrasi gateway aktif.
             </span>
           </div>
 

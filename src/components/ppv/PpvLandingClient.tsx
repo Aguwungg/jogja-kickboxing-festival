@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { formatRupiah } from "@/lib/currency";
-import { purchasePPVPassAction } from "@/app/(public)/ppv/actions";
+import { purchasePPVPassAction, simulateStagingPPVActivationAction } from "@/app/(public)/ppv/actions";
 import {
   Tv,
   Radio,
@@ -63,6 +63,18 @@ export default function PpvLandingClient({ products }: Props) {
   const [paymentMethod, setPaymentMethod] = useState("QRIS");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [purchaseError, setPurchaseError] = useState<string | null>(null);
+
+  // Staging Pending Payment Gate State
+  const [pendingPass, setPendingPass] = useState<{
+    passId: string;
+    accessCode: string;
+    simulationAllowed: boolean;
+    productName: string;
+    price: number;
+    isActivated?: boolean;
+  } | null>(null);
+  const [isActivatingSimulation, setIsActivatingSimulation] = useState(false);
+  const [activationError, setActivationError] = useState<string | null>(null);
 
   // Live countdown state (to 12 December 2026, 09:00 WIB)
   const [timeLeft, setTimeLeft] = useState({
@@ -130,8 +142,16 @@ export default function PpvLandingClient({ products }: Props) {
       });
 
       if (res.success && res.accessCode) {
+        setPendingPass({
+          passId: res.entitlementId!,
+          accessCode: res.accessCode,
+          simulationAllowed: !!res.isSimulatorAllowed,
+          productName: selectedProduct.name,
+          price: selectedProduct.price,
+          isActivated: false,
+        });
         setSelectedProduct(null);
-        router.push(res.watchUrl);
+        setIsSubmitting(false);
       } else {
         setPurchaseError(res.error || "Gagal memproses transaksi.");
         setIsSubmitting(false);
@@ -139,6 +159,24 @@ export default function PpvLandingClient({ products }: Props) {
     } catch (err: any) {
       setPurchaseError(err.message || "Terjadi kesalahan internal.");
       setIsSubmitting(false);
+    }
+  };
+
+  const handleSimulateActivation = async () => {
+    if (!pendingPass) return;
+    setIsActivatingSimulation(true);
+    setActivationError(null);
+    try {
+      const res = await simulateStagingPPVActivationAction(pendingPass.accessCode);
+      if (res.success) {
+        setPendingPass((prev) => (prev ? { ...prev, isActivated: true } : null));
+      } else {
+        setActivationError(res.error || "Gagal mengaktifkan tiket.");
+      }
+    } catch (err: any) {
+      setActivationError(err.message || "Gagal menghubungi simulasi server.");
+    } finally {
+      setIsActivatingSimulation(false);
     }
   };
 
@@ -706,6 +744,138 @@ export default function PpvLandingClient({ products }: Props) {
                 </div>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      {/* Pending Payment & Simulation Gate Modal */}
+      {pendingPass && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-[#171719] border border-white/15 rounded-sm max-w-lg w-full p-6 text-[#F6F3EC] shadow-2xl relative space-y-5">
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
+              <div>
+                <span className="text-[10px] text-amber-400 font-mono font-bold uppercase tracking-wider block">
+                  TRANSAKSI TERCATAT • GATEWAY GATE
+                </span>
+                <h3
+                  className="text-xl font-black uppercase text-white"
+                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                >
+                  {pendingPass.productName}
+                </h3>
+              </div>
+              <button
+                onClick={() => setPendingPass(null)}
+                className="w-8 h-8 rounded-sm border border-white/10 flex items-center justify-center text-white/50 hover:text-white"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="bg-[#09090b] border border-white/10 p-4 rounded-sm space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-[#90929A]">Status Pembayaran:</span>
+                <span
+                  className={`text-xs font-mono font-bold px-2 py-0.5 rounded-xs border ${
+                    pendingPass.isActivated
+                      ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+                      : "bg-amber-500/10 text-amber-400 border-amber-500/30"
+                  }`}
+                >
+                  {pendingPass.isActivated ? "LUNAS (ACTIVE)" : "MENUNGGU PEMBAYARAN (PENDING)"}
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-[#90929A]">Total Biaya:</span>
+                <span className="text-xl font-black text-amber-400 font-mono">
+                  {formatRupiah(pendingPass.price)}
+                </span>
+              </div>
+
+              <div className="pt-2 border-t border-white/5">
+                <span className="text-[11px] text-[#90929A] block mb-1">Kode Akses Streaming:</span>
+                <div className="bg-[#171719] border border-white/10 px-3 py-2 rounded-xs flex items-center justify-between">
+                  <span className="font-mono text-base font-black text-white tracking-wider">
+                    {pendingPass.accessCode}
+                  </span>
+                  <span className="text-[10px] text-white/40 uppercase font-mono">Tersimpan di DB</span>
+                </div>
+              </div>
+            </div>
+
+            {activationError && (
+              <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-sm text-red-400 text-xs">
+                {activationError}
+              </div>
+            )}
+
+            {/* Simulation or Production Gate Notice */}
+            {pendingPass.isActivated ? (
+              <div className="space-y-3 pt-2">
+                <div className="p-3 rounded-sm bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 shrink-0 text-emerald-400" />
+                  <span>Pembayaran berhasil diverifikasi secara server-side! Hak siar streaming kini aktif.</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    router.push(`/ppv/watch?code=${encodeURIComponent(pendingPass.accessCode)}`);
+                  }}
+                  className="w-full bg-[#EF3340] hover:bg-[#D91F2C] text-white font-bold uppercase tracking-wider py-3 px-4 rounded-sm transition-all shadow-lg shadow-[#EF3340]/20 flex items-center justify-center gap-2 text-sm"
+                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                >
+                  <Play className="w-4 h-4 fill-white" />
+                  <span>Buka Live Streaming Sekarang &rarr;</span>
+                </button>
+              </div>
+            ) : pendingPass.simulationAllowed ? (
+              <div className="space-y-3 pt-2">
+                <div className="p-3 rounded-sm bg-amber-500/10 border border-amber-500/20 text-amber-200/90 text-xs space-y-1">
+                  <div className="flex items-center gap-1.5 font-bold text-amber-400">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>Mode Staging Demo / QA Test Environment</span>
+                  </div>
+                  <p className="text-[11px] text-white/70 leading-relaxed">
+                    Pesanan berstatus PENDING di database. Untuk memverifikasi entitlement siaran secara end-to-end tanpa gateway eksternal, klik tombol simulasi di bawah:
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  disabled={isActivatingSimulation}
+                  onClick={handleSimulateActivation}
+                  className="w-full bg-amber-500 hover:bg-amber-400 text-black font-black uppercase tracking-wider py-3 px-4 rounded-sm transition-all flex items-center justify-center gap-2 text-xs"
+                >
+                  {isActivatingSimulation ? (
+                    <span>Memproses Verifikasi Server...</span>
+                  ) : (
+                    <>
+                      <Zap className="w-4 h-4" />
+                      <span>Simulasikan Konfirmasi Pembayaran (Staging Test)</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-3 pt-2">
+                <div className="p-3 rounded-sm bg-blue-500/10 border border-blue-500/20 text-blue-200 text-xs space-y-1">
+                  <div className="flex items-center gap-1.5 font-bold text-blue-400">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>Gerbang Komersial Produksi Terkunci</span>
+                  </div>
+                  <p className="text-[11px] text-white/70 leading-relaxed">
+                    Pesanan Anda tersimpan aman dengan status PENDING. Penyelesaian pembayaran publik ditangguhkan hingga integrasi gateway pembayaran Midtrans live diaktifkan secara resmi.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setPendingPass(null)}
+                  className="w-full bg-white/10 hover:bg-white/20 text-white font-bold uppercase tracking-wider py-2.5 px-4 rounded-sm transition-all text-xs"
+                >
+                  Tutup
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

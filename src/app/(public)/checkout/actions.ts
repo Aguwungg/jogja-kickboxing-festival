@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
+import { getGatePolicy, assertSimulationAllowed } from "@/lib/commercial-gates";
 
 export interface CheckoutInput {
   customerName: string;
@@ -21,8 +22,23 @@ export interface CheckoutInput {
   }[];
 }
 
+/**
+ * Creates a new order.
+ * Strictly defaults all created orders to PENDING & UNPAID.
+ * Never trusts client-submitted paymentStatus.
+ */
 export async function createOrderAction(input: CheckoutInput) {
   try {
+    const policy = getGatePolicy();
+
+    // Check if commercial payment checkout is permitted in current environment
+    if (!policy.isLivePaymentActive && !policy.allowPaymentSimulator) {
+      return {
+        success: false,
+        error: "Checkout publik dinonaktifkan sementara hingga integrasi gateway pembayaran resmi terverifikasi.",
+      };
+    }
+
     if (!input.customerName || !input.guestEmail || !input.customerPhone) {
       return { success: false, error: "Harap lengkapi nama, email, dan nomor WhatsApp." };
     }
@@ -46,7 +62,7 @@ export async function createOrderAction(input: CheckoutInput) {
         });
 
         if (!variant) {
-          throw new Error(`Varian produk tidak ditemukan.`);
+          throw new Error("Varian produk tidak ditemukan.");
         }
 
         if (variant.stockQuantity < item.quantity) {
@@ -73,7 +89,7 @@ export async function createOrderAction(input: CheckoutInput) {
       const orderNumber = `JKB-ORD-2026-${randomOrderSuffix}`;
       const claimBarcode = `JKB-CLAIM-${Math.floor(10000 + Math.random() * 90000)}`;
 
-      // 2. Create Order
+      // 2. Create Order — STRICT DEFAULT: PENDING & UNPAID
       const newOrder = await tx.order.create({
         data: {
           orderNumber,
@@ -87,12 +103,9 @@ export async function createOrderAction(input: CheckoutInput) {
           courier: input.courier,
           shippingCost: input.shippingCost || 0,
           totalAmount,
-          status: "CONFIRMED",
-          paymentStatus: "PAID", // Auto-approved under Midtrans Sandbox Demo
-          fulfillmentStatus:
-            input.deliveryMethod === "PICKUP_VENUE"
-              ? "READY_FOR_PICKUP"
-              : "PROCESSING",
+          status: "PENDING",
+          paymentStatus: "UNPAID",
+          fulfillmentStatus: "UNFULFILLED",
           claimBarcode,
           notes: input.notes || null,
           orderItems: {
@@ -112,12 +125,60 @@ export async function createOrderAction(input: CheckoutInput) {
       success: true,
       orderId: result.id,
       orderNumber: result.orderNumber,
+      paymentStatus: "UNPAID",
+      isSimulatorAllowed: policy.allowPaymentSimulator,
     };
   } catch (error: any) {
     console.error("Error creating order:", error);
     return {
       success: false,
       error: error.message || "Gagal memproses pesanan. Silakan coba lagi.",
+    };
+  }
+}
+
+/**
+ * Staging/Dev-only test action to simulate order payment completion.
+ * Protected by assertSimulationAllowed to prevent production execution.
+ */
+export async function simulateOrderPaymentAction(orderId: string) {
+  try {
+    assertSimulationAllowed("simulateOrderPaymentAction");
+
+    const order = await prisma.order.findUnique({
+      where: { id: orderId },
+    });
+
+    if (!order) {
+      return { success: false, error: "Pesanan tidak ditemukan." };
+    }
+
+    if (order.paymentStatus === "PAID") {
+      return { success: true, message: "Pesanan sudah berstatus PAID." };
+    }
+
+    const updated = await prisma.order.update({
+      where: { id: orderId },
+      data: {
+        paymentStatus: "PAID",
+        status: "CONFIRMED",
+        fulfillmentStatus:
+          order.deliveryMethod === "PICKUP_VENUE"
+            ? "READY_FOR_PICKUP"
+            : "PROCESSING",
+      },
+    });
+
+    return {
+      success: true,
+      orderId: updated.id,
+      orderNumber: updated.orderNumber,
+      paymentStatus: updated.paymentStatus,
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      error: error.message || "Gagal melakukan simulasi pembayaran.",
     };
   }
 }
