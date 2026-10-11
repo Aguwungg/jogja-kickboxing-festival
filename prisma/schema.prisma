@@ -1,0 +1,375 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------
+// Authentication & Users
+// ---------------------------------------------------------
+
+model User {
+  id            String    @id @default(cuid())
+  email         String?   @unique
+  passwordHash  String?
+  name          String?
+  role          String    @default("VIEWER") // Enum replacement
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sessions      Session[]
+  creatorProfile CreatorProfile?
+  orders        Order[]
+  votes         Vote[]
+  entitlements  Entitlement[]
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ---------------------------------------------------------
+// Creator Hub
+// ---------------------------------------------------------
+
+model CreatorProfile {
+  id            String         @id @default(cuid())
+  userId        String         @unique
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name          String?
+  category      String?        @default("COMBAT_SPORT")
+  instagram     String?
+  tiktok        String?
+  youtube       String?
+  bio           String?
+  status        String         @default("PENDING") // "PENDING", "APPROVED", "REJECTED"
+  totalPoints   Int            @default(0)
+  
+  submissions   Submission[]
+  barcodeClaims BarcodeClaim[]
+}
+
+model Submission {
+  id          String         @id @default(cuid())
+  creatorId   String
+  creator     CreatorProfile @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  campaignId  String?
+  title       String?
+  url         String
+  platform    String         // "TIKTOK", "INSTAGRAM", "YOUTUBE"
+  status      String         @default("PENDING") // "PENDING", "APPROVED", "REJECTED"
+  points      Int            @default(0)
+  adminNote   String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model BarcodeClaim {
+  id            String         @id @default(cuid())
+  creatorId     String
+  creator       CreatorProfile @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  barcode       String         @unique
+  status        String         @default("PENDING") // "PENDING", "VERIFIED", "REJECTED", "EXPIRED"
+  pointsAwarded Int            @default(0)
+  adminNote     String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model MediaAccreditation {
+  id              String   @id @default(cuid())
+  mediaName       String
+  journalistName  String
+  email           String
+  phone           String
+  mediaType       String   @default("ONLINE_MEDIA") // "ONLINE_MEDIA", "PRINT_MEDIA", "TELEVISION", "PHOTOGRAPHER_RINGSIDE"
+  pressCardNumber String?
+  coveragePlan    String?
+  status          String   @default("PENDING") // "PENDING", "APPROVED", "REJECTED"
+  badgeNumber     String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// ---------------------------------------------------------
+// CMS & Marketing
+// ---------------------------------------------------------
+
+model Campaign {
+  id          String    @id @default(cuid())
+  name        String
+  startDate   DateTime
+  endDate     DateTime
+  status      String    @default("DRAFT")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model ContentBlock {
+  id          String    @id @default(cuid())
+  key         String    @unique
+  content     String    
+  type        String
+  isPublished Boolean   @default(false)
+  scheduledAt DateTime?
+  updatedAt   DateTime  @updatedAt
+}
+
+model Announcement {
+  id          String    @id @default(cuid())
+  title       String
+  content     String    
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// ---------------------------------------------------------
+// E-Commerce
+// ---------------------------------------------------------
+
+model Product {
+  id          String           @id @default(cuid())
+  name        String
+  slug        String           @unique
+  description String           
+  price       Float
+  category    String           @default("APPAREL") // "APPAREL", "EQUIPMENT", "ACCESSORIES"
+  badge       String?          // "OFFICIAL MERCH", "LIMITED EDITION", "FESTIVAL EXCLUSIVE"
+  material    String?          
+  isActive    Boolean          @default(true)
+  imageUrl    String?
+  variants    ProductVariant[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model ProductVariant {
+  id            String      @id @default(cuid())
+  productId     String
+  product       Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  size          String?
+  color         String?
+  stockQuantity Int         @default(0)
+  orderItems    OrderItem[]
+}
+
+model Order {
+  id                String      @id @default(cuid())
+  orderNumber       String      @unique @default(cuid())
+  userId            String?
+  user              User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  guestEmail        String?
+  customerName      String?
+  customerPhone     String?
+  deliveryMethod    String      @default("PICKUP_VENUE") // "PICKUP_VENUE" | "EXPEDITION"
+  shippingAddress   String?
+  shippingCity      String?
+  shippingPostalCode String?
+  courier           String?     // "Pickup GOR Among Rogo", "JNE Regular", "J&T Express"
+  shippingCost      Float       @default(0)
+  totalAmount       Float
+  status            String      @default("PENDING") // "PENDING", "CONFIRMED", "CANCELLED"
+  paymentStatus     String      @default("UNPAID")  // "UNPAID", "PAID"
+  fulfillmentStatus String      @default("UNFULFILLED") // "UNFULFILLED", "PROCESSING", "READY_FOR_PICKUP", "SHIPPED", "DELIVERED"
+  trackingNumber    String?
+  claimBarcode      String?     // e.g. "JKB-CLAIM-89211" for venue pickup
+  notes             String?
+  orderItems        OrderItem[]
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+}
+
+model OrderItem {
+  id            String         @id @default(cuid())
+  orderId       String
+  order         Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  variantId     String
+  variant       ProductVariant @relation(fields: [variantId], references: [id])
+  quantity      Int
+  price         Float
+}
+
+// ---------------------------------------------------------
+// Championship & Athletes
+// ---------------------------------------------------------
+
+model Athlete {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  weightClass String
+  division    String
+  club        String?
+  wins        Int       @default(0)
+  losses      Int       @default(0)
+  draws       Int       @default(0)
+  image       String?
+  isPublished Boolean   @default(false)
+  
+  matchesAsFighter1 Match[] @relation("Fighter1")
+  matchesAsFighter2 Match[] @relation("Fighter2")
+  matchWins         Match[] @relation("MatchWinner")
+}
+
+
+model Match {
+  id          String      @id @default(cuid())
+  athlete1Id  String?
+  athlete1    Athlete?    @relation("Fighter1", fields: [athlete1Id], references: [id])
+  athlete2Id  String?
+  athlete2    Athlete?    @relation("Fighter2", fields: [athlete2Id], references: [id])
+  winnerId    String?
+  winner      Athlete?    @relation("MatchWinner", fields: [winnerId], references: [id])
+  category    String
+  round       String      @default("QUARTERFINAL") // "QUARTERFINAL", "SEMIFINAL", "FINAL"
+  matchNumber Int         @default(1)
+  resultType  String?     // "KO", "TKO", "DECISION", "BYE"
+  roundResult String?     // e.g. "R2 1:45"
+  scheduledAt DateTime?
+  status      String      @default("SCHEDULED") // "SCHEDULED", "LIVE", "COMPLETED"
+  bracketId   String?
+  bracket     Tournament? @relation(fields: [bracketId], references: [id])
+}
+
+model Tournament {
+  id          String    @id @default(cuid())
+  name        String
+  category    String    @default("Bantamweight")
+  format      String    @default("SINGLE_ELIMINATION")
+  status      String    @default("ACTIVE")
+  matches     Match[]
+}
+
+// ---------------------------------------------------------
+// City Pride Voting
+// ---------------------------------------------------------
+
+model VotingCampaign {
+  id          String    @id @default(cuid())
+  name        String
+  startDate   DateTime
+  endDate     DateTime
+  status      String    @default("DRAFT")
+  votes       Vote[]
+}
+
+model Vote {
+  id          String         @id @default(cuid())
+  userId      String
+  user        User           @relation(fields: [userId], references: [id])
+  campaignId  String
+  campaign    VotingCampaign @relation(fields: [campaignId], references: [id])
+  choice      String
+  createdAt   DateTime       @default(now())
+
+  @@unique([userId, campaignId])
+}
+
+// ---------------------------------------------------------
+// PPV Platform
+// ---------------------------------------------------------
+
+model PPVProduct {
+  id          String        @id @default(cuid())
+  name        String
+  slug        String        @unique @default("ppv-product")
+  tier        String        @default("STANDARD") // "SINGLE_DAY", "ALL_ACCESS", "VIP"
+  badge       String?       // "POPULAR", "BEST VALUE", "LIMITED VIP"
+  description String        @default("Akses siaran langsung resmi JKB 2026.")
+  features    String?       // Stored comma/pipe separated or JSON features
+  resolution  String        @default("1080p 60FPS")
+  price       Float
+  order       Int           @default(1)
+  streamUrl   String?
+  isActive    Boolean       @default(true)
+  entitlements Entitlement[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now()) @updatedAt
+}
+
+model Entitlement {
+  id            String      @id @default(cuid())
+  accessCode    String      @unique
+  userId        String?
+  user          User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  guestEmail    String?
+  customerName  String?
+  customerPhone String?
+  ppvId         String
+  ppvProduct    PPVProduct  @relation(fields: [ppvId], references: [id], onDelete: Cascade)
+  status        String      @default("ACTIVE") // "ACTIVE", "EXPIRED", "REVOKED"
+  paymentMethod String      @default("QRIS")
+  amountPaid    Float       @default(0)
+  deviceLimit   Int         @default(2)
+  expiresAt     DateTime?
+  lastWatchedAt DateTime?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+// ---------------------------------------------------------
+// Music & Entertainment (Lineup)
+// ---------------------------------------------------------
+
+model Performer {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  image       String?
+  stage       String?
+  scheduledAt DateTime?
+  isPublished Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// ---------------------------------------------------------
+// Event Schedule & Activities
+// ---------------------------------------------------------
+
+model ScheduleItem {
+  id          String   @id @default(cuid())
+  title       String
+  category    String   // "COMBAT", "STAGE", "CEREMONY", "COMMUNITY"
+  day         Int      // 1, 2, 3
+  timeSlot    String   // e.g. "09:00 - 11:30 WIB"
+  location    String   // "Ring Utama (Championship Ring)" or "Panggung Utama (Live Stage)"
+  description String?
+  isHighlight Boolean  @default(false)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ---------------------------------------------------------
+// Contact & Inquiries
+// ---------------------------------------------------------
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  status    String   @default("UNREAD") // UNREAD, READ, REPLIED
+  createdAt DateTime @default(now())
+}
+

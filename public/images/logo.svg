@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="100%" height="100%">
+  <style>
+    .text-jkb {
+      font-family: 'Barlow Condensed', 'Bebas Neue', sans-serif;
+      font-size: 80px;
+      font-weight: 900;
+      fill: #F6F3EC;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .text-year {
+      fill: #D21F2B;
+    }
+    .text-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      fill: #90929A;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+    }
+  </style>
+  
+  <text x="0" y="80" class="text-jkb">JKB <tspan class="text-year">2026</tspan></text>
+  <text x="2" y="105" class="text-sub">JOGJA KICKBOXING FESTIVAL</text>
+</svg>
