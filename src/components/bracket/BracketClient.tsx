@@ -90,8 +90,14 @@ export default function BracketClient({ tournaments }: BracketClientProps) {
         })}
       </div>
 
+      {/* Mobile Swipe Hint */}
+      <div className="flex md:hidden items-center justify-between text-[11px] text-[#9A9AA2] pb-2 px-1">
+        <span>Geser ke samping untuk melihat alur turnamen →</span>
+        <span className="font-mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-white">SWIPE</span>
+      </div>
+
       {/* Bracket Tree Container (Horizontal Scrollable on Mobile) */}
-      <div className="overflow-x-auto pb-8 pt-2 no-scrollbar">
+      <div className="overflow-x-auto pb-8 pt-1 no-scrollbar">
         <div className="min-w-[850px] grid grid-cols-3 gap-8 items-center relative">
           {/* Column 1: Semifinals */}
           <div className="space-y-8">

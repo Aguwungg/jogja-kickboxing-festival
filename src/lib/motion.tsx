@@ -21,10 +21,10 @@ export const SectionReveal = ({ children, className }: { children: ReactNode; cl
   <motion.div
     initial="hidden"
     whileInView="visible"
-    viewport={{ once: true, margin: "-100px" }}
+    viewport={{ once: true, margin: "-20px" }}
     variants={{
-      hidden: { opacity: 0, y: 30 },
-      visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+      hidden: { opacity: 0.1, y: 16 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } }
     }}
     className={className}
   >

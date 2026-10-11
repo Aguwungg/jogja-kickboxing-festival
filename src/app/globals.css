@@ -4,11 +4,18 @@
   --color-jkb-black: #09090B;
   --color-jkb-charcoal: #171719;
   --color-jkb-surface: #252529;
+  --color-jkb-surface-border: #333338;
   --color-jkb-red: #D91F2C;
   --color-jkb-bright-red: #EF3340;
   --color-jkb-offwhite: #F5F3EE;
+  --color-jkb-warm-white: #F5F3EE;
+  --color-jkb-warm-card: #FFFFFF;
+  --color-jkb-dark-text: #09090B;
   --color-jkb-gray: #9A9AA2;
+  --color-jkb-gray-light: #C4C4CC;
+  --color-jkb-muted-dark: #62626A;
   --color-jkb-gold: #E2BA75;
+  --color-jkb-gold-hover: #F0CB8E;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-barlow-condensed), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -35,17 +42,52 @@ body {
   font-family: var(--font-display);
 }
 
+/* Editorial layout utilities */
+.editorial-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+@media (min-width: 640px) {
+  .editorial-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .editorial-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Section Themes */
+.theme-dark {
+  background-color: #09090B;
+  color: #F5F3EE;
+}
+.theme-charcoal {
+  background-color: #171719;
+  color: #F5F3EE;
+}
+.theme-editorial-warm {
+  background-color: #F5F3EE;
+  color: #09090B;
+}
+
 /* Marquee animation */
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 32s linear infinite;
 }
 
 /* Custom scrollbar */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: #09090B; }
 ::-webkit-scrollbar-thumb { background: #252529; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #D91F2C; }

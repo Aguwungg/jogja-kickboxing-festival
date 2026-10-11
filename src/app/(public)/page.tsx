@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import prisma from "@/lib/prisma";
 import HomeClient from "./HomeClient";
 
@@ -22,5 +20,16 @@ export default async function Home() {
     take: 3,
   });
 
-  return <HomeClient fighters={publishedFighters} products={products} />;
+  const performers = await prisma.performer.findMany({
+    where: { isPublished: true },
+    take: 3,
+  });
+
+  return (
+    <HomeClient
+      fighters={publishedFighters}
+      products={products}
+      performers={performers}
+    />
+  );
 }

@@ -1,5 +1,6 @@
 import ContactFormClient from "@/components/contact/ContactFormClient";
 import { Mail, Phone, MapPin, MessageCircle, Globe, Clock, ShieldCheck } from "lucide-react";
+import { EVENT_CONFIG } from "@/lib/event-config";
 
 export const metadata = {
   title: "Kontak & Sekretariat Resmi — JKB 2026",
@@ -74,16 +75,16 @@ export default function KontakPage() {
               <div className="flex items-start gap-3">
                 <MessageCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-white text-xs font-bold uppercase font-sans">WhatsApp Hotline & Sponsorship</h4>
-                  <p className="text-xs text-[#99999F] font-mono mt-0.5">+62 812-2800-2026</p>
+                  <h4 className="text-white text-xs font-bold uppercase font-sans">Hotline & Sekretariat</h4>
+                  <p className="text-xs text-[#99999F] font-mono mt-0.5">{EVENT_CONFIG.contact.phone}</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-[#EF3340] shrink-0 mt-0.5" />
+                <Mail className="w-5 h-5 text-[#D91F2C] shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-white text-xs font-bold uppercase font-sans">Email Resmi</h4>
-                  <p className="text-xs text-[#99999F] font-mono mt-0.5">halo@jkbchampionship.id</p>
+                  <p className="text-xs text-[#99999F] font-mono mt-0.5">{EVENT_CONFIG.contact.email}</p>
                 </div>
               </div>
 
@@ -91,7 +92,7 @@ export default function KontakPage() {
                 <Globe className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-white text-xs font-bold uppercase font-sans">Instagram Resmi</h4>
-                  <p className="text-xs text-[#99999F] font-sans mt-0.5">@jkb.championship</p>
+                  <p className="text-xs text-[#99999F] font-sans mt-0.5">{EVENT_CONFIG.contact.instagram}</p>
                 </div>
               </div>
             </div>
