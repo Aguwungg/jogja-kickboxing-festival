@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Trophy, Award, Crown, CheckCircle2, Clock, Swords } from "lucide-react";
+import { Trophy, Swords, Crown, CheckCircle2, Clock } from "lucide-react";
 
 interface AthleteData {
   id: string;
@@ -47,40 +47,67 @@ export default function BracketClient({ tournaments }: BracketClientProps) {
   const activeTournament =
     tournaments.find((t) => t.id === selectedTournamentId) || tournaments[0];
 
+  // Distinct rounds available in the active tournament
+  const availableRounds = activeTournament
+    ? Array.from(new Set(activeTournament.matches.map((m) => m.round)))
+    : [];
+
+  const [selectedRoundMobile, setSelectedRoundMobile] = useState<string>(
+    availableRounds.includes("SEMIFINAL")
+      ? "SEMIFINAL"
+      : availableRounds[0] || ""
+  );
+
   if (!activeTournament) {
     return (
-      <div className="bg-[#171719] border border-white/10 p-12 text-center rounded-sm">
-        <Trophy className="w-10 h-10 text-white/30 mx-auto mb-3" />
-        <h3 className="text-xl font-bold uppercase text-white mb-2">Pohon Turnamen Belum Tersedia</h3>
-        <p className="text-xs text-[#99999F]">Bagan kejuaraan sedang disusun oleh operator pertandingan.</p>
+      <div className="bg-[#171719] border border-white/10 p-12 text-center rounded-sm space-y-2">
+        <Trophy className="w-10 h-10 text-[#9A9AA2]/40 mx-auto mb-2" />
+        <h3
+          className="text-xl font-bold uppercase text-white"
+          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+        >
+          BAGAN TURNAMEN BELUM TERSEDIA
+        </h3>
+        <p className="text-xs text-[#9A9AA2]">
+          Bagan pertandingan resmi sedang disusun oleh komite kejuaraan.
+        </p>
       </div>
     );
   }
 
-  const semifinalMatches = activeTournament.matches.filter(
-    (m) => m.round === "SEMIFINAL"
-  ).sort((a, b) => a.matchNumber - b.matchNumber);
+  const semifinalMatches = activeTournament.matches
+    .filter((m) => m.round === "SEMIFINAL")
+    .sort((a, b) => a.matchNumber - b.matchNumber);
 
-  const finalMatch = activeTournament.matches.find(
-    (m) => m.round === "FINAL"
-  );
-
+  const finalMatch = activeTournament.matches.find((m) => m.round === "FINAL");
   const finalWinner = finalMatch?.winner;
 
+  // Filtered matches for mobile round selector
+  const mobileFilteredMatches = activeTournament.matches.filter(
+    (m) => m.round === selectedRoundMobile
+  );
+
   return (
-    <div className="w-full font-sans">
-      {/* Division Selector Tabs */}
-      <div className="flex items-center gap-3 overflow-x-auto pb-4 mb-8 no-scrollbar">
+    <div className="w-full space-y-8 font-sans">
+      
+      {/* ═════════════════════════════════════════════════════════════════════
+          DIVISION SELECTOR
+      ═════════════════════════════════════════════════════════════════════ */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
         {tournaments.map((t) => {
           const isActive = t.id === activeTournament.id;
           return (
             <button
               key={t.id}
-              onClick={() => setSelectedTournamentId(t.id)}
-              className={`px-5 py-3 rounded-sm text-xs font-bold uppercase tracking-wider shrink-0 transition-all border ${
+              onClick={() => {
+                setSelectedTournamentId(t.id);
+                const rounds = Array.from(new Set(t.matches.map((m) => m.round)));
+                setSelectedRoundMobile(rounds.includes("SEMIFINAL") ? "SEMIFINAL" : rounds[0] || "");
+              }}
+              className={`px-4 py-2.5 rounded-sm text-xs font-bold uppercase tracking-wider shrink-0 transition-all border ${
                 isActive
-                  ? "bg-[#D91F2C] border-[#D91F2C] text-white shadow-lg shadow-[#D91F2C]/20"
-                  : "bg-[#171719] border-white/10 text-white/70 hover:border-white/20 hover:text-white"
+                  ? "bg-[#D91F2C] border-[#D91F2C] text-white shadow-md shadow-[#D91F2C]/20"
+                  : "bg-[#171719] border-white/10 text-[#9A9AA2] hover:border-white/20 hover:text-white"
               }`}
               style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
@@ -90,73 +117,221 @@ export default function BracketClient({ tournaments }: BracketClientProps) {
         })}
       </div>
 
-      {/* Mobile Swipe Hint */}
-      <div className="flex md:hidden items-center justify-between text-[11px] text-[#9A9AA2] pb-2 px-1">
-        <span>Geser ke samping untuk melihat alur turnamen →</span>
-        <span className="font-mono text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-white">SWIPE</span>
+      {/* ═════════════════════════════════════════════════════════════════════
+          MOBILE EXPERIENCE: Round Selector → Match List (NCAA / Toornament)
+      ═════════════════════════════════════════════════════════════════════ */}
+      <div className="block md:hidden space-y-5">
+        
+        {/* Step 2: Round Selector */}
+        <div className="flex items-center gap-2 border-b border-white/10 pb-3">
+          <span className="text-[11px] uppercase font-bold text-[#9A9AA2] mr-1">Ronde:</span>
+          {availableRounds.map((round) => {
+            const isRoundActive = selectedRoundMobile === round;
+            return (
+              <button
+                key={round}
+                onClick={() => setSelectedRoundMobile(round)}
+                className={`px-3 py-1.5 rounded-sm text-xs font-bold uppercase tracking-wider transition-all ${
+                  isRoundActive
+                    ? "bg-white text-[#09090B]"
+                    : "bg-[#171719] border border-white/10 text-[#C4C4CC] hover:text-white"
+                }`}
+                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+              >
+                {round}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Step 3: Match List for Selected Round */}
+        <div className="space-y-4">
+          {mobileFilteredMatches.map((match) => (
+            <div
+              key={match.id}
+              className="bg-[#171719] border border-white/10 rounded-sm p-4 space-y-3"
+            >
+              <div className="flex items-center justify-between text-[11px] font-mono text-[#9A9AA2] pb-2 border-b border-white/5">
+                <span>PARTAI #{match.matchNumber}</span>
+                {match.status === "COMPLETED" ? (
+                  <span className="text-emerald-400 font-bold uppercase text-[10px]">
+                    SELESAI • {match.resultType || "DEC"} ({match.roundResult || "R3"})
+                  </span>
+                ) : (
+                  <span className="text-amber-400 font-bold uppercase text-[10px]">
+                    JADWAL LAGA
+                  </span>
+                )}
+              </div>
+
+              {/* Red Corner / Athlete 1 */}
+              <div
+                className={`p-2.5 rounded-sm flex items-center justify-between transition-colors ${
+                  match.winner?.id === match.athlete1?.id
+                    ? "bg-emerald-500/10 border border-emerald-500/30"
+                    : "bg-black/30 border border-transparent"
+                }`}
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-8 h-8 rounded-sm bg-[#252529] relative overflow-hidden shrink-0">
+                    {match.athlete1?.image ? (
+                      <Image
+                        src={match.athlete1.image}
+                        alt={match.athlete1.name}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center font-bold text-xs text-white/20">
+                        {match.athlete1?.name?.charAt(0) || "T"}
+                      </div>
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-xs font-bold text-white block truncate">
+                      {match.athlete1?.name || "TBD"}
+                    </span>
+                    <span className="text-[10px] text-[#9A9AA2] block truncate">
+                      {match.athlete1?.club || "Mandiri"}
+                    </span>
+                  </div>
+                </div>
+                {match.winner?.id === match.athlete1?.id && (
+                  <span className="text-[10px] uppercase font-bold text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded shrink-0">
+                    MENANG
+                  </span>
+                )}
+              </div>
+
+              {/* Blue Corner / Athlete 2 */}
+              <div
+                className={`p-2.5 rounded-sm flex items-center justify-between transition-colors ${
+                  match.winner?.id === match.athlete2?.id
+                    ? "bg-emerald-500/10 border border-emerald-500/30"
+                    : "bg-black/30 border border-transparent"
+                }`}
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-8 h-8 rounded-sm bg-[#252529] relative overflow-hidden shrink-0">
+                    {match.athlete2?.image ? (
+                      <Image
+                        src={match.athlete2.image}
+                        alt={match.athlete2.name}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center font-bold text-xs text-white/20">
+                        {match.athlete2?.name?.charAt(0) || "T"}
+                      </div>
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-xs font-bold text-white block truncate">
+                      {match.athlete2?.name || "TBD"}
+                    </span>
+                    <span className="text-[10px] text-[#9A9AA2] block truncate">
+                      {match.athlete2?.club || "Mandiri"}
+                    </span>
+                  </div>
+                </div>
+                {match.winner?.id === match.athlete2?.id && (
+                  <span className="text-[10px] uppercase font-bold text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded shrink-0">
+                    MENANG
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+
+          {/* Champion Display on Mobile */}
+          {finalWinner && (
+            <div className="p-4 bg-gradient-to-r from-amber-500/15 to-transparent border border-amber-500/30 rounded-sm flex items-center gap-3">
+              <Crown className="w-6 h-6 text-amber-400 shrink-0" />
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 block">
+                  JUARA SABUK EMAS
+                </span>
+                <span className="text-sm font-bold text-white block">
+                  {finalWinner.name} ({finalWinner.club || "Mandiri"})
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+
       </div>
 
-      {/* Bracket Tree Container (Horizontal Scrollable on Mobile) */}
-      <div className="overflow-x-auto pb-8 pt-1 no-scrollbar">
-        <div className="min-w-[850px] grid grid-cols-3 gap-8 items-center relative">
+      {/* ═════════════════════════════════════════════════════════════════════
+          DESKTOP EXPERIENCE: Full Tournament Tree
+      ═════════════════════════════════════════════════════════════════════ */}
+      <div className="hidden md:block">
+        <div className="grid grid-cols-3 gap-8 items-center relative">
+          
           {/* Column 1: Semifinals */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div className="flex items-center justify-between pb-2 border-b border-white/10">
-              <span className="text-xs font-black uppercase tracking-widest text-[#EF3340]">
+              <span className="text-xs font-black uppercase tracking-widest text-[#D91F2C]">
                 BABAK SEMIFINAL
               </span>
-              <span className="text-[10px] text-[#99999F] uppercase font-mono">2 Partai Laga</span>
+              <span className="text-[10px] text-[#9A9AA2] uppercase font-mono">2 Partai Laga</span>
             </div>
 
-            <div className="space-y-6">
-              {semifinalMatches.map((match, idx) => (
+            <div className="space-y-5">
+              {semifinalMatches.map((match) => (
                 <div
                   key={match.id}
-                  className="bg-[#171719] border border-white/10 rounded-sm p-4 relative group hover:border-[#D91F2C]/40 transition-all shadow-md"
+                  className="bg-[#171719] border border-white/10 rounded-sm p-4 hover:border-[#D91F2C]/40 transition-all shadow-md space-y-2.5"
                 >
-                  <div className="flex items-center justify-between text-[10px] font-mono text-[#99999F] mb-3 pb-2 border-b border-white/5">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-[#9A9AA2] pb-1.5 border-b border-white/5">
                     <span>PARTAI #{match.matchNumber}</span>
                     {match.status === "COMPLETED" ? (
                       <span className="text-emerald-400 font-bold uppercase">
                         SELESAI • {match.resultType} ({match.roundResult})
                       </span>
                     ) : (
-                      <span className="text-amber-400 font-bold uppercase">JADWAL PERTANDINGAN</span>
+                      <span className="text-amber-400 font-bold uppercase">JADWAL LAGA</span>
                     )}
                   </div>
 
-                  {/* Fighter 1 (Red Corner) */}
+                  {/* Corner 1 */}
                   <div
-                    className={`flex items-center justify-between p-2 rounded-sm mb-2 transition-colors ${
+                    className={`flex items-center justify-between p-2 rounded-sm transition-colors ${
                       match.winner?.id === match.athlete1?.id
                         ? "bg-emerald-500/10 border border-emerald-500/30"
                         : "bg-black/30"
                     }`}
                   >
-                    <div className="flex items-center gap-2.5">
-                      <div className="relative w-8 h-8 rounded-sm bg-black overflow-hidden shrink-0 border border-white/10">
-                        <Image
-                          src={match.athlete1?.image || "/images/jkb/fighter-1.jpg"}
-                          alt={match.athlete1?.name || "Fighter"}
-                          fill
-                          className="object-cover"
-                        />
+                    <div className="flex items-center gap-2">
+                      <div className="relative w-7 h-7 rounded-sm bg-black overflow-hidden shrink-0 border border-white/10">
+                        {match.athlete1?.image ? (
+                          <Image
+                            src={match.athlete1.image}
+                            alt={match.athlete1.name}
+                            fill
+                            className="object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center font-bold text-xs text-white/20">
+                            {match.athlete1?.name?.charAt(0) || "T"}
+                          </div>
+                        )}
                       </div>
                       <div>
                         <span className="text-xs font-bold text-white block">
                           {match.athlete1?.name || "TBD"}
                         </span>
-                        <span className="text-[10px] text-[#99999F] block">
-                          {match.athlete1?.club || "Independent"}
+                        <span className="text-[9px] text-[#9A9AA2] block">
+                          {match.athlete1?.club || "Mandiri"}
                         </span>
                       </div>
                     </div>
                     {match.winner?.id === match.athlete1?.id && (
-                      <span className="text-[10px] font-bold text-emerald-400 uppercase">MENANG</span>
+                      <span className="text-[9px] font-bold uppercase text-emerald-400">WIN</span>
                     )}
                   </div>
 
-                  {/* Fighter 2 (Blue Corner) */}
+                  {/* Corner 2 */}
                   <div
                     className={`flex items-center justify-between p-2 rounded-sm transition-colors ${
                       match.winner?.id === match.athlete2?.id
@@ -164,26 +339,32 @@ export default function BracketClient({ tournaments }: BracketClientProps) {
                         : "bg-black/30"
                     }`}
                   >
-                    <div className="flex items-center gap-2.5">
-                      <div className="relative w-8 h-8 rounded-sm bg-black overflow-hidden shrink-0 border border-white/10">
-                        <Image
-                          src={match.athlete2?.image || "/images/jkb/fighter-2.jpg"}
-                          alt={match.athlete2?.name || "Fighter"}
-                          fill
-                          className="object-cover"
-                        />
+                    <div className="flex items-center gap-2">
+                      <div className="relative w-7 h-7 rounded-sm bg-black overflow-hidden shrink-0 border border-white/10">
+                        {match.athlete2?.image ? (
+                          <Image
+                            src={match.athlete2.image}
+                            alt={match.athlete2.name}
+                            fill
+                            className="object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center font-bold text-xs text-white/20">
+                            {match.athlete2?.name?.charAt(0) || "T"}
+                          </div>
+                        )}
                       </div>
                       <div>
                         <span className="text-xs font-bold text-white block">
                           {match.athlete2?.name || "TBD"}
                         </span>
-                        <span className="text-[10px] text-[#99999F] block">
-                          {match.athlete2?.club || "Independent"}
+                        <span className="text-[9px] text-[#9A9AA2] block">
+                          {match.athlete2?.club || "Mandiri"}
                         </span>
                       </div>
                     </div>
                     {match.winner?.id === match.athlete2?.id && (
-                      <span className="text-[10px] font-bold text-emerald-400 uppercase">MENANG</span>
+                      <span className="text-[9px] font-bold uppercase text-emerald-400">WIN</span>
                     )}
                   </div>
                 </div>
@@ -192,126 +373,154 @@ export default function BracketClient({ tournaments }: BracketClientProps) {
           </div>
 
           {/* Column 2: Grand Final */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div className="flex items-center justify-between pb-2 border-b border-white/10">
-              <span className="text-xs font-black uppercase tracking-widest text-[#E2BA75]">
-                GRAND FINAL PEREBUTAN SABUK
+              <span className="text-xs font-black uppercase tracking-widest text-[#E2BA75] flex items-center gap-1.5">
+                <Crown className="w-3.5 h-3.5" />
+                GRAND FINAL
               </span>
-              <span className="text-[10px] text-[#E2BA75] uppercase font-mono font-bold">1 Partai Puncak</span>
+              <span className="text-[10px] text-[#9A9AA2] uppercase font-mono">Perebutan Sabuk</span>
             </div>
 
             {finalMatch ? (
-              <div className="bg-[#171719] border-2 border-[#E2BA75]/50 rounded-sm p-5 relative shadow-xl shadow-[#E2BA75]/5">
-                <div className="flex items-center justify-between text-[10px] font-mono text-[#E2BA75] mb-4 pb-2 border-b border-white/10">
-                  <span className="font-bold uppercase flex items-center gap-1.5">
-                    <Crown className="w-3.5 h-3.5" />
-                    PARTAI TITEL JUARA RESMI
-                  </span>
-                  <span>HARI 3 • 20:00 WIB</span>
+              <div className="bg-[#171719] border-2 border-[#E2BA75]/40 rounded-sm p-5 space-y-3 shadow-xl">
+                <div className="flex items-center justify-between text-[10px] font-mono text-[#9A9AA2] pb-2 border-b border-white/5">
+                  <span className="text-[#E2BA75] font-bold">PARTAI PUNCAK #{finalMatch.matchNumber}</span>
+                  {finalMatch.status === "COMPLETED" ? (
+                    <span className="text-emerald-400 font-bold uppercase">
+                      SELESAI • {finalMatch.resultType} ({finalMatch.roundResult})
+                    </span>
+                  ) : (
+                    <span className="text-amber-400 font-bold uppercase">LIVE FINAL</span>
+                  )}
                 </div>
 
-                {/* Finalist 1 */}
+                {/* Final Corner 1 */}
                 <div
-                  className={`flex items-center justify-between p-3 rounded-sm mb-3 transition-colors ${
+                  className={`flex items-center justify-between p-2.5 rounded-sm transition-colors ${
                     finalWinner?.id === finalMatch.athlete1?.id
-                      ? "bg-gradient-to-r from-amber-500/20 to-transparent border border-[#E2BA75]"
-                      : "bg-black/40 border border-white/5"
+                      ? "bg-amber-500/15 border border-amber-500/40"
+                      : "bg-black/30"
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="relative w-10 h-10 rounded-sm bg-black overflow-hidden shrink-0 border border-white/20">
-                      <Image
-                        src={finalMatch.athlete1?.image || "/images/jkb/fighter-1.jpg"}
-                        alt={finalMatch.athlete1?.name || "Finalist"}
-                        fill
-                        className="object-cover"
-                      />
+                  <div className="flex items-center gap-2.5">
+                    <div className="relative w-8 h-8 rounded-sm bg-black overflow-hidden shrink-0 border border-white/10">
+                      {finalMatch.athlete1?.image ? (
+                        <Image
+                          src={finalMatch.athlete1.image}
+                          alt={finalMatch.athlete1.name}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center font-bold text-xs text-white/20">
+                          {finalMatch.athlete1?.name?.charAt(0) || "T"}
+                        </div>
+                      )}
                     </div>
                     <div>
-                      <span className="text-sm font-black text-white block uppercase">
-                        {finalMatch.athlete1?.name || "Pemenang SF 1"}
+                      <span className="text-xs font-bold text-white block">
+                        {finalMatch.athlete1?.name || "TBD (Pemenang SF 1)"}
                       </span>
-                      <span className="text-[10px] text-[#99999F]">
-                        {finalMatch.athlete1?.club || "Klub Pemenang"}
+                      <span className="text-[9px] text-[#9A9AA2] block">
+                        {finalMatch.athlete1?.club || "Mandiri"}
                       </span>
                     </div>
                   </div>
                   {finalWinner?.id === finalMatch.athlete1?.id && (
-                    <Trophy className="w-4 h-4 text-[#E2BA75]" />
+                    <Crown className="w-4 h-4 text-amber-400 shrink-0" />
                   )}
                 </div>
 
-                {/* Finalist 2 */}
+                {/* Final Corner 2 */}
                 <div
-                  className={`flex items-center justify-between p-3 rounded-sm transition-colors ${
+                  className={`flex items-center justify-between p-2.5 rounded-sm transition-colors ${
                     finalWinner?.id === finalMatch.athlete2?.id
-                      ? "bg-gradient-to-r from-amber-500/20 to-transparent border border-[#E2BA75]"
-                      : "bg-black/40 border border-white/5"
+                      ? "bg-amber-500/15 border border-amber-500/40"
+                      : "bg-black/30"
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="relative w-10 h-10 rounded-sm bg-black overflow-hidden shrink-0 border border-white/20">
-                      <Image
-                        src={finalMatch.athlete2?.image || "/images/jkb/fighter-3.jpg"}
-                        alt={finalMatch.athlete2?.name || "Finalist"}
-                        fill
-                        className="object-cover"
-                      />
+                  <div className="flex items-center gap-2.5">
+                    <div className="relative w-8 h-8 rounded-sm bg-black overflow-hidden shrink-0 border border-white/10">
+                      {finalMatch.athlete2?.image ? (
+                        <Image
+                          src={finalMatch.athlete2.image}
+                          alt={finalMatch.athlete2.name}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center font-bold text-xs text-white/20">
+                          {finalMatch.athlete2?.name?.charAt(0) || "T"}
+                        </div>
+                      )}
                     </div>
                     <div>
-                      <span className="text-sm font-black text-white block uppercase">
-                        {finalMatch.athlete2?.name || "Pemenang SF 2"}
+                      <span className="text-xs font-bold text-white block">
+                        {finalMatch.athlete2?.name || "TBD (Pemenang SF 2)"}
                       </span>
-                      <span className="text-[10px] text-[#99999F]">
-                        {finalMatch.athlete2?.club || "Klub Pemenang"}
+                      <span className="text-[9px] text-[#9A9AA2] block">
+                        {finalMatch.athlete2?.club || "Mandiri"}
                       </span>
                     </div>
                   </div>
                   {finalWinner?.id === finalMatch.athlete2?.id && (
-                    <Trophy className="w-4 h-4 text-[#E2BA75]" />
+                    <Crown className="w-4 h-4 text-amber-400 shrink-0" />
                   )}
                 </div>
               </div>
             ) : (
-              <div className="bg-[#171719] border border-white/10 p-8 text-center text-xs text-[#99999F]">
+              <div className="bg-[#171719] border border-white/10 p-6 text-center text-xs text-[#9A9AA2] rounded-sm">
                 Partai final belum dijadwalkan.
               </div>
             )}
           </div>
 
-          {/* Column 3: Champion / Belt */}
-          <div className="space-y-8 flex flex-col justify-center">
-            <div className="pb-2 border-b border-white/10">
-              <span className="text-xs font-black uppercase tracking-widest text-[#E2BA75]">
-                JUARA SABUK EMAS
+          {/* Column 3: Champion Pedestal */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-between pb-2 border-b border-white/10">
+              <span className="text-xs font-black uppercase tracking-widest text-emerald-400">
+                JUARA SABUK
               </span>
+              <span className="text-[10px] text-[#9A9AA2] uppercase font-mono">Hasil Resmi</span>
             </div>
 
-            <div className="bg-gradient-to-b from-[#171719] to-[#09090b] border border-[#E2BA75]/30 p-8 rounded-sm text-center relative overflow-hidden shadow-2xl">
-              <div className="w-16 h-16 rounded-full bg-[#E2BA75]/10 border border-[#E2BA75]/40 flex items-center justify-center text-[#E2BA75] mx-auto mb-4">
-                <Trophy className="w-8 h-8" />
+            <div className="bg-gradient-to-b from-amber-500/10 via-[#171719] to-[#171719] border border-amber-500/30 rounded-sm p-6 text-center space-y-4">
+              <div className="w-14 h-14 mx-auto rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
+                <Trophy className="w-7 h-7" />
               </div>
 
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#E2BA75] block mb-1">
-                REDY CHAMPIONSHIP 2 BELT
-              </span>
-
-              <h4
-                className="text-2xl font-black uppercase text-white mb-3"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                {finalWinner ? finalWinner.name : "MENUNGGU HASIL FINAL"}
-              </h4>
-
-              <p className="text-xs text-[#99999F] leading-relaxed">
-                {finalWinner
-                  ? `Juara resmi divisi ${activeTournament.category} JKB 2026 mewakili sasana ${finalWinner.club || ""}.`
-                  : `Perebutan sabuk emas divisi ${activeTournament.category} di hadapan 5.000 penonton GOR UNY.`}
-              </p>
+              {finalWinner ? (
+                <div className="space-y-1">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 block">
+                    JUARA RESMI
+                  </span>
+                  <h3
+                    className="font-display text-2xl font-black uppercase text-white"
+                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                  >
+                    {finalWinner.name}
+                  </h3>
+                  <p className="text-xs text-[#9A9AA2]">
+                    {finalWinner.club || "Sasana Mandiri"}
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-1">
+                  <span className="text-xs font-bold uppercase text-white block">
+                    MENUNGGU HASIL FINAL
+                  </span>
+                  <p className="text-[11px] text-[#9A9AA2] leading-relaxed">
+                    Sabuk emas kejuaraan divisi {activeTournament.name} akan diserahkan setelah partai final selesai.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
+
         </div>
       </div>
+
     </div>
   );
 }

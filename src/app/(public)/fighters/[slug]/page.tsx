@@ -46,21 +46,6 @@ export default async function FighterDetailPage({
       </div>
 
       {/* ═══════════════════════════════════════════════════
-          STAGING DISCLAIMER BANNER (DATA INTEGRITY)
-      ═══════════════════════════════════════════════════ */}
-      {isDemo && (
-        <div className="w-full bg-yellow-500/10 border-y border-yellow-500/30 px-5 py-2.5">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-yellow-300">
-            <div className="flex items-center gap-2">
-              <span className="font-bold bg-yellow-400 text-black px-1.5 py-0.5 uppercase text-[10px] tracking-wider">DATA SIMULASI</span>
-              <span>Profil atlet ini merupakan perlengkapan data uji coba teknis (*staging test fixture*).</span>
-            </div>
-            <span className="text-yellow-400/80 text-[11px]">Roster resmi diverifikasi saat weigh-in kejuaraan.</span>
-          </div>
-        </div>
-      )}
-
-      {/* ═══════════════════════════════════════════════════
           HERO BANNER & PROFILE HEADER
       ═══════════════════════════════════════════════════ */}
       <section className="relative w-full py-12 md:py-16 px-5 bg-jkb-charcoal border-b border-white/5 overflow-hidden">
@@ -86,7 +71,7 @@ export default async function FighterDetailPage({
                   <span className="font-display text-9xl font-black text-white/10">
                     {fighter.name.charAt(0)}
                   </span>
-                  <p className="text-xs text-jkb-gray uppercase tracking-widest mt-4">Simulasi Potret Atlet</p>
+                  <p className="text-xs text-jkb-gray uppercase tracking-widest mt-4">Potret Atlet</p>
                 </div>
               )}
               {/* Badge overlay */}
@@ -98,11 +83,6 @@ export default async function FighterDetailPage({
                 }`}>
                   {fighter.division} Division
                 </span>
-                {isDemo && (
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 bg-yellow-500 text-black shadow-md self-start">
-                    SIMULASI STAGING
-                  </span>
-                )}
               </div>
               <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-jkb-red" />
             </div>

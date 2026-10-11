@@ -1,224 +1,295 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion, type Variants } from "framer-motion";
-import { useState } from "react";
+import { Search, Filter, ChevronDown, ChevronUp, Trophy, ArrowRight } from "lucide-react";
 
 type Fighter = {
-  id: string; name: string; slug: string; division: string; weightClass: string;
-  club: string | null; wins: number; losses: number; draws: number; image: string | null;
+  id: string;
+  name: string;
+  slug: string;
+  division: string;
+  weightClass: string;
+  club: string | null;
+  wins: number;
+  losses: number;
+  draws: number;
+  image: string | null;
 };
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0.2, y: 12 },
-  visible: (i: number = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: Math.min(i * 0.04, 0.25), duration: 0.35, ease: "easeOut" as const },
-  }),
-};
+interface FighterCenterClientProps {
+  fighters: Fighter[];
+  divisions: string[];
+  weightClasses: string[];
+  currentQuery: string;
+  currentDivision: string;
+  currentWeight: string;
+}
 
 export default function FighterCenterClient({
-  fighters, divisions, weightClasses, currentQuery, currentDivision, currentWeight,
-}: {
-  fighters: Fighter[]; divisions: string[]; weightClasses: string[];
-  currentQuery: string; currentDivision: string; currentWeight: string;
-}) {
+  fighters,
+  divisions,
+  weightClasses,
+  currentQuery,
+  currentDivision,
+  currentWeight,
+}: FighterCenterClientProps) {
   const router = useRouter();
   const [search, setSearch] = useState(currentQuery);
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState(Boolean(currentDivision || currentWeight));
 
   function applyFilters(params: Record<string, string>) {
     const sp = new URLSearchParams();
-    if (params.q || search) sp.set("q", params.q ?? search);
-    if (params.division ?? currentDivision) sp.set("division", params.division ?? currentDivision);
-    if (params.weight ?? currentWeight) sp.set("weight", params.weight ?? currentWeight);
+    const qVal = params.q !== undefined ? params.q : search;
+    const divVal = params.division !== undefined ? params.division : currentDivision;
+    const wVal = params.weight !== undefined ? params.weight : currentWeight;
+
+    if (qVal) sp.set("q", qVal);
+    if (divVal) sp.set("division", divVal);
+    if (wVal) sp.set("weight", wVal);
+
     router.push(`/fighters?${sp.toString()}`);
   }
 
+  function handleReset() {
+    setSearch("");
+    router.push("/fighters");
+  }
+
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen text-jkb-offwhite bg-jkb-black overflow-x-hidden">
+    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F5F3EE] bg-[#09090B] pt-24 pb-20 overflow-x-hidden">
       
-      {/* ═══════════════════════════════════════════════════
-          HERO — Full-bleed athletic image + overlay info
-      ═══════════════════════════════════════════════════ */}
-      <section className="relative w-full pt-24 pb-16 md:pt-32 md:pb-20">
-        <div className="absolute inset-0 z-0">
-          <Image src="/images/jkb/fighter-training.jpg" alt="Latihan atlet kickboxing" fill priority sizes="100vw" className="object-cover opacity-25" />
-          <div className="absolute inset-0 bg-gradient-to-b from-jkb-black/60 via-jkb-black/80 to-jkb-black" />
-        </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-8">
-          <motion.div initial={{ opacity: 0.4, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <span className="text-jkb-red text-xs font-bold tracking-[0.3em] uppercase bg-jkb-red/10 border border-jkb-red/30 px-3 py-1">
-              FIGHT CENTER • ROSTER RESMI
-            </span>
-            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black uppercase mt-3 leading-[0.9]">
-              DATABASE<br /><span className="text-jkb-red">FIGHTER</span>
-            </h1>
-            <p className="text-jkb-gray text-base md:text-lg max-w-lg mt-3">
-              Profil lengkap, sasana asal, dan statistik petarung Jogja Kickboxing Festival & Redy Championship 2.
-            </p>
-          </motion.div>
+      {/* ═════════════════════════════════════════════════════════════════════
+          HEADER — KENALI PARA PETARUNG
+      ═════════════════════════════════════════════════════════════════════ */}
+      <section className="relative w-full border-b border-white/10 py-12 md:py-16 bg-[#171719]/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-[#D91F2C]/10 border border-[#D91F2C]/30 text-[#D91F2C] text-xs font-bold tracking-widest uppercase">
+            <Trophy className="w-3.5 h-3.5" />
+            <span>FIGHT CENTER • ROSTER RESMI</span>
+          </div>
+
+          <h1
+            className="font-display text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white leading-none"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            KENALI PARA <span className="text-[#D91F2C]">PETARUNG</span>
+          </h1>
+
+          <p className="text-[#9A9AA2] text-sm sm:text-base max-w-xl leading-relaxed">
+            Profil atlet kickboxing resmi Redy Championship 2. Telusuri nama petarung, sasana asal, dan kelas divisi tanding.
+          </p>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
-          STAGING DISCLAIMER
-      ═══════════════════════════════════════════════════ */}
-      <div className="w-full bg-yellow-500/10 border-y border-yellow-500/20 px-5 py-2">
-        <div className="max-w-7xl mx-auto flex items-center justify-between text-xs text-yellow-300/90">
-          <span>⚠️ Roster di bawah merupakan data simulasi staging untuk pengetesan sistem platform JKB 2026.</span>
-          <span className="hidden sm:inline text-yellow-400 font-medium">Data resmi diumumkan pasca weigh-in.</span>
-        </div>
-      </div>
-
-      {/* ═══════════════════════════════════════════════════
-          FILTERS & SEARCH — Sticky & Accessible
-      ═══════════════════════════════════════════════════ */}
-      <section className="w-full py-5 px-5 bg-jkb-charcoal border-b border-white/5 sticky top-16 z-30 shadow-lg">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-stretch md:items-center gap-3">
-          {/* Search */}
-          <div className="flex-1">
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && applyFilters({ q: search })}
-              placeholder="Cari nama fighter atau nama sasana / klub..."
-              className="w-full bg-jkb-black border border-white/10 px-4 py-3 text-sm text-white placeholder:text-jkb-gray focus:outline-none focus:border-jkb-red transition-colors"
-            />
-          </div>
-          {/* Division filter */}
-          <select
-            value={currentDivision}
-            onChange={(e) => applyFilters({ division: e.target.value })}
-            className="bg-jkb-black border border-white/10 px-4 py-3 text-sm text-white focus:outline-none focus:border-jkb-red transition-colors cursor-pointer"
-          >
-            <option value="">Semua Divisi</option>
-            {divisions.map((d) => (
-              <option key={d} value={d}>{d}</option>
-            ))}
-          </select>
-          {/* Weight filter */}
-          <select
-            value={currentWeight}
-            onChange={(e) => applyFilters({ weight: e.target.value })}
-            className="bg-jkb-black border border-white/10 px-4 py-3 text-sm text-white focus:outline-none focus:border-jkb-red transition-colors cursor-pointer"
-          >
-            <option value="">Semua Kelas</option>
-            {weightClasses.map((w) => (
-              <option key={w} value={w}>{w}</option>
-            ))}
-          </select>
-          {/* Search button */}
-          <button
-            type="button"
-            onClick={() => applyFilters({ q: search })}
-            className="font-display bg-jkb-red hover:bg-jkb-bright-red text-white uppercase tracking-widest text-sm px-7 py-3 transition-all font-bold cursor-pointer"
-          >
-            CARI
-          </button>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          RESULTS — All cards guaranteed visible
-      ═══════════════════════════════════════════════════ */}
-      <section className="w-full py-12 px-5 bg-jkb-black flex-1">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-6">
-            <p className="text-jkb-gray text-sm">
-              Menampilkan <span className="text-white font-bold">{fighters.length}</span> petarung terdaftar
-              {currentDivision && <> di divisi <span className="text-jkb-red font-bold">{currentDivision}</span></>}
-              {currentWeight && <> kelas <span className="text-jkb-red font-bold">{currentWeight}</span></>}
-            </p>
-            {(currentQuery || currentDivision || currentWeight) && (
-              <Link href="/fighters" className="text-xs text-jkb-red hover:underline font-bold uppercase tracking-wider">
-                Reset Filter ×
-              </Link>
-            )}
-          </div>
-
-          {fighters.length === 0 ? (
-            <div className="text-center py-20 bg-jkb-charcoal border border-white/5 p-8">
-              <h3 className="font-display text-2xl font-black uppercase text-jkb-gray">Tidak ada fighter ditemukan</h3>
-              <p className="text-jkb-gray text-sm mt-2">Coba sesuaikan kata kunci pencarian atau reset filter divisi.</p>
-              <Link href="/fighters" className="inline-block font-display bg-jkb-red text-white uppercase tracking-widest text-xs font-bold mt-6 px-6 py-3">
-                RESET SEMUA FILTER
-              </Link>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {fighters.map((f, i) => (
-                <motion.div
-                  key={f.id}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "300px" }}
-                  variants={fadeUp}
-                  custom={i}
+      {/* ═════════════════════════════════════════════════════════════════════
+          SEARCH FIRST & COLLAPSIBLE ADVANCED FILTERS
+      ═════════════════════════════════════════════════════════════════════ */}
+      <section className="w-full bg-[#171719] border-b border-white/10 py-4 px-4 sm:px-6 lg:px-8 sticky top-16 z-30 shadow-md">
+        <div className="max-w-7xl mx-auto space-y-3">
+          
+          {/* Primary Search Bar */}
+          <div className="flex items-center gap-2">
+            <div className="relative flex-1">
+              <Search className="w-4 h-4 text-[#9A9AA2] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && applyFilters({ q: search })}
+                placeholder="Cari petarung atau nama sasana / klub..."
+                className="w-full bg-[#09090B] border border-white/10 pl-10 pr-4 py-2.5 text-xs sm:text-sm text-white placeholder-[#9A9AA2] rounded-sm focus:outline-none focus:border-[#D91F2C] transition-colors font-sans"
+              />
+              {search && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearch("");
+                    applyFilters({ q: "" });
+                  }}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#9A9AA2] hover:text-white"
                 >
-                  <Link href={`/fighters/${f.slug}`} className="block bg-jkb-charcoal border border-white/5 hover:border-jkb-red/50 transition-all group overflow-hidden">
-                    {/* Fighter visual */}
-                    <div className="h-48 bg-jkb-surface relative overflow-hidden">
-                      {f.image ? (
-                        <Image
-                          src={f.image}
-                          alt={f.name}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                          className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="font-display text-7xl font-black text-white/5 group-hover:text-jkb-red/10 transition-colors">
-                            {f.name.charAt(0)}
-                          </span>
-                        </div>
-                      )}
-                      {/* Division badge */}
-                      <div className="absolute top-3 left-3 flex gap-1">
-                        <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 shadow ${
-                          f.division === "Pro" ? "bg-jkb-red text-white" :
-                          f.division === "Exhibition" ? "bg-jkb-gold text-jkb-black" :
-                          "bg-white/10 text-white"
-                        }`}>
-                          {f.division}
-                        </span>
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-1 bg-black/60 text-yellow-300">
-                          DEMO
-                        </span>
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-jkb-charcoal via-transparent to-transparent opacity-80" />
-                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-jkb-red scale-x-0 group-hover:scale-x-100 transition-transform origin-left z-10" />
-                    </div>
-                    
-                    {/* Fighter info */}
-                    <div className="p-5">
-                      <h4 className="font-display text-lg font-bold uppercase tracking-wide group-hover:text-jkb-red transition-colors">{f.name}</h4>
-                      <p className="text-jkb-gray text-xs mt-1 uppercase tracking-wider">{f.weightClass}</p>
-                      <p className="text-jkb-gray/70 text-xs mt-0.5">{f.club || "Sasana Mandiri"}</p>
-                      
-                      {/* Record bar */}
-                      <div className="flex items-center gap-1 mt-4">
-                        <div className="h-1 bg-green-500/70 rounded-full" style={{ width: `${(f.wins / Math.max(f.wins + f.losses + f.draws, 1)) * 100}%`, minWidth: "4px" }} />
-                        <div className="h-1 bg-red-500/70 rounded-full" style={{ width: `${(f.losses / Math.max(f.wins + f.losses + f.draws, 1)) * 100}%`, minWidth: "4px" }} />
-                        {f.draws > 0 && <div className="h-1 bg-gray-500/70 rounded-full" style={{ width: `${(f.draws / Math.max(f.wins + f.losses + f.draws, 1)) * 100}%`, minWidth: "4px" }} />}
-                      </div>
-                      <div className="flex items-center gap-3 mt-2 text-xs">
-                        <span className="text-green-400 font-bold">{f.wins}W</span>
-                        <span className="text-red-400 font-bold">{f.losses}L</span>
-                        <span className="text-jkb-gray font-bold">{f.draws}D</span>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
+                  Hapus
+                </button>
+              )}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => applyFilters({ q: search })}
+              className="font-display bg-[#D91F2C] hover:bg-[#EF3340] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2.5 rounded-sm transition-all"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              Cari
+            </button>
+
+            {/* Toggle Advanced Filters */}
+            <button
+              type="button"
+              onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+              className={`p-2.5 rounded-sm border transition-all flex items-center gap-1.5 text-xs font-semibold ${
+                showAdvancedFilters || currentDivision || currentWeight
+                  ? "bg-white/10 border-white/20 text-white"
+                  : "bg-[#09090B] border-white/10 text-[#9A9AA2] hover:text-white"
+              }`}
+              title="Filter Lanjutan"
+              aria-label="Filter Lanjutan"
+            >
+              <Filter className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Filter</span>
+              {showAdvancedFilters ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+            </button>
+          </div>
+
+          {/* Collapsible Advanced Filters */}
+          {showAdvancedFilters && (
+            <div className="pt-2 pb-1 border-t border-white/5 flex flex-wrap items-center gap-3 text-xs">
+              <div className="flex items-center gap-2">
+                <span className="text-[#9A9AA2] font-medium">Divisi:</span>
+                <select
+                  value={currentDivision}
+                  onChange={(e) => applyFilters({ division: e.target.value })}
+                  className="bg-[#09090B] border border-white/10 px-3 py-1.5 rounded-sm text-white focus:outline-none focus:border-[#D91F2C]"
+                >
+                  <option value="">Semua Divisi</option>
+                  {divisions.map((d) => (
+                    <option key={d} value={d}>{d}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="text-[#9A9AA2] font-medium">Kelas Berat:</span>
+                <select
+                  value={currentWeight}
+                  onChange={(e) => applyFilters({ weight: e.target.value })}
+                  className="bg-[#09090B] border border-white/10 px-3 py-1.5 rounded-sm text-white focus:outline-none focus:border-[#D91F2C]"
+                >
+                  <option value="">Semua Kelas</option>
+                  {weightClasses.map((w) => (
+                    <option key={w} value={w}>{w}</option>
+                  ))}
+                </select>
+              </div>
+
+              {(currentDivision || currentWeight || currentQuery) && (
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className="text-xs text-[#D91F2C] hover:underline font-bold uppercase tracking-wider ml-auto"
+                >
+                  Reset Filter ×
+                </button>
+              )}
             </div>
           )}
+
         </div>
       </section>
+
+      {/* ═════════════════════════════════════════════════════════════════════
+          FIGHTER CARDS DIRECTORY
+      ═════════════════════════════════════════════════════════════════════ */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-1">
+        
+        {/* Meta Count */}
+        <div className="flex items-center justify-between mb-6 text-xs text-[#9A9AA2]">
+          <span>
+            Menampilkan <strong className="text-white">{fighters.length}</strong> petarung terdaftar
+            {currentDivision && <> di divisi <strong className="text-[#D91F2C]">{currentDivision}</strong></>}
+            {currentWeight && <> kelas <strong className="text-[#D91F2C]">{currentWeight}</strong></>}
+          </span>
+          {(currentDivision || currentWeight || currentQuery) && (
+            <button
+              onClick={handleReset}
+              className="text-[#D91F2C] hover:underline font-semibold"
+            >
+              Hapus Semua Filter
+            </button>
+          )}
+        </div>
+
+        {fighters.length === 0 ? (
+          <div className="p-12 text-center bg-[#171719] border border-white/10 rounded-sm space-y-3 max-w-md mx-auto">
+            <Trophy className="w-8 h-8 text-[#9A9AA2]/50 mx-auto" />
+            <h3
+              className="font-display text-xl font-bold uppercase text-white"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              TIDAK ADA PETARUNG DITEMUKAN
+            </h3>
+            <p className="text-xs text-[#9A9AA2] leading-relaxed">
+              Coba gunakan kata kunci pencarian lain atau pilih semua divisi.
+            </p>
+            <button
+              type="button"
+              onClick={handleReset}
+              className="font-display text-xs uppercase tracking-widest px-4 py-2 bg-[#D91F2C] text-white rounded-sm font-bold"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              Reset Pencarian
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {fighters.map((f) => (
+              <Link
+                key={f.id}
+                href={`/fighters/${f.slug}`}
+                className="group bg-[#171719] border border-white/10 hover:border-[#D91F2C]/50 rounded-sm overflow-hidden flex flex-col justify-between transition-all"
+              >
+                {/* Real Approved Portrait */}
+                <div className="h-56 bg-[#252529] relative overflow-hidden">
+                  {f.image ? (
+                    <Image
+                      src={f.image}
+                      alt={f.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center font-display text-6xl font-black text-white/5">
+                      {f.name.charAt(0)}
+                    </div>
+                  )}
+
+                  {/* Division Badge */}
+                  <div className="absolute top-3 left-3 bg-[#D91F2C] text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-sm shadow-md">
+                    {f.division}
+                  </div>
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#171719] via-transparent to-transparent opacity-90" />
+                </div>
+
+                {/* Identity Summary */}
+                <div className="p-4 space-y-1.5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h2
+                      className="font-display text-xl font-bold uppercase text-white group-hover:text-[#D91F2C] transition-colors leading-tight"
+                      style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                    >
+                      {f.name}
+                    </h2>
+                    <p className="text-xs text-[#9A9AA2] uppercase tracking-wide mt-1">
+                      {f.weightClass} • {f.club || "Sasana Mandiri"}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-[#9A9AA2]">
+                    <span>Profil Atlet</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#D91F2C] group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+
+      </section>
+
     </main>
   );
 }
