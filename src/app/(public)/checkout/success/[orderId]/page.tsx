@@ -99,10 +99,10 @@ export default async function OrderSuccessPage({ params }: Props) {
                     className="text-xl font-black uppercase text-white"
                     style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
                   >
-                    BOOTH OFFICIAL MERCH — GOR AMONG ROGO
+                    BOOTH OFFICIAL MERCH — GOR UNY
                   </h3>
                   <p className="text-xs text-[#90929A] max-w-md mt-1">
-                    Hall Barat Lantai 1 (Pintu Masuk Utama). Buka 14-16 Agustus 2026, 09:00 - 22:00 WIB. Tunjukkan kode klaim berikut:
+                    Hall Barat Lantai 1 (Pintu Masuk Utama). Buka 12–14 Desember 2026, 09:00 - 22:00 WIB. Tunjukkan kode klaim berikut:
                   </p>
                 </div>
 

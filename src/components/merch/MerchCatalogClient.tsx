@@ -374,7 +374,7 @@ export default function MerchCatalogClient({ initialProducts }: Props) {
               PICK UP VENUE GRATIS
             </h4>
             <p className="text-xs text-[#90929A] leading-relaxed">
-              Ambil pesanan Anda langsung di Official Merchandise Booth GOR Among Rogo saat hari festival (14-16 Agustus 2026).
+              Ambil pesanan Anda langsung di Official Merchandise Booth GOR UNY saat hari festival (12–14 Desember 2026).
             </p>
           </div>
         </div>

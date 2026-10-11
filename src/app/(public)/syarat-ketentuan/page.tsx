@@ -2,7 +2,7 @@ import { Scale, AlertTriangle, ShieldCheck, Ticket, Video, FileText } from "luci
 
 export const metadata = {
   title: "Syarat & Ketentuan — JKB 2026",
-  description: "Peraturan resmi kehadiran penonton di venue GOR Among Rogo, ketentuan pembelian tiket, siaran PPV, dan kode etik festival JKB 2026.",
+  description: "Peraturan resmi kehadiran penonton di venue GOR UNY, ketentuan pembelian tiket, siaran PPV, dan kode etik festival JKB 2026.",
 };
 
 export default function SyaratKetentuanPage() {
@@ -24,7 +24,7 @@ export default function SyaratKetentuanPage() {
           </h1>
 
           <p className="text-[#99999F] text-base sm:text-lg font-sans max-w-2xl leading-relaxed">
-            Peraturan resmi dan tata tertib yang mengikat setiap pemegang tiket, pengunjung gelanggang GOR Among Rogo, pengguna platform digital, dan pembeli siaran berbayar JKB 2026.
+            Peraturan resmi dan tata tertib yang mengikat setiap pemegang tiket, pengunjung gelanggang GOR UNY, pengguna platform digital, dan pembeli siaran berbayar JKB 2026.
           </p>
         </div>
       </section>

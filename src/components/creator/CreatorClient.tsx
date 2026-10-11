@@ -789,7 +789,7 @@ export default function CreatorClient({
           <div className="bg-[#171719]/60 border border-white/5 p-5 rounded-sm space-y-2">
             <span className="font-bold text-white block">4. Pengambilan ID Badge Akreditasi</span>
             <p className="text-[#99999F] text-xs leading-relaxed">
-              Jurnalis dan kreator yang telah disetujui dapat mengambil kartu akreditasi fisik di Media Center Pintu Timur GOR Among Rogo mulai H-1 acara dengan membawa KTP/Surat Tugas asli.
+              Jurnalis dan kreator yang telah disetujui dapat mengambil kartu akreditasi fisik di Media Center Pintu Barat GOR UNY mulai H-1 acara dengan membawa KTP/Surat Tugas asli.
             </p>
           </div>
         </div>

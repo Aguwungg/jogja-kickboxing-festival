@@ -14,7 +14,7 @@ const FAQ_DATA: FaqItem[] = [
   {
     category: "TIKET",
     q: "Bagaimana cara membeli tiket Jogja Kickboxing Festival 2026?",
-    a: "Tiket resmi dapat dibeli secara online melalui platform tiket mitra resmi Rawooh yang ditautkan di website resmi ini, atau secara on-the-spot (OTS) di Ticket Box GOR Among Rogo selama kuota harian masih tersedia.",
+    a: "Tiket resmi dapat dibeli secara online melalui platform tiket mitra resmi Rawooh yang ditautkan di website resmi ini, atau secara on-the-spot (OTS) di Ticket Box GOR UNY selama kuota harian masih tersedia.",
   },
   {
     category: "TIKET",
@@ -53,13 +53,13 @@ const FAQ_DATA: FaqItem[] = [
   },
   {
     category: "ATURAN",
-    q: "Apa saja barang yang dilarang dibawa ke dalam arena GOR Among Rogo?",
+    q: "Apa saja barang yang dilarang dibawa ke dalam arena GOR UNY?",
     a: "Barang terlarang meliputi: senjata tajam, senjata api, flare/kembang api/laser pointer, botol kaca/kaleng, minuman beralkohol, obat-obatan terlarang, helm, tongkat selfie/tripod profesional tanpa kartu pers resmi, serta hewan peliharaan.",
   },
   {
     category: "ATURAN",
     q: "Apakah area festival ramah bagi pengguna kursi roda?",
-    a: "Tentu. GOR Among Rogo dilengkapi ramp akses di pintu selatan untuk memudahkan penonton pengguna kursi roda, serta tribun khusus dengan pandangan bebas hambatan ke arah ring.",
+    a: "Tentu. GOR UNY dilengkapi ramp akses di pintu selatan untuk memudahkan penonton pengguna kursi roda, serta tribun khusus dengan pandangan bebas hambatan ke arah ring.",
   },
   {
     category: "PPV",

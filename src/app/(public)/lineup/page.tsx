@@ -5,7 +5,7 @@ import { Music, Mic2, Sparkles, MapPin, Calendar, AlertTriangle, ArrowRight } fr
 
 export const metadata = {
   title: "Lineup Musik & Hiburan — JKB 2026",
-  description: "Deretan penampil musik dan panggung festival Jogja Kickboxing Festival & Redy Championship 2: 14-16 Agustus 2026.",
+  description: "Deretan penampil musik dan panggung festival Jogja Kickboxing Festival & Redy Championship 2: 12-14 Desember 2026.",
 };
 
 export default async function LineupPage() {
@@ -43,7 +43,7 @@ export default async function LineupPage() {
           </h1>
 
           <p className="text-[#99999F] text-base sm:text-lg font-sans max-w-2xl leading-relaxed mb-6">
-            Merayakan energi pertarungan lewat ritme panggung musik. Perpaduan kurasi band independen, hip-hop cyphers, dan set musik pembakar adrenalin sepanjang akhir pekan 14–16 Agustus 2026.
+            Merayakan energi pertarungan lewat ritme panggung musik. Perpaduan kurasi band independen, hip-hop cyphers, dan set musik pembakar adrenalin sepanjang akhir pekan 12–14 Desember 2026.
           </p>
 
           {/* Staging Notice Banner */}
@@ -121,7 +121,7 @@ export default async function LineupPage() {
                     <Sparkles className="w-3.5 h-3.5" />
                     LIVE PERFORMANCE
                   </span>
-                  <span>GOR Among Rogo, Yogyakarta</span>
+                  <span>GOR UNY, Yogyakarta</span>
                 </div>
               </div>
             </div>

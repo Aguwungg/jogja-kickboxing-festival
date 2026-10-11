@@ -85,7 +85,7 @@ export default function CheckoutClient() {
         shippingPostalCode: deliveryMethod === "EXPEDITION" ? shippingPostalCode : undefined,
         courier:
           deliveryMethod === "PICKUP_VENUE"
-            ? "Pickup Booth GOR Among Rogo"
+            ? "Pickup Booth GOR UNY"
             : `${courierName} (${shippingRegion === "DIY_JATENG" ? "DIY/Jateng" : shippingRegion === "JAWA" ? "Pulau Jawa" : "Luar Jawa"})`,
         shippingCost,
         notes,
@@ -256,7 +256,7 @@ export default function CheckoutClient() {
                 </span>
               </div>
               <p className="text-[11px] text-[#90929A] leading-relaxed">
-                Booth Merch Resmi GOR Among Rogo (14-16 Agustus 2026). Tunjukkan barcode order.
+                Booth Merch Resmi GOR UNY (12–14 Desember 2026). Tunjukkan barcode order.
               </p>
             </button>
 
@@ -376,13 +376,13 @@ export default function CheckoutClient() {
                 <strong className="text-white block mb-0.5">
                   Lokasi Booth Pengambilan On-Site:
                 </strong>
-                GOR Among Rogo, Hall Barat Lantai 1 (Dekat Pintu Masuk VIP & Media). Jam buka booth: 09:00 - 22:00 WIB selama tanggal 14, 15, dan 16 Agustus 2026.
+                GOR UNY, Hall Barat Lantai 1 (Dekat Pintu Masuk VIP & Media). Jam buka booth: 09:00 - 22:00 WIB selama tanggal 12, 13, dan 14 Desember 2026.
               </div>
             </div>
           )}
         </section>
 
-        {/* Step 3: Payment Method (Midtrans Sandbox Simulator) */}
+        {/* Step 3: Payment Method (Staging Sandbox Simulator) */}
         <section className="bg-[#171719] border border-white/10 p-6 rounded-sm space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-white/10">
             <div className="flex items-center gap-3">
@@ -393,11 +393,11 @@ export default function CheckoutClient() {
                 className="text-lg font-black uppercase tracking-wider text-white"
                 style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
               >
-                METODE PEMBAYARAN (MIDTRANS SANDBOX)
+                METODE PEMBAYARAN (SIMULASI STAGING)
               </h2>
             </div>
-            <span className="text-[10px] text-emerald-400 font-mono font-bold bg-emerald-500/10 px-2 py-0.5 rounded-xs">
-              SIMULASI AKTIF
+            <span className="text-[10px] text-amber-400 font-mono font-bold bg-amber-500/10 px-2 py-0.5 rounded-xs">
+              SIMULATOR STAGING
             </span>
           </div>
 

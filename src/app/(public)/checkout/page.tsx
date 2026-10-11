@@ -6,7 +6,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Checkout Official Merchandise — JKB 2026",
   description:
-    "Selesaikan pesanan merchandise resmi Jogja Kickboxing Festival & Redy Championship 2. Pilihan ambil di venue GOR Among Rogo atau pengiriman ekspedisi ke seluruh Indonesia.",
+    "Selesaikan pesanan merchandise resmi Jogja Kickboxing Festival & Redy Championship 2. Pilihan ambil di venue GOR UNY atau pengiriman ekspedisi ke seluruh Indonesia.",
 };
 
 export default function CheckoutPage() {

@@ -401,7 +401,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
               </div>
               <div className="flex justify-between py-1 border-b border-white/5">
                 <span className="text-white/60">Opsi Pengambilan</span>
-                <span className="text-white font-medium">Pick up GOR Among Rogo / Kurir JNE/J&T</span>
+                <span className="text-white font-medium">Pick up GOR UNY / Kurir JNE/J&T</span>
               </div>
               <div className="flex justify-between py-1">
                 <span className="text-white/60">Garansi Penukaran</span>

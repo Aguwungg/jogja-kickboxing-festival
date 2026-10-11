@@ -181,7 +181,7 @@ model Order {
   shippingAddress   String?
   shippingCity      String?
   shippingPostalCode String?
-  courier           String?     // "Pickup GOR Among Rogo", "JNE Regular", "J&T Express"
+  courier           String?     // "Pickup Booth GOR UNY", "JNE Regular", "J&T Express"
   shippingCost      Float       @default(0)
   totalAmount       Float
   status            String      @default("PENDING") // "PENDING", "CONFIRMED", "CANCELLED"

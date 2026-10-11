@@ -18,11 +18,9 @@ interface JadwalClientProps {
   initialItems: ScheduleItemData[];
 }
 
-const DAYS = [
-  { day: 1, label: "HARI 1", date: "Jumat, 14 Agustus 2026", theme: "Weigh-in & Babak Penyisihan" },
-  { day: 2, label: "HARI 2", date: "Sabtu, 15 Agustus 2026", theme: "Perempat Final & Semifinal Clash" },
-  { day: 3, label: "HARI 3", date: "Minggu, 16 Agustus 2026", theme: "Grand Final & Pesta Musik Akbar" },
-];
+import { EVENT_CONFIG } from "@/lib/event-config";
+
+const DAYS = EVENT_CONFIG.dates.days;
 
 const CATEGORIES = [
   { key: "ALL", label: "Semua Jadwal" },

@@ -188,7 +188,7 @@ export default function AdminPpvClient({
             3.842 <span className="text-sm font-sans font-normal text-white/60">online</span>
           </div>
           <p className="text-[11px] text-white/50 mt-1">
-            GOR Among Rogo Main Arena Feed
+            GOR UNY Main Arena Feed
           </p>
         </div>
 

@@ -300,7 +300,7 @@ export default function BracketClient({ tournaments }: BracketClientProps) {
               <p className="text-xs text-[#99999F] leading-relaxed">
                 {finalWinner
                   ? `Juara resmi divisi ${activeTournament.category} JKB 2026 mewakili sasana ${finalWinner.club || ""}.`
-                  : `Perebutan sabuk emas divisi ${activeTournament.category} di hadapan 5.000 penonton GOR Among Rogo.`}
+                  : `Perebutan sabuk emas divisi ${activeTournament.category} di hadapan 5.000 penonton GOR UNY.`}
               </p>
             </div>
           </div>

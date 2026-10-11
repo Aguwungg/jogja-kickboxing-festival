@@ -25,7 +25,7 @@ export default function FaqPage() {
           </h1>
 
           <p className="text-[#99999F] text-base sm:text-lg font-sans max-w-2xl leading-relaxed">
-            Temukan panduan lengkap dan informasi resmi mengenai tiket, jadwal kejuaraan, festival konser musik, serta aturan keselamatan di GOR Among Rogo.
+            Temukan panduan lengkap dan informasi resmi mengenai tiket, jadwal kejuaraan, festival konser musik, serta aturan keselamatan di GOR UNY Yogyakarta.
           </p>
         </div>
       </section>

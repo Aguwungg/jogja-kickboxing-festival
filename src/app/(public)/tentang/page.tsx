@@ -43,11 +43,11 @@ export default function TentangPage() {
           <div className="flex flex-wrap items-center gap-4 text-sm font-sans text-white/80">
             <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-sm">
               <Calendar className="w-4 h-4 text-[#EF3340]" />
-              <span>14–16 Agustus 2026</span>
+              <span>12–14 Desember 2026</span>
             </div>
             <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-sm">
               <MapPin className="w-4 h-4 text-[#EF3340]" />
-              <span>GOR Among Rogo, Yogyakarta</span>
+              <span>GOR UNY, Yogyakarta</span>
             </div>
             <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-sm">
               <Award className="w-4 h-4 text-[#E2BA75]" />
@@ -248,7 +248,7 @@ export default function TentangPage() {
             <div>
               <h4 className="text-white font-bold mb-2 uppercase text-xs tracking-wider">Sekretariat & Hubungan Media</h4>
               <p className="leading-relaxed mb-4">
-                Kompleks GOR Among Rogo, Jl. Kenari No. 1, Semaki, Umbulharjo, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55166.
+                Kompleks GOR UNY, Jl. Colombo No. 1, Karang Malang, Caturtunggal, Kec. Depok, Sleman, D.I. Yogyakarta 55281.
               </p>
               <div className="pt-2">
                 <Link

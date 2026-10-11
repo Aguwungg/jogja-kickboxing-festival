@@ -4,7 +4,7 @@ import { Calendar, AlertCircle } from "lucide-react";
 
 export const metadata = {
   title: "Jadwal Acara & Pertandingan — JKB 2026",
-  description: "Rundown resmi 3 hari Jogja Kickboxing Festival & Redy Championship 2: 14-16 Agustus 2026 di GOR Among Rogo Yogyakarta.",
+  description: "Rundown resmi 3 hari Jogja Kickboxing Festival & Redy Championship 2: 12-14 Desember 2026 di GOR UNY Yogyakarta.",
 };
 
 export default async function JadwalPage() {

@@ -52,9 +52,9 @@ export default function KontakPage() {
                 SEKRETARIAT UTAMA
               </h3>
               <p className="text-xs text-[#99999F] font-sans leading-relaxed mb-4">
-                Gedung Olahraga Among Rogo<br />
-                Jl. Kenari No. 1, Semaki, Umbulharjo<br />
-                Kota Yogyakarta, D.I. Yogyakarta 55166
+                Gelanggang Olahraga Universitas Negeri Yogyakarta (GOR UNY)<br />
+                Jl. Colombo No. 1, Karang Malang, Caturtunggal, Kec. Depok<br />
+                Kabupaten Sleman, D.I. Yogyakarta 55281
               </p>
               <div className="flex items-center gap-2 text-xs text-white/60 font-sans border-t border-white/5 pt-3">
                 <Clock className="w-3.5 h-3.5 text-[#E2BA75]" />

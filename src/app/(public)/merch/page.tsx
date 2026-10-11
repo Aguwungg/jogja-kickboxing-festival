@@ -6,7 +6,7 @@ import { ShoppingBag, Flame, Sparkles } from "lucide-react";
 export const metadata = {
   title: "Official Merch Store — JKB 2026",
   description:
-    "Beli merchandise dan apparel resmi Jogja Kickboxing Festival & Redy Championship 2. Kaos oversized, hoodie heavyweight, handwrap, dan gloves standar pro. Free pick up di GOR Among Rogo.",
+    "Beli merchandise dan apparel resmi Jogja Kickboxing Festival & Redy Championship 2. Kaos oversized, hoodie heavyweight, handwrap, dan gloves standar pro. Free pick up di GOR UNY Yogyakarta.",
 };
 
 export default async function MerchPage() {
@@ -38,7 +38,7 @@ export default async function MerchPage() {
           </h1>
 
           <p className="text-[#99999F] text-base sm:text-lg font-sans max-w-3xl leading-relaxed mb-6">
-            Koleksi resmi apparel pertarungan, perlengkapan latihan standar kejuaraan, dan cenderamata eksklusif Redy Championship 2. Tersedia pengambilan langsung gratis di GOR Among Rogo atau pengiriman ekspedisi ke seluruh Indonesia.
+            Koleksi resmi apparel pertarungan, perlengkapan latihan standar kejuaraan, dan cenderamata eksklusif Redy Championship 2. Tersedia pengambilan langsung gratis di GOR UNY Yogyakarta atau pengiriman ekspedisi ke seluruh Indonesia.
           </p>
 
           <div className="flex flex-wrap items-center gap-6 text-xs text-white/70 font-sans">
@@ -52,7 +52,7 @@ export default async function MerchPage() {
             </div>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-amber-400" />
-              <span>Free On-Site Pickup 14-16 Agustus</span>
+              <span>Free On-Site Pickup 12-14 Desember</span>
             </div>
           </div>
         </div>

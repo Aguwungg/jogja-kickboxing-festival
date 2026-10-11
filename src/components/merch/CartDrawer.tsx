@@ -203,7 +203,7 @@ export default function CartDrawer() {
                   <div className="flex items-center gap-2 text-[11px] text-[#90929A] bg-white/5 p-2.5 rounded-sm border border-white/5">
                     <MapPin className="w-4 h-4 text-[#D21F2B] shrink-0" />
                     <span>
-                      Tersedia <strong>Pick Up Gratis</strong> di Booth GOR Among Rogo atau Ekspedisi Reguler.
+                      Tersedia <strong>Pick Up Gratis</strong> di Booth GOR UNY atau Ekspedisi Reguler.
                     </span>
                   </div>
 
@@ -254,7 +254,7 @@ export default function CartDrawer() {
                   {/* Security Assurance */}
                   <div className="flex items-center justify-center gap-1.5 text-[10px] text-white/40 pt-1">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Transaksi Terverifikasi Resmi & Midtrans Sandbox Ready</span>
+                    <span>Simulasi Checkout Staging (Sandbox Mode)</span>
                   </div>
                 </div>
               )}

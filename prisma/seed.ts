@@ -195,7 +195,7 @@ async function seed() {
         customerPhone: "081234567890",
         guestEmail: "dimas.striker@gmail.com",
         deliveryMethod: "PICKUP_VENUE",
-        courier: "Pickup Booth GOR Among Rogo",
+        courier: "Pickup Booth GOR UNY",
         shippingCost: 0,
         totalAmount: 288000,
         paymentStatus: "PAID",
@@ -209,7 +209,7 @@ async function seed() {
         customerPhone: "081234567890",
         guestEmail: "dimas.striker@gmail.com",
         deliveryMethod: "PICKUP_VENUE",
-        courier: "Pickup Booth GOR Among Rogo",
+        courier: "Pickup Booth GOR UNY",
         shippingCost: 0,
         totalAmount: 288000,
         paymentStatus: "PAID",
@@ -316,19 +316,19 @@ async function seed() {
 
   // Seed Schedule items for 3-day festival
   const scheduleItems = [
-    // Day 1 (Jumat, 14 Agustus 2026)
+    // Day 1 (Sabtu, 12 Desember 2026)
     { id: "sch-01", title: "Registrasi & Official Weigh-in Atlet", category: "CEREMONY", day: 1, timeSlot: "09:00 - 11:30 WIB", location: "Main Hall & Ring Utama", description: "Pemeriksaan medis resmi, timbang badan 80 atlet kickboxing, dan aturan pertandingan.", isHighlight: false, isPublished: true },
     { id: "sch-02", title: "Babak Penyisihan: Bantamweight & Featherweight", category: "COMBAT", day: 1, timeSlot: "13:30 - 17:30 WIB", location: "Ring Utama (Championship Ring)", description: "12 partai eliminasi kejuaraan regional Redy Championship 2.", isHighlight: true, isPublished: true },
     { id: "sch-03", title: "Opening Ceremony & Sunset Sound Session", category: "STAGE", day: 1, timeSlot: "18:30 - 20:00 WIB", location: "Panggung Utama (The Stage)", description: "Pembukaan resmi JKB 2026, sambutan kehormatan, dan pertunjukan musik pembuka.", isHighlight: false, isPublished: true },
     { id: "sch-04", title: "Live Indie Music Headline — Session 1", category: "STAGE", day: 1, timeSlot: "20:00 - 22:30 WIB", location: "Panggung Utama (The Stage)", description: "Penampilan band lokal Jogja dan musisi tamu nasional.", isHighlight: true, isPublished: true },
 
-    // Day 2 (Sabtu, 15 Agustus 2026)
+    // Day 2 (Minggu, 13 Desember 2026)
     { id: "sch-05", title: "Babak Perempat Final: Lightweight & Welterweight", category: "COMBAT", day: 2, timeSlot: "10:00 - 15:00 WIB", location: "Ring Utama (Championship Ring)", description: "Pertandingan tensi tinggi perebutan tiket semi-final 4 divisi.", isHighlight: true, isPublished: true },
     { id: "sch-06", title: "Community Martial Arts Showcase & Coaching Clinic", category: "COMMUNITY", day: 2, timeSlot: "15:30 - 17:00 WIB", location: "Outdoor Festival Plaza", description: "Sesi edukasi teknik striking dasar dan temu atlet nasional bersama pelatih bersertifikat.", isHighlight: false, isPublished: true },
     { id: "sch-07", title: "Semifinal Championship Clash", category: "COMBAT", day: 2, timeSlot: "18:30 - 21:00 WIB", location: "Ring Utama (Championship Ring)", description: "8 laga hidup-mati menuju partai puncak sabuk juara JKB 2026.", isHighlight: true, isPublished: true },
     { id: "sch-08", title: "The Stage Saturday Night Live Performance", category: "STAGE", day: 2, timeSlot: "21:00 - 23:00 WIB", location: "Panggung Utama (The Stage)", description: "Energi festival musik puncak malam minggu bersama band headliner nasional.", isHighlight: true, isPublished: true },
 
-    // Day 3 (Minggu, 16 Agustus 2026)
+    // Day 3 (Senin, 14 Desember 2026)
     { id: "sch-09", title: "City Pride Community Voting Announcement", category: "COMMUNITY", day: 3, timeSlot: "13:00 - 14:30 WIB", location: "Main Plaza Stage", description: "Pengumuman kontingen kota terfavorit hasil voting warga Jogja, Bantul, dan Sleman.", isHighlight: false, isPublished: true },
     { id: "sch-10", title: "Celebrity & Creator Exhibition Match (PPV BigMo)", category: "COMBAT", day: 3, timeSlot: "15:30 - 17:30 WIB", location: "Ring Utama (Championship Ring)", description: "Partai ekshibisi spesial kreator konten dan influencer olahraga tarung.", isHighlight: true, isPublished: true },
     { id: "sch-11", title: "GRAND FINAL: 4 Championship Title Fights", category: "COMBAT", day: 3, timeSlot: "19:00 - 21:30 WIB", location: "Ring Utama (Championship Ring)", description: "Perebutan 4 sabuk emas Redy Championship 2 JKB 2026 di depan 5.000 penonton.", isHighlight: true, isPublished: true },
@@ -475,7 +475,7 @@ async function seed() {
   await prisma.submission.upsert({
     where: { id: "sub-04" },
     update: { points: 200, status: "APPROVED" },
-    create: { id: "sub-04", creatorId: "creator-prof-02", title: "5 Alasan Nonton Shaggydog & Barasuara di GOR Among Rogo!", platform: "TIKTOK", url: "https://tiktok.com/@gita_mataramvibes/video/739348123", status: "APPROVED", points: 200, adminNote: "Promosi stage musik resmi." },
+    create: { id: "sub-04", creatorId: "creator-prof-02", title: "5 Alasan Nonton Shaggydog & Barasuara di GOR UNY!", platform: "TIKTOK", url: "https://tiktok.com/@gita_mataramvibes/video/739348123", status: "APPROVED", points: 200, adminNote: "Promosi stage musik resmi." },
   });
   await prisma.submission.upsert({
     where: { id: "sub-05" },
@@ -519,7 +519,7 @@ async function seed() {
   await prisma.submission.upsert({
     where: { id: "sub-08" },
     update: { status: "PENDING", points: 0 },
-    create: { id: "sub-08", creatorId: "creator-prof-04", title: "Ada Festival Kickboxing Terbesar di Among Rogo Besok!", platform: "TIKTOK", url: "https://tiktok.com/@kulinerdanhits_yk/video/739556112", status: "PENDING", points: 0, adminNote: "Menunggu moderasi admin." },
+    create: { id: "sub-08", creatorId: "creator-prof-04", title: "Ada Festival Kickboxing Terbesar di GOR UNY Besok!", platform: "TIKTOK", url: "https://tiktok.com/@kulinerdanhits_yk/video/739556112", status: "PENDING", points: 0, adminNote: "Menunggu moderasi admin." },
   });
 
   // Media Accreditations
@@ -594,12 +594,12 @@ async function seed() {
     {
       id: "ppv-single-day",
       slug: "single-day-pass",
-      name: "Day Pass: Penyisihan & Sound Session",
+      name: "Day Pass: BigMo Exhibition & Stage Stream",
       tier: "SINGLE_DAY",
-      badge: "STARTER PASS",
+      badge: "PROVISIONAL APPROVED",
       price: 10000,
-      description: "Akses siaran langsung satu hari penuh babak penyisihan turnamen Redy Championship 2 dan pertunjukan musik pembuka.",
-      features: "Kualitas Streaming HD 1080p | Akses 24 Jam Live & Replay VOD | Audio Komentator Resmi Ring | Live Polling & Chat Interaktif",
+      description: "Akses siaran langsung resmi partai ekshibisi selebriti BigMo dan sesi musik pembuka.",
+      features: "Kualitas Streaming HD 1080p | Akses Live Streaming BigMo Exhibition | Audio Komentator Ring | Live Chat Interaktif",
       resolution: "1080p 60FPS",
       order: 1,
       streamUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
@@ -608,30 +608,30 @@ async function seed() {
     {
       id: "ppv-all-access",
       slug: "all-access-championship-pass",
-      name: "3-Day All-Access: Championship & Music Stage",
+      name: "3-Day All-Access: Championship & Music Stage [DRAFT]",
       tier: "ALL_ACCESS",
-      badge: "PALING POPULER",
+      badge: "MENUNGGU PERSETUJUAN",
       price: 29000,
-      description: "Tiket siaran terlengkap 3 hari penuh! Seluruh 24 partai pertarungan 4 divisi, The Stage Live Music Headline, dan partai ekshibisi selebriti BigMo.",
-      features: "Ultra-HD 1080p 60FPS Bitrate Tinggi | Akses Penuh 3 Hari (14-16 Agustus 2026) | Seluruh 4 Partai Sabuk Gelar Juara | BigMo Celebrity Exhibition Clash | Akses VOD Replay 30 Hari Penuh | Dukungan Multi-Device (Smart TV & Mobile)",
+      description: "Paket siaran 3 hari kejuaraan. Status: Tertunda dan belum disetujui promotor untuk penjualan umum.",
+      features: "Ultra-HD 1080p 60FPS Bitrate Tinggi | Akses 3 Hari (12–14 Desember 2026) | Partai Sabuk Juara | Replay VOD Terjadwal",
       resolution: "1080p 60FPS High-Bitrate",
       order: 2,
       streamUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
-      isActive: true,
+      isActive: false, // Disabled for public purchasing
     },
     {
       id: "ppv-vip-ringside",
       slug: "vip-ringside-stream",
-      name: "VIP Ringside Multi-Cam & Locker Room Pass",
+      name: "VIP Ringside Multi-Cam Pass [DRAFT]",
       tier: "VIP",
-      badge: "LIMITED VIP ACCESS",
+      badge: "MENUNGGU PERSETUJUAN",
       price: 79000,
-      description: "Pengalaman siaran digital termewah bagai duduk di ringside GOR Among Rogo. Pilih 3 sudut kamera eksklusif dan saksikan aktivitas ruang ganti atlet.",
-      features: "Ultra-HD 4K & 1080p 60FPS Zero-Lag | 3 Pilihan Sudut Kamera (Ringside, Overhead Canvas, Locker Room Cam) | Dual Audio Track (Komentator Pro vs Suara Asli Kanvas) | Live Q&A Chat Eksklusif dengan Petarung | Voucher Diskon Merchandise Resmi Rp 25.000 | Replay Arsip Seumur Hidup",
-      resolution: "4K Ultra-HD / 1080p 60FPS",
+      description: "Konsep siaran digital ringside GOR UNY. Status: Fitur multi-angle dan ruang ganti memerlukan persetujuan kru teknis dan promotor.",
+      features: "Konsep Multi-Angle Switcher | Pilihan Sudut Kanvas | Akses Q&A Petarung",
+      resolution: "1080p 60FPS",
       order: 3,
       streamUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
-      isActive: true,
+      isActive: false, // Disabled for public purchasing
     },
   ];
 

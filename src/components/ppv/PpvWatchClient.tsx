@@ -165,7 +165,7 @@ export default function PpvWatchClient({ initialCode }: Props) {
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-widest">
-                LIVE STAGING BROADCAST • FEED UTAMA GOR AMONG ROGO
+                LIVE STAGING BROADCAST • FEED UTAMA GOR UNY, YOGYAKARTA
               </span>
             </div>
             <h1
@@ -296,7 +296,7 @@ export default function PpvWatchClient({ initialCode }: Props) {
 
                   {/* Test Shortcut */}
                   <div className="flex items-center justify-center gap-2 text-[11px] text-white/60">
-                    <span>Gunakan Demo Pass:</span>
+                    <span>Uji Staging QA (Internal Demo):</span>
                     <button
                       type="button"
                       onClick={() => {
@@ -372,7 +372,7 @@ export default function PpvWatchClient({ initialCode }: Props) {
               <div className="space-y-1.5">
                 <span className="text-[10px] uppercase font-bold tracking-wider text-white/60 block flex items-center gap-1.5">
                   <Video className="w-3.5 h-3.5 text-[#EF3340]" />
-                  <span>SUDUT KAMERA AKTIF:</span>
+                  <span>SUDUT KAMERA AKTIF: <strong className="text-amber-400 font-normal">[SIMULASI TEKNIS]</strong></span>
                 </span>
                 <div className="flex items-center gap-2">
                   {[

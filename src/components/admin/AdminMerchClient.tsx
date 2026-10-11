@@ -610,7 +610,7 @@ export default function AdminMerchClient({ initialOrders, initialProducts }: Pro
                 <strong className="text-white block mb-1">Metode Pengiriman:</strong>
                 {selectedOrder.deliveryMethod === "PICKUP_VENUE" ? (
                   <div className="text-[#99999F]">
-                    <span className="text-amber-400 font-bold">Pick-Up On Site (GOR Among Rogo)</span>
+                    <span className="text-amber-400 font-bold">Pick-Up On Site (GOR UNY)</span>
                     <br />
                     Kode Klaim Barcode: <strong className="font-mono text-white">{selectedOrder.claimBarcode}</strong>
                   </div>

@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Navigation, Bus, Train, Car, Compass, ShieldCheck, HeartPulse, Accessibility, ExternalLink } from "lucide-react";
+import { EVENT_CONFIG } from "@/lib/event-config";
 
 export const metadata = {
   title: "Panduan Lokasi & Venue — JKB 2026",
-  description: "Informasi lengkap denah arena, transportasi, dan fasilitas GOR Among Rogo Yogyakarta untuk Jogja Kickboxing Festival 2026.",
+  description: "Informasi lengkap denah arena, transportasi, dan fasilitas GOR UNY Yogyakarta untuk Jogja Kickboxing Festival 2026.",
 };
 
 const ZONES = [
@@ -38,22 +39,22 @@ const TRANSPORTS = [
   {
     icon: Train,
     title: "KRL & Kereta Api Jarak Jauh",
-    desc: "Turun di Stasiun Lempuyangan (berjarak ±2,5 km, 8–10 menit dengan ojek online) atau Stasiun Tugu Yogyakarta (berjarak ±4,5 km, 15 menit).",
+    desc: "Turun di Stasiun Lempuyangan (±10 menit via ojek online/taksi) atau Stasiun Yogyakarta / Tugu (±15 menit menuju GOR UNY).",
   },
   {
     icon: Bus,
     title: "Trans Jogja",
-    desc: "Gunakan Trans Jogja Jalur 1A, 2A, atau 4A dan turun di Halte Among Rogo (berada tepat di seberang gerbang utama venue).",
+    desc: "Gunakan Trans Jogja Koridor 1B, 2A, atau 11 dan turun di Halte UNY Colombo (akses jalan utama kampus UNY).",
   },
   {
     icon: Car,
     title: "Kendaraan Pribadi & Parkir",
-    desc: "Tersedia kantong parkir resmi roda dua dan roda empat di area timur dan selatan stadion. Disarankan datang lebih awal saat hari final.",
+    desc: "Tersedia kantong parkir resmi roda dua dan roda empat di kompleks kampus UNY sekitar gedung olahraga. Disarankan datang lebih awal saat hari final.",
   },
   {
     icon: Navigation,
     title: "Titik Drop-Off Ojek Online",
-    desc: "Pintu Masuk Barat (Jl. Kenari) ditetapkan sebagai zona drop-off resmi untuk taksi dan ojek online demi kelancaran arus lalu lintas.",
+    desc: "Gerbang Barat GOR UNY (akses Jl. Colombo) ditetapkan sebagai zona drop-off resmi untuk taksi dan ojek online demi kelancaran lalu lintas.",
   },
 ];
 
@@ -72,19 +73,19 @@ export default function VenuePage() {
             className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white leading-none mb-4"
             style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
-            GOR AMONG ROGO, <span className="text-[#EF3340]">YOGYAKARTA</span>
+            GOR UNY, <span className="text-[#EF3340]">YOGYAKARTA</span>
           </h1>
 
           <p className="text-[#99999F] text-base sm:text-lg font-sans max-w-2xl leading-relaxed mb-6">
-            Gedung Olahraga Among Rogo merupakan arena bersejarah kebanggaan warga Yogyakarta yang berdaya tampung lebih dari 5.000 penonton. Terletak strategis di pusat kota dengan akses transportasi publik yang mudah.
+            Gelanggang Olahraga Universitas Negeri Yogyakarta (GOR UNY) merupakan arena olahraga indoor bertaraf nasional dengan daya tampung 5.000+ penonton, akustik prima, dan letak strategis di kawasan kampus Colombo Yogyakarta.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 text-xs font-sans text-white/80">
             <span className="bg-white/5 border border-white/10 px-4 py-2 rounded-sm">
-              Jl. Kenari No. 1, Semaki, Umbulharjo, Kota Yogyakarta 55166
+              {EVENT_CONFIG.venue.address}
             </span>
             <a
-              href="https://maps.google.com/?q=GOR+Among+Rogo+Yogyakarta"
+              href={EVENT_CONFIG.venue.googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 bg-[#D91F2C] hover:bg-[#EF3340] text-white px-4 py-2 rounded-sm font-bold transition-all"
@@ -106,7 +107,7 @@ export default function VenuePage() {
             PEMBAGIAN ZONA ARENA FESTIVAL
           </h2>
           <p className="text-[#99999F] text-sm font-sans max-w-xl">
-            Area GOR Among Rogo dibagi menjadi 4 zona utama untuk kenyamanan mobilitas penonton, atlet, dan pengunjung festival.
+            Area GOR UNY dibagi menjadi 4 zona utama untuk kenyamanan mobilitas penonton, atlet, dan pengunjung festival.
           </p>
         </div>
 
@@ -157,7 +158,7 @@ export default function VenuePage() {
               PANDUAN TRANSPORTASI & KEDATANGAN
             </h2>
             <p className="text-[#99999F] text-sm font-sans">
-              Beragam opsi transportasi umum dan kendaraan pribadi untuk menuju GOR Among Rogo.
+              Beragam opsi transportasi umum dan kendaraan pribadi untuk menuju GOR UNY Yogyakarta.
             </p>
           </div>
 

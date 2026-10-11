@@ -64,7 +64,7 @@ export default function PpvLandingClient({ products }: Props) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [purchaseError, setPurchaseError] = useState<string | null>(null);
 
-  // Live countdown state (to 14 August 2026, 09:00 WIB)
+  // Live countdown state (to 12 December 2026, 09:00 WIB)
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -73,7 +73,7 @@ export default function PpvLandingClient({ products }: Props) {
   });
 
   useEffect(() => {
-    const targetDate = new Date("2026-08-14T09:00:00+07:00").getTime();
+    const targetDate = new Date("2026-12-12T09:00:00+07:00").getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -153,14 +153,14 @@ export default function PpvLandingClient({ products }: Props) {
           <div className="lg:col-span-7 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EF3340]/10 border border-[#EF3340]/30 text-[#EF3340] text-xs font-bold uppercase tracking-wider font-mono">
               <span className="w-2 h-2 rounded-full bg-[#EF3340] animate-pulse" />
-              <span>LIVE BROADCAST COUNTDOWN • 14 AGUSTUS 2026</span>
+              <span>LIVE BROADCAST COUNTDOWN • 12 DESEMBER 2026</span>
             </div>
 
             <h2
               className="text-2xl sm:text-3xl md:text-4xl font-black uppercase text-white tracking-tight leading-tight"
               style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
-              HITUNG MUNDUR SIARAN RESMI DARI GOR AMONG ROGO
+              HITUNG MUNDUR SIARAN RESMI DARI GOR UNY, YOGYAKARTA
             </h2>
 
             {/* Countdown Blocks */}
@@ -220,7 +220,7 @@ export default function PpvLandingClient({ products }: Props) {
 
               {/* Demo Hint */}
               <div className="flex items-center gap-1.5 pt-1 text-[11px] text-white/50 font-mono">
-                <span>Demo Pass:</span>
+                <span>Demo Pass (QA Staging):</span>
                 <button
                   type="button"
                   onClick={() => setAccessCodeInput("JKB-VIP-2026")}
@@ -387,26 +387,44 @@ export default function PpvLandingClient({ products }: Props) {
                   </div>
                 </div>
 
-                {/* Buy Button */}
+                {/* Buy Button & Approval Lock */}
                 <div className="pt-8 mt-6 border-t border-white/5">
-                  <button
-                    type="button"
-                    onClick={() => handleOpenPurchase(product)}
-                    className={`w-full py-3.5 px-4 rounded-sm text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg ${
-                      isFeatured
-                        ? "bg-[#EF3340] hover:bg-[#D91F2C] text-white shadow-[#EF3340]/20"
-                        : isVip
-                        ? "bg-amber-500 hover:bg-amber-400 text-black shadow-amber-500/20"
-                        : "bg-white/10 hover:bg-white/15 text-white border border-white/10"
-                    }`}
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    <span>Beli Akses Streaming</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                  <span className="text-[10px] text-white/40 text-center block mt-2">
-                    Kode tiket instan terkirim ke WhatsApp & Email
-                  </span>
+                  {product.tier === "SINGLE_DAY" ? (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => handleOpenPurchase(product)}
+                        className="w-full py-3.5 px-4 rounded-sm text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg bg-[#EF3340] hover:bg-[#D91F2C] text-white shadow-[#EF3340]/20"
+                        style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                      >
+                        <span>Beli Tiket Streaming BigMo (Rp 10.000)</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                      <span className="text-[10px] text-emerald-400 text-center block mt-2 font-mono">
+                        ✓ Paket Provisional Disetujui (BigMo Exhibition)
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <div className="mb-2 p-2 rounded-xs bg-amber-500/10 border border-amber-500/20 text-center">
+                        <span className="text-[10px] font-mono font-bold text-amber-300 block uppercase">
+                          [TERTUNDA / DRAFT]
+                        </span>
+                        <span className="text-[10px] text-[#90929A] block leading-tight mt-0.5">
+                          Menunggu persetujuan komersial promotor
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        disabled
+                        className="w-full py-3 px-4 rounded-sm text-xs font-bold uppercase tracking-wider bg-white/5 text-white/30 border border-white/10 cursor-not-allowed flex items-center justify-center gap-2"
+                        style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                      >
+                        <Lock className="w-3.5 h-3.5" />
+                        <span>Penjualan Publik Ditangguhkan</span>
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             );
@@ -621,7 +639,7 @@ export default function PpvLandingClient({ products }: Props) {
               {/* Payment Method Selector */}
               <div className="space-y-1.5 pt-2">
                 <label className="text-white/80 font-bold uppercase tracking-wider block">
-                  Metode Pembayaran (Midtrans Sandbox Simulator):
+                  Metode Pembayaran (Simulasi Staging Sandbox):
                 </label>
                 <div className="grid grid-cols-3 gap-2">
                   <button
@@ -684,7 +702,7 @@ export default function PpvLandingClient({ products }: Props) {
                 </button>
                 <div className="flex items-center justify-center gap-1 text-[10px] text-white/40">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Simulasi Midtrans Sandbox Terhubung Langsung</span>
+                  <span>Simulasi Gateway Internal (Staging Environment)</span>
                 </div>
               </div>
             </form>

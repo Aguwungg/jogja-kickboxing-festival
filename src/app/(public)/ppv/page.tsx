@@ -6,12 +6,11 @@ import { Radio, Flame, Sparkles } from "lucide-react";
 export const metadata = {
   title: "Pay-Per-View Live Streaming — JKB 2026",
   description:
-    "Saksikan siaran langsung resmi Jogja Kickboxing Festival & Redy Championship 2 dari GOR Among Rogo. Partai ekshibisi selebriti BigMo dan laga final 4 sabuk juara dalam kualitas Ultra-HD 60 FPS.",
+    "Saksikan siaran langsung resmi Jogja Kickboxing Festival & Redy Championship 2 dari GOR UNY. Partai ekshibisi selebriti BigMo dan laga kejuaraan dalam siaran digital berkualitas tinggi.",
 };
 
 export default async function PpvPage() {
   const ppvProducts = await prisma.pPVProduct.findMany({
-    where: { isActive: true },
     orderBy: { order: "asc" },
   });
 
@@ -22,7 +21,7 @@ export default async function PpvPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/15 bg-white/5 text-white/80 text-xs font-bold tracking-widest uppercase mb-4">
             <Radio className="w-3.5 h-3.5 text-[#EF3340] animate-pulse" />
-            <span>OFFICIAL GLOBAL BROADCAST & PAY-PER-VIEW</span>
+            <span>OFFICIAL BROADCAST & PAY-PER-VIEW PLATFORM</span>
           </div>
 
           <h1
@@ -33,21 +32,21 @@ export default async function PpvPage() {
           </h1>
 
           <p className="text-[#99999F] text-base sm:text-lg font-sans max-w-3xl leading-relaxed mb-6">
-            Bagi pendukung yang tidak dapat hadir langsung di GOR Among Rogo Yogyakarta, saksikan benturan 80 petarung memperebutkan 4 sabuk emas Redy Championship 2, BigMo Exhibition Match, dan panggung musik festival dalam kualitas siaran Ultra-HD 60 FPS multi-kamera.
+            Bagi pendukung yang tidak dapat hadir langsung di GOR UNY Yogyakarta, saksikan siaran langsung partai ekshibisi BigMo dan kejuaraan Redy Championship 2 langsung dari arena pertandingan.
           </p>
 
           <div className="flex flex-wrap items-center gap-6 text-xs text-white/70 font-sans">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span>Multi-Cam Ringside Switcher</span>
+              <span>Siaran Langsung Arena Resmi</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#EF3340]" />
-              <span>Ultra-HD 1080p & 4K 60FPS</span>
+              <span>Akses Digital BigMo Exhibition (Rp 10.000)</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-amber-400" />
-              <span>30 Hari Replay VOD Akses Penuh</span>
+              <span>Replay VOD Terjadwal</span>
             </div>
           </div>
         </div>
