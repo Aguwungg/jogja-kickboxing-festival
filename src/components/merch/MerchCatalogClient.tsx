@@ -212,21 +212,11 @@ export default function MerchCatalogClient({ initialProducts }: Props) {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 opacity-60 group-hover:opacity-40 transition-opacity" />
 
                   {/* Badge */}
-                  {product.badge && (
-                    <div className="absolute top-3 left-3 bg-[#D21F2B] text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs shadow-md">
-                      {product.badge}
-                    </div>
-                  )}
-
-                  {/* Stock Indicator */}
-                  <div className="absolute bottom-3 left-3 flex items-center gap-1.5 bg-black/70 backdrop-blur-md px-2 py-0.5 rounded-xs border border-white/10 text-[10px]">
-                    <span
-                      className={`w-1.5 h-1.5 rounded-full ${
-                        totalStock > 10 ? "bg-emerald-400" : "bg-amber-400"
-                      }`}
-                    />
-                    <span className="text-white/80 font-mono font-medium">
-                      {totalStock > 10 ? "Ready Stock" : `Tersisa ${totalStock} pcs`}
+                  {/* Official Merch Indicator */}
+                  <div className="absolute bottom-3 left-3 flex items-center gap-1.5 bg-black/75 backdrop-blur-md px-2.5 py-1 rounded-sm border border-white/10 text-[10px]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span className="text-white/90 font-medium">
+                      Koleksi Resmi
                     </span>
                   </div>
                 </Link>

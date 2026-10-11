@@ -2,23 +2,17 @@
 
 import React, { useState, useTransition } from "react";
 import {
-  Trophy,
   Video,
-  Award,
   Ticket,
-  ShieldCheck,
   CheckCircle2,
   AlertCircle,
-  ExternalLink,
-  Share2,
-  Globe,
-  Send,
   Sparkles,
   Camera,
   Newspaper,
   ChevronRight,
-  HelpCircle,
-  Flame,
+  ShieldCheck,
+  Send,
+  UserCheck,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -53,7 +47,7 @@ export default function CreatorClient({
   claimBarcodeAction,
   applyAccreditationAction,
 }: CreatorClientProps) {
-  const [activeTab, setActiveTab] = useState<"register" | "submit" | "barcode" | "media">("register");
+  const [activeFormTab, setActiveFormTab] = useState<"creator" | "media">("creator");
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -64,38 +58,6 @@ export default function CreatorClient({
     const formData = new FormData(form);
     startTransition(async () => {
       const res = await registerCreatorAction(formData);
-      if (res.success) {
-        setFeedback({ type: "success", text: res.message });
-        form.reset();
-      } else {
-        setFeedback({ type: "error", text: res.message });
-      }
-    });
-  };
-
-  const handleSubmitContent = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFeedback(null);
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    startTransition(async () => {
-      const res = await submitContentAction(formData);
-      if (res.success) {
-        setFeedback({ type: "success", text: res.message });
-        form.reset();
-      } else {
-        setFeedback({ type: "error", text: res.message });
-      }
-    });
-  };
-
-  const handleClaimBarcode = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFeedback(null);
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    startTransition(async () => {
-      const res = await claimBarcodeAction(formData);
       if (res.success) {
         setFeedback({ type: "success", text: res.message });
         form.reset();
@@ -123,677 +85,345 @@ export default function CreatorClient({
 
   return (
     <div className="w-full space-y-16">
-      {/* 4 Pilar Keuntungan Creator & Media */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-[#171719]/80 border border-white/10 p-6 rounded-sm relative overflow-hidden group hover:border-[#EF3340]/40 transition-all">
-          <div className="w-10 h-10 rounded-sm bg-[#EF3340]/10 border border-[#EF3340]/20 flex items-center justify-center text-[#EF3340] mb-4">
-            <Camera className="w-5 h-5" />
-          </div>
-          <h3
-            className="text-xl font-bold uppercase tracking-tight text-white mb-2"
+      
+      {/* ═════════════════════════════════════════════════════════════════════
+          3-STEP PARTICIPATION STRUCTURE (GoPro / Canva Creators Pattern)
+      ═════════════════════════════════════════════════════════════════════ */}
+      <section className="space-y-8">
+        <div className="text-center max-w-xl mx-auto space-y-2">
+          <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
+            CARA BERGABUNG
+          </span>
+          <h2
+            className="font-display text-3xl sm:text-5xl font-black uppercase text-white"
             style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
-            Akses Ringside Pass
-          </h3>
-          <p className="text-sm font-sans text-[#99999F] leading-relaxed">
-            Spot peliputan eksklusif di tepi apron kanvas ring dan zona mixed zone untuk wawancara petarung dan musisi.
+            TIGA LANGKAH MUDAH
+          </h2>
+          <p className="text-xs sm:text-sm text-[#9A9AA2]">
+            Ikuti alur partisipasi resmi untuk menjadi kreator terverifikasi festival JKB 2026.
           </p>
         </div>
 
-        <div className="bg-[#171719]/80 border border-white/10 p-6 rounded-sm relative overflow-hidden group hover:border-amber-400/40 transition-all">
-          <div className="w-10 h-10 rounded-sm bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-amber-400 mb-4">
-            <Ticket className="w-5 h-5" />
-          </div>
-          <h3
-            className="text-xl font-bold uppercase tracking-tight text-white mb-2"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            Reward Tiket Barcode
-          </h3>
-          <p className="text-sm font-sans text-[#99999F] leading-relaxed">
-            Klaim tiket masuk harian festival gratis cukup dengan membagikan konten promo dan menginput kode barcode tiket resmi.
-          </p>
-        </div>
-
-        <div className="bg-[#171719]/80 border border-white/10 p-6 rounded-sm relative overflow-hidden group hover:border-emerald-400/40 transition-all">
-          <div className="w-10 h-10 rounded-sm bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center text-emerald-400 mb-4">
-            <Trophy className="w-5 h-5" />
-          </div>
-          <h3
-            className="text-xl font-bold uppercase tracking-tight text-white mb-2"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            Leaderboard Cash Prize
-          </h3>
-          <p className="text-sm font-sans text-[#99999F] leading-relaxed">
-            Akumulasi poin dari setiap video yang diverifikasi. Top 3 kreator terbaik memenangkan total hadiah jutaan rupiah.
-          </p>
-        </div>
-
-        <div className="bg-[#171719]/80 border border-white/10 p-6 rounded-sm relative overflow-hidden group hover:border-sky-400/40 transition-all">
-          <div className="w-10 h-10 rounded-sm bg-sky-400/10 border border-sky-400/20 flex items-center justify-center text-sky-400 mb-4">
-            <Newspaper className="w-5 h-5" />
-          </div>
-          <h3
-            className="text-xl font-bold uppercase tracking-tight text-white mb-2"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            Kredensial Media Resmi
-          </h3>
-          <p className="text-sm font-sans text-[#99999F] leading-relaxed">
-            Akreditasi kartu pers bertanda tangan panitia resmi untuk jurnalis, kru siaran TV, dan fotografer terakreditasi.
-          </p>
-        </div>
-      </section>
-
-      {/* Creator Leaderboard Section */}
-      <section className="bg-[#121215] border border-white/10 rounded-sm p-6 sm:p-8 relative">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10 mb-8">
-          <div>
-            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full border border-amber-400/30 bg-amber-400/10 text-amber-400 text-[10px] font-bold tracking-widest uppercase mb-2">
-              <Flame className="w-3 h-3" />
-              TOP AMPLIFIER JKB 2026
-            </div>
-            <h2
-              className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-white"
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Step 1 */}
+          <div className="bg-[#171719] border border-white/10 rounded-sm p-6 space-y-3 relative">
+            <span className="font-display text-4xl font-black text-[#D91F2C]/30 block leading-none">
+              01
+            </span>
+            <h3
+              className="font-display text-2xl font-bold uppercase text-white"
               style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
-              KLASEMEN KREATOR TERBAIK <span className="text-[#EF3340]">(LIVE LEADERBOARD)</span>
-            </h2>
-            <p className="text-xs sm:text-sm font-sans text-[#99999F] mt-1">
-              Skor poin dihitung murni dari konten video publik yang telah dimoderasi dan disetujui kurator festival.
+              DAFTAR AKUN KREATOR
+            </h3>
+            <p className="text-xs text-[#9A9AA2] leading-relaxed">
+              Lengkapi formulir pendaftaran di bawah dengan menyertakan tautan akun Instagram atau TikTok aktif kamu.
             </p>
           </div>
 
-          <Link
-            href="/creator/dashboard"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-sm bg-white/5 hover:bg-white/10 border border-white/20 text-xs font-bold uppercase tracking-wider text-white transition-all shrink-0 w-fit"
+          {/* Step 2 */}
+          <div className="bg-[#171719] border border-white/10 rounded-sm p-6 space-y-3 relative">
+            <span className="font-display text-4xl font-black text-white/20 block leading-none">
+              02
+            </span>
+            <h3
+              className="font-display text-2xl font-bold uppercase text-white"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              PUBLIKASIKAN KONTEN
+            </h3>
+            <p className="text-xs text-[#9A9AA2] leading-relaxed">
+              Buat konten kreatif seputar JKB 2026 dengan menyertakan tagar resmi <strong>#JOGJAPUNYANYALI</strong> dan tag akun <strong>@jkb.championship</strong>.
+            </p>
+          </div>
+
+          {/* Step 3 */}
+          <div className="bg-[#171719] border border-white/10 rounded-sm p-6 space-y-3 relative">
+            <span className="font-display text-4xl font-black text-[#E2BA75]/30 block leading-none">
+              03
+            </span>
+            <h3
+              className="font-display text-2xl font-bold uppercase text-white"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              AKSES LIPUTAN ARENA
+            </h3>
+            <p className="text-xs text-[#9A9AA2] leading-relaxed">
+              Kreator dengan konten terverifikasi komite akan mendapatkan ID pass peliputan resmi ringside GOR UNY.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ═════════════════════════════════════════════════════════════════════
+          TWO CLEAR CHANNELS: CREATOR PROGRAM vs MEDIA ACCREDITATION
+      ═════════════════════════════════════════════════════════════════════ */}
+      <section id="action-hub" className="max-w-3xl mx-auto space-y-6">
+        
+        {/* Channel Selector Tabs */}
+        <div className="flex border-b border-white/10 pb-4 justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => {
+              setActiveFormTab("creator");
+              setFeedback(null);
+            }}
+            className={`px-5 py-2.5 rounded-sm text-xs font-bold uppercase tracking-wider transition-all ${
+              activeFormTab === "creator"
+                ? "bg-[#D91F2C] text-white shadow-md shadow-[#D91F2C]/20"
+                : "bg-[#171719] border border-white/10 text-[#9A9AA2] hover:text-white"
+            }`}
             style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            Buka Portal Dashboard Saya &rarr;
+            Form Registrasi Kreator
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setActiveFormTab("media");
+              setFeedback(null);
+            }}
+            className={`px-5 py-2.5 rounded-sm text-xs font-bold uppercase tracking-wider transition-all ${
+              activeFormTab === "media"
+                ? "bg-[#D91F2C] text-white shadow-md shadow-[#D91F2C]/20"
+                : "bg-[#171719] border border-white/10 text-[#9A9AA2] hover:text-white"
+            }`}
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            Akreditasi Media Massa
+          </button>
+        </div>
+
+        {/* Feedback Alert */}
+        {feedback && (
+          <div
+            className={`p-4 rounded-sm flex items-center gap-3 text-xs ${
+              feedback.type === "success"
+                ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-400"
+                : "bg-red-500/10 border border-red-500/30 text-red-400"
+            }`}
+          >
+            {feedback.type === "success" ? (
+              <CheckCircle2 className="w-4 h-4 shrink-0" />
+            ) : (
+              <AlertCircle className="w-4 h-4 shrink-0" />
+            )}
+            <span>{feedback.text}</span>
+          </div>
+        )}
+
+        {/* FORM 1: Registrasi Kreator */}
+        {activeFormTab === "creator" && (
+          <form
+            onSubmit={handleRegister}
+            className="bg-[#171719] border border-white/10 p-6 sm:p-8 rounded-sm space-y-4"
+          >
+            <div className="border-b border-white/10 pb-3">
+              <h3
+                className="font-display text-xl font-bold uppercase text-white"
+                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+              >
+                Pendaftaran Kreator Konten
+              </h3>
+              <p className="text-xs text-[#9A9AA2]">
+                Terbuka untuk kreator independen, videografer, dan penggiat media sosial.
+              </p>
+            </div>
+
+            <div className="space-y-3 text-xs">
+              <div>
+                <label className="block text-[#C4C4CC] font-bold uppercase mb-1">
+                  Nama Lengkap / Nama Panggung *
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  placeholder="Contoh: Budi Kickboxer"
+                  className="w-full bg-[#09090B] border border-white/10 px-3.5 py-2.5 rounded-sm text-white focus:outline-none focus:border-[#D91F2C]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[#C4C4CC] font-bold uppercase mb-1">
+                  Email Aktif *
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="budi@example.com"
+                  className="w-full bg-[#09090B] border border-white/10 px-3.5 py-2.5 rounded-sm text-white focus:outline-none focus:border-[#D91F2C]"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[#C4C4CC] font-bold uppercase mb-1">
+                    Username Instagram (Opsional)
+                  </label>
+                  <input
+                    type="text"
+                    name="instagram"
+                    placeholder="@username"
+                    className="w-full bg-[#09090B] border border-white/10 px-3.5 py-2.5 rounded-sm text-white focus:outline-none focus:border-[#D91F2C]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[#C4C4CC] font-bold uppercase mb-1">
+                    Username TikTok (Opsional)
+                  </label>
+                  <input
+                    type="text"
+                    name="tiktok"
+                    placeholder="@username"
+                    className="w-full bg-[#09090B] border border-white/10 px-3.5 py-2.5 rounded-sm text-white focus:outline-none focus:border-[#D91F2C]"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[#C4C4CC] font-bold uppercase mb-1">
+                  Kategori Konten Utama
+                </label>
+                <select
+                  name="category"
+                  defaultValue="SPORT"
+                  className="w-full bg-[#09090B] border border-white/10 px-3.5 py-2.5 rounded-sm text-white focus:outline-none focus:border-[#D91F2C]"
+                >
+                  <option value="SPORT">Olahraga / Bela Diri / Martial Arts</option>
+                  <option value="MUSIC">Musik / Festival / Entertainment</option>
+                  <option value="LIFESTYLE">Lifestyle / Vlog / Urban Culture</option>
+                </select>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isPending}
+              className="w-full font-display font-black text-xs uppercase tracking-widest py-3.5 bg-[#D91F2C] hover:bg-[#EF3340] text-white rounded-sm transition-all shadow-md shadow-[#D91F2C]/20 cursor-pointer"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              {isPending ? "Mengirim Pendaftaran..." : "KIRIM PENDAFTARAN KREATOR"}
+            </button>
+          </form>
+        )}
+
+        {/* FORM 2: Akreditasi Media Massa */}
+        {activeFormTab === "media" && (
+          <form
+            onSubmit={handleMediaApply}
+            className="bg-[#171719] border border-white/10 p-6 sm:p-8 rounded-sm space-y-4"
+          >
+            <div className="border-b border-white/10 pb-3">
+              <h3
+                className="font-display text-xl font-bold uppercase text-white"
+                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+              >
+                Permohonan Akreditasi Media & Pers
+              </h3>
+              <p className="text-xs text-[#9A9AA2]">
+                Khusus jurnalis, fotografer pers, dan awak redaksi media massa terverifikasi.
+              </p>
+            </div>
+
+            <div className="space-y-3 text-xs">
+              <div>
+                <label className="block text-[#C4C4CC] font-bold uppercase mb-1">
+                  Nama Media / Kantor Redaksi *
+                </label>
+                <input
+                  type="text"
+                  name="mediaName"
+                  required
+                  placeholder="Contoh: Harian Jogja / Kompas TV"
+                  className="w-full bg-[#09090B] border border-white/10 px-3.5 py-2.5 rounded-sm text-white focus:outline-none focus:border-[#D91F2C]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[#C4C4CC] font-bold uppercase mb-1">
+                  Nama Lengkap Jurnalis / Peliput *
+                </label>
+                <input
+                  type="text"
+                  name="applicantName"
+                  required
+                  placeholder="Nama sesuai kartu pers"
+                  className="w-full bg-[#09090B] border border-white/10 px-3.5 py-2.5 rounded-sm text-white focus:outline-none focus:border-[#D91F2C]"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[#C4C4CC] font-bold uppercase mb-1">
+                    Email Redaksi Resmi *
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="redaksi@media.co.id"
+                    className="w-full bg-[#09090B] border border-white/10 px-3.5 py-2.5 rounded-sm text-white focus:outline-none focus:border-[#D91F2C]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[#C4C4CC] font-bold uppercase mb-1">
+                    No. WhatsApp Redaksi *
+                  </label>
+                  <input
+                    type="text"
+                    name="phone"
+                    required
+                    placeholder="0812xxxxxxxx"
+                    className="w-full bg-[#09090B] border border-white/10 px-3.5 py-2.5 rounded-sm text-white focus:outline-none focus:border-[#D91F2C]"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[#C4C4CC] font-bold uppercase mb-1">
+                  Tipe Media
+                </label>
+                <select
+                  name="mediaType"
+                  defaultValue="ONLINE"
+                  className="w-full bg-[#09090B] border border-white/10 px-3.5 py-2.5 rounded-sm text-white focus:outline-none focus:border-[#D91F2C]"
+                >
+                  <option value="ONLINE">Media Online / Portal Berita</option>
+                  <option value="CETAK">Media Cetak (Koran / Majalah)</option>
+                  <option value="TELEVISI">Televisi / Radio Penyiaran</option>
+                  <option value="PHOTO">Fotografi Jurnalistik Independen</option>
+                </select>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isPending}
+              className="w-full font-display font-black text-xs uppercase tracking-widest py-3.5 bg-[#D91F2C] hover:bg-[#EF3340] text-white rounded-sm transition-all shadow-md shadow-[#D91F2C]/20 cursor-pointer"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              {isPending ? "Mengajukan Akreditasi..." : "KIRIM PENGAJUAN AKREDITASI PERS"}
+            </button>
+          </form>
+        )}
+
+        {/* Link to Authenticated Creator Dashboard */}
+        <div className="p-4 bg-[#171719] border border-white/5 rounded-sm flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#9A9AA2]">
+          <span>Sudah terdaftar sebagai kreator resmi JKB 2026?</span>
+          <Link
+            href="/creator/dashboard"
+            className="text-white hover:text-[#D91F2C] font-bold uppercase tracking-wider flex items-center gap-1 transition-colors"
+          >
+            <span>Buka Dashboard Pribadi</span>
+            <ChevronRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
-        {/* Podium / Leaderboard List */}
-        <div className="space-y-3">
-          {creators.length === 0 ? (
-            <div className="text-center py-12 text-[#99999F] text-sm">
-              Belum ada kreator yang terverifikasi dalam leaderboard.
-            </div>
-          ) : (
-            creators.map((c, index) => {
-              const rank = index + 1;
-              const isTop1 = rank === 1;
-              const isTop2 = rank === 2;
-              const isTop3 = rank === 3;
-
-              return (
-                <div
-                  key={c.id}
-                  className={`flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-5 rounded-sm border transition-all ${
-                    isTop1
-                      ? "bg-amber-500/10 border-amber-500/30 hover:border-amber-400"
-                      : isTop2
-                      ? "bg-slate-400/10 border-slate-400/30 hover:border-slate-300"
-                      : isTop3
-                      ? "bg-amber-700/10 border-amber-700/30 hover:border-amber-600"
-                      : "bg-[#171719]/60 border-white/5 hover:border-white/20"
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    {/* Rank Number */}
-                    <div
-                      className={`w-10 h-10 rounded-sm flex items-center justify-center font-black text-lg shrink-0 ${
-                        isTop1
-                          ? "bg-amber-400 text-black shadow-lg shadow-amber-400/20"
-                          : isTop2
-                          ? "bg-slate-300 text-black"
-                          : isTop3
-                          ? "bg-amber-600 text-white"
-                          : "bg-white/5 text-white/60 border border-white/10"
-                      }`}
-                      style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                    >
-                      {isTop1 ? <Trophy className="w-5 h-5 text-black" /> : `#${rank}`}
-                    </div>
-
-                    {/* Creator Identity */}
-                    <div>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-base sm:text-lg font-bold text-white tracking-tight">
-                          {c.name || "Kreator JKB"}
-                        </span>
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm bg-white/5 border border-white/10 text-white/70">
-                          {c.category?.replace("_", " ") || "COMBAT SPORT"}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center gap-3 text-xs text-[#99999F] mt-1 flex-wrap">
-                        {c.tiktok && (
-                          <span className="inline-flex items-center gap-1 text-[#EF3340]">
-                            <Video className="w-3 h-3" />
-                            {c.tiktok}
-                          </span>
-                        )}
-                        {c.instagram && (
-                          <span className="inline-flex items-center gap-1 text-pink-400">
-                            <Share2 className="w-3 h-3" />
-                            {c.instagram}
-                          </span>
-                        )}
-                        <span className="text-white/40">•</span>
-                        <span>{c.submissions.filter((s) => s.status === "APPROVED").length} Konten Lolos</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Points Badge */}
-                  <div className="mt-4 sm:mt-0 flex items-center justify-between sm:justify-end gap-4 border-t sm:border-t-0 pt-3 sm:pt-0 border-white/5">
-                    <div className="text-right">
-                      <span className="text-xs uppercase tracking-widest text-[#99999F] block">Akumulasi Poin</span>
-                      <span
-                        className="text-2xl font-black text-amber-400 tracking-tight"
-                        style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                      >
-                        {c.totalPoints.toLocaleString()} <span className="text-xs font-bold text-white/70">PTS</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })
-          )}
-        </div>
       </section>
 
-      {/* Action Hub (Tabs: Register, Submit Content, Barcode, Media) */}
-      <section id="action-hub" className="bg-[#171719] border border-white/10 rounded-sm overflow-hidden">
-        {/* Tab Headers */}
-        <div className="grid grid-cols-2 md:grid-cols-4 border-b border-white/10 bg-[#121215]">
-          <button
-            onClick={() => {
-              setActiveTab("register");
-              setFeedback(null);
-            }}
-            className={`px-4 py-4 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 border-b-2 ${
-              activeTab === "register"
-                ? "bg-[#171719] text-[#EF3340] border-[#EF3340]"
-                : "text-[#99999F] hover:text-white border-transparent"
-            }`}
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            <Sparkles className="w-4 h-4" />
-            1. Daftar Creator
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab("submit");
-              setFeedback(null);
-            }}
-            className={`px-4 py-4 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 border-b-2 ${
-              activeTab === "submit"
-                ? "bg-[#171719] text-[#EF3340] border-[#EF3340]"
-                : "text-[#99999F] hover:text-white border-transparent"
-            }`}
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            <Video className="w-4 h-4" />
-            2. Submit Konten
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab("barcode");
-              setFeedback(null);
-            }}
-            className={`px-4 py-4 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 border-b-2 ${
-              activeTab === "barcode"
-                ? "bg-[#171719] text-[#EF3340] border-[#EF3340]"
-                : "text-[#99999F] hover:text-white border-transparent"
-            }`}
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            <Ticket className="w-4 h-4" />
-            3. Klaim Barcode
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab("media");
-              setFeedback(null);
-            }}
-            className={`px-4 py-4 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 border-b-2 ${
-              activeTab === "media"
-                ? "bg-[#171719] text-[#EF3340] border-[#EF3340]"
-                : "text-[#99999F] hover:text-white border-transparent"
-            }`}
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            <ShieldCheck className="w-4 h-4" />
-            4. Akreditasi Media
-          </button>
-        </div>
-
-        {/* Tab Body */}
-        <div className="p-6 sm:p-10">
-          {feedback && (
-            <div
-              className={`p-4 rounded-sm mb-8 flex items-center gap-3 text-sm font-sans border ${
-                feedback.type === "success"
-                  ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
-                  : "bg-red-500/10 border-red-500/30 text-red-400"
-              }`}
-            >
-              {feedback.type === "success" ? (
-                <CheckCircle2 className="w-5 h-5 shrink-0" />
-              ) : (
-                <AlertCircle className="w-5 h-5 shrink-0" />
-              )}
-              <span>{feedback.text}</span>
-            </div>
-          )}
-
-          {/* TAB 1: REGISTRASI CREATOR */}
-          {activeTab === "register" && (
-            <div className="max-w-2xl mx-auto space-y-6">
-              <div>
-                <h3
-                  className="text-2xl font-black uppercase text-white tracking-tight"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  FORMULIR REGISTRASI KREATOR RESMI JKB 2026
-                </h3>
-                <p className="text-xs sm:text-sm text-[#99999F] mt-1">
-                  Daftarkan akun kreator Anda untuk mendapatkan kode afiliasi, akses materi visual resmi, dan klaim tiket festival.
-                </p>
-              </div>
-
-              <form onSubmit={handleRegister} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Nama Lengkap</label>
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      placeholder="Contoh: Raditya Pratama"
-                      className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#EF3340]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Email Aktif</label>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      placeholder="email@anda.com"
-                      className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#EF3340]"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Handle TikTok</label>
-                    <input
-                      type="text"
-                      name="tiktok"
-                      placeholder="@username.tiktok"
-                      className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#EF3340]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Handle Instagram</label>
-                    <input
-                      type="text"
-                      name="instagram"
-                      placeholder="@username_ig"
-                      className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#EF3340]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Kategori Konten</label>
-                    <select
-                      name="category"
-                      className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#EF3340]"
-                    >
-                      <option value="COMBAT_SPORT">Olahraga Tarung & Beladiri</option>
-                      <option value="MUSIC_LIFESTYLE">Musik & Festival Lifestyle</option>
-                      <option value="GENERAL_HYPE">Vlog & Kuliner Jogja</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Bio Singkat / Profil Audiens</label>
-                  <textarea
-                    name="bio"
-                    rows={3}
-                    placeholder="Ceritakan sedikit tentang fokus konten dan perkiraan audiens Anda..."
-                    className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#EF3340]"
-                  ></textarea>
-                </div>
-
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    disabled={isPending}
-                    className="w-full bg-[#EF3340] hover:bg-[#D91F2C] text-white font-bold uppercase tracking-wider py-3.5 rounded-sm text-sm transition-all shadow-lg shadow-[#EF3340]/20 flex items-center justify-center gap-2"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    <Send className="w-4 h-4" />
-                    {isPending ? "MEMPROSES REGISTRASI..." : "KIRIM REGISTRASI KREATOR"}
-                  </button>
-                </div>
-              </form>
-            </div>
-          )}
-
-          {/* TAB 2: SUBMIT KONTEN */}
-          {activeTab === "submit" && (
-            <div className="max-w-2xl mx-auto space-y-6">
-              <div>
-                <h3
-                  className="text-2xl font-black uppercase text-white tracking-tight"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  SUBMIT TAUTAN KONTEN KAMPANYE JKB 2026
-                </h3>
-                <p className="text-xs sm:text-sm text-[#99999F] mt-1">
-                  Masukkan link video TikTok, Instagram Reels, atau YouTube Shorts Anda. Admin akan memverifikasi dan menambahkan skor poin Anda.
-                </p>
-              </div>
-
-              <form onSubmit={handleSubmitContent} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Pilih Profil Kreator Anda</label>
-                  <select
-                    name="creatorId"
-                    required
-                    className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#EF3340]"
-                  >
-                    <option value="">-- Pilih Akun Terdaftar --</option>
-                    {allCreatorsForSelect.map((c) => (
-                      <option key={c.id} value={c.id}>
-                        {c.name || "Kreator"} ({c.tiktok || c.instagram || "No Handle"})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Platform Video</label>
-                    <select
-                      name="platform"
-                      className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#EF3340]"
-                    >
-                      <option value="TIKTOK">TikTok Video</option>
-                      <option value="INSTAGRAM">Instagram Reels</option>
-                      <option value="YOUTUBE">YouTube Shorts</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Judul / Tema Konten</label>
-                    <input
-                      type="text"
-                      name="title"
-                      required
-                      placeholder="Contoh: Preview Laga Panas Sleman vs Bantul"
-                      className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#EF3340]"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Tautan URL Video Publik</label>
-                  <input
-                    type="url"
-                    name="url"
-                    required
-                    placeholder="https://www.tiktok.com/@username/video/..."
-                    className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#EF3340]"
-                  />
-                  <p className="text-[11px] text-[#99999F] mt-1">
-                    Pastikan video disetel publik dan menyertakan hashtag resmi <span className="text-white font-mono">#JOGJAPUNYANYALI</span>.
-                  </p>
-                </div>
-
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    disabled={isPending}
-                    className="w-full bg-[#EF3340] hover:bg-[#D91F2C] text-white font-bold uppercase tracking-wider py-3.5 rounded-sm text-sm transition-all shadow-lg shadow-[#EF3340]/20 flex items-center justify-center gap-2"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    <Send className="w-4 h-4" />
-                    {isPending ? "MENGIRIM KONTEN..." : "SUBMIT KONTEN UNTUK REVIEW"}
-                  </button>
-                </div>
-              </form>
-            </div>
-          )}
-
-          {/* TAB 3: KLAIM TIKET BARCODE */}
-          {activeTab === "barcode" && (
-            <div className="max-w-2xl mx-auto space-y-6">
-              <div>
-                <h3
-                  className="text-2xl font-black uppercase text-white tracking-tight"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  KLAIM TIKET HARIAN DENGAN KODE BARCODE
-                </h3>
-                <p className="text-xs sm:text-sm text-[#99999F] mt-1">
-                  Setiap konten video yang mencapai target impresi berhak mendapatkan kode barcode tiket harian festival. Masukkan kode untuk verifikasi.
-                </p>
-              </div>
-
-              <form onSubmit={handleClaimBarcode} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Pilih Akun Kreator</label>
-                  <select
-                    name="creatorId"
-                    required
-                    className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#EF3340]"
-                  >
-                    <option value="">-- Pilih Akun Terdaftar --</option>
-                    {allCreatorsForSelect.map((c) => (
-                      <option key={c.id} value={c.id}>
-                        {c.name || "Kreator"} ({c.tiktok || c.instagram || "No Handle"})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Kode Barcode Tiket</label>
-                  <input
-                    type="text"
-                    name="barcode"
-                    required
-                    placeholder="Contoh: JKB2026-FEST-88120"
-                    className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white font-mono placeholder-white/30 focus:outline-none focus:border-amber-400"
-                  />
-                  <p className="text-[11px] text-[#99999F] mt-1">
-                    Format: Huruf kapital dan angka kombinasi tiket resmi. Kode unik hanya dapat diklaim 1 kali.
-                  </p>
-                </div>
-
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    disabled={isPending}
-                    className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold uppercase tracking-wider py-3.5 rounded-sm text-sm transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    <Ticket className="w-4 h-4" />
-                    {isPending ? "MEMVERIFIKASI KODE..." : "KLAIM BARCODE TIKET"}
-                  </button>
-                </div>
-              </form>
-            </div>
-          )}
-
-          {/* TAB 4: AKREDITASI MEDIA & PERS */}
-          {activeTab === "media" && (
-            <div className="max-w-2xl mx-auto space-y-6">
-              <div>
-                <h3
-                  className="text-2xl font-black uppercase text-white tracking-tight"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  FORMULIR AKREDITASI MEDIA & KARTU PERS RESMI
-                </h3>
-                <p className="text-xs sm:text-sm text-[#99999F] mt-1">
-                  Ditujukan bagi jurnalis, juru kamera TV, fotografer pers, dan portal berita nasional/lokal untuk peliputan turnamen Redy Championship 2 & panggung festival.
-                </p>
-              </div>
-
-              <form onSubmit={handleMediaApply} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Nama Lembaga Media</label>
-                    <input
-                      type="text"
-                      name="mediaName"
-                      required
-                      placeholder="Contoh: Kedaulatan Rakyat / Tribun Jogja"
-                      className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#EF3340]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Jenis Media</label>
-                    <select
-                      name="mediaType"
-                      className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#EF3340]"
-                    >
-                      <option value="ONLINE_MEDIA">Portal Berita Online</option>
-                      <option value="PRINT_MEDIA">Koran / Media Cetak</option>
-                      <option value="TELEVISION">Stasiun Televisi / Broadcast</option>
-                      <option value="PHOTOGRAPHER_RINGSIDE">Fotografer Laga (Ringside Pass)</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Nama Jurnalis / Fotografer</label>
-                    <input
-                      type="text"
-                      name="journalistName"
-                      required
-                      placeholder="Nama lengkap peliput"
-                      className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#EF3340]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">No. Kartu Pers (PWI/AJI/PFI)</label>
-                    <input
-                      type="text"
-                      name="pressCardNumber"
-                      placeholder="Nomor kartu pers resmi"
-                      className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#EF3340]"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Email Redaksi / Koresponden</label>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      placeholder="redaksi@media.co.id"
-                      className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#EF3340]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">No. WhatsApp / HP</label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      required
-                      placeholder="0812xxxxxxxx"
-                      className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#EF3340]"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase text-[#99999F] mb-1.5">Rencana Sudut Liputan</label>
-                  <textarea
-                    name="coveragePlan"
-                    rows={2}
-                    placeholder="Contoh: Liputan partai final perebutan sabuk juara & liputan festival kuliner UMKM."
-                    className="w-full bg-[#121215] border border-white/10 rounded-sm px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#EF3340]"
-                  ></textarea>
-                </div>
-
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    disabled={isPending}
-                    className="w-full bg-[#EF3340] hover:bg-[#D91F2C] text-white font-bold uppercase tracking-wider py-3.5 rounded-sm text-sm transition-all shadow-lg shadow-[#EF3340]/20 flex items-center justify-center gap-2"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    <ShieldCheck className="w-4 h-4" />
-                    {isPending ? "MENGAJUKAN AKREDITASI..." : "KIRIM PERMOHONAN AKREDITASI MEDIA"}
-                  </button>
-                </div>
-              </form>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* FAQ & Regulasi Etika Peliputan */}
-      <section className="bg-[#121215] border border-white/10 rounded-sm p-6 sm:p-8">
-        <div className="flex items-center gap-2 text-white/80 font-bold uppercase tracking-wider text-xs mb-3">
-          <HelpCircle className="w-4 h-4 text-[#EF3340]" />
-          PANDUAN & ETIKA PELIPUTAN RESMI
-        </div>
-
-        <h3
-          className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white mb-6"
-          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-        >
-          REGULASI KHUSUS AREA RINGSIDE & PANGGUNG FESTIVAL
-        </h3>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm font-sans">
-          <div className="bg-[#171719]/60 border border-white/5 p-5 rounded-sm space-y-2">
-            <span className="font-bold text-white block">1. Rompi Fotografer & Zona Apron Ring</span>
-            <p className="text-[#99999F] text-xs leading-relaxed">
-              Fotografer pemegang Ringside Pass wajib mengenakan rompi resmi bernomor seri saat berada di bibir apron kanvas ring. Dilarang berdiri menghalangi sudut pandang ketiga juri penilaian.
-            </p>
-          </div>
-
-          <div className="bg-[#171719]/60 border border-white/5 p-5 rounded-sm space-y-2">
-            <span className="font-bold text-white block">2. Hak Siar Video Eksklusif (PPV)</span>
-            <p className="text-[#99999F] text-xs leading-relaxed">
-              Dilarang menyiarkan siaran langsung penuh (full live stream) partai kejuaraan di platform media sosial pribadi. Klip highlight dan reels diperbolehkan dengan durasi maksimal 60 detik per laga.
-            </p>
-          </div>
-
-          <div className="bg-[#171719]/60 border border-white/5 p-5 rounded-sm space-y-2">
-            <span className="font-bold text-white block">3. Mekanisme Verifikasi Poin Konten</span>
-            <p className="text-[#99999F] text-xs leading-relaxed">
-              Poin leaderboard dihitung secara deterministik oleh kurator. Setiap 1 konten yang lolos kurasi berhak memperoleh 100-200 poin sesuai kualitas produksi dan engagement orisinal.
-            </p>
-          </div>
-
-          <div className="bg-[#171719]/60 border border-white/5 p-5 rounded-sm space-y-2">
-            <span className="font-bold text-white block">4. Pengambilan ID Badge Akreditasi</span>
-            <p className="text-[#99999F] text-xs leading-relaxed">
-              Jurnalis dan kreator yang telah disetujui dapat mengambil kartu akreditasi fisik di Media Center Pintu Barat GOR UNY mulai H-1 acara dengan membawa KTP/Surat Tugas asli.
-            </p>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
