@@ -7,85 +7,74 @@ import { Search, ChevronDown, HelpCircle, MessageSquare } from "lucide-react";
 interface FaqItem {
   q: string;
   a: string;
-  category: "TIKET" | "COMBAT" | "FESTIVAL" | "ATURAN" | "PPV";
+  category: "TIKET" | "COMBAT" | "FESTIVAL" | "ATURAN";
 }
 
 const FAQ_DATA: FaqItem[] = [
   {
     category: "TIKET",
-    q: "Bagaimana cara membeli tiket Jogja Kickboxing Festival 2026?",
-    a: "Tiket resmi dapat dibeli secara online melalui platform tiket mitra resmi Rawooh yang ditautkan di website resmi ini, atau secara on-the-spot (OTS) di Ticket Box GOR UNY selama kuota harian masih tersedia.",
+    q: "Bagaimana informasi pembelian tiket resmi JKB 2026?",
+    a: "Informasi resmi penjualan tiket akan diumumkan oleh panitia pelaksana. Akses tiket akan difasilitasi melalui platform ticketing resmi terverifikasi tanpa perantara calo.",
   },
   {
     category: "TIKET",
-    q: "Apakah tiket festival berlaku untuk menonton pertandingan kickboxing dan konser musik sekaligus?",
-    a: "Ya! Tiket Festival Pass (Day Pass maupun 3-Day Pass) memberikan akses penuh ke seluruh zona: area tribun pertandingan The Ring, panggung festival The Stage, serta F&B Street Plaza.",
+    q: "Apakah tiket festival mencakup pertandingan dan konser musik?",
+    a: "Festival JKB 2026 mengusung konsep sportainment terpadu. Detail ketentuan hak akses harian atau terusan akan dirilis bersamaan dengan pengumuman skema tiket resmi.",
   },
   {
     category: "TIKET",
-    q: "Apakah anak-anak dikenakan biaya tiket masuk?",
-    a: "Anak-anak berusia di bawah 5 tahun dapat masuk gratis dengan pendampingan orang tua/wali (tanpa nomor kursi terpisah). Demi kenyamanan dan keselamatan pendengaran anak, disarankan menggunakan pelindung telinga (earmuffs) di area panggung konser.",
+    q: "Bagaimana verifikasi tiket di lokasi GOR UNY?",
+    a: "Seluruh e-voucher resmi wajib ditukarkan dengan gelang tanda masuk fisik di loket verifikasi pintu masuk GOR UNY sebelum memasuki arena.",
   },
   {
     category: "COMBAT",
     q: "Aturan pertandingan apa yang digunakan pada Redy Championship 2?",
-    a: "Pertandingan menggunakan regulasi Full Contact K-1 Kickboxing Rules dengan dewan juri dan wasit berlisensi resmi. Ronde terdiri dari 3 ronde x 3 menit untuk partai profesional, dan 3 ronde x 2 menit untuk partai amatir dengan jeda istirahat 1 menit.",
+    a: "Pertandingan menggunakan regulasi kickboxing resmi dengan wasit dan dewan juri bersertifikasi. Terdapat pembagian kelas pertandingan amatir dan profesional.",
   },
   {
     category: "COMBAT",
-    q: "Berapa banyak atlet yang bertanding dalam kejuaraan ini?",
-    a: "Terdapat lebih dari 80 atlet terdaftar yang mewakili puluhan sasana/camp dari berbagai penjuru tanah air, memperebutkan 4 sabuk kejuaraan utama di divisi Bantamweight, Featherweight, Lightweight, dan Welterweight.",
+    q: "Divisi apa saja yang dipertandingkan dalam kejuaraan ini?",
+    a: "Redy Championship 2 mempertandingkan partai kejuaraan di berbagai divisi kelas berat resmi, memperebutkan sabuk juara festival.",
   },
   {
     category: "COMBAT",
-    q: "Di mana saya bisa melihat profil dan statistik rekor atlet?",
-    a: "Anda dapat melihat rekor kemenangan, statistik jangkauan, dan biografi petarung secara langsung di menu 'Fighter Center' pada website ini.",
+    q: "Di mana saya dapat melihat daftar petarung?",
+    a: "Daftar petarung dan data atlet yang telah terverifikasi komite dapat diakses langsung melalui menu 'Pertandingan' atau 'Daftar Petarung' di website ini.",
   },
   {
     category: "FESTIVAL",
-    q: "Pukul berapa pintu masuk (open gate) dibuka setiap harinya?",
-    a: "Gerbang utama festival dibuka mulai pukul 09:00 WIB untuk sesi timbang badan dan pertandingan penyisihan, dan beroperasi hingga pukul 23:30 WIB setiap harinya.",
+    q: "Pukul berapa pintu masuk (open gate) dibuka?",
+    a: "Jadwal resmi jam buka pintu masuk (open gate) setiap harinya akan diumumkan secara resmi oleh panitia pelaksana menyesuaikan rangkaian sesi laga.",
   },
   {
     category: "FESTIVAL",
-    q: "Apakah diperbolehkan membawa makanan dan minuman dari luar?",
-    a: "Penonton dilarang membawa makanan dan minuman dari luar ke dalam area stadion. Namun, di dalam area Plaza Festival tersedia puluhan tenant F&B UMKM lokal pilihan dengan harga terjangkau dan pembayaran tunai maupun QRIS.",
+    q: "Apakah tersedia area makanan dan minuman di dalam venue?",
+    a: "Ya, area festival menyediakan tenant makanan dan minuman bagi pengunjung. Makanan dan minuman luar dilarang dibawa ke dalam arena pertandingan.",
   },
   {
     category: "ATURAN",
-    q: "Apa saja barang yang dilarang dibawa ke dalam arena GOR UNY?",
-    a: "Barang terlarang meliputi: senjata tajam, senjata api, flare/kembang api/laser pointer, botol kaca/kaleng, minuman beralkohol, obat-obatan terlarang, helm, tongkat selfie/tripod profesional tanpa kartu pers resmi, serta hewan peliharaan.",
+    q: "Apa saja barang yang dilarang dibawa ke arena GOR UNY?",
+    a: "Barang terlarang meliputi senjata tajam, senjata api, bahan peledak/flare/laser pointer, botol kaca, minuman beralkohol, zat terlarang, serta kamera profesional tanpa izin peliputan resmi.",
   },
   {
     category: "ATURAN",
-    q: "Apakah area festival ramah bagi pengguna kursi roda?",
-    a: "Tentu. GOR UNY dilengkapi ramp akses di pintu selatan untuk memudahkan penonton pengguna kursi roda, serta tribun khusus dengan pandangan bebas hambatan ke arah ring.",
-  },
-  {
-    category: "PPV",
-    q: "Apa itu BigMo PPV dan bagaimana cara menontonnya jika tidak bisa hadir langsung?",
-    a: "Bagi pendukung yang berada di luar Yogyakarta atau luar negeri, partai ekshibisi spesial BigMo dan pertandingan semifinal/final disiarkan secara eksklusif melalui Pay-Per-View (PPV) resmi berdefinisi tinggi di website ini dengan biaya terjangkau Rp10.000.",
-  },
-  {
-    category: "PPV",
-    q: "Apakah siaran PPV dapat ditonton ulang setelah acara selesai?",
-    a: "Ya. Setiap pembelian tiket digital PPV mencakup hak akses siaran langsung (live streaming) serta tayangan ulang (VOD replay) selama 7 hari kalender setelah turnamen berakhir.",
+    q: "Apakah venue menyediakan akses ramah disabilitas?",
+    a: "Ya. GOR UNY memiliki jalur ramp akses bagi pengguna kursi roda serta area khusus penonton disabilitas demi kenyamanan dan keselamatan seluruh pengunjung.",
   },
 ];
 
 const CATEGORIES = [
   { key: "ALL", label: "Semua Kategori" },
   { key: "TIKET", label: "Tiket & Akses" },
-  { key: "COMBAT", label: "Pertandingan & Atlet" },
+  { key: "COMBAT", label: "Pertandingan" },
   { key: "FESTIVAL", label: "Festival Musik" },
-  { key: "ATURAN", label: "Aturan & Keamanan" },
-  { key: "PPV", label: "PPV BigMo" },
+  { key: "ATURAN", label: "Aturan & Keselamatan" },
 ];
 
 export default function FaqClient() {
   const [activeCategory, setActiveCategory] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [openIndexes, setOpenIndexes] = useState<number[]>([0, 1]); // Open first two by default
+  const [openIndexes, setOpenIndexes] = useState<number[]>([0, 1]);
 
   const toggleAccordion = (index: number) => {
     setOpenIndexes((prev) =>
@@ -111,7 +100,7 @@ export default function FaqClient() {
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Cari pertanyaan... (contoh: tiket, aturan, jam buka, makanan, ppv)"
+          placeholder="Cari pertanyaan... (contoh: tiket, aturan, jam buka, barang dilarang)"
           className="w-full bg-[#171719] border border-white/10 rounded-sm pl-12 pr-4 py-3.5 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#D91F2C] transition-colors font-sans"
         />
         {searchQuery && (
@@ -152,20 +141,18 @@ export default function FaqClient() {
             className="text-xl font-black uppercase text-white mb-2"
             style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
-            PERTANYAAN TIDAK DITEMUKAN
+            TIDAK MENEMUKAN JAWABAN
           </h4>
           <p className="text-[#99999F] text-sm font-sans mb-4">
-            Tidak ada jawaban yang sesuai dengan kata kunci pencarian Anda.
+            Pertanyaan yang Anda cari belum tersedia. Silakan hubungi sekretariat panitia pelaksana.
           </p>
-          <button
-            onClick={() => {
-              setSearchQuery("");
-              setActiveCategory("ALL");
-            }}
-            className="text-xs uppercase tracking-widest text-[#EF3340] font-bold hover:underline"
+          <Link
+            href="/kontak"
+            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#D91F2C] hover:underline"
           >
-            Reset Pencarian
-          </button>
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span>Kirim Pesan ke Panitia</span>
+          </Link>
         </div>
       ) : (
         <div className="space-y-3">
@@ -174,26 +161,22 @@ export default function FaqClient() {
             return (
               <div
                 key={index}
-                className={`border rounded-sm transition-all overflow-hidden ${
-                  isOpen
-                    ? "bg-[#171719] border-white/25 shadow-sm"
-                    : "bg-[#171719]/50 border-white/10 hover:border-white/20"
-                }`}
+                className="bg-[#171719] border border-white/10 rounded-sm overflow-hidden transition-colors"
               >
                 <button
+                  type="button"
                   onClick={() => toggleAccordion(index)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-sans font-bold text-white text-base sm:text-lg"
+                  className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-white hover:text-[#D91F2C] transition-colors"
                 >
-                  <span className="leading-snug">{faq.q}</span>
+                  <span>{faq.q}</span>
                   <ChevronDown
-                    className={`w-5 h-5 text-white/50 shrink-0 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-[#EF3340]" : ""
+                    className={`w-4 h-4 text-[#99999F] shrink-0 transition-transform duration-200 ${
+                      isOpen ? "rotate-180 text-[#D91F2C]" : ""
                     }`}
                   />
                 </button>
-
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 text-sm text-[#99999F] font-sans leading-relaxed border-t border-white/5">
+                  <div className="px-4 pb-5 sm:px-5 text-xs sm:text-sm text-[#99999F] font-sans leading-relaxed border-t border-white/5 pt-3">
                     {faq.a}
                   </div>
                 )}
@@ -203,26 +186,25 @@ export default function FaqClient() {
         </div>
       )}
 
-      {/* Help CTA Box */}
-      <div className="mt-12 bg-gradient-to-r from-[#171719] to-[#171719]/80 border border-white/10 p-8 rounded-sm flex flex-col sm:flex-row items-center justify-between gap-6">
+      {/* Contact CTA */}
+      <div className="mt-12 p-6 sm:p-8 bg-[#171719] border border-white/10 rounded-sm flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
           <h4
-            className="text-xl sm:text-2xl font-black uppercase text-white mb-1 tracking-tight"
+            className="text-xl font-black uppercase text-white mb-1"
             style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
-            MASIH MEMILIKI PERTANYAAN LAIN?
+            PUNYA PERTANYAAN LAIN?
           </h4>
-          <p className="text-xs sm:text-sm text-[#99999F] font-sans">
-            Tim panitia dan layanan penonton JKB 2026 siap membantu menjawab pertanyaan Anda.
+          <p className="text-xs text-[#99999F] font-sans">
+            Tim sekretariat JKB 2026 siap menjawab pertanyaan seputar festival dan kemitraan.
           </p>
         </div>
-
         <Link
           href="/kontak"
-          className="shrink-0 inline-flex items-center gap-2 bg-[#D91F2C] hover:bg-[#EF3340] text-white px-6 py-3 rounded-sm font-bold text-xs uppercase tracking-widest transition-all"
+          className="font-display font-bold text-xs uppercase tracking-widest px-5 py-3 bg-[#D91F2C] hover:bg-[#EF3340] text-white rounded-sm transition-all shrink-0"
+          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
         >
-          <MessageSquare className="w-4 h-4" />
-          <span>HUBUNGI PANITIA</span>
+          Hubungi Sekretariat
         </Link>
       </div>
     </div>

@@ -1,234 +1,183 @@
-import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Navigation, Bus, Train, Car, Compass, ShieldCheck, HeartPulse, Accessibility, ExternalLink } from "lucide-react";
+import { MapPin, Navigation, Bus, Train, ExternalLink, Calendar, ShieldCheck } from "lucide-react";
 import { EVENT_CONFIG } from "@/lib/event-config";
 
 export const metadata = {
-  title: "Panduan Lokasi & Venue — JKB 2026",
-  description: "Informasi lengkap denah arena, transportasi, dan fasilitas GOR UNY Yogyakarta untuk Jogja Kickboxing Festival 2026.",
+  title: "Panduan Lokasi & Venue GOR UNY — JKB 2026",
+  description: "Informasi resmi lokasi, akses transportasi, dan peta GOR UNY Yogyakarta untuk Jogja Kickboxing Festival 2026.",
 };
 
-const ZONES = [
-  {
-    name: "ZONA 1 — RING UTAMA (CHAMPIONSHIP RING)",
-    desc: "Gelanggang sentral tempat berlangsungnya 80 partai pertandingan kickboxing resmi. Dilengkapi tribun penonton 360 derajat, pencahayaan panggung arena K-1, dan layar siaran langsung LED raksasa.",
-    type: "Combat Arena",
-    highlight: true,
-  },
-  {
-    name: "ZONA 2 — THE STAGE (FESTIVAL & CONCERT)",
-    desc: "Panggung musik live indoor-outdoor dengan sistem tata suara kelas festival. Tempat dilangsungkannya opening ceremony, konser musik malam, dan afterparty selebrasi juara.",
-    type: "Music Stage",
-    highlight: false,
-  },
-  {
-    name: "ZONA 3 — FOOD & BEVERAGE STREET PLAZA",
-    desc: "Sentra kuliner dan minuman segar menampilkan 30+ tenant UMKM khas Yogyakarta. Area terbuka nyaman untuk bersantai dan mengisi tenaga di antara sesi laga.",
-    type: "Food & Lifestyle",
-    highlight: false,
-  },
-  {
-    name: "ZONA 4 — OFFICIAL MERCH STORE & ACTIVATIONS",
-    desc: "Booth resmi penjualan merchandise kapsul JKB 2026, arcade tantangan refleks pukulan, photobooth atlet, dan booth aktivasi sponsor.",
-    type: "Merch & Sponsor",
-    highlight: false,
-  },
-];
-
-const TRANSPORTS = [
+const ACCESS_OPTIONS = [
   {
     icon: Train,
-    title: "KRL & Kereta Api Jarak Jauh",
-    desc: "Turun di Stasiun Lempuyangan (±10 menit via ojek online/taksi) atau Stasiun Yogyakarta / Tugu (±15 menit menuju GOR UNY).",
+    title: "Kereta Api & KRL",
+    desc: "Akses mudah dari Stasiun Lempuyangan (±10 menit berkendara) atau Stasiun Yogyakarta / Tugu (±15 menit berkendara menuju GOR UNY).",
   },
   {
     icon: Bus,
     title: "Trans Jogja",
-    desc: "Gunakan Trans Jogja Koridor 1B, 2A, atau 11 dan turun di Halte UNY Colombo (akses jalan utama kampus UNY).",
-  },
-  {
-    icon: Car,
-    title: "Kendaraan Pribadi & Parkir",
-    desc: "Tersedia kantong parkir resmi roda dua dan roda empat di kompleks kampus UNY sekitar gedung olahraga. Disarankan datang lebih awal saat hari final.",
+    desc: "Terhubung melalui jaringan Trans Jogja rute koridor Colombo (halte kampus Universitas Negeri Yogyakarta).",
   },
   {
     icon: Navigation,
-    title: "Titik Drop-Off Ojek Online",
-    desc: "Gerbang Barat GOR UNY (akses Jl. Colombo) ditetapkan sebagai zona drop-off resmi untuk taksi dan ojek online demi kelancaran lalu lintas.",
+    title: "Transportasi Daring",
+    desc: "Titik penjemputan dan penurunan penumpang dapat diarahkan langsung ke GOR UNY di Jalan Colombo.",
   },
 ];
 
 export default function VenuePage() {
   return (
-    <div className="flex-1 flex flex-col w-full min-h-screen text-[#F6F3EC] bg-[#09090b] pt-24 pb-20">
-      {/* Hero Banner */}
-      <section className="relative w-full border-b border-white/10 overflow-hidden py-16 md:py-24 bg-[#171719]/40">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/15 bg-white/5 text-white/80 text-xs font-bold tracking-widest uppercase mb-4">
-            <MapPin className="w-3.5 h-3.5 text-[#EF3340]" />
-            LOKASI RESMI KEJUARAAN & FESTIVAL
+    <div className="flex-1 flex flex-col w-full min-h-screen text-[#F5F3EE] bg-[#09090B] pt-24 pb-20">
+      
+      {/* Header Banner */}
+      <section className="relative w-full border-b border-white/10 overflow-hidden py-14 md:py-20 bg-[#171719]/40">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm border border-[#D91F2C]/30 bg-[#D91F2C]/10 text-[#D91F2C] text-xs font-bold tracking-widest uppercase">
+            <MapPin className="w-3.5 h-3.5" />
+            <span>VENUE RESMI FESTIVAL</span>
           </div>
 
           <h1
-            className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white leading-none mb-4"
+            className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white leading-none"
             style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
-            GOR UNY, <span className="text-[#EF3340]">YOGYAKARTA</span>
+            GOR UNY, <span className="text-[#D91F2C]">YOGYAKARTA</span>
           </h1>
 
-          <p className="text-[#99999F] text-base sm:text-lg font-sans max-w-2xl leading-relaxed mb-6">
-            Gelanggang Olahraga Universitas Negeri Yogyakarta (GOR UNY) merupakan arena olahraga indoor bertaraf nasional dengan daya tampung 5.000+ penonton, akustik prima, dan letak strategis di kawasan kampus Colombo Yogyakarta.
+          <p className="text-[#9A9AA2] text-sm sm:text-base max-w-2xl leading-relaxed">
+            Gelanggang Olahraga Universitas Negeri Yogyakarta (GOR UNY) menjadi pusat penyelenggaraan seluruh laga kejuaraan kickboxing profesional dan pertunjukan musik festival JKB 2026.
           </p>
 
-          <div className="flex flex-wrap items-center gap-4 text-xs font-sans text-white/80">
-            <span className="bg-white/5 border border-white/10 px-4 py-2 rounded-sm">
+          <div className="flex flex-wrap items-center gap-3 text-xs text-[#C4C4CC] pt-2">
+            <span className="flex items-center gap-1.5 bg-[#171719] px-3.5 py-2 rounded-sm border border-white/5">
+              <Calendar className="w-3.5 h-3.5 text-[#D91F2C]" />
+              12–14 Desember 2026
+            </span>
+            <span className="flex items-center gap-1.5 bg-[#171719] px-3.5 py-2 rounded-sm border border-white/5">
+              <MapPin className="w-3.5 h-3.5 text-[#D91F2C]" />
               {EVENT_CONFIG.venue.address}
             </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Venue Content */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10 w-full">
+        
+        {/* Venue Information Card */}
+        <div className="bg-[#171719] border border-white/10 rounded-sm p-6 sm:p-8 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
+            <div className="space-y-1">
+              <span className="text-xs uppercase font-bold tracking-widest text-[#D91F2C]">
+                Alamat Lengkap
+              </span>
+              <h2
+                className="text-2xl sm:text-3xl font-black uppercase text-white"
+                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+              >
+                GELANGGANG OLAHRAGA UNY
+              </h2>
+              <p className="text-xs sm:text-sm text-[#9A9AA2]">
+                {EVENT_CONFIG.venue.address}
+              </p>
+            </div>
+
             <a
               href={EVENT_CONFIG.venue.googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 bg-[#D91F2C] hover:bg-[#EF3340] text-white px-4 py-2 rounded-sm font-bold transition-all"
+              className="font-display font-bold text-xs uppercase tracking-widest px-5 py-3 bg-[#D91F2C] hover:bg-[#EF3340] text-white rounded-sm transition-all flex items-center justify-center gap-2 self-start sm:self-center shrink-0"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
-              <span>Buka di Google Maps</span>
+              <span>Buka Google Maps</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
-        </div>
-      </section>
 
-      {/* Pembagian Zona Venue */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
-        <div className="mb-10">
-          <h2
-            className="text-3xl sm:text-5xl font-black uppercase text-white tracking-tight mb-3"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            PEMBAGIAN ZONA ARENA FESTIVAL
-          </h2>
-          <p className="text-[#99999F] text-sm font-sans max-w-xl">
-            Area GOR UNY dibagi menjadi 4 zona utama untuk kenyamanan mobilitas penonton, atlet, dan pengunjung festival.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {ZONES.map((zone, idx) => (
-            <div
-              key={idx}
-              className={`p-8 rounded-sm border transition-all ${
-                zone.highlight
-                  ? "bg-[#171719] border-[#D91F2C]/50 shadow-lg"
-                  : "bg-[#171719]/60 border-white/10 hover:border-white/25"
-              }`}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm bg-white/10 text-white font-sans">
-                  {zone.type}
-                </span>
-                {zone.highlight && (
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#EF3340] font-sans">
-                    ★ ARENA TARUNG UTAMA
-                  </span>
-                )}
-              </div>
-
-              <h3
-                className="text-xl sm:text-2xl font-black uppercase text-white tracking-tight mb-3"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                {zone.name}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-[#C4C4CC] leading-relaxed">
+            <div className="space-y-2">
+              <h3 className="font-bold text-sm text-[#F5F3EE] uppercase tracking-wide">
+                Tentang Gedung
               </h3>
-
-              <p className="text-sm text-[#99999F] font-sans leading-relaxed">
-                {zone.desc}
+              <p>
+                GOR UNY merupakan gedung olahraga serbaguna bertaraf nasional yang berlokasi strategis di kawasan kampus Colombo. Arena ini dilengkapi tribun penonton bertingkat dan sirkulasi udara yang nyaman untuk ribuan penonton festival.
               </p>
             </div>
-          ))}
+            <div className="space-y-2">
+              <h3 className="font-bold text-sm text-[#F5F3EE] uppercase tracking-wide">
+                Fasilitas Publik
+              </h3>
+              <p>
+                Tersedia fasilitas toilet umum, musholla, serta jalur akses pengunjung. Seluruh penonton dihimbau untuk selalu menjaga kebersihan arena dan mematuhi arahan panitia di lokasi.
+              </p>
+            </div>
+          </div>
         </div>
-      </section>
 
-      {/* Akses Transportasi & Cara Menuju Lokasi */}
-      <section className="bg-[#171719] border-y border-white/10 py-16 w-full">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
+        {/* Akses Transportasi */}
+        <div className="space-y-6">
+          <div className="border-b border-white/10 pb-3">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#D91F2C]">
+              PANDUAN PERJALANAN
+            </span>
             <h2
-              className="text-3xl sm:text-5xl font-black uppercase text-white tracking-tight mb-3"
+              className="text-2xl sm:text-3xl font-black uppercase text-white mt-0.5"
               style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
-              PANDUAN TRANSPORTASI & KEDATANGAN
+              PANDUAN AKSES MENUJU GOR UNY
             </h2>
-            <p className="text-[#99999F] text-sm font-sans">
-              Beragam opsi transportasi umum dan kendaraan pribadi untuk menuju GOR UNY Yogyakarta.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {TRANSPORTS.map((t, idx) => {
-              const Icon = t.icon;
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {ACCESS_OPTIONS.map((item, idx) => {
+              const Icon = item.icon;
               return (
-                <div key={idx} className="bg-[#09090b] border border-white/10 p-6 rounded-sm">
-                  <div className="w-10 h-10 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center text-[#EF3340] mb-4">
-                    <Icon className="w-5 h-5" />
+                <div
+                  key={idx}
+                  className="bg-[#171719] border border-white/10 rounded-sm p-6 space-y-3"
+                >
+                  <div className="w-9 h-9 rounded-sm bg-[#D91F2C]/10 text-[#D91F2C] flex items-center justify-center">
+                    <Icon className="w-4 h-4" />
                   </div>
-                  <h4
-                    className="text-lg font-black uppercase text-white mb-2"
+                  <h3
+                    className="font-display text-xl font-bold uppercase text-white"
                     style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
                   >
-                    {t.title}
-                  </h4>
-                  <p className="text-xs text-[#99999F] font-sans leading-relaxed">
-                    {t.desc}
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-[#9A9AA2] leading-relaxed">
+                    {item.desc}
                   </p>
                 </div>
               );
             })}
           </div>
         </div>
-      </section>
 
-      {/* Fasilitas & Ketertiban Pengunjung */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
-        <div className="bg-[#171719]/40 border border-white/10 p-8 sm:p-12 rounded-sm">
-          <h3
-            className="text-2xl sm:text-3xl font-black uppercase text-white mb-6"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+        {/* Quick Links */}
+        <div className="pt-4 flex flex-wrap gap-4 text-xs">
+          <Link
+            href="/jadwal"
+            className="text-[#D91F2C] hover:underline font-bold uppercase tracking-wider"
           >
-            FASILITAS & KESELAMATAN PENONTON
-          </h3>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm text-[#99999F] font-sans">
-            <div className="flex items-start gap-3">
-              <HeartPulse className="w-5 h-5 text-[#EF3340] shrink-0 mt-0.5" />
-              <div>
-                <h4 className="text-white font-bold mb-1 uppercase text-xs">Posko Medis Siaga</h4>
-                <p className="text-xs leading-relaxed">
-                  Tim dokter olahraga dan paramedis bersertifikasi serta 2 unit ambulans siaga di pintu darurat barat selama kejuaraan berlangsung.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <Accessibility className="w-5 h-5 text-[#E2BA75] shrink-0 mt-0.5" />
-              <div>
-                <h4 className="text-white font-bold mb-1 uppercase text-xs">Akses Disabilitas & Kursi Roda</h4>
-                <p className="text-xs leading-relaxed">
-                  Jalur ramp khusus penonton berkebutuhan khusus tersedia di Pintu Masuk Selatan menuju area tribun khusus ramah kursi roda.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-              <div>
-                <h4 className="text-white font-bold mb-1 uppercase text-xs">Keamanan & Penitipan Barang</h4>
-                <p className="text-xs leading-relaxed">
-                  Pemeriksaan tas di seluruh gerbang masuk. Senjata tajam, kembang api, botol kaca, dan minuman keras dilarang keras memasuki arena.
-                </p>
-              </div>
-            </div>
-          </div>
+            Lihat Jadwal Lengkap Acara →
+          </Link>
+          <Link
+            href="/tiket"
+            className="text-[#9A9AA2] hover:text-white underline uppercase tracking-wider"
+          >
+            Informasi Tiket Masuk
+          </Link>
+          <Link
+            href="/kontak"
+            className="text-[#9A9AA2] hover:text-white underline uppercase tracking-wider"
+          >
+            Hubungi Sekretariat
+          </Link>
         </div>
+
       </section>
+
     </div>
   );
 }
