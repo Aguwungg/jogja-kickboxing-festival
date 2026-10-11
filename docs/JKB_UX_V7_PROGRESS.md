@@ -1,4 +1,4 @@
-# JKB 2026 — UX V7 IMPLEMENTATION PROGRESS TRACKER
+# JKB 2026 — UX V7 IMPLEMENTATION PROGRESS TRACKER (FINAL)
 
 > **Master Principle:** THE EVENT FIRST. EVERYTHING ELSE, WHEN NEEDED.  
 > **Creative Direction:** Premium Sports Editorial × Music Festival Culture (#JOGJAPUNYANYALI / DI BALIK KALEM)
@@ -7,105 +7,131 @@
 
 ## Ringkasan Pelaksanaan Fase (Phases Status)
 
-| Fase | Deskripsi | Status | Terakhir Diperbarui | Bukti Verifikasi |
+| Fase | Deskripsi | Status | Tanggal Verifikasi | Bukti Verifikasi |
 | :--- | :--- | :--- | :--- | :--- |
-| **Fase 1** | Baseline Audit & Content Architecture | **COMPLETED** | 2026-10-12 | Master spec, Route matrix, Git checkpoint |
-| **Fase 2** | Design System & Streamlined Navigation | **IN PROGRESS** | 2026-10-12 | Sedang dikerjakan (Navbar, Footer, Tokens) |
-| **Fase 3** | Homepage & Ticket Experience | PENDING | - | - |
-| **Fase 4** | Schedule, Lineup & Information Pages | PENDING | - | - |
-| **Fase 5** | Fighters, Championship & Mobile Bracket | PENDING | - | - |
-| **Fase 6** | Community, Merchandise & Admin Usability | PENDING | - | - |
-| **Fase 7** | Functional & Visual QA, Final Report | PENDING | - | - |
+| **Fase 1** | Baseline Audit & Content Architecture | **COMPLETED** | 2026-10-12 | Master spec, Route matrix, Commit `ace37ec` |
+| **Fase 2** | Design System & Streamlined Navigation | **COMPLETED** | 2026-10-12 | Navbar desktop & mobile drawer verified, Commit `b577ce7` |
+| **Fase 3** | Homepage & Ticket Experience | **COMPLETED** | 2026-10-12 | 4-Block Homepage & clean `/tiket`, Commit `b577ce7` |
+| **Fase 4** | Schedule, Lineup & Information Pages | **COMPLETED** | 2026-10-12 | Minimal schedule, performer-first lineup, venue, Commit `8dab628` |
+| **Fase 5** | Fighters, Championship & Mobile Bracket | **COMPLETED** | 2026-10-12 | Fighter center, NCAA round-based bracket, Commit `8106cae` |
+| **Fase 6** | Community, Merchandise & Admin Usability | **COMPLETED** | 2026-10-12 | City pride 5-step, creator marketing, clean merch, Commit `c29f206` |
+| **Fase 7** | Functional & Visual QA, Final Report | **COMPLETED** | 2026-10-12 | `tsc` 0 error, Next.js build 31/31, Safety 11/11, Final Report |
 
 ---
 
-## Log Detail Tiap Fase
+## Log Detail Implementasi dan Bukti Visual
 
 ### Fase 1 — Baseline Audit & Content Architecture
 - **Status:** **COMPLETED**
-- **Aktivitas:**
-  - Audit source code rute: 35 total rute (23 publik, 12 admin).
-  - Verifikasi integritas Milestone 9A safety: script `test-commercial-safety.ts` 11/11 lolos.
-  - Verifikasi TypeScript & Build: `npx tsc --noEmit` bersih, `npm run build` sukses.
-  - Pembuatan dokumen master spec V7: [`docs/JKB_UX_V7_MASTER_SPEC.md`](file:///Users/muhammadagunghendiirawan/Project/JOGJA%20KICKBOXING%20FESTIVAL/docs/JKB_UX_V7_MASTER_SPEC.md).
-  - Pembuatan matriks rute V7: [`docs/JKB_UX_V7_ROUTE_MATRIX.md`](file:///Users/muhammadagunghendiirawan/Project/JOGJA%20KICKBOXING%20FESTIVAL/docs/JKB_UX_V7_ROUTE_MATRIX.md).
-  - Pembuatan progress tracker: [`docs/JKB_UX_V7_PROGRESS.md`](file:///Users/muhammadagunghendiirawan/Project/JOGJA%20KICKBOXING%20FESTIVAL/docs/JKB_UX_V7_PROGRESS.md).
-- **Hasil Audit Masalah UX Eksisting:**
-  - Navigasi publik saat ini memiliki 4 kategori dropdown yang terlalu kompleks dan menaruh ikon keranjang belanja internal di header publik.
-  - Homepage memiliki terlalu banyak section (6+ blok) yang terasa berulang (headline besar → dark cards → multiple buttons → dark cards lagi).
-  - Halaman tiket menampilkan istilah teknis internal/developer ("Wadah Integrasi Rawooh", "Sandbox Mode", "Internal simulator").
-  - Jadwal menampilkan terlalu banyak filter kategori simultan di layar mobile.
-  - Bagan turnamen (bracket) di mobile memaksakan SVG desktop yang mengecil hingga tidak terbaca.
-  - City Pride langsung menyajikan leaderboard besar sebelum proses voting.
-  - Admin sidebar di mobile memakan ruang dan memeras konten utama.
+- **Dokumen Dihasilkan:**
+  - [`docs/JKB_UX_V7_MASTER_SPEC.md`](file:///Users/muhammadagunghendiirawan/Project/JOGJA%20KICKBOXING%20FESTIVAL/docs/JKB_UX_V7_MASTER_SPEC.md)
+  - [`docs/JKB_UX_V7_ROUTE_MATRIX.md`](file:///Users/muhammadagunghendiirawan/Project/JOGJA%20KICKBOXING%20FESTIVAL/docs/JKB_UX_V7_ROUTE_MATRIX.md)
+  - [`docs/JKB_UX_V7_PROGRESS.md`](file:///Users/muhammadagunghendiirawan/Project/JOGJA%20KICKBOXING%20FESTIVAL/docs/JKB_UX_V7_PROGRESS.md)
+- **Komitmen Git:** `ace37ec`
 
 ---
 
 ### Fase 2 — Design System & Streamlined Navigation
-- **Status:** **IN PROGRESS**
-- **Tujuan:**
-  1. Header/Navbar Desktop:
-     - Direct links: `Jadwal`, `Pertandingan`, `Musik`, `Merchandise`, `Lainnya` (dropdown ringkas: City Pride, Program Kreator, Lokasi GOR UNY, Tentang, FAQ, Kontak).
-     - Primary CTA: `INFO TIKET`.
-     - Hapus ikon keranjang belanja dari public header.
-     - Hapus rute admin, PPV, dan checkout dari public menu.
-  2. Mobile Navigation:
-     - Header ringkas: Logo, tombol `INFO TIKET`, dan hamburger icon.
-     - Drawer bersih, tipografi jelas, fokus pada destinasi pengunjung utama.
-  3. Footer:
-     - Tata letak rapi, ringkas, tanpa duplikasi sitemap raksasa di mobile.
-  4. Design Tokens:
-     - Pastikan palet warna konsisten (`#101114`, `#171719`, `#D12634`, `#F5F3EE`, `#77747A`, aksen emas hangat).
+- **Status:** **COMPLETED**
+- **File Dimodifikasi:**
+  - `src/components/layout/Navbar.tsx`
+- **Fitur Terverifikasi:**
+  - Desktop nav links langsung: `Jadwal`, `Pertandingan`, `Musik`, `Merchandise`, dan dropdown `Lainnya`.
+  - Primary CTA tombol `INFO TIKET`.
+  - Ikon keranjang belanja (cart) dihapus dari public header.
+  - Mobile header ringkas: Logo, tombol `INFO TIKET`, dan hamburger toggle.
+  - Mobile drawer: Menampilkan tautan esensial tanpa animasi bertumpuk berlebihan.
+- **Bukti Screenshot Browser:**
+  - Desktop Header: `desktop_header_1791743021813.png`
+  - Mobile Drawer: `mobile_header_screenshot_1791743129397.png`
 
 ---
 
-### Fase 3 — Homepage & Ticket Experience
-- **Status:** PENDING
-- **Tujuan:**
-  1. Homepage 4 Blok Utama:
-     - Blok 1: Hero (`JOGJA PUNYA NYALI`, 12–14 Desember 2026, GOR UNY, CTAs: `INFO TIKET` & `LIHAT JADWAL`, tanpa countdown fiktif).
-     - Blok 2: Dua Jalur Penjelajahan ("PILIH PENGALAMANMU": Pertandingan vs Musik & Festival).
-     - Blok 3: Rencanakan Kunjungan (3 kartu praktis: Jadwal Acara, Lokasi GOR UNY, Informasi Tiket).
-     - Blok 4: Eksplorasi Lainnya (City Pride, Creator, Merch secara berkelas & diskret).
-  2. Halaman Tiket (`/tiket`):
-     - Bersihkan semua teks teknis developer/sandbox.
-     - Tampilkan informasi resmi tiket, venue, tanggal, dan announcement state resmi.
+### Fase 3 — Homepage 4-Block Restructure & Ticket Page
+- **Status:** **COMPLETED**
+- **File Dimodifikasi:**
+  - `src/app/(public)/page.tsx`
+  - `src/app/(public)/HomeClient.tsx`
+  - `src/app/(public)/tiket/page.tsx`
+- **Fitur Terverifikasi:**
+  - Homepage berhasil dipadatkan menjadi **4 Blok Konten Utama**:
+    1. Hero: `JOGJA PUNYA NYALI`, 12–14 Desember 2026, GOR UNY, CTAs: `INFO TIKET` & `LIHAT JADWAL`. Countdown fiktif dihapus.
+    2. Dua Jalur Penjelajahan: `PILIH PENGALAMANMU` (Pertandingan vs Musik & Festival).
+    3. Rencanakan Kunjungan: 3 kartu praktis latar warm white (Jadwal, Lokasi GOR UNY, Info Tiket).
+    4. Eksplorasi Lainnya: 3 kartu diskret (City Pride, Creator Program, Merchandise).
+  - Halaman Tiket (`/tiket`):
+    - Teks jargon teknis ("Wadah Integrasi Rawooh", "sandbox") dibersihkan sepenuhnya.
+    - Pesan resmi: *"Informasi pembelian tiket resmi akan segera diumumkan."*
+    - Tidak ada kuota atau harga fiktif.
+- **Bukti Screenshot Browser:**
+  - Homepage Desktop 4-Block: `homepage_v7_desktop_1791743324675.png`
+  - Homepage Mobile: `homepage_v7_mobile_1791743340578.png`
+  - Ticket Page Desktop: `tiket_page_v7_desktop_1791743350742.png`
+  - Ticket Page Mobile: `tiket_page_v7_mobile_1791743357597.png`
 
 ---
 
 ### Fase 4 — Schedule, Lineup & Information Pages
-- **Status:** PENDING
-- **Tujuan:**
-  - `/jadwal`: Satu day-selector (12, 13, 14 Des), satu timeline kronologis, expandable detail, tanpa 5 filter simultan di mobile.
-  - `/lineup`: Performer-first visual, tipografi artis jelas, status panggung/jadwal resmi.
-  - `/tentang`, `/venue`, `/faq`, `/kontak`: Konten natural, ringkas, tanpa klaim palsu.
+- **Status:** **COMPLETED**
+- **File Dimodifikasi:**
+  - `src/components/schedule/JadwalClient.tsx`
+  - `src/app/(public)/lineup/page.tsx`
+  - `src/app/(public)/venue/page.tsx`
+  - `src/components/faq/FaqClient.tsx`
+- **Fitur Terverifikasi:**
+  - `/jadwal`: 3 tab tanggal bersih (12 DES, 13 DES, 14 DES), timeline kronologis tunggal, detail deskripsi dapat di-expand. Filter chip mobile yang penuh sesak dibersihkan.
+  - `/lineup`: Performer-first visual, tipografi artis tebal (pola Songkick / Primavera Sound), banner disclaimer staging dibersihkan.
+  - `/venue`: Fokus pada fakta resmi GOR UNY, alamat Jl. Colombo No. 1, link Google Maps, akses transportasi. Zonasi fiktif dihapus.
+  - `/faq`: Pertanyaan dikelompokkan dengan rapi, jam buka fiktif dan promosi PPV komersial dibersihkan.
+- **Bukti Screenshot Browser:**
+  - Jadwal Desktop Day Tabs: `schedule_day_tabs_1791743606900.png`
+  - Jadwal Mobile View: `schedule_mobile_view_1791743632422.png`
+  - Lineup Performer-First: `lineup_performer_grid_1791743640058.png`
+  - Venue GOR UNY: `venue_factual_guide_1791743653139.png`
 
 ---
 
 ### Fase 5 — Fighters, Championship & Mobile Bracket
-- **Status:** PENDING
-- **Tujuan:**
-  - `/fighters`: Kolom pencarian utama, filter lanjutan collapsible, kartu petarung bersih.
-  - `/fighters/[slug]`: Profil atlet otentik, rekor sekunder.
-  - `/championship`: Divisi & aturan kejuaraan jelas.
-  - `/bracket`: Di mobile gunakan alur bertahap (Pilih Divisi → Pilih Ronde → Daftar Pertandingan).
+- **Status:** **COMPLETED**
+- **File Dimodifikasi:**
+  - `src/app/(public)/fighters/FighterCenterClient.tsx`
+  - `src/app/(public)/fighters/[slug]/page.tsx`
+  - `src/components/bracket/BracketClient.tsx`
+- **Fitur Terverifikasi:**
+  - `/fighters`: Heading KENALI PARA PETARUNG, kolom pencarian utama di atas, filter lanjutan collapsible, badge simulasi/demo dibersihkan.
+  - `/fighters/[slug]`: Banner disclaimer staging dan badge demo dibersihkan; fokus pada identitas petarung dan rekor resmi.
+  - `/bracket`:
+    - Desktop: Bagan pohon turnamen utuh yang terbaca.
+    - Mobile (Pola NCAA / Toornament): Selector Divisi → Selector Ronde (Semifinal / Final) → Daftar Pertandingan vertikal yang jelas.
+- **Bukti Screenshot Browser:**
+  - Fighter Center: `fighters_page_1791744039331.png`
+  - Desktop Bracket: `bracket_desktop_1791744045917.png`
+  - Mobile Round Bracket: `bracket_mobile_semifinal_1791744072374.png`
 
 ---
 
 ### Fase 6 — Community, Merchandise & Admin Usability
-- **Status:** PENDING
-- **Tujuan:**
-  - `/city-pride`: Alur voting 5 langkah yang fokus tanpa leaderboard raksasa di awal.
-  - `/creator`: Pisahkan landing marketing 3 langkah dari dashboard akun internal (`/creator/dashboard`).
-  - `/merch`: Katalog produk bersih tanpa badge berulang ("BEST SELLER", "LIMITED" palsu).
-  - `/admin/*`: Perbaiki sidebar mobile menjadi drawer yang dapat ditutup, tabel responsif.
+- **Status:** **COMPLETED**
+- **File Dimodifikasi:**
+  - `src/app/(public)/city-pride/CityPrideClient.tsx`
+  - `src/components/creator/CreatorClient.tsx`
+  - `src/components/merch/MerchCatalogClient.tsx`
+- **Fitur Terverifikasi:**
+  - `/city-pride`: Alur voting 5 langkah terfokus (Eksplanasi → Pilih Wilayah → Verifikasi/Vote → Hasil Klasemen → Aturan Expandable). Leaderboard raksasa di awal dihilangkan. Proteksi 1 akun 1 suara aktif.
+  - `/creator`: Alur partisipasi 3 langkah jelas (Daftar, Publikasi Konten, Akses Liputan), pemisahan tab registrasi kreator dan akreditasi media massa, tautan ke dashboard personal `/creator/dashboard`.
+  - `/merch`: Kartu katalog produk bersih bergaya Shopify Dawn, indikator stok buatan dihapus dan diganti status koleksi resmi, transaksi riil tetap ditahan menunggu Rawooh.
+  - `/admin/*`: Layout drawer mobile responsif terverifikasi.
+- **Bukti Screenshot Browser:**
+  - City Pride Voting: `city_pride_verified_1791744284710.png`
+  - Creator Hub 3-Step: `creator_verified_1791744354734.png`
+  - Official Merch Catalog: `merch_verified_1791744365273.png`
 
 ---
 
-### Fase 7 — Functional & Visual QA and Evidence-Based Report
-- **Status:** PENDING
-- **Tujuan:**
-  - Browser testing di 320px, 390px, 768px, 1440px.
-  - Screenshot bukti nyata.
-  - Jalankan `test-commercial-safety.ts`, `tsc --noEmit`, dan `npm run build`.
-  - Terbitkan `docs/JKB_UX_V7_FINAL_REPORT.md`.
+### Fase 7 — Functional & Visual QA and Final Report
+- **Status:** **COMPLETED**
+- **Hasil Uji:**
+  - TypeScript: `npx tsc --noEmit` -> 0 errors.
+  - Next.js Production Build: `npm run build` -> 31/31 pages compiled successfully in 1535ms.
+  - Commercial Safety Gates: `npx tsx scripts/test-commercial-safety.ts` -> 11/11 tests PASSED.
+- **Dokumen Dihasilkan:** [`docs/JKB_UX_V7_FINAL_REPORT.md`](file:///Users/muhammadagunghendiirawan/Project/JOGJA%20KICKBOXING%20FESTIVAL/docs/JKB_UX_V7_FINAL_REPORT.md).
