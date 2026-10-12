@@ -71,32 +71,32 @@
 - Status: **COMPLETED**
 - Seluruh 7 rute informasi publik berhasil diverifikasi via browser di 1440px dan 390px:
   1. **Tiket (`/tiket`)**:
-     - Desktop: `tiket_desktop_1791798336302.png`
-     - Mobile: `tiket_mobile_1791798341696.png`
+     - Desktop: `tiket_desktop_1791798339517.png`
+     - Mobile: `tiket_mobile_1791798343624.png`
      - Fever pattern: Pengumuman ketersediaan jujur tanpa harga fiktif, tanpa jargon teknis, fokus tanggal (12–14 Des 2026) dan venue (GOR UNY).
   2. **Lineup Musik (`/lineup`)**:
-     - Desktop: `lineup_desktop_1791798348881.png`
-     - Mobile: `lineup_mobile_1791798353982.png`
+     - Desktop: `lineup_desktop_1791798358394.png`
+     - Mobile: `lineup_mobile_1791798374617.png`
      - Lollapalooza / Primavera Sound pattern: Penampil-first, foto terkonfirmasi, status kurasi bersih tanpa kartu musisi fiktif.
   3. **Kejuaraan (`/championship`)**:
-     - Desktop: `championship_desktop_1791798361099.png`
-     - Mobile: `championship_mobile_1791798365859.png`
+     - Desktop: `championship_desktop_1791798388695.png`
+     - Mobile: `championship_mobile_1791798402948.png`
      - Glory Kickboxing pattern: Kredibilitas kejuaraan, 4 divisi berat badan resmi, ringkasan aturan tarung K-1 sah.
   4. **Lokasi Venue (`/venue`)**:
-     - Desktop: `venue_desktop_1791798372666.png`
-     - Mobile: `venue_mobile_1791798377759.png`
+     - Desktop: `venue_desktop_1791798423528.png`
+     - Mobile: `venue_mobile_1791798433979.png`
      - Alamat resmi GOR UNY Jl. Colombo No. 1, tautan Google Maps, panduan akses nyata (KRL, Trans Jogja, daring) tanpa zona fiktif.
   5. **FAQ Pusat Bantuan (`/faq`)**:
-     - Desktop: `faq_desktop_1791798384803.png`
-     - Mobile: `faq_mobile_1791798393527.png`
-     - Pertanyaan esensial, interaksi akordeon mulus, tidak ada jam open gate rekaan.
+     - Desktop: `faq_desktop_1791798454605.png`
+     - Mobile: `faq_mobile_1791798600109.png`
+     - Pertanyaan esensial, interaksi akordeon terverifikasi, tidak ada jam open gate rekaan.
   6. **Kontak Sekretariat (`/kontak`)**:
-     - Desktop: `kontak_desktop_1791798401314.png`
-     - Mobile: `kontak_mobile_1791798407421.png`
+     - Desktop: `kontak_desktop_1791798636993.png`
+     - Mobile: `kontak_mobile_1791798650800.png`
      - Kanal resmi panitia pelaksana (telepon, email, instagram), formulir ringkas dengan validasi server.
   7. **Profil Petarung (`/fighters/[slug]`)**:
-     - Desktop: `fighter_detail_desktop_1791798414440.png`
-     - Mobile: `fighter_detail_mobile_1791798420367.png`
+     - Desktop: `fighter_detail_desktop_1791798687232.png`
+     - Mobile: `fighter_detail_mobile_1791798748430.png`
      - ONE Championship pattern: Identitas atlet diutamakan, potret autentik, divisi jelas, pengungkapan progresif statistik rekor sah.
 
 
