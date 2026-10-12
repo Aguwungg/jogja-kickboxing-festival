@@ -14,8 +14,8 @@
 | **Fase 2** | New Design System & Tokens | **COMPLETED** | 2026-10-12 | Navbar Coachella, Footer, Tokens `#101114`, `#171719`, `#D91F2C`, `#F5F3EE` |
 | **Fase 3** | Four High-Fidelity Proof Pages | **COMPLETED** | 2026-10-12 | 8 Screenshots (1440px & 390px) verified |
 | **Fase 4** | Complete Information Experience | **COMPLETED** | 2026-10-12 | 14 Screenshots (1440px & 390px) verified |
-| **Fase 5** | Community & Commerce Experience | **IN PROGRESS** | 2026-10-12 | City Pride, Creator Hub, Merch Catalog |
-| **Fase 6** | Admin UX & Operational Layouts | PENDING | - | Drawer mobile & tabel data responsif |
+| **Fase 5** | Community & Commerce Experience | **COMPLETED** | 2026-10-12 | 10 Screenshots (1440px & 390px) verified |
+| **Fase 6** | Admin UX & Operational Layouts | **IN PROGRESS** | 2026-10-12 | Drawer mobile & tabel data responsif |
 | **Fase 7** | Final Design & Functional QA | PENDING | - | Build test, Safety test, Final Report |
 
 ---
@@ -98,5 +98,30 @@
      - Desktop: `fighter_detail_desktop_1791798687232.png`
      - Mobile: `fighter_detail_mobile_1791798748430.png`
      - ONE Championship pattern: Identitas atlet diutamakan, potret autentik, divisi jelas, pengungkapan progresif statistik rekor sah.
+
+### Fase 5 — Community & Commerce Experience
+- Status: **COMPLETED**
+- Seluruh 5 rute komunitas dan e-commerce berhasil diverifikasi via browser di 1440px dan 390px:
+  1. **City Pride Voting (`/city-pride`)**:
+     - Desktop: `city_pride_desktop_1791804766296.png`
+     - Mobile: `city_pride_mobile_1791804771021.png`
+     - NBA All-Star pattern: 3 kartu wilayah (Sleman, Bantul, Kota Jogja), alur 5-langkah (paham kampanye → pilih wilayah → verifikasi akun → konfirmasi vote → lihat hasil persentase), tanpa beban dashboard awal.
+  2. **Creator Hub Landing (`/creator`)**:
+     - Desktop: `creator_desktop_1791804781899.png`
+     - Mobile: `creator_mobile_1791804788367.png`
+     - GoPro Awards pattern: Penjelasan 3 langkah partisipasi terarah (01 Daftar Akun, 02 Publikasi Konten, 03 Akses Liputan), formulir registrasi jelas, pendaftaran akreditasi media terpisah.
+  3. **Personal Creator Dashboard (`/creator/dashboard`)**:
+     - Desktop: `creator_dashboard_desktop_1791804795844.png`
+     - Mobile: `creator_dashboard_mobile_1791804801815.png`
+     - Profil personal status, perolehan poin leaderboard terverifikasi, riwayat kurasi submisi, klaim barcode tiket festival.
+  4. **Katalog Merchandise (`/merch`)**:
+     - Desktop: `merch_desktop_1791804808235.png`
+     - Mobile: `merch_mobile_1791804813772.png`
+     - Shopify Dawn pattern: Grid produk bersih, foto produk asli, status stok dan harga resmi, filter kategori.
+  5. **Detail Produk (`/merch/jkb-tee-black`)**:
+     - Desktop: `merch_detail_desktop_1791804843669.png`
+     - Mobile: `merch_detail_mobile_1791804848955.png`
+     - Pilihan varian ukuran responsif (S, M, L, XL, XXL) dengan indikator stok, spesifikasi bahan, dan batas integrasi pembayaran resmi (Midtrans/Rawooh) yang aman.
+
 
 
