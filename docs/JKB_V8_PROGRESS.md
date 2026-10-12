@@ -15,8 +15,8 @@
 | **Fase 3** | Four High-Fidelity Proof Pages | **COMPLETED** | 2026-10-12 | 8 Screenshots (1440px & 390px) verified |
 | **Fase 4** | Complete Information Experience | **COMPLETED** | 2026-10-12 | 14 Screenshots (1440px & 390px) verified |
 | **Fase 5** | Community & Commerce Experience | **COMPLETED** | 2026-10-12 | 10 Screenshots (1440px & 390px) verified |
-| **Fase 6** | Admin UX & Operational Layouts | **IN PROGRESS** | 2026-10-12 | Drawer mobile & tabel data responsif |
-| **Fase 7** | Final Design & Functional QA | PENDING | - | Build test, Safety test, Final Report |
+| **Fase 6** | Admin UX & Operational Layouts | **COMPLETED** | 2026-10-12 | Drawer mobile & tabel responsif (6 screenshots) |
+| **Fase 7** | Final Design & Functional QA | **IN PROGRESS** | 2026-10-12 | Build test, Safety test, Final Report |
 
 ---
 
@@ -122,6 +122,23 @@
      - Desktop: `merch_detail_desktop_1791804843669.png`
      - Mobile: `merch_detail_mobile_1791804848955.png`
      - Pilihan varian ukuran responsif (S, M, L, XL, XXL) dengan indikator stok, spesifikasi bahan, dan batas integrasi pembayaran resmi (Midtrans/Rawooh) yang aman.
+
+### Fase 6 — Admin UX & Operational Layouts
+- Status: **COMPLETED**
+- Modul administrasi & tata letak operasional berhasil diverifikasi via browser:
+  1. **Login Administrator (`/admin/login`)**:
+     - Desktop: `admin_login_desktop_1791804936439.png`
+     - Mobile: `admin_login_mobile_1791804939611.png`
+     - Antarmuka login terisolasi, aman, dilengkapi pengisian cepat staging credentials tanpa mengekspos kredensial ke publik.
+  2. **Command Center Dashboard (`/admin`)**:
+     - Desktop: `admin_dashboard_desktop_1791805047699.png`
+     - Mobile: `admin_dashboard_mobile_1791805050807.png`
+     - Tata letak produktivitas bergaya Shopify Admin: Metrik ringkas, status operasional turnamen, verifikasi pengguna login dengan peran RBAC.
+  3. **Manajemen Atlet Petarung (`/admin/fighters`)**:
+     - Desktop: `admin_fighters_desktop_1791805100820.png`
+     - Mobile: `admin_fighters_mobile_1791805097242.png`
+     - Tabel operasional responsif dengan pembungkus scroll horizontal yang rapi tanpa merusak tata letak mobile, aksi edit dan hapus dapat diakses dengan mudah.
+
 
 
 
