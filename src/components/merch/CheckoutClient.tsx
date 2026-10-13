@@ -8,24 +8,17 @@ import { useCart, formatRupiah } from "@/lib/cart-context";
 import { createOrderAction } from "@/app/(public)/checkout/actions";
 import {
   ShoppingBag,
-  CreditCard,
   Truck,
   MapPin,
   ShieldCheck,
-  CheckCircle2,
+  ArrowRight,
   AlertCircle,
-  QrCode,
-  Building,
-  ArrowLeft,
-  ChevronRight,
-  Info,
 } from "lucide-react";
 
 export default function CheckoutClient() {
   const router = useRouter();
-  const { items, clearCart, subtotal, totalItems } = useCart();
+  const { items, clearCart, subtotal } = useCart();
 
-  // Form State
   const [customerName, setCustomerName] = useState("");
   const [guestEmail, setGuestEmail] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
@@ -41,7 +34,6 @@ export default function CheckoutClient() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Shipping cost calculation
   const shippingCost =
     deliveryMethod === "PICKUP_VENUE"
       ? 0
@@ -103,483 +95,241 @@ export default function CheckoutClient() {
         clearCart();
         router.push(`/checkout/success/${res.orderId}`);
       } else {
-        setErrorMessage(res.error || "Gagal memproses pesanan.");
+        setErrorMessage(res.error || "Gagal memproses pesanan. Silakan periksa kembali.");
         setIsSubmitting(false);
       }
-    } catch (err: any) {
-      setErrorMessage(err.message || "Terjadi kesalahan internal.");
+    } catch {
+      setErrorMessage("Terjadi kesalahan sistem. Silakan coba kembali sesaat lagi.");
       setIsSubmitting(false);
     }
   };
 
   if (items.length === 0) {
     return (
-      <div className="max-w-2xl mx-auto py-20 text-center space-y-6">
-        <div className="w-20 h-20 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-white/30 mx-auto">
-          <ShoppingBag className="w-10 h-10" />
-        </div>
-        <h2
-          className="text-3xl font-black uppercase tracking-tight text-white"
-          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-        >
-          KERANJANG BELANJA ANDA KOSONG
-        </h2>
-        <p className="text-sm text-[#90929A] max-w-md mx-auto">
-          Anda belum memilih merchandise resmi JKB 2026. Temukan kaos, hoodie, atau sarung tinju resmi untuk melanjutkan checkout.
+      <div className="p-16 text-center bg-[#141416] border border-white/10 space-y-4 max-w-md mx-auto">
+        <ShoppingBag className="w-8 h-8 text-[#8F8E8B] mx-auto" />
+        <h3 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+          KERANJANG BELANJA KOSONG
+        </h3>
+        <p className="text-xs text-[#8F8E8B]">
+          Pilih produk merchandise resmi festival terlebih dahulu sebelum melanjutkan checkout.
         </p>
-        <Link
-          href="/merch"
-          className="inline-flex items-center gap-2 bg-[#D21F2B] hover:bg-[#b01822] text-white font-bold uppercase tracking-wider px-8 py-3.5 rounded-sm text-sm transition-all shadow-lg shadow-[#D21F2B]/20"
-          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Kembali ke Katalog Merch</span>
+        <Link href="/merch" className="v9-btn-red text-xs inline-flex">
+          LIHAT KATALOG MERCHANDISE ↗
         </Link>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmitOrder} className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-      {/* Left Column: Checkout Inputs (7 cols) */}
+    <form onSubmit={handleSubmitOrder} className="grid grid-cols-1 lg:grid-cols-12 gap-10 font-sans">
+      
+      {/* Left Column: Customer and Delivery Details */}
       <div className="lg:col-span-7 space-y-8">
-        {/* Error Alert */}
-        {errorMessage && (
-          <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-sm flex items-start gap-3 text-red-400 text-xs">
-            <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-            <span>{errorMessage}</span>
-          </div>
-        )}
+        
+        {/* Contact Info */}
+        <div className="p-6 sm:p-8 bg-[#141416] border border-white/10 space-y-4">
+          <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">
+            LANGKAH 01
+          </span>
+          <h2 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+            DATA PEMESAN
+          </h2>
 
-        {/* Step 1: Customer Contact Information */}
-        <section className="bg-[#171719] border border-white/10 p-6 rounded-sm space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10">
-            <div className="flex items-center gap-3">
-              <span className="w-7 h-7 rounded-sm bg-[#D21F2B] text-white flex items-center justify-center font-bold text-xs font-mono">
-                1
-              </span>
-              <h2
-                className="text-lg font-black uppercase tracking-wider text-white"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                INFORMASI PEMESAN
-              </h2>
-            </div>
-            <span className="text-[10px] text-white/40 uppercase font-mono">Wajib diisi</span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-            <div className="sm:col-span-2 space-y-1.5">
-              <label className="text-white/80 font-bold uppercase tracking-wider block">
-                Nama Lengkap *
-              </label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-1 sm:col-span-2">
+              <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">NAMA LENGKAP</label>
               <input
                 type="text"
                 required
-                placeholder="Contoh: Dimas Wicaksono"
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
-                className="w-full bg-[#09090b] border border-white/10 rounded-sm p-3 text-white placeholder-white/30 focus:outline-none focus:border-[#D21F2B]"
+                placeholder="Nama Lengkap"
+                className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
               />
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-white/80 font-bold uppercase tracking-wider block">
-                Alamat Email (untuk E-Invoice) *
-              </label>
+            <div className="space-y-1">
+              <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">EMAIL KONFIRMASI</label>
               <input
                 type="email"
                 required
-                placeholder="emailanda@domain.com"
                 value={guestEmail}
                 onChange={(e) => setGuestEmail(e.target.value)}
-                className="w-full bg-[#09090b] border border-white/10 rounded-sm p-3 text-white placeholder-white/30 focus:outline-none focus:border-[#D21F2B]"
+                placeholder="email@anda.com"
+                className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
               />
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-white/80 font-bold uppercase tracking-wider block">
-                No. WhatsApp / HP *
-              </label>
+            <div className="space-y-1">
+              <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">WHATSAPP / NO. HP</label>
               <input
                 type="tel"
                 required
-                placeholder="081234567890"
                 value={customerPhone}
                 onChange={(e) => setCustomerPhone(e.target.value)}
-                className="w-full bg-[#09090b] border border-white/10 rounded-sm p-3 text-white placeholder-white/30 focus:outline-none focus:border-[#D21F2B]"
+                placeholder="0812xxxxxxxx"
+                className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
               />
             </div>
           </div>
-        </section>
+        </div>
 
-        {/* Step 2: Delivery Method */}
-        <section className="bg-[#171719] border border-white/10 p-6 rounded-sm space-y-5">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10">
-            <div className="flex items-center gap-3">
-              <span className="w-7 h-7 rounded-sm bg-[#D21F2B] text-white flex items-center justify-center font-bold text-xs font-mono">
-                2
-              </span>
-              <h2
-                className="text-lg font-black uppercase tracking-wider text-white"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                METODE PENGAMBILAN & PENGIRIMAN
-              </h2>
-            </div>
-          </div>
+        {/* Delivery Method */}
+        <div className="p-6 sm:p-8 bg-[#141416] border border-white/10 space-y-4">
+          <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">
+            LANGKAH 02
+          </span>
+          <h2 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+            METODE PENERIMAAN
+          </h2>
 
-          {/* Delivery Method Selector Tabs */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {/* Pickup Option */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <button
               type="button"
               onClick={() => setDeliveryMethod("PICKUP_VENUE")}
-              className={`p-4 rounded-sm border text-left transition-all relative ${
+              className={`p-4 border text-left transition-colors ${
                 deliveryMethod === "PICKUP_VENUE"
-                  ? "bg-[#D21F2B]/10 border-[#D21F2B] ring-1 ring-[#D21F2B]"
-                  : "bg-white/5 border-white/10 hover:bg-white/10"
+                  ? "border-[#D91F2C] bg-[#0B0B0B]"
+                  : "border-white/10 bg-[#0B0B0B]/50 hover:border-white/20"
               }`}
             >
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-[#D21F2B]" />
-                  <span
-                    className="text-sm font-bold uppercase tracking-wider text-white"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    Ambil di Venue (GOR)
-                  </span>
-                </div>
-                <span className="text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-xs">
-                  GRATIS / RP 0
-                </span>
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#F4F0E8]">
+                <MapPin className="w-4 h-4 text-[#D91F2C]" />
+                <span>PICK-UP DI GOR UNY</span>
               </div>
-              <p className="text-[11px] text-[#90929A] leading-relaxed">
-                Booth Merch Resmi GOR UNY (12–14 Desember 2026). Tunjukkan barcode order.
+              <p className="text-[10px] text-[#8F8E8B] mt-1">
+                Ambil langsung di booth merchandise (Gratis).
               </p>
             </button>
 
-            {/* Expedition Shipping Option */}
             <button
               type="button"
               onClick={() => setDeliveryMethod("EXPEDITION")}
-              className={`p-4 rounded-sm border text-left transition-all relative ${
+              className={`p-4 border text-left transition-colors ${
                 deliveryMethod === "EXPEDITION"
-                  ? "bg-[#D21F2B]/10 border-[#D21F2B] ring-1 ring-[#D21F2B]"
-                  : "bg-white/5 border-white/10 hover:bg-white/10"
+                  ? "border-[#D91F2C] bg-[#0B0B0B]"
+                  : "border-white/10 bg-[#0B0B0B]/50 hover:border-white/20"
               }`}
             >
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-2">
-                  <Truck className="w-4 h-4 text-[#D21F2B]" />
-                  <span
-                    className="text-sm font-bold uppercase tracking-wider text-white"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    Kirim Ekspedisi
-                  </span>
-                </div>
-                <span className="text-[10px] font-mono text-amber-400">
-                  Mulai Rp 15.000
-                </span>
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#F4F0E8]">
+                <Truck className="w-4 h-4 text-[#D91F2C]" />
+                <span>PENGIRIMAN EKSPEDISI</span>
               </div>
-              <p className="text-[11px] text-[#90929A] leading-relaxed">
-                Pengiriman via JNE atau J&T Express ke alamat rumah seluruh Indonesia.
+              <p className="text-[10px] text-[#8F8E8B] mt-1">
+                Dikirim via JNE/J&T ke alamat rumah.
               </p>
             </button>
           </div>
 
-          {/* Details for Expedition */}
           {deliveryMethod === "EXPEDITION" && (
-            <div className="space-y-4 pt-3 border-t border-white/10 text-xs animate-in fade-in duration-200">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-white/80 font-bold uppercase tracking-wider block">
-                    Wilayah Tujuan *
-                  </label>
-                  <select
-                    value={shippingRegion}
-                    onChange={(e) => setShippingRegion(e.target.value)}
-                    className="w-full bg-[#09090b] border border-white/10 rounded-sm p-3 text-white focus:outline-none focus:border-[#D21F2B]"
-                  >
-                    <option value="DIY_JATENG">D.I. Yogyakarta & Jawa Tengah (+ Rp 15.000)</option>
-                    <option value="JAWA">Pulau Jawa Lainnya (DKI, Jabar, Jatim) (+ Rp 25.000)</option>
-                    <option value="LUAR_JAWA">Luar Pulau Jawa (+ Rp 45.000)</option>
-                  </select>
-                </div>
+            <div className="space-y-4 pt-4 border-t border-white/5">
+              <div className="space-y-1">
+                <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">WILAYAH TUJUAN</label>
+                <select
+                  value={shippingRegion}
+                  onChange={(e) => setShippingRegion(e.target.value)}
+                  className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
+                >
+                  <option value="DIY_JATENG">D.I. Yogyakarta & Jawa Tengah (Rp 15.000)</option>
+                  <option value="JAWA">Pulau Jawa Lainnya (Rp 25.000)</option>
+                  <option value="LUAR_JAWA">Luar Pulau Jawa (Rp 45.000)</option>
+                </select>
+              </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-white/80 font-bold uppercase tracking-wider block">
-                    Kurir Pilihan *
-                  </label>
-                  <select
-                    value={courierName}
-                    onChange={(e) => setCourierName(e.target.value)}
-                    className="w-full bg-[#09090b] border border-white/10 rounded-sm p-3 text-white focus:outline-none focus:border-[#D21F2B]"
-                  >
-                    <option value="JNE Regular">JNE Regular (Est. 2-3 Hari)</option>
-                    <option value="J&T Express">J&T Express (Est. 1-3 Hari)</option>
-                  </select>
-                </div>
+              <div className="space-y-1">
+                <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">ALAMAT LENGKAP PENGIRIMAN</label>
+                <textarea
+                  required
+                  rows={2}
+                  value={shippingAddress}
+                  onChange={(e) => setShippingAddress(e.target.value)}
+                  placeholder="Nama jalan, RT/RW, nomor rumah, kelurahan, kecamatan"
+                  className="w-full bg-[#0B0B0B] border border-white/10 p-3 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
+                />
+              </div>
 
-                <div className="sm:col-span-2 space-y-1.5">
-                  <label className="text-white/80 font-bold uppercase tracking-wider block">
-                    Alamat Lengkap (Jalan, RT/RW, No. Rumah, Kecamatan) *
-                  </label>
-                  <textarea
-                    required
-                    rows={2}
-                    placeholder="Jl. Solo Km 8 No. 12, Sleman..."
-                    value={shippingAddress}
-                    onChange={(e) => setShippingAddress(e.target.value)}
-                    className="w-full bg-[#09090b] border border-white/10 rounded-sm p-3 text-white placeholder-white/30 focus:outline-none focus:border-[#D21F2B]"
-                  />
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-white/80 font-bold uppercase tracking-wider block">
-                    Kota / Kabupaten *
-                  </label>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">KOTA / KABUPATEN</label>
                   <input
                     type="text"
-                    required
-                    placeholder="Yogyakarta"
                     value={shippingCity}
                     onChange={(e) => setShippingCity(e.target.value)}
-                    className="w-full bg-[#09090b] border border-white/10 rounded-sm p-3 text-white placeholder-white/30 focus:outline-none focus:border-[#D21F2B]"
+                    className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
                   />
                 </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-white/80 font-bold uppercase tracking-wider block">
-                    Kode Pos *
-                  </label>
+                <div className="space-y-1">
+                  <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">KODE POS</label>
                   <input
                     type="text"
-                    required
-                    placeholder="55281"
                     value={shippingPostalCode}
                     onChange={(e) => setShippingPostalCode(e.target.value)}
-                    className="w-full bg-[#09090b] border border-white/10 rounded-sm p-3 text-white placeholder-white/30 focus:outline-none focus:border-[#D21F2B]"
+                    className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
                   />
                 </div>
               </div>
             </div>
           )}
+        </div>
 
-          {/* Details for On-Site Pickup */}
-          {deliveryMethod === "PICKUP_VENUE" && (
-            <div className="bg-[#09090b] border border-white/5 p-4 rounded-sm flex items-start gap-3 text-xs text-[#90929A]">
-              <Info className="w-4 h-4 text-[#D21F2B] shrink-0 mt-0.5" />
-              <div>
-                <strong className="text-white block mb-0.5">
-                  Lokasi Booth Pengambilan On-Site (Tentatif):
-                </strong>
-                GOR UNY, Hall Barat Lantai 1 (Rencana awal dekat Pintu Masuk VIP & Media). Jam buka booth dan titik presisi bersifat unconfirmed dan akan dikonfirmasi secara resmi mendekati 12–14 Desember 2026.
-              </div>
-            </div>
-          )}
-        </section>
-
-        {/* Step 3: Payment Method (Staging Sandbox Simulator) */}
-        <section className="bg-[#171719] border border-white/10 p-6 rounded-sm space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10">
-            <div className="flex items-center gap-3">
-              <span className="w-7 h-7 rounded-sm bg-[#D21F2B] text-white flex items-center justify-center font-bold text-xs font-mono">
-                3
-              </span>
-              <h2
-                className="text-lg font-black uppercase tracking-wider text-white"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                METODE PEMBAYARAN (STAGING GATE)
-              </h2>
-            </div>
-            <span className="text-[10px] text-amber-400 font-mono font-bold bg-amber-500/10 px-2 py-0.5 rounded-xs">
-              SIMULATOR STAGING
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <button
-              type="button"
-              onClick={() => setPaymentMethod("QRIS")}
-              className={`p-3.5 rounded-sm border text-left transition-all ${
-                paymentMethod === "QRIS"
-                  ? "bg-[#D21F2B]/10 border-[#D21F2B] ring-1 ring-[#D21F2B]"
-                  : "bg-white/5 border-white/10 hover:bg-white/10"
-              }`}
-            >
-              <QrCode className="w-5 h-5 text-[#D21F2B] mb-1.5" />
-              <div className="text-xs font-bold text-white uppercase">QRIS Instant</div>
-              <div className="text-[10px] text-[#90929A]">BCA, GoPay, OVO, ShopeePay</div>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setPaymentMethod("VA_BANK")}
-              className={`p-3.5 rounded-sm border text-left transition-all ${
-                paymentMethod === "VA_BANK"
-                  ? "bg-[#D21F2B]/10 border-[#D21F2B] ring-1 ring-[#D21F2B]"
-                  : "bg-white/5 border-white/10 hover:bg-white/10"
-              }`}
-            >
-              <Building className="w-5 h-5 text-[#D21F2B] mb-1.5" />
-              <div className="text-xs font-bold text-white uppercase">Virtual Account</div>
-              <div className="text-[10px] text-[#90929A]">BCA, Mandiri, BNI, BRI</div>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setPaymentMethod("CREDIT_CARD")}
-              className={`p-3.5 rounded-sm border text-left transition-all ${
-                paymentMethod === "CREDIT_CARD"
-                  ? "bg-[#D21F2B]/10 border-[#D21F2B] ring-1 ring-[#D21F2B]"
-                  : "bg-white/5 border-white/10 hover:bg-white/10"
-              }`}
-            >
-              <CreditCard className="w-5 h-5 text-[#D21F2B] mb-1.5" />
-              <div className="text-xs font-bold text-white uppercase">Kartu Kredit / Debit</div>
-              <div className="text-[10px] text-[#90929A]">Visa, Mastercard, JCB</div>
-            </button>
-          </div>
-
-          {/* Sandbox Info */}
-          <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-sm text-[11px] text-amber-300 flex items-start gap-2">
-            <Info className="w-4 h-4 shrink-0 mt-0.5" />
-            <span>
-              <strong>Gerbang Keamanan Pembayaran:</strong> Pesanan dibuat secara aman dengan status PENDING & UNPAID. Di staging environment, simulasi pelunasan dapat diuji di halaman sukses transaksi. Di production, pembayaran nyata ditahan hingga integrasi gateway aktif.
-            </span>
-          </div>
-
-          {/* Notes Input */}
-          <div className="pt-2 text-xs space-y-1.5">
-            <label className="text-white/70 block">
-              Catatan Khusus untuk Panitia / Kurir (Opsional)
-            </label>
-            <input
-              type="text"
-              placeholder="Contoh: Titipkan di satpam / Hubungi via WA sebelum sampai"
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              className="w-full bg-[#09090b] border border-white/10 rounded-sm p-2.5 text-white placeholder-white/30 focus:outline-none focus:border-[#D21F2B]"
-            />
-          </div>
-        </section>
       </div>
 
-      {/* Right Column: Order Summary & Pay CTA (5 cols) */}
+      {/* Right Column: Order Summary */}
       <div className="lg:col-span-5 space-y-6">
-        <div className="bg-[#171719] border border-white/10 p-6 rounded-sm space-y-6 sticky top-28">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10">
-            <h2
-              className="text-lg font-black uppercase tracking-wider text-white"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
-              RINGKASAN PESANAN ({totalItems})
-            </h2>
-            <Link
-              href="/merch"
-              className="text-xs text-[#90929A] hover:text-white underline transition-colors"
-            >
-              Ubah Item
-            </Link>
-          </div>
+        <div className="p-6 sm:p-8 bg-[#141416] border border-white/10 space-y-6 sticky top-24">
+          <span className="v9-overline text-[#D91F2C]">RINGKASAN PESANAN</span>
 
-          {/* Items Breakdown */}
-          <div className="space-y-3.5 max-h-72 overflow-y-auto pr-1">
-            {items.map((item) => (
-              <div
-                key={item.variantId}
-                className="flex items-center gap-3 bg-[#09090b]/60 border border-white/5 p-2.5 rounded-sm"
-              >
-                <div className="relative w-14 h-14 bg-black/50 rounded-xs overflow-hidden shrink-0 border border-white/10">
-                  <Image
-                    src={item.imageUrl}
-                    alt={item.name}
-                    fill
-                    className="object-cover"
-                    unoptimized
-                  />
+          {/* Cart Items List */}
+          <div className="divide-y divide-white/10 max-h-60 overflow-y-auto pr-1">
+            {items.map((i) => (
+              <div key={i.variantId} className="py-3 flex justify-between gap-3 text-xs font-mono">
+                <div>
+                  <span className="text-[#F4F0E8] font-bold block">{i.name}</span>
+                  <span className="text-[10px] text-[#8F8E8B]">
+                    {i.size} × {i.quantity}
+                  </span>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-xs font-bold text-white truncate">{item.name}</h4>
-                  <div className="flex items-center gap-2 mt-0.5 text-[10px] text-[#90929A]">
-                    {item.size && (
-                      <span className="font-mono bg-white/10 px-1 py-0.2 rounded-xs text-white/80">
-                        {item.size}
-                      </span>
-                    )}
-                    <span>Qty: {item.quantity}</span>
-                  </div>
-                </div>
-                <span className="text-xs font-mono font-bold text-amber-400">
-                  {formatRupiah(item.price * item.quantity)}
+                <span className="text-[#F4F0E8] font-bold">
+                  {formatRupiah(i.price * i.quantity)}
                 </span>
               </div>
             ))}
           </div>
 
-          {/* Costs Calculation */}
-          <div className="space-y-2 pt-4 border-t border-white/10 text-xs font-sans">
-            <div className="flex justify-between text-[#90929A]">
-              <span>Subtotal Merchandise</span>
-              <span className="font-mono text-white">{formatRupiah(subtotal)}</span>
+          {/* Calculation */}
+          <div className="border-t border-white/10 pt-4 space-y-2 text-xs font-mono">
+            <div className="flex justify-between text-[#8F8E8B]">
+              <span>SUBTOTAL PRODUK</span>
+              <span>{formatRupiah(subtotal)}</span>
             </div>
-            <div className="flex justify-between text-[#90929A]">
-              <span>Ongkos Kirim ({deliveryMethod === "PICKUP_VENUE" ? "Pick-Up Venue" : courierName})</span>
-              <span className="font-mono text-white">
-                {shippingCost === 0 ? (
-                  <span className="text-emerald-400 font-bold uppercase">GRATIS</span>
-                ) : (
-                  formatRupiah(shippingCost)
-                )}
-              </span>
+            <div className="flex justify-between text-[#8F8E8B]">
+              <span>ONGKOS KIRIM</span>
+              <span>{deliveryMethod === "PICKUP_VENUE" ? "GRATIS" : formatRupiah(shippingCost)}</span>
             </div>
-            <div className="flex justify-between text-[#90929A]">
-              <span>Biaya Layanan & Pembayaran</span>
-              <span className="font-mono text-emerald-400 font-bold uppercase">RP 0 (FREE)</span>
-            </div>
-
-            <div className="flex justify-between items-baseline pt-4 border-t border-white/10 text-base font-bold text-white">
-              <span
-                className="uppercase tracking-wider"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                Total Pembayaran
-              </span>
-              <span className="text-2xl font-black text-[#D21F2B] font-mono">
-                {formatRupiah(finalTotal)}
-              </span>
+            <div className="flex justify-between text-[#F4F0E8] text-sm font-bold pt-2 border-t border-white/5">
+              <span>TOTAL PEMBAYARAN</span>
+              <span className="text-[#D91F2C]">{formatRupiah(finalTotal)}</span>
             </div>
           </div>
 
-          {/* Submit CTA */}
-          <div className="pt-2 space-y-3">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-[#D21F2B] hover:bg-[#b01822] disabled:opacity-50 text-white font-bold uppercase tracking-wider py-4 px-6 rounded-sm text-sm transition-all shadow-xl shadow-[#D21F2B]/20 flex items-center justify-center gap-2"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
-              {isSubmitting ? (
-                <span>Memproses Pesanan...</span>
-              ) : (
-                <>
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span>Konfirmasi & Bayar Pesanan</span>
-                </>
-              )}
-            </button>
-
-            <div className="flex items-center justify-center gap-1.5 text-[10px] text-[#90929A]">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Garansi Transaksi Aman & Data Terproteksi</span>
+          {errorMessage && (
+            <div className="p-3 bg-red-950/40 border border-red-500/30 text-red-300 text-xs font-mono">
+              {errorMessage}
             </div>
-          </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="v9-btn-red text-xs font-display font-black tracking-wider w-full py-4"
+          >
+            <span>{isSubmitting ? "MEMPROSES PESANAN..." : "KONFIRMASI PESANAN SEKARANG"}</span>
+            <span>↗</span>
+          </button>
         </div>
       </div>
+
     </form>
   );
 }

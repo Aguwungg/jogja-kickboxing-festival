@@ -1,16 +1,20 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { Mail, Phone, Clock, CheckCircle2, Trash2, MessageSquare, AlertCircle } from "lucide-react";
+import { requireAdminSession, verifyAdminAction } from "@/lib/auth-guard";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminMessagesPage() {
+  await requireAdminSession();
+
   const messages = await prisma.contactMessage.findMany({
     orderBy: { createdAt: "desc" },
   });
 
   async function toggleStatus(id: string, currentStatus: string) {
     "use server";
+    await verifyAdminAction();
     const nextStatus = currentStatus === "UNREAD" ? "READ" : "UNREAD";
     await prisma.contactMessage.update({
       where: { id },
@@ -22,6 +26,7 @@ export default async function AdminMessagesPage() {
 
   async function deleteMessage(id: string) {
     "use server";
+    await verifyAdminAction();
     await prisma.contactMessage.delete({ where: { id } });
     revalidatePath("/admin/messages");
     revalidatePath("/admin");

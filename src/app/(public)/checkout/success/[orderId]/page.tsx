@@ -1,7 +1,6 @@
 import React from "react";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { formatRupiah } from "@/lib/currency";
 import { getGatePolicy } from "@/lib/commercial-gates";
@@ -10,14 +9,8 @@ import {
   Clock,
   MapPin,
   Truck,
-  QrCode,
-  Calendar,
   ArrowLeft,
-  ShoppingBag,
-  Printer,
   ShieldCheck,
-  Package,
-  AlertCircle,
 } from "lucide-react";
 import PrintButton from "./PrintButton";
 import SimulatePaymentButton from "./SimulatePaymentButton";
@@ -27,8 +20,8 @@ interface Props {
 }
 
 export const metadata = {
-  title: "Konfirmasi Pesanan — JKB 2026",
-  description: "E-Receipt dan bukti pemesanan resmi merchandise JKB 2026.",
+  title: "Konfirmasi Pesanan | JKBF 2026",
+  description: "Bukti pemesanan resmi merchandise Jogja Kickboxing Festival 2026.",
 };
 
 export default async function OrderSuccessPage({ params }: Props) {
@@ -58,236 +51,121 @@ export default async function OrderSuccessPage({ params }: Props) {
   const isPaid = order.paymentStatus === "PAID";
 
   return (
-    <div className="flex-1 flex flex-col w-full min-h-screen text-[#F6F3EC] bg-[#09090b] pt-24 pb-20">
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-1">
-        {/* Success Banner */}
-        <div className="bg-[#171719] border border-white/10 rounded-sm p-6 sm:p-10 shadow-2xl relative overflow-hidden space-y-8">
-          {/* Ambient Glow */}
-          <div
-            className={`absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none ${
-              isPaid ? "bg-emerald-500/10" : "bg-amber-500/10"
-            }`}
-          />
+    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F4F0E8] bg-[#0B0B0B] pt-24 pb-20 font-sans">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-1 space-y-6">
+        
+        <Link
+          href="/merch"
+          className="inline-flex items-center gap-1.5 text-xs font-mono text-[#8F8E8B] hover:text-[#F4F0E8] uppercase tracking-wider transition-colors"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span>KEMBALI KE KATALOG MERCHANDISE</span>
+        </Link>
 
-          {/* Top Status */}
+        {/* E-Receipt Container */}
+        <div className="bg-[#141416] border border-white/10 p-6 sm:p-10 space-y-8">
+          
+          {/* Header Status */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
-            <div className="flex items-center gap-4">
-              <div
-                className={`w-14 h-14 rounded-full border flex items-center justify-center shrink-0 ${
-                  isPaid
-                    ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-400"
-                    : "bg-amber-500/20 border-amber-500/40 text-amber-400"
-                }`}
+            <div>
+              <span className="v9-overline text-[#D91F2C]">BUKTI PEMESANAN RESMI</span>
+              <h1
+                className="v9-display-title text-3xl sm:text-4xl text-[#F4F0E8] mt-1"
+                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
               >
-                {isPaid ? <CheckCircle2 className="w-8 h-8" /> : <Clock className="w-8 h-8" />}
-              </div>
-              <div>
-                <span
-                  className={`text-[10px] uppercase font-mono font-bold tracking-widest block ${
-                    isPaid ? "text-emerald-400" : "text-amber-400"
-                  }`}
-                >
-                  {isPaid ? "PEMBAYARAN TERVERIFIKASI" : "STATUS: MENUNGGU PEMBAYARAN (UNPAID)"}
-                </span>
-                <h1
-                  className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white leading-tight"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  {isPaid ? "TERIMA KASIH ATAS DUKUNGANMU!" : "PESANAN BERHASIL DICATAT"}
-                </h1>
-                {!isPaid && (
-                  <p className="text-xs text-[#90929A] mt-1 font-sans">
-                    Pesanan Anda berstatus PENDING. Barang akan disiapkan setelah pembayaran terkonfirmasi.
-                  </p>
-                )}
-              </div>
+                PESANAN #{order.orderNumber}
+              </h1>
+              <p className="text-xs text-[#8F8E8B] font-mono mt-1">
+                TANGGAL: {new Date(order.createdAt).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}
+              </p>
             </div>
 
-            <div className="text-left sm:text-right font-mono">
-              <span className="text-xs text-[#90929A] block">NOMOR PESANAN</span>
-              <span className="text-base sm:text-lg font-black text-amber-400">
-                {order.orderNumber}
+            <div className="flex items-center gap-2">
+              <span
+                className={`px-3 py-1.5 text-xs font-mono font-bold uppercase ${
+                  isPaid
+                    ? "bg-green-950/60 border border-green-500/30 text-green-400"
+                    : "bg-[#0B0B0B] border border-white/10 text-[#8F8E8B]"
+                }`}
+              >
+                {isPaid ? "PEMBAYARAN TERKONFIRMASI" : "MENUNGGU PEMBAYARAN"}
               </span>
+              <PrintButton />
             </div>
           </div>
 
-          {/* Staging Simulator Component (Dev / Non-Production Only) */}
-          {!isPaid && policy.allowPaymentSimulator && (
-            <SimulatePaymentButton orderId={order.id} />
-          )}
-
-          {/* Barcode & Pick-Up / Delivery Pass Card */}
-          {isPickup ? (
-            <div
-              className={`p-6 rounded-sm space-y-4 border-2 ${
-                isPaid
-                  ? "bg-[#09090b] border-dashed border-[#D21F2B]/40"
-                  : "bg-[#09090b]/80 border-dashed border-amber-500/30 opacity-90"
-              }`}
-            >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                  <div
-                    className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-xs text-xs font-bold uppercase tracking-wider mb-2 border ${
-                      isPaid
-                        ? "bg-[#D21F2B]/20 border-[#D21F2B]/40 text-[#D21F2B]"
-                        : "bg-amber-500/10 border-amber-500/30 text-amber-400"
-                    }`}
-                  >
-                    <MapPin className="w-3.5 h-3.5" />
-                    <span>{isPaid ? "PASS KLAIM MERCHANDISE DI VENUE" : "PROVISIONAL KLAIM (PENDING PAYMENT)"}</span>
-                  </div>
-                  <h3
-                    className="text-xl font-black uppercase text-white"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    BOOTH OFFICIAL MERCH — GOR UNY
-                  </h3>
-                  <p className="text-xs text-[#90929A] max-w-md mt-1">
-                    Hall Barat Lantai 1 (Pintu Masuk Utama). Buka 12–14 Desember 2026, 09:00 - 22:00 WIB.
-                    {isPaid ? " Tunjukkan kode klaim berikut:" : " Kode klaim akan aktif setelah pembayaran diverifikasi."}
-                  </p>
-                </div>
-
-                <div className="bg-white p-3 rounded-sm text-center flex flex-col items-center self-start sm:self-auto shrink-0 shadow-lg">
-                  <QrCode className="w-20 h-20 text-black mb-1" />
-                  <span className="text-xs font-mono font-black text-black tracking-widest">
-                    {order.claimBarcode || order.orderNumber}
-                  </span>
-                  {!isPaid && (
-                    <span className="text-[9px] font-mono text-red-600 font-bold uppercase block mt-0.5">
-                      (UNPAID)
-                    </span>
-                  )}
-                </div>
-              </div>
+          {/* Delivery & Recipient Details */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs font-mono bg-[#0B0B0B] border border-white/5 p-6">
+            <div className="space-y-1">
+              <span className="text-[#8F8E8B] block text-[10px] uppercase">DATA PENERIMA</span>
+              <span className="text-[#F4F0E8] font-bold block">{order.customerName}</span>
+              <span className="text-[#8F8E8B] block">{order.guestEmail}</span>
+              <span className="text-[#8F8E8B] block">{order.customerPhone}</span>
             </div>
-          ) : (
-            <div className="bg-[#09090b] border border-white/10 p-6 rounded-sm space-y-2">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-400">
-                <Truck className="w-4 h-4" />
-                <span>INFORMASI PENGIRIMAN EKSPEDISI</span>
-              </div>
-              <h3 className="text-sm font-bold text-white">
-                Kurir: {order.courier}
-              </h3>
-              <p className="text-xs text-[#90929A]">
-                Tujuan: <strong>{order.customerName}</strong> ({order.customerPhone})<br />
-                {order.shippingAddress}, {order.shippingCity} ({order.shippingPostalCode})
-              </p>
-              <div className="pt-2 text-[11px] text-white/50">
-                Status Fulfillment: <strong className="text-amber-400 font-mono uppercase">{order.fulfillmentStatus}</strong> (Nomor resi akan dikirim via WhatsApp saat paket diserahkan ke kurir).
-              </div>
+
+            <div className="space-y-1">
+              <span className="text-[#8F8E8B] block text-[10px] uppercase">METODE PENGAMBILAN</span>
+              <span className="text-[#F4F0E8] font-bold block">
+                {isPickup ? "PICK-UP BOOTH GOR UNY (12—14 DES)" : "EKSPEDISI PENGIRIMAN"}
+              </span>
+              {!isPickup && (
+                <span className="text-[#8F8E8B] block">
+                  {order.shippingAddress}, {order.shippingCity} {order.shippingPostalCode}
+                </span>
+              )}
             </div>
-          )}
+          </div>
 
-          {/* Purchased Items Table */}
-          <div className="space-y-4">
-            <h3
-              className="text-base font-bold uppercase tracking-wider text-white flex items-center gap-2"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
-              <Package className="w-4 h-4 text-[#D21F2B]" />
-              <span>RINCIAN ITEM PESANAN</span>
-            </h3>
-
-            <div className="border border-white/10 rounded-sm overflow-hidden divide-y divide-white/5">
+          {/* Order Items Table */}
+          <div className="space-y-3">
+            <span className="text-[10px] text-[#8F8E8B] font-mono uppercase tracking-widest block">
+              DAFTAR ITEM PESANAN
+            </span>
+            <div className="border border-white/10 divide-y divide-white/10 bg-[#0B0B0B]">
               {order.orderItems.map((item) => (
-                <div key={item.id} className="p-4 flex items-center gap-4 bg-[#111114]">
-                  <div className="relative w-16 h-16 bg-black rounded-xs overflow-hidden shrink-0 border border-white/10">
-                    <Image
-                      src={item.variant.product.imageUrl || "/images/jkb/merch-tee-black.jpg"}
-                      alt={item.variant.product.name}
-                      fill
-                      className="object-cover"
-                      unoptimized
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-xs sm:text-sm font-bold text-white truncate">
+                <div key={item.id} className="p-4 flex justify-between items-center text-xs font-mono">
+                  <div>
+                    <span className="text-[#F4F0E8] font-bold block">
                       {item.variant.product.name}
-                    </h4>
-                    <div className="flex items-center gap-2 mt-1 text-xs text-[#90929A]">
-                      {item.variant.size && (
-                        <span className="font-mono bg-white/10 px-1.5 py-0.5 rounded-xs text-white/80">
-                          Size {item.variant.size}
-                        </span>
-                      )}
-                      <span>Jumlah: {item.quantity}</span>
-                    </div>
-                  </div>
-                  <div className="text-right font-mono">
-                    <span className="text-xs sm:text-sm font-bold text-white block">
-                      {formatRupiah(item.price * item.quantity)}
                     </span>
-                    <span className="text-[10px] text-[#90929A]">
-                      @{formatRupiah(item.price)}
+                    <span className="text-[10px] text-[#8F8E8B]">
+                      UKURAN: {item.variant.size || "ALL"} • JUMLAH: {item.quantity}
                     </span>
                   </div>
+                  <span className="text-[#F4F0E8] font-bold">
+                    {formatRupiah(item.price * item.quantity)}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Payment & Total Breakdown */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-white/10 text-xs">
-            <div className="space-y-2">
-              <span className="text-[#90929A] block font-bold uppercase tracking-wider">
-                DATA PEMESAN
-              </span>
-              <div className="text-white space-y-1">
-                <div>Nama: <strong>{order.customerName}</strong></div>
-                <div>Email: {order.guestEmail}</div>
-                <div>WhatsApp: {order.customerPhone}</div>
-                {order.notes && <div>Catatan: <em>"{order.notes}"</em></div>}
-              </div>
+          {/* Totals */}
+          <div className="border-t border-white/10 pt-4 space-y-2 text-xs font-mono text-right">
+            <div className="flex justify-between text-[#8F8E8B]">
+              <span>SUBTOTAL ITEM</span>
+              <span>{formatRupiah(order.totalAmount - order.shippingCost)}</span>
             </div>
-
-            <div className="space-y-2 bg-[#09090b] p-4 rounded-sm border border-white/5">
-              <div className="flex justify-between text-[#90929A]">
-                <span>Total Merchandise</span>
-                <span className="font-mono text-white">
-                  {formatRupiah(order.totalAmount - order.shippingCost)}
-                </span>
-              </div>
-              <div className="flex justify-between text-[#90929A]">
-                <span>Ongkos Kirim</span>
-                <span className="font-mono text-white">
-                  {order.shippingCost === 0 ? "GRATIS" : formatRupiah(order.shippingCost)}
-                </span>
-              </div>
-              <div className="flex justify-between text-base font-bold text-white pt-2 border-t border-white/10">
-                <span className="uppercase">Total Bayar</span>
-                <span className="text-[#D21F2B] font-mono text-lg font-black">
-                  {formatRupiah(order.totalAmount)}
-                </span>
-              </div>
+            <div className="flex justify-between text-[#8F8E8B]">
+              <span>BIAYA PENGIRIMAN</span>
+              <span>{isPickup ? "GRATIS" : formatRupiah(order.shippingCost)}</span>
+            </div>
+            <div className="flex justify-between text-sm font-bold text-[#F4F0E8] pt-2 border-t border-white/5">
+              <span>TOTAL PESANAN</span>
+              <span className="text-[#D91F2C]">{formatRupiah(order.totalAmount)}</span>
             </div>
           </div>
 
-          {/* Action CTAs */}
-          <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
-            <Link
-              href="/merch"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#90929A] hover:text-white transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Kembali ke Katalog Merch</span>
-            </Link>
-
-            <div className="flex items-center gap-3">
-              <PrintButton />
-              <Link
-                href="/"
-                className="bg-[#D21F2B] hover:bg-[#b01822] text-white text-xs font-bold uppercase tracking-wider px-6 py-2.5 rounded-sm transition-all shadow-md shadow-[#D21F2B]/20"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                Kembali ke Beranda
-              </Link>
+          {/* Staging Simulator Button */}
+          {policy.allowPaymentSimulator && !isPaid && (
+            <div className="pt-4 border-t border-white/10 flex justify-end">
+              <SimulatePaymentButton orderId={order.id} />
             </div>
-          </div>
+          )}
+
         </div>
-      </main>
-    </div>
+
+      </div>
+    </main>
   );
 }

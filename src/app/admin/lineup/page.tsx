@@ -2,16 +2,20 @@ import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import { Music, Plus, Trash2, Eye, EyeOff, Sparkles } from "lucide-react";
+import { requireAdminSession, verifyAdminAction } from "@/lib/auth-guard";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminLineupPage() {
+  await requireAdminSession();
+
   const performers = await prisma.performer.findMany({
     orderBy: { createdAt: "asc" },
   });
 
   async function createPerformer(formData: FormData) {
     "use server";
+    await verifyAdminAction();
     const name = (formData.get("name") as string)?.trim();
     const stage = (formData.get("stage") as string)?.trim() || "Panggung Utama (The Stage)";
     const description = (formData.get("description") as string)?.trim() || null;
@@ -43,6 +47,7 @@ export default async function AdminLineupPage() {
 
   async function togglePublish(id: string, currentStatus: boolean) {
     "use server";
+    await verifyAdminAction();
     await prisma.performer.update({
       where: { id },
       data: { isPublished: !currentStatus },
@@ -53,6 +58,7 @@ export default async function AdminLineupPage() {
 
   async function deletePerformer(id: string) {
     "use server";
+    await verifyAdminAction();
     await prisma.performer.delete({ where: { id } });
     revalidatePath("/admin/lineup");
     revalidatePath("/lineup");

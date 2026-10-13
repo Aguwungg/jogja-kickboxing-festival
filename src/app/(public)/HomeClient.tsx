@@ -2,487 +2,523 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { 
-  Calendar, 
-  MapPin, 
-  Ticket, 
-  Trophy, 
-  Music, 
-  ChevronRight, 
-  ArrowUpRight,
-  Vote,
-  Sparkles,
-  ShoppingBag
-} from "lucide-react";
+import { ArrowUpRight, ArrowDown, Calendar, MapPin, ShieldAlert } from "lucide-react";
 
 export default function HomeClient() {
   return (
-    <main className="flex-1 flex flex-col w-full text-[#F5F3EE] bg-[#09090B] overflow-x-hidden">
+    <main className="flex-1 flex flex-col w-full text-[#F4F0E8] bg-[#0B0B0B] overflow-x-hidden">
       
       {/* ═════════════════════════════════════════════════════════════════════
-          BLOCK 1 — HERO
-          Event First: WHAT, WHEN, WHERE, WHY, HOW
-          Headline: JOGJA PUNYA NYALI.
-          Approved Dates: 12–14 DESEMBER 2026
-          Approved Venue: GOR UNY, YOGYAKARTA
+          1. HERO SECTION — V9 FIGHT CULTURE EDITORIAL
+          Desktop: Asymmetric Clean Cut composition
+          Mobile: Standalone vertical layout
       ═════════════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full min-h-[90svh] md:min-h-[96svh] flex items-end pb-12 sm:pb-16 md:pb-20 pt-28 overflow-hidden">
+      <section className="relative w-full min-h-[92svh] lg:min-h-screen pt-24 pb-12 flex flex-col justify-between border-b border-white/10 bg-[#0B0B0B]">
         
-        {/* Dual Visual Atmosphere */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          {/* Ring / Combat Side */}
-          <div className="absolute top-0 left-0 w-full md:w-1/2 h-1/2 md:h-full">
-            <Image
-              src="/images/jkb/hero-boxing.jpg"
-              alt="Arena kickboxing profesional JKB 2026"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover object-center"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#09090B]/90 via-[#09090B]/60 to-transparent" />
-            <div className="absolute top-6 left-6 z-10 hidden sm:block">
-              <span className="font-display text-[11px] font-black uppercase tracking-[0.25em] bg-[#D91F2C] text-white px-3 py-1 shadow-md">
-                THE RING • CHAMPIONSHIP
-              </span>
-            </div>
-          </div>
-
-          {/* Stage / Music Festival Side */}
-          <div className="absolute bottom-0 right-0 w-full md:w-1/2 h-1/2 md:h-full">
-            <Image
-              src="/images/jkb/hero-concert.jpg"
-              alt="Panggung festival musik spektakuler JKB 2026"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover object-top"
-            />
-            <div className="absolute inset-0 bg-gradient-to-l from-[#09090B]/85 via-[#09090B]/50 to-transparent" />
-            <div className="absolute top-6 right-6 z-10 hidden sm:block">
-              <span className="font-display text-[11px] font-black uppercase tracking-[0.25em] bg-[#E2BA75] text-[#09090B] px-3 py-1 shadow-md">
-                THE STAGE • LIVE MUSIC
-              </span>
-            </div>
-          </div>
-
-          {/* Vignette Overlays for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#09090B] via-[#09090B]/70 to-[#09090B]/40 pointer-events-none" />
-          <div className="absolute top-0 bottom-0 left-1/2 w-px bg-white/10 hidden md:block pointer-events-none" />
+        {/* Desktop Split Background Image */}
+        <div className="hidden lg:block absolute top-0 right-0 w-[52%] h-full z-0 overflow-hidden">
+          <Image
+            src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
+            alt="Dokumentasi Kickboxing JKBF"
+            fill
+            priority
+            sizes="52vw"
+            className="object-cover object-center grayscale contrast-125"
+          />
+          {/* Gradient blends left into deep black */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B] via-[#0B0B0B]/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-transparent to-black/40" />
         </div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-4 sm:space-y-5">
+        {/* Mobile Top Image */}
+        <div className="lg:hidden relative w-full h-[52svh] z-0 overflow-hidden -mt-4 mb-4">
+          <Image
+            src="/images/v9/05_FOTO_FIGHT_MOBILE_TANPA_TEKST.png"
+            alt="Dokumentasi Kickboxing JKBF"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-top grayscale contrast-125"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-transparent to-transparent" />
+        </div>
+
+        {/* Hero Main Copy */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto">
+          <div className="max-w-2xl space-y-4 sm:space-y-6">
             
-            {/* Campaign Narrative */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-block text-[#D91F2C] font-bold tracking-[0.25em] text-xs sm:text-sm uppercase border-l-2 border-[#D91F2C] pl-2.5">
-                #JOGJAPUNYANYALI
-              </span>
-              <span className="text-white/30 hidden sm:inline">•</span>
-              <span className="text-[#E2BA75] font-bold tracking-[0.2em] text-xs uppercase hidden sm:inline">
-                DI BALIK KALEM
+            {/* Overline */}
+            <div className="flex items-center gap-2">
+              <span className="v9-overline text-[#8F8E8B] text-xs sm:text-sm tracking-[0.22em]">
+                12—14 DESEMBER 2026 / GOR UNY / YOGYAKARTA
               </span>
             </div>
 
-            {/* Display Headline */}
+            {/* Headline */}
             <h1
-              className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase leading-[0.9] tracking-tight"
+              className="v9-display-title text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-[#F4F0E8] leading-[0.88]"
               style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
-              JOGJA PUNYA <span className="text-[#D91F2C]">NYALI.</span>
+              JOGJA<br />
+              PUNYA<br />
+              <span className="text-[#D91F2C]">NYALI.</span>
             </h1>
 
-            {/* Concise Narrative */}
-            <p className="text-base sm:text-lg md:text-xl text-[#F5F3EE]/90 max-w-2xl leading-relaxed font-normal">
-              Pertarungan sengit kickboxing profesional Redy Championship 2 berpadu dengan panggung musik festival. Tiga hari pembuktian nyali di Yogyakarta.
+            {/* Subline */}
+            <p className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wider text-[#F4F0E8]/90 font-display">
+              DI BALIK KALEM. ADA PERTARUNGAN.
             </p>
 
-            {/* Approved Key Facts */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-[#F5F3EE]/85 font-medium tracking-wide pt-1">
-              <span className="flex items-center gap-1.5 bg-[#171719]/80 px-3.5 py-1.5 rounded-sm border border-white/10">
-                <Calendar className="w-3.5 h-3.5 text-[#D91F2C]" />
-                12–14 DESEMBER 2026
-              </span>
-              <span className="flex items-center gap-1.5 bg-[#171719]/80 px-3.5 py-1.5 rounded-sm border border-white/10">
-                <MapPin className="w-3.5 h-3.5 text-[#D91F2C]" />
-                GOR UNY, YOGYAKARTA
-              </span>
-            </div>
+            <p className="text-xs sm:text-sm text-[#8F8E8B] max-w-md font-sans leading-relaxed">
+              Peleburan kejuaraan kickboxing profesional Redy Championship 2 dengan festival musik spektakuler di Yogyakarta. Tiga hari pembuktian nyali pemuda.
+            </p>
 
-            {/* Primary & Secondary Actions */}
-            <div className="flex flex-wrap items-center gap-3 pt-3">
+            {/* CTA Row */}
+            <div className="pt-2 flex flex-wrap items-center gap-3">
               <Link
                 href="/tiket"
-                className="font-display font-black text-xs sm:text-sm uppercase tracking-widest text-white bg-[#D91F2C] hover:bg-[#EF3340] active:scale-95 px-6 sm:px-8 py-3.5 rounded-sm transition-all shadow-lg shadow-[#D91F2C]/30 flex items-center gap-2"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                className="v9-btn-red text-sm sm:text-base font-display font-black tracking-wider px-6 py-3"
               >
-                <Ticket className="w-4 h-4" />
                 <span>INFO TIKET</span>
+                <span>↗</span>
               </Link>
-              
-              <Link
-                href="/jadwal"
-                className="font-display font-black text-xs sm:text-sm uppercase tracking-widest text-[#F5F3EE] bg-white/10 hover:bg-white/20 active:scale-95 border border-white/15 px-6 sm:px-7 py-3.5 rounded-sm transition-all flex items-center gap-2"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+              <a
+                href="#festival-destinations"
+                className="v9-btn-ghost text-sm sm:text-base font-display font-extrabold tracking-wider px-5 py-3 text-[#F4F0E8]"
               >
-                <Calendar className="w-4 h-4 text-[#E2BA75]" />
-                <span>LIHAT JADWAL</span>
-              </Link>
+                <span>JELAJAHI FESTIVAL</span>
+                <ArrowDown className="w-4 h-4" />
+              </a>
             </div>
 
-          </div>
-        </div>
-      </section>
-
-      {/* ═════════════════════════════════════════════════════════════════════
-          BLOCK 2 — TWO DISCOVERY PATHS
-          "PILIH PENGALAMANMU"
-          Path 1: PERTANDINGAN (/championship)
-          Path 2: MUSIK & FESTIVAL (/lineup)
-      ═════════════════════════════════════════════════════════════════════ */}
-      <section className="w-full py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#09090B]">
-        <div className="max-w-7xl mx-auto space-y-10">
-          
-          <div className="text-center max-w-xl mx-auto space-y-2">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
-              DUA DUNIA • SATU ARENA
-            </span>
-            <h2
-              className="font-display text-3xl sm:text-5xl font-black uppercase text-white"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
-              PILIH PENGALAMANMU
-            </h2>
-            <p className="text-xs sm:text-sm text-[#9A9AA2]">
-              Jelajahi tensi ring pertarungan atau nikmati energi panggung musik festival.
+            {/* Editorial Asset Notice */}
+            <p className="text-[10px] tracking-widest text-[#5A5957] uppercase font-mono pt-4">
+              FOTO KONSEP / PETARUNG ILUSTRATIF • BUKAN ATLET RESMI
             </p>
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-            
-            {/* Path 1: PERTANDINGAN */}
-            <div className="group relative rounded-sm overflow-hidden bg-[#171719] border border-white/10 hover:border-[#D91F2C]/50 transition-all flex flex-col justify-end min-h-[380px] sm:min-h-[440px]">
-              <Image
-                src="/images/jkb/boxing-ring.jpg"
-                alt="Arena Kejuaraan Redy Championship 2"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-60"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#09090B] via-[#09090B]/60 to-transparent" />
-              
-              <div className="relative z-10 p-6 sm:p-8 space-y-3">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-[#D91F2C] text-white text-[11px] font-bold uppercase tracking-wider">
-                  <Trophy className="w-3.5 h-3.5" />
-                  <span>THE RING</span>
+        {/* Hero Bottom Ribbon */}
+        <div id="festival-destinations" className="relative z-10 w-full border-t border-white/10 mt-10 pt-4 pb-2 bg-[#0B0B0B]/90 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-xs font-display font-black tracking-widest uppercase">
+              <Link
+                href="/championship"
+                className="flex items-center justify-between p-3 border border-white/10 bg-[#141416] hover:border-[#D91F2C] transition-colors group"
+              >
+                <div>
+                  <span className="text-[#D91F2C] block text-[10px]">01</span>
+                  <span className="text-sm text-[#F4F0E8] group-hover:text-white">THE RING.</span>
                 </div>
+                <ArrowUpRight className="w-4 h-4 text-[#8F8E8B] group-hover:text-[#D91F2C]" />
+              </Link>
 
-                <h3
-                  className="font-display text-3xl sm:text-4xl font-black uppercase text-white leading-tight"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  PERTANDINGAN KICKBOXING
-                </h3>
-
-                <p className="text-xs sm:text-sm text-[#C4C4CC] leading-relaxed max-w-md">
-                  Rangkaian kejuaraan kickboxing profesional Redy Championship 2. Perebutan sabuk juara nasional di atas ring resmi GOR UNY.
-                </p>
-
-                <div className="pt-2 flex flex-wrap gap-3">
-                  <Link
-                    href="/championship"
-                    className="font-display font-bold text-xs uppercase tracking-widest px-5 py-2.5 bg-[#D91F2C] hover:bg-[#EF3340] text-white rounded-sm transition-all"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    Info Kejuaraan →
-                  </Link>
-                  <Link
-                    href="/fighters"
-                    className="font-display font-bold text-xs uppercase tracking-widest px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-sm transition-all border border-white/10"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    Daftar Petarung
-                  </Link>
+              <Link
+                href="/lineup"
+                className="flex items-center justify-between p-3 border border-white/10 bg-[#141416] hover:border-[#D91F2C] transition-colors group"
+              >
+                <div>
+                  <span className="text-[#D91F2C] block text-[10px]">02</span>
+                  <span className="text-sm text-[#F4F0E8] group-hover:text-white">THE STAGE.</span>
                 </div>
-              </div>
+                <ArrowUpRight className="w-4 h-4 text-[#8F8E8B] group-hover:text-[#D91F2C]" />
+              </Link>
+
+              <Link
+                href="/city-pride"
+                className="col-span-2 md:col-span-1 flex items-center justify-between p-3 border border-white/10 bg-[#141416] hover:border-[#D91F2C] transition-colors group"
+              >
+                <div>
+                  <span className="text-[#D91F2C] block text-[10px]">03</span>
+                  <span className="text-sm text-[#F4F0E8] group-hover:text-white">THE CITY.</span>
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-[#8F8E8B] group-hover:text-[#D91F2C]" />
+              </Link>
             </div>
-
-            {/* Path 2: MUSIK & FESTIVAL */}
-            <div className="group relative rounded-sm overflow-hidden bg-[#171719] border border-white/10 hover:border-[#E2BA75]/50 transition-all flex flex-col justify-end min-h-[380px] sm:min-h-[440px]">
-              <Image
-                src="/images/jkb/festival-lights.jpg"
-                alt="Panggung Festival Musik JKB 2026"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-60"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#09090B] via-[#09090B]/60 to-transparent" />
-              
-              <div className="relative z-10 p-6 sm:p-8 space-y-3">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-[#E2BA75] text-[#09090B] text-[11px] font-bold uppercase tracking-wider">
-                  <Music className="w-3.5 h-3.5" />
-                  <span>THE STAGE</span>
-                </div>
-
-                <h3
-                  className="font-display text-3xl sm:text-4xl font-black uppercase text-white leading-tight"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  MUSIK & FESTIVAL
-                </h3>
-
-                <p className="text-xs sm:text-sm text-[#C4C4CC] leading-relaxed max-w-md">
-                  Panggung pertunjukan musik spektakuler, tata cahaya festival megah, food bazaar, dan selebrasi kultur muda Yogyakarta.
-                </p>
-
-                <div className="pt-2 flex flex-wrap gap-3">
-                  <Link
-                    href="/lineup"
-                    className="font-display font-bold text-xs uppercase tracking-widest px-5 py-2.5 bg-[#E2BA75] hover:bg-[#F0CB8E] text-[#09090B] rounded-sm transition-all"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    Lineup Musik →
-                  </Link>
-                  <Link
-                    href="/venue"
-                    className="font-display font-bold text-xs uppercase tracking-widest px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-sm transition-all border border-white/10"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    Fasilitas Festival
-                  </Link>
-                </div>
-              </div>
-            </div>
-
           </div>
-
         </div>
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════
-          BLOCK 3 — PLAN YOUR VISIT
-          "RENCANAKAN KUNJUNGANMU"
-          3 Practical Destinations:
-          1. Jadwal Acara (/jadwal)
-          2. Lokasi GOR UNY (/venue)
-          3. Informasi Tiket (/tiket)
+          2. THE RING — COMBAT EXPERIENCE
+          Underground Fight Editorial
       ═════════════════════════════════════════════════════════════════════ */}
-      <section className="w-full py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#F5F3EE] text-[#09090B]">
-        <div className="max-w-7xl mx-auto space-y-10">
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#09090B]/10 pb-6">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
-                PANDUAN PRAKTIS
-              </span>
+      <section className="w-full py-20 border-b border-white/10 bg-[#0B0B0B] relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            {/* Left Content */}
+            <div className="lg:col-span-6 space-y-6">
+              <div className="flex items-center gap-2">
+                <span className="v9-overline text-[#D91F2C]">01 / COMBAT SPORTS</span>
+                <span className="text-[#8F8E8B] text-xs">•</span>
+                <span className="text-xs uppercase tracking-widest text-[#8F8E8B] font-display font-bold">
+                  REDY CHAMPIONSHIP 2
+                </span>
+              </div>
+
               <h2
-                className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight mt-1 text-[#09090B]"
+                className="v9-display-title text-4xl sm:text-5xl md:text-6xl text-[#F4F0E8]"
                 style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
               >
-                RENCANAKAN KUNJUNGANMU
+                PERTARUNGAN DI ATAS RING. BUKAN REKAYASA.
+              </h2>
+
+              <p className="text-sm text-[#8F8E8B] leading-relaxed font-sans">
+                Turnamen kickboxing paling bergengsi di Yogyakarta. Menghadirkan atlet-atlet pilihan lintas divisi dalam aturan ketat kickboxing profesional. Setiap laga adalah pembuktian kehormatan dan mentalitas bertarung.
+              </p>
+
+              {/* Pre-event notice */}
+              <div className="p-4 bg-[#141416] border-l-2 border-[#D91F2C] text-xs text-[#8F8E8B] space-y-1">
+                <p className="font-bold text-[#F4F0E8] uppercase tracking-wider font-display">
+                  STATUS RESMI FIGHT CARD
+                </p>
+                <p>
+                  Jadwal partai dan penentuan petarung saat ini sedang dalam proses verifikasi tim teknis & komisi pertandingan resmi.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-3 pt-2">
+                <Link
+                  href="/championship"
+                  className="v9-btn-red text-xs sm:text-sm font-display font-extrabold tracking-wider"
+                >
+                  <span>LIHAT REDY CHAMPIONSHIP 2</span>
+                  <span>↗</span>
+                </Link>
+                <Link
+                  href="/bracket"
+                  className="v9-btn-ghost text-xs sm:text-sm font-display font-extrabold tracking-wider"
+                >
+                  <span>BAGAN TURNAMEN</span>
+                </Link>
+                <Link
+                  href="/fighters"
+                  className="v9-btn-ghost text-xs sm:text-sm font-display font-extrabold tracking-wider"
+                >
+                  <span>ROSTER PETARUNG</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Combat Showcase Imagery */}
+            <div className="lg:col-span-6 relative h-[380px] sm:h-[480px] bg-[#141416] border border-white/10 overflow-hidden">
+              <Image
+                src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
+                alt="Pertarungan kickboxing resmi Redy Championship"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center grayscale contrast-125"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 p-4 bg-[#0B0B0B]/85 border border-white/10 backdrop-blur-sm">
+                <span className="text-[10px] text-[#D91F2C] font-mono uppercase tracking-widest block">
+                  ARENA PERTANDINGAN UTAMA
+                </span>
+                <span className="text-base font-display font-black uppercase text-[#F4F0E8] block" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+                  GOR UNY YOGYAKARTA • RING SIDE & TRIBUN
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ═════════════════════════════════════════════════════════════════════
+          3. THE STAGE — MUSIC FESTIVAL EXPERIENCE
+          Youth Music Energy Editorial
+      ═════════════════════════════════════════════════════════════════════ */}
+      <section className="w-full py-20 border-b border-white/10 bg-[#141416] relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            {/* Left Concert Photo */}
+            <div className="lg:col-span-6 relative h-[380px] sm:h-[480px] bg-[#0B0B0B] border border-white/10 overflow-hidden order-2 lg:order-1">
+              <Image
+                src="/images/v9/06_FOTO_KONSER_PLACEHOLDER_INTERNAL.png"
+                alt="Panggung festival musik JKBF 2026"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-transparent to-black/30" />
+              <div className="absolute bottom-4 left-4 right-4 p-4 bg-[#0B0B0B]/85 border border-white/10 backdrop-blur-sm">
+                <span className="text-[10px] text-[#D91F2C] font-mono uppercase tracking-widest block">
+                  STAGE ATMOSPHERE • SOUND & LIGHTS
+                </span>
+                <span className="text-base font-display font-black uppercase text-[#F4F0E8] block" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+                  PANGGUNG MUSIK ENERGI PEMUDA
+                </span>
+              </div>
+            </div>
+
+            {/* Right Music Copy */}
+            <div className="lg:col-span-6 space-y-6 order-1 lg:order-2">
+              <div className="flex items-center gap-2">
+                <span className="v9-overline text-[#D91F2C]">02 / MUSIC FESTIVAL</span>
+                <span className="text-[#8F8E8B] text-xs">•</span>
+                <span className="text-xs uppercase tracking-widest text-[#8F8E8B] font-display font-bold">
+                  THE STAGE
+                </span>
+              </div>
+
+              <h2
+                className="v9-display-title text-4xl sm:text-5xl md:text-6xl text-[#F4F0E8]"
+                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+              >
+                ENERGI MUSIK DAN SORAK PENONTON.
+              </h2>
+
+              <p className="text-sm text-[#8F8E8B] leading-relaxed font-sans">
+                Festival ini bukan sekadar laga fisik. Selepas dentuman sarung tinju di atas ring, panggung musik menyala mengiringi malam di Yogyakarta. Kolaborasi musisi dan band indie menggetarkan GOR UNY selama tiga hari penuh.
+              </p>
+
+              <div className="p-4 bg-[#0B0B0B] border-l-2 border-[#D91F2C] text-xs text-[#8F8E8B] space-y-1">
+                <p className="font-bold text-[#F4F0E8] uppercase tracking-wider font-display">
+                  PENGUMUMAN RESMI ARTIS & LINEUP
+                </p>
+                <p>
+                  Lineup artis dan jadwal performa panggung akan diumumkan secara bertahap melalui kanal resmi panitia pelaksana.
+                </p>
+              </div>
+
+              <div className="pt-2">
+                <Link
+                  href="/lineup"
+                  className="v9-btn-red text-xs sm:text-sm font-display font-extrabold tracking-wider"
+                >
+                  <span>EXPLORE LINEUP MUSIK</span>
+                  <span>↗</span>
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ═════════════════════════════════════════════════════════════════════
+          4. 3-DAY TIMETABLE OVERVIEW
+          Clean Editorial Timetable
+      ═════════════════════════════════════════════════════════════════════ */}
+      <section className="w-full py-20 border-b border-white/10 bg-[#0B0B0B]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+              <span className="v9-overline text-[#D91F2C]">TIMETABLE RESMI</span>
+              <h2
+                className="v9-display-title text-4xl sm:text-5xl text-[#F4F0E8] mt-1"
+                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+              >
+                TIGA HARI FESTIVAL DI GOR UNY
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-[#62626A] max-w-sm leading-relaxed">
-              Tiga informasi utama yang wajib diketahui pengunjung sebelum hadir ke arena festival.
-            </p>
+            <Link
+              href="/jadwal"
+              className="text-xs uppercase font-extrabold tracking-widest text-[#F4F0E8] hover:text-[#D91F2C] flex items-center gap-1 font-display"
+            >
+              <span>LIHAT JADWAL LENGKAP 3 HARI</span>
+              <span>↗</span>
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             
-            {/* Card 1: Jadwal */}
-            <div className="bg-white rounded-sm p-6 sm:p-7 border border-black/5 shadow-sm space-y-4 flex flex-col justify-between hover:shadow-md transition-shadow">
-              <div className="space-y-3">
-                <div className="w-10 h-10 rounded-sm bg-[#D91F2C]/10 text-[#D91F2C] flex items-center justify-center font-bold">
-                  <Calendar className="w-5 h-5" />
+            {/* Day 1 */}
+            <div className="p-6 bg-[#141416] border border-white/10 space-y-4">
+              <div className="flex justify-between items-start border-b border-white/10 pb-3">
+                <div>
+                  <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">HARI 01</span>
+                  <h3 className="text-xl font-display font-black text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+                    SABTU, 12 DESEMBER
+                  </h3>
                 </div>
-                <h3
-                  className="font-display text-2xl font-black uppercase text-[#09090B]"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  JADWAL ACARA
-                </h3>
-                <p className="text-xs sm:text-sm text-[#62626A] leading-relaxed">
-                  Rangkaian jadwal 3 hari festival: babak penyisihan laga, semifinal, hingga malam Grand Final dan panggung musik.
-                </p>
+                <span className="text-xs font-mono text-[#8F8E8B]">GOR UNY</span>
               </div>
-              <Link
-                href="/jadwal"
-                className="font-display font-bold text-xs uppercase tracking-widest text-[#D91F2C] hover:text-[#EF3340] flex items-center gap-1.5 pt-4 border-t border-black/5"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                <span>LIHAT RUNDOWN JADWAL</span>
-                <ChevronRight className="w-4 h-4" />
-              </Link>
+              <ul className="space-y-3 text-xs text-[#8F8E8B]">
+                <li className="flex gap-3">
+                  <span className="font-mono text-[#F4F0E8] w-14">SESI 1</span>
+                  <span>Registrasi, timbang badan & upacara pembuka</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="font-mono text-[#F4F0E8] w-14">SESI 2</span>
+                  <span>Babak penyisihan Redy Championship 2</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="font-mono text-[#D91F2C] w-14">MALAM</span>
+                  <span>Opening acts panggung musik festival</span>
+                </li>
+              </ul>
             </div>
 
-            {/* Card 2: Lokasi GOR UNY */}
-            <div className="bg-white rounded-sm p-6 sm:p-7 border border-black/5 shadow-sm space-y-4 flex flex-col justify-between hover:shadow-md transition-shadow">
-              <div className="space-y-3">
-                <div className="w-10 h-10 rounded-sm bg-[#09090B]/10 text-[#09090B] flex items-center justify-center font-bold">
-                  <MapPin className="w-5 h-5" />
+            {/* Day 2 */}
+            <div className="p-6 bg-[#141416] border border-white/10 space-y-4">
+              <div className="flex justify-between items-start border-b border-white/10 pb-3">
+                <div>
+                  <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">HARI 02</span>
+                  <h3 className="text-xl font-display font-black text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+                    MINGGU, 13 DESEMBER
+                  </h3>
                 </div>
-                <h3
-                  className="font-display text-2xl font-black uppercase text-[#09090B]"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  LOKASI GOR UNY
-                </h3>
-                <p className="text-xs sm:text-sm text-[#62626A] leading-relaxed">
-                  Lokasi strategis di Jl. Colombo No. 1, Sleman, Yogyakarta. Panduan transportasi umum, titik masuk venue, dan peta.
-                </p>
+                <span className="text-xs font-mono text-[#8F8E8B]">GOR UNY</span>
               </div>
-              <Link
-                href="/venue"
-                className="font-display font-bold text-xs uppercase tracking-widest text-[#09090B] hover:text-[#D91F2C] flex items-center gap-1.5 pt-4 border-t border-black/5"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                <span>PANDUAN LOKASI VENUE</span>
-                <ChevronRight className="w-4 h-4" />
-              </Link>
+              <ul className="space-y-3 text-xs text-[#8F8E8B]">
+                <li className="flex gap-3">
+                  <span className="font-mono text-[#F4F0E8] w-14">SESI 1</span>
+                  <span>Perempat final & semifinal antar divisi</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="font-mono text-[#F4F0E8] w-14">SESI 2</span>
+                  <span>Aktivasi komunitas City Pride & Creator Meet</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="font-mono text-[#D91F2C] w-14">MALAM</span>
+                  <span>Konser musik live & performa band utama</span>
+                </li>
+              </ul>
             </div>
 
-            {/* Card 3: Informasi Tiket */}
-            <div className="bg-white rounded-sm p-6 sm:p-7 border border-[#D91F2C]/30 shadow-sm space-y-4 flex flex-col justify-between hover:shadow-md transition-shadow">
-              <div className="space-y-3">
-                <div className="w-10 h-10 rounded-sm bg-[#D91F2C] text-white flex items-center justify-center font-bold">
-                  <Ticket className="w-5 h-5" />
+            {/* Day 3 */}
+            <div className="p-6 bg-[#141416] border border-white/10 space-y-4">
+              <div className="flex justify-between items-start border-b border-white/10 pb-3">
+                <div>
+                  <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">HARI 03</span>
+                  <h3 className="text-xl font-display font-black text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+                    SENIN, 14 DESEMBER
+                  </h3>
                 </div>
-                <h3
-                  className="font-display text-2xl font-black uppercase text-[#09090B]"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  INFORMASI TIKET
-                </h3>
-                <p className="text-xs sm:text-sm text-[#62626A] leading-relaxed">
-                  Informasi resmi akses tiket festival dan ketentuan masuk arena GOR UNY. Penjualan resmi segera diumumkan.
-                </p>
+                <span className="text-xs font-mono text-[#8F8E8B]">GOR UNY</span>
               </div>
-              <Link
-                href="/tiket"
-                className="font-display font-bold text-xs uppercase tracking-widest text-[#D91F2C] hover:text-[#EF3340] flex items-center gap-1.5 pt-4 border-t border-black/5"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                <span>CEK INFORMASI TIKET</span>
-                <ChevronRight className="w-4 h-4" />
-              </Link>
+              <ul className="space-y-3 text-xs text-[#8F8E8B]">
+                <li className="flex gap-3">
+                  <span className="font-mono text-[#F4F0E8] w-14">SESI 1</span>
+                  <span>Final perebutan sabuk juara divisi</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="font-mono text-[#F4F0E8] w-14">SESI 2</span>
+                  <span>Main Event Redy Championship 2</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="font-mono text-[#D91F2C] w-14">MALAM</span>
+                  <span>Penyerahan sabuk juara & grand finale music stage</span>
+                </li>
+              </ul>
             </div>
 
           </div>
-
         </div>
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════
-          BLOCK 4 — EXPLORE MORE
-          Discreet discovery for City Pride, Creator Program, and Merchandise
-      ═════════════════════════════════════════════════════════════════════ */}
-      <section className="w-full py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#09090B] border-t border-white/10">
-        <div className="max-w-7xl mx-auto space-y-8">
-          
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-white/10 pb-4">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
-                EKOSISTEM JKB
-              </span>
-              <h2
-                className="font-display text-3xl sm:text-4xl font-black uppercase text-white mt-0.5"
+          5. CITY PRIDE & CREATOR (COMMUNITY)
+      ═════════════════════════════════════════════ */}
+      <section className="w-full py-20 border-b border-white/10 bg-[#141416]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            {/* City Pride Card */}
+            <div className="p-8 bg-[#0B0B0B] border border-white/10 space-y-5">
+              <span className="v9-overline text-[#D91F2C]">GERAKAN PEMUDA</span>
+              <h3
+                className="v9-display-title text-3xl sm:text-4xl text-[#F4F0E8]"
                 style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
               >
-                EKSPLORASI LAINNYA
-              </h2>
+                CITY PRIDE #JOGJAPUNYANYALI
+              </h3>
+              <p className="text-xs sm:text-sm text-[#8F8E8B] leading-relaxed">
+                Suarakan kebanggaan wilayahmu. Lima kabupaten/kota di D.I. Yogyakarta bersatu mendukung atlet dan komunitas masing-masing di panggung festival.
+              </p>
+              <div>
+                <Link
+                  href="/city-pride"
+                  className="v9-btn-ghost text-xs font-display font-extrabold tracking-wider"
+                >
+                  <span>EKSPLORASI CITY PRIDE</span>
+                  <span>↗</span>
+                </Link>
+              </div>
             </div>
-            <p className="text-xs text-[#9A9AA2] max-w-sm">
-              Dukungan komunitas, program liputan kreatif, dan katalog apparel resmi.
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {/* Creator Hub Card */}
+            <div className="p-8 bg-[#0B0B0B] border border-white/10 space-y-5">
+              <span className="v9-overline text-[#D91F2C]">KOLABORASI DIGITAL</span>
+              <h3
+                className="v9-display-title text-3xl sm:text-4xl text-[#F4F0E8]"
+                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+              >
+                CREATOR & MEDIA PASS
+              </h3>
+              <p className="text-xs sm:text-sm text-[#8F8E8B] leading-relaxed">
+                Ruang bagi kreator konten, fotografer, jurnalis, dan komunitas peliput untuk mendokumentasikan atmosfer pertarungan serta konser musik secara langsung.
+              </p>
+              <div>
+                <Link
+                  href="/creator"
+                  className="v9-btn-ghost text-xs font-display font-extrabold tracking-wider"
+                >
+                  <span>DAFTAR CREATOR HUB</span>
+                  <span>↗</span>
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ═════════════════════════════════════════════════════════════════════
+          6. VENUE & TICKETS CALLOUT
+          Warm Ivory contrast or Clean Dark
+      ═════════════════════════════════════════════ */}
+      <section className="w-full py-20 bg-[#F4F0E8] text-[#0B0B0B]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
-            {/* Card 1: City Pride */}
-            <Link
-              href="/city-pride"
-              className="p-6 bg-[#171719] border border-white/10 hover:border-[#D91F2C]/50 rounded-sm flex flex-col justify-between space-y-4 group transition-all"
-            >
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="w-8 h-8 rounded-sm bg-[#D91F2C]/10 text-[#D91F2C] flex items-center justify-center">
-                    <Vote className="w-4 h-4" />
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-[#9A9AA2] group-hover:text-[#D91F2C] transition-colors" />
-                </div>
-                <h3
-                  className="font-display text-xl font-bold uppercase text-white group-hover:text-[#D91F2C] transition-colors"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  City Pride Voting
-                </h3>
-                <p className="text-xs text-[#9A9AA2] leading-relaxed">
-                  Vote wilayah kebanggaanmu di Jogja & Jateng. Satu akun satu suara aman terverifikasi.
-                </p>
-              </div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#D91F2C]">
-                Vote Wilayah →
+            <div className="lg:col-span-8 space-y-4">
+              <span className="v9-overline text-[#D91F2C] tracking-[0.25em]">
+                AKSES RESMI FESTIVAL
               </span>
-            </Link>
+              <h2
+                className="v9-display-title text-4xl sm:text-5xl md:text-6xl text-[#0B0B0B]"
+                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+              >
+                AMANKAN TEMPAT ANDA DI GOR UNY YOGYAKARTA.
+              </h2>
+              <p className="text-sm text-[#5A5957] max-w-xl font-sans leading-relaxed">
+                Tiket resmi akan didistribusikan melalui platform mitra RAWOOH. Dapatkan informasi pembukaan penjualan tiket presale, reguler, dan ringside pass.
+              </p>
+              <div className="flex items-center gap-6 text-xs font-bold text-[#0B0B0B] font-display uppercase tracking-wider pt-2">
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="w-4 h-4 text-[#D91F2C]" />
+                  12—14 DESEMBER 2026
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <MapPin className="w-4 h-4 text-[#D91F2C]" />
+                  GOR UNY, YOGYAKARTA
+                </span>
+              </div>
+            </div>
 
-            {/* Card 2: Creator Program */}
-            <Link
-              href="/creator"
-              className="p-6 bg-[#171719] border border-white/10 hover:border-white/30 rounded-sm flex flex-col justify-between space-y-4 group transition-all"
-            >
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="w-8 h-8 rounded-sm bg-white/10 text-white flex items-center justify-center">
-                    <Sparkles className="w-4 h-4" />
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-[#9A9AA2] group-hover:text-white transition-colors" />
-                </div>
-                <h3
-                  className="font-display text-xl font-bold uppercase text-white group-hover:text-white transition-colors"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  Program Kreator
-                </h3>
-                <p className="text-xs text-[#9A9AA2] leading-relaxed">
-                  Daftarkan kanal konten dan media kamu untuk akses liputan resmi arena festival.
-                </p>
-              </div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#C4C4CC]">
-                Gabung Program →
-              </span>
-            </Link>
-
-            {/* Card 3: Merchandise */}
-            <Link
-              href="/merch"
-              className="p-6 bg-[#171719] border border-white/10 hover:border-[#E2BA75]/50 rounded-sm flex flex-col justify-between space-y-4 group transition-all"
-            >
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="w-8 h-8 rounded-sm bg-[#E2BA75]/10 text-[#E2BA75] flex items-center justify-center">
-                    <ShoppingBag className="w-4 h-4" />
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-[#9A9AA2] group-hover:text-[#E2BA75] transition-colors" />
-                </div>
-                <h3
-                  className="font-display text-xl font-bold uppercase text-white group-hover:text-[#E2BA75] transition-colors"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  Official Merchandise
-                </h3>
-                <p className="text-xs text-[#9A9AA2] leading-relaxed">
-                  Koleksi apparel dan memorabilia resmi festival dengan identitas Di Balik Kalem.
-                </p>
-              </div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#E2BA75]">
-                Lihat Katalog →
-              </span>
-            </Link>
+            <div className="lg:col-span-4 flex flex-col gap-3">
+              <Link
+                href="/tiket"
+                className="v9-btn-red text-center justify-center text-sm font-display font-black tracking-wider py-4 shadow-xl"
+              >
+                <span>INFO PEMBELIAN TIKET</span>
+                <span>↗</span>
+              </Link>
+              <Link
+                href="/venue"
+                className="border border-[#0B0B0B] text-[#0B0B0B] hover:bg-black/5 text-center justify-center text-xs font-display font-extrabold tracking-wider py-3 inline-flex items-center gap-1.5 transition-colors"
+              >
+                <span>PANDUAN LOKASI & DENAH GOR UNY</span>
+                <span>↗</span>
+              </Link>
+            </div>
 
           </div>
-
         </div>
       </section>
 

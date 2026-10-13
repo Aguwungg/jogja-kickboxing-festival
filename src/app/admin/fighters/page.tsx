@@ -1,14 +1,18 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
+import { requireAdminSession, verifyAdminAction } from "@/lib/auth-guard";
 
 export default async function FightersAdminPage() {
+  await requireAdminSession();
+
   const fighters = await prisma.athlete.findMany({
     orderBy: { name: "asc" }
   });
 
   async function togglePublish(id: string, currentStatus: boolean) {
     "use server";
+    await verifyAdminAction();
     await prisma.athlete.update({
       where: { id },
       data: { isPublished: !currentStatus }
@@ -18,6 +22,7 @@ export default async function FightersAdminPage() {
 
   async function deleteFighter(id: string) {
     "use server";
+    await verifyAdminAction();
     await prisma.athlete.delete({ where: { id } });
     revalidatePath("/admin/fighters");
   }

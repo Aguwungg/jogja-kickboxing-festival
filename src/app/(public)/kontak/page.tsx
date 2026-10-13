@@ -1,117 +1,94 @@
 import ContactFormClient from "@/components/contact/ContactFormClient";
-import { Mail, Phone, MapPin, MessageCircle, Globe, Clock, ShieldCheck } from "lucide-react";
+import { Mail, MapPin, Clock, Calendar } from "lucide-react";
 import { EVENT_CONFIG } from "@/lib/event-config";
 
 export const metadata = {
-  title: "Kontak & Sekretariat Resmi — JKB 2026",
-  description: "Hubungi panitia pelaksana Jogja Kickboxing Festival & Redy Championship 2 untuk kemitraan, media, dan informasi tiket.",
+  title: "Kontak & Sekretariat Resmi | JKBF 2026",
+  description: "Hubungi panitia pelaksana Jogja Kickboxing Festival & Redy Championship 2 untuk informasi kemitraan, media, dan tiket.",
 };
 
 export default function KontakPage() {
   return (
-    <div className="flex-1 flex flex-col w-full min-h-screen text-[#F6F3EC] bg-[#09090b] pt-24 pb-20">
-      {/* Header Banner */}
-      <section className="border-b border-white/10 py-12 md:py-16 bg-[#171719]/40 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/15 bg-white/5 text-white/80 text-xs font-bold tracking-widest uppercase mb-4">
-            <Mail className="w-3.5 h-3.5 text-[#EF3340]" />
-            PUSAT LAYANAN & SEKRETARIAT
-          </div>
+    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F4F0E8] bg-[#0B0B0B] pt-24 pb-20">
+      
+      {/* Editorial Header */}
+      <section className="relative w-full border-b border-white/10 py-16 md:py-24 bg-[#0B0B0B]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+          <span className="v9-overline text-[#D91F2C]">
+            PUSAT LAYANAN & SEKRETARIAT RESMI
+          </span>
 
           <h1
-            className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white leading-none mb-4"
+            className="v9-display-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#F4F0E8]"
             style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
-            HUBUNGI <span className="text-[#EF3340]">PANITIA PELAKSANA</span>
+            HUBUNGI PANITIA
           </h1>
 
-          <p className="text-[#99999F] text-base sm:text-lg font-sans max-w-2xl leading-relaxed">
-            Terbuka untuk peluang kemitraan sponsor, registrasi delegasi sasana/atlet, akreditasi media peliput, serta kerja sama tenant festival.
+          <p className="text-base sm:text-lg text-[#F4F0E8] font-bold uppercase tracking-wider font-display">
+            KEMITRAAN, MEDIA, DAN LAYANAN INFORMASI FESTIVAL
+          </p>
+
+          <p className="text-xs sm:text-sm text-[#8F8E8B] max-w-2xl leading-relaxed font-sans">
+            Terbuka untuk kolaborasi sponsor, pendaftaran sasana kickboxing, akreditasi liputan media pers, serta kerja sama tenant festival di GOR UNY Yogyakarta.
           </p>
         </div>
       </section>
 
       {/* Main Content Grid */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          {/* Left Column: Form */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full flex-1">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          {/* Left Form */}
           <div className="lg:col-span-7">
             <ContactFormClient />
           </div>
 
-          {/* Right Column: Contact Details Cards */}
-          <div className="lg:col-span-5 space-y-6">
-            {/* Sekretariat Card */}
-            <div className="bg-[#171719] border border-white/10 p-6 sm:p-8 rounded-sm">
-              <div className="w-10 h-10 rounded-sm bg-[#D91F2C]/10 border border-[#D91F2C]/30 flex items-center justify-center text-[#EF3340] mb-4">
-                <MapPin className="w-5 h-5" />
-              </div>
-              <h3
-                className="text-xl font-black uppercase text-white mb-2"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
+          {/* Right Information Details */}
+          <div className="lg:col-span-5 space-y-6 font-sans">
+            
+            {/* Address */}
+            <div className="p-8 bg-[#141416] border border-white/10 space-y-4">
+              <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">
                 SEKRETARIAT UTAMA
+              </span>
+              <h3 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+                GELANGGANG OLAHRAGA UNY
               </h3>
-              <p className="text-xs text-[#99999F] font-sans leading-relaxed mb-4">
-                Gelanggang Olahraga Universitas Negeri Yogyakarta (GOR UNY)<br />
-                Jl. Colombo No. 1, Karang Malang, Caturtunggal, Kec. Depok<br />
-                Kabupaten Sleman, D.I. Yogyakarta 55281
+              <p className="text-xs text-[#8F8E8B] font-mono leading-relaxed">
+                Jl. Colombo No. 1, Caturtunggal, Kec. Depok, Kabupaten Sleman, D.I. Yogyakarta 55281
               </p>
-              <div className="flex items-center gap-2 text-xs text-white/60 font-sans border-t border-white/5 pt-3">
-                <Clock className="w-3.5 h-3.5 text-[#E2BA75]" />
-                <span>Jam Kerja: Senin – Sabtu, 09:00 – 17:00 WIB</span>
+              <div className="pt-2 border-t border-white/5 text-[11px] font-mono text-[#8F8E8B]">
+                JAM OPERASIONAL: SENIN—SABTU, 09:00—17:00 WIB
               </div>
             </div>
 
-            {/* Direct Communication Channels */}
-            <div className="bg-[#171719] border border-white/10 p-6 sm:p-8 rounded-sm space-y-5">
-              <h3
-                className="text-xl font-black uppercase text-white"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
+            {/* Email & Event Dates */}
+            <div className="p-8 bg-[#141416] border border-white/10 space-y-4">
+              <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">
                 KANAL RESMI
-              </h3>
-
-              <div className="flex items-start gap-3">
-                <MessageCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-white text-xs font-bold uppercase font-sans">Hotline & Sekretariat</h4>
-                  <p className="text-xs text-[#99999F] font-mono mt-0.5">{EVENT_CONFIG.contact.phone}</p>
+              </span>
+              <div className="space-y-2 text-xs font-mono">
+                <div className="flex justify-between py-1 border-b border-white/5">
+                  <span className="text-[#8F8E8B]">EMAIL UMUM</span>
+                  <span className="text-[#F4F0E8] font-bold">info@jogjakickboxing.com</span>
                 </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-[#D91F2C] shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-white text-xs font-bold uppercase font-sans">Email Resmi</h4>
-                  <p className="text-xs text-[#99999F] font-mono mt-0.5">{EVENT_CONFIG.contact.email}</p>
+                <div className="flex justify-between py-1 border-b border-white/5">
+                  <span className="text-[#8F8E8B]">MEDIA & PERS</span>
+                  <span className="text-[#F4F0E8] font-bold">media@jogjakickboxing.com</span>
                 </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Globe className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-white text-xs font-bold uppercase font-sans">Instagram Resmi</h4>
-                  <p className="text-xs text-[#99999F] font-sans mt-0.5">{EVENT_CONFIG.contact.instagram}</p>
+                <div className="flex justify-between py-1">
+                  <span className="text-[#8F8E8B]">EVENT DATES</span>
+                  <span className="text-[#D91F2C] font-bold">12—14 DESEMBER 2026</span>
                 </div>
               </div>
             </div>
 
-            {/* Media Accreditation Note */}
-            <div className="bg-gradient-to-r from-[#D91F2C]/10 to-transparent border border-[#D91F2C]/20 p-6 rounded-sm">
-              <div className="flex items-start gap-3">
-                <ShieldCheck className="w-5 h-5 text-[#EF3340] shrink-0 mt-0.5" />
-                <div className="text-xs font-sans text-white/80 leading-relaxed">
-                  <span className="font-bold text-white uppercase block mb-1">
-                    Akreditasi Media & Fotografer
-                  </span>
-                  Pendaftaran kartu pers peliput pertandingan dibuka mulai H-14 acara. Lampirkan surat tugas resmi redaksi melalui formulir atau email di atas.
-                </div>
-              </div>
-            </div>
           </div>
+
         </div>
       </section>
-    </div>
+
+    </main>
   );
 }

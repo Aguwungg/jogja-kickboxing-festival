@@ -1,17 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Shield, Lock, Mail, ArrowRight, AlertCircle, Loader2, KeyRound } from "lucide-react";
+import { Shield, Lock, Mail, ArrowRight, AlertCircle, Loader2 } from "lucide-react";
 
-export default function AdminLoginPage() {
+function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const errorParam = searchParams.get("error");
+    if (errorParam === "AccessDenied") {
+      setError("Akses ditolak: Akun Anda tidak memiliki otorisasi peran administrator.");
+    }
+  }, [searchParams]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,6 +27,7 @@ export default function AdminLoginPage() {
     setError("");
 
     try {
+      const callbackUrl = searchParams.get("callbackUrl") || "/admin";
       const res = await signIn("credentials", {
         redirect: false,
         email: email.trim(),
@@ -31,7 +40,7 @@ export default function AdminLoginPage() {
         return;
       }
 
-      router.push("/admin");
+      router.push(callbackUrl);
       router.refresh();
     } catch {
       setError("Terjadi kesalahan sistem saat mencoba masuk. Silakan coba lagi.");
@@ -39,12 +48,74 @@ export default function AdminLoginPage() {
     }
   };
 
-  const fillCredentials = (userEmail: string) => {
-    setEmail(userEmail);
-    setPassword("AdminJKB2026!");
-    setError("");
-  };
+  return (
+    <div className="bg-[#171719] border border-white/10 p-8 rounded-sm shadow-2xl">
+      {error && (
+        <div className="mb-6 p-4 rounded-sm bg-[#D91F2C]/10 border border-[#D91F2C]/30 text-[#EF3340] text-xs font-sans flex items-start gap-2.5">
+          <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+          <span>{error}</span>
+        </div>
+      )}
 
+      <form onSubmit={handleLogin} className="space-y-5">
+        <div>
+          <label className="block text-xs uppercase tracking-wider text-white/80 font-bold mb-2 font-sans">
+            Email Administrator
+          </label>
+          <div className="relative">
+            <Mail className="w-4 h-4 text-white/30 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@jkbchampionship.id"
+              className="w-full bg-[#09090b] border border-white/10 rounded-sm pl-10 pr-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#D91F2C] transition-colors font-sans"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-xs uppercase tracking-wider text-white/80 font-bold mb-2 font-sans">
+            Kata Sandi
+          </label>
+          <div className="relative">
+            <Lock className="w-4 h-4 text-white/30 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••••••"
+              className="w-full bg-[#09090b] border border-white/10 rounded-sm pl-10 pr-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#D91F2C] transition-colors font-sans"
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full inline-flex items-center justify-center gap-2 bg-[#D91F2C] hover:bg-[#EF3340] disabled:bg-[#D91F2C]/50 text-white py-3.5 rounded-sm font-bold text-xs uppercase tracking-widest transition-all mt-2"
+          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+        >
+          {loading ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              <span>MEMVERIFIKASI...</span>
+            </>
+          ) : (
+            <>
+              <span>MASUK KE COMMAND CENTER</span>
+              <ArrowRight className="w-4 h-4" />
+            </>
+          )}
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export default function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-[#09090b] text-[#F6F3EC] flex flex-col justify-center items-center px-4 py-12 relative overflow-hidden">
       {/* Background Glow */}
@@ -68,103 +139,16 @@ export default function AdminLoginPage() {
           </p>
         </div>
 
-        {/* Login Card */}
-        <div className="bg-[#171719] border border-white/10 p-8 rounded-sm shadow-2xl">
-          {error && (
-            <div className="mb-6 p-4 rounded-sm bg-[#D91F2C]/10 border border-[#D91F2C]/30 text-[#EF3340] text-xs font-sans flex items-start gap-2.5">
-              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-              <span>{error}</span>
+        {/* Suspense Boundary for useSearchParams */}
+        <Suspense
+          fallback={
+            <div className="bg-[#171719] border border-white/10 p-8 rounded-sm shadow-2xl flex items-center justify-center py-12">
+              <Loader2 className="w-6 h-6 animate-spin text-[#D91F2C]" />
             </div>
-          )}
-
-          <form onSubmit={handleLogin} className="space-y-5">
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-white/80 font-bold mb-2 font-sans">
-                Email Administrator
-              </label>
-              <div className="relative">
-                <Mail className="w-4 h-4 text-white/30 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@jkbchampionship.id"
-                  className="w-full bg-[#09090b] border border-white/10 rounded-sm pl-10 pr-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#D91F2C] transition-colors font-sans"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-white/80 font-bold mb-2 font-sans">
-                Kata Sandi
-              </label>
-              <div className="relative">
-                <Lock className="w-4 h-4 text-white/30 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <input
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••••••"
-                  className="w-full bg-[#09090b] border border-white/10 rounded-sm pl-10 pr-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#D91F2C] transition-colors font-sans"
-                />
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full inline-flex items-center justify-center gap-2 bg-[#D91F2C] hover:bg-[#EF3340] disabled:bg-[#D91F2C]/50 text-white py-3.5 rounded-sm font-bold text-xs uppercase tracking-widest transition-all mt-2"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>MEMVERIFIKASI...</span>
-                </>
-              ) : (
-                <>
-                  <span>MASUK KE COMMAND CENTER</span>
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
-            </button>
-          </form>
-
-          {/* Quick-Fill Staging Accounts Box */}
-          <div className="mt-8 pt-6 border-t border-white/10">
-            <div className="flex items-center gap-1.5 text-xs text-amber-400 font-bold uppercase tracking-wider mb-2 font-sans">
-              <KeyRound className="w-3.5 h-3.5" />
-              <span>Akun Staging Siap Pakai:</span>
-            </div>
-            <div className="space-y-2">
-              <button
-                type="button"
-                onClick={() => fillCredentials("admin@jkbchampionship.id")}
-                className="w-full text-left p-2.5 rounded-sm bg-white/5 hover:bg-white/10 border border-white/5 text-xs font-sans text-white/80 transition-colors flex items-center justify-between"
-              >
-                <div>
-                  <span className="font-bold text-white block">Super Admin</span>
-                  <span className="text-[11px] text-[#99999F]">admin@jkbchampionship.id</span>
-                </div>
-                <span className="text-[10px] text-[#EF3340] font-bold uppercase">Gunakan &rarr;</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => fillCredentials("content@jkbchampionship.id")}
-                className="w-full text-left p-2.5 rounded-sm bg-white/5 hover:bg-white/10 border border-white/5 text-xs font-sans text-white/80 transition-colors flex items-center justify-between"
-              >
-                <div>
-                  <span className="font-bold text-white block">Content Admin</span>
-                  <span className="text-[11px] text-[#99999F]">content@jkbchampionship.id</span>
-                </div>
-                <span className="text-[10px] text-amber-400 font-bold uppercase">Gunakan &rarr;</span>
-              </button>
-            </div>
-          </div>
-        </div>
+          }
+        >
+          <LoginForm />
+        </Suspense>
 
         {/* Back Link */}
         <div className="text-center mt-6">

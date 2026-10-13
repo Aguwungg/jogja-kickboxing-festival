@@ -2,9 +2,11 @@
 
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { verifyAdminAction } from "@/lib/auth-guard";
 
 export async function togglePpvProductAction(productId: string, isActive: boolean) {
   try {
+    await verifyAdminAction();
     await prisma.pPVProduct.update({
       where: { id: productId },
       data: { isActive },
@@ -19,6 +21,7 @@ export async function togglePpvProductAction(productId: string, isActive: boolea
 
 export async function updateStreamUrlAction(productId: string, streamUrl: string) {
   try {
+    await verifyAdminAction();
     await prisma.pPVProduct.update({
       where: { id: productId },
       data: { streamUrl: streamUrl.trim() },
@@ -33,6 +36,7 @@ export async function updateStreamUrlAction(productId: string, streamUrl: string
 
 export async function updateEntitlementStatusAction(entitlementId: string, status: string) {
   try {
+    await verifyAdminAction();
     await prisma.entitlement.update({
       where: { id: entitlementId },
       data: { status },
@@ -43,3 +47,4 @@ export async function updateEntitlementStatusAction(entitlementId: string, statu
     return { success: false, error: error.message };
   }
 }
+

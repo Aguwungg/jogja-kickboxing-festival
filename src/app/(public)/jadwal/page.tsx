@@ -1,10 +1,10 @@
 import prisma from "@/lib/prisma";
 import JadwalClient from "@/components/schedule/JadwalClient";
-import { Calendar, AlertCircle } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 
 export const metadata = {
-  title: "Jadwal Acara & Pertandingan — JKB 2026",
-  description: "Rundown resmi 3 hari Jogja Kickboxing Festival & Redy Championship 2: 12-14 Desember 2026 di GOR UNY Yogyakarta.",
+  title: "Jadwal Pertandingan & Panggung Acara | JKBF 2026",
+  description: "Rundown resmi 3 hari festival kickboxing dan musik Jogja Kickboxing Festival di GOR UNY Yogyakarta: 12—14 Desember 2026.",
 };
 
 export default async function JadwalPage() {
@@ -14,37 +14,42 @@ export default async function JadwalPage() {
   });
 
   return (
-    <div className="flex-1 flex flex-col w-full min-h-screen text-[#F6F3EC] bg-[#09090b] pt-24 pb-20">
-      {/* Header Banner */}
-      <section className="border-b border-white/10 py-12 md:py-16 bg-[#171719]/40 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/15 bg-white/5 text-white/80 text-xs font-bold tracking-widest uppercase mb-4">
-            <Calendar className="w-3.5 h-3.5 text-[#EF3340]" />
-            RUNDOWN RESMI 3 HARI
-          </div>
+    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F4F0E8] bg-[#0B0B0B] pt-24 pb-20">
+      
+      {/* Editorial Header */}
+      <section className="border-b border-white/10 py-16 md:py-20 bg-[#0B0B0B]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+          <span className="v9-overline text-[#D91F2C]">
+            TIMETABLE RESMI / 12—14 DESEMBER 2026
+          </span>
 
           <h1
-            className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white leading-none mb-4"
+            className="v9-display-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#F4F0E8]"
             style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
-            JADWAL <span className="text-[#EF3340]">PERTANDINGAN & FESTIVAL</span>
+            JADWAL ACARA
           </h1>
 
-          <p className="text-[#99999F] text-base sm:text-lg font-sans max-w-2xl leading-relaxed">
-            Ikuti perjalanan turnamen kickboxing dari babak penimbangan resmi, penyisihan eliminasi, hingga malam puncak perebutan sabuk juara dan perayaan festival musik.
+          <p className="text-xs sm:text-sm text-[#8F8E8B] font-sans max-w-2xl leading-relaxed">
+            Rundown kronologis 3 hari pertandingan kickboxing Redy Championship 2 dan panggung musik festival di GOR UNY Yogyakarta.
           </p>
 
-          <div className="mt-6 flex items-center gap-2 text-xs text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3.5 py-2 rounded-sm w-fit font-sans">
-            <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-            <span>Waktu dapat mengalami penyesuaian teknis di arena pertandingan. Seluruh waktu mengacu pada Waktu Indonesia Barat (WIB).</span>
+          <div className="p-4 bg-[#141416] border-l-2 border-[#D91F2C] text-xs text-[#8F8E8B] space-y-1 max-w-2xl">
+            <p className="font-bold text-[#F4F0E8] uppercase tracking-wider font-display">
+              STANDAR WAKTU & PENYESUAIAN ARENA
+            </p>
+            <p>
+              Seluruh jadwal menggunakan Waktu Indonesia Barat (WIB). Jadwal partai tanding dapat mengalami penyesuaian dinamis sesuai durasi penyelesaian laga (KO/TKO/Keputusan Juri) di atas ring.
+            </p>
           </div>
         </div>
       </section>
 
       {/* Interactive Schedule Component */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-1">
         <JadwalClient initialItems={scheduleItems} />
       </section>
-    </div>
+
+    </main>
   );
 }

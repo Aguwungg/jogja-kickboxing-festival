@@ -1,24 +1,10 @@
 import prisma from "@/lib/prisma";
-import {
-  Trophy,
-  Video,
-  Ticket,
-  CheckCircle2,
-  Clock,
-  AlertCircle,
-  ExternalLink,
-  Sparkles,
-  ArrowLeft,
-  Flame,
-  Award,
-  Calendar,
-  Layers,
-} from "lucide-react";
 import Link from "next/link";
+import { ArrowLeft, ArrowUpRight, Trophy, Video, Ticket, CheckCircle2, Clock, AlertCircle } from "lucide-react";
 
 export const metadata = {
-  title: "Dashboard Personal Kreator — JKB 2026",
-  description: "Pantau status profil kreator, riwayat submisi video kampanye, akumulasi poin, dan verifikasi tiket festival.",
+  title: "Dashboard Personal Kreator | JKBF 2026",
+  description: "Pantau profil kreator, riwayat submisi video festival, akumulasi poin, dan verifikasi tiket di Jogja Kickboxing Festival.",
 };
 
 export default async function CreatorDashboardPage({
@@ -28,7 +14,6 @@ export default async function CreatorDashboardPage({
 }) {
   const { creatorId } = await searchParams;
 
-  // Fetch all creators
   const creators = await prisma.creatorProfile.findMany({
     orderBy: { totalPoints: "desc" },
     include: {
@@ -41,240 +26,142 @@ export default async function CreatorDashboardPage({
     },
   });
 
-  // Select active creator (default to first or matching query)
   const currentCreator =
     creators.find((c) => c.id === creatorId) || creators[0] || null;
 
-  // Calculate rank
   const rank = currentCreator
     ? creators.findIndex((c) => c.id === currentCreator.id) + 1
     : 0;
 
   return (
-    <div className="flex-1 flex flex-col w-full min-h-screen text-[#F6F3EC] bg-[#09090b] pt-24 pb-20">
-      {/* Top Bar */}
-      <section className="border-b border-white/10 py-8 bg-[#171719]/40">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F4F0E8] bg-[#0B0B0B] pt-24 pb-20">
+      
+      {/* Top Header */}
+      <section className="border-b border-white/10 py-12 bg-[#0B0B0B]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+          <Link
+            href="/creator"
+            className="inline-flex items-center gap-1.5 text-xs font-mono text-[#8F8E8B] hover:text-[#F4F0E8] uppercase tracking-wider transition-colors"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>KEMBALI KE CREATOR HUB</span>
+          </Link>
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <Link
-                href="/creator"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#99999F] hover:text-white uppercase tracking-wider mb-2 transition-colors"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                Kembali ke Creator Hub
-              </Link>
+              <span className="v9-overline text-[#D91F2C]">PORTAL KREATOR RESMI</span>
               <h1
-                className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white"
+                className="v9-display-title text-4xl sm:text-5xl md:text-6xl text-[#F4F0E8] mt-1"
                 style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
               >
-                DASHBOARD <span className="text-[#EF3340]">PERSONAL KREATOR</span>
+                DASHBOARD KREATOR
               </h1>
-              <p className="text-xs sm:text-sm text-[#99999F] font-sans mt-0.5">
-                Pantau performa submisi, perolehan poin leaderboard, dan tiket promosi Anda secara transparan.
-              </p>
             </div>
 
-            {/* Profile Selector for Staging Demo */}
-            <div className="bg-[#121215] border border-white/10 p-3 rounded-sm">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#99999F] block mb-1">
-                Ganti Akun Kreator (Demo):
-              </span>
-              <div className="flex items-center gap-2">
-                <form method="get" className="flex items-center gap-2">
-                  <select
-                    name="creatorId"
-                    defaultValue={currentCreator?.id}
-                    className="bg-[#171719] border border-white/15 text-xs text-white px-2.5 py-1.5 rounded-sm focus:outline-none focus:border-[#EF3340]"
-                  >
-                    {creators.map((c) => (
-                      <option key={c.id} value={c.id}>
-                        {c.name} ({c.totalPoints} PTS)
-                      </option>
-                    ))}
-                  </select>
-                  <button
-                    type="submit"
-                    className="bg-white/10 hover:bg-white/20 text-white text-xs px-3 py-1.5 rounded-sm font-bold uppercase tracking-wider transition-all"
-                  >
-                    PILIH
-                  </button>
-                </form>
-              </div>
-            </div>
+            {/* Account Switcher */}
+            {creators.length > 0 && (
+              <form method="get" className="flex items-center gap-2 text-xs font-mono">
+                <span className="text-[#8F8E8B]">PILIH AKUN:</span>
+                <select
+                  name="creatorId"
+                  defaultValue={currentCreator?.id}
+                  className="bg-[#141416] border border-white/10 text-[#F4F0E8] px-3 py-2 text-xs focus:outline-none focus:border-[#D91F2C]"
+                >
+                  {creators.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name} ({c.totalPoints} PTS)
+                    </option>
+                  ))}
+                </select>
+                <button
+                  type="submit"
+                  className="px-3 py-2 bg-[#141416] hover:bg-white/10 border border-white/10 text-xs font-bold uppercase"
+                >
+                  PILIH
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Main Dashboard Grid */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-10">
+      {/* Main Dashboard Content */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10 w-full flex-1">
+        
         {!currentCreator ? (
-          <div className="text-center py-20 bg-[#171719] border border-white/10 rounded-sm">
-            <AlertCircle className="w-8 h-8 text-amber-400 mx-auto mb-2" />
-            <p className="text-white font-bold">Belum ada akun kreator terdaftar.</p>
-            <Link
-              href="/creator#action-hub"
-              className="mt-4 inline-block text-xs uppercase tracking-wider text-[#EF3340] hover:underline font-bold"
-            >
-              Daftar Sekarang di Creator Hub &rarr;
+          <div className="p-16 text-center bg-[#141416] border border-white/10 space-y-4 max-w-md mx-auto">
+            <h3 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+              BELUM ADA AKUN KREATOR
+            </h3>
+            <p className="text-xs text-[#8F8E8B]">
+              Daftarkan profil kreator Anda di Creator Hub untuk mulai meliput.
+            </p>
+            <Link href="/creator" className="v9-btn-red text-xs inline-flex">
+              DAFTAR SEKARANG ↗
             </Link>
           </div>
         ) : (
           <>
-            {/* Identity & Stats Banner */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              {/* Profile Card */}
-              <div className="md:col-span-2 bg-[#171719] border border-white/10 p-6 rounded-sm relative overflow-hidden">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase tracking-wider mb-2 border border-emerald-500/30 bg-emerald-500/10 text-emerald-400">
-                      <CheckCircle2 className="w-3 h-3" />
-                      STATUS: {currentCreator.status}
-                    </div>
-                    <h2
-                      className="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight"
-                      style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                    >
-                      {currentCreator.name}
-                    </h2>
-                    <p className="text-xs text-[#99999F] font-sans mt-1">
-                      {currentCreator.bio || "Kreator konten resmi JKB 2026."}
-                    </p>
-                  </div>
-
-                  <div className="w-12 h-12 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center font-black text-xl text-white shrink-0">
-                    {currentCreator.name?.[0] || "C"}
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 mt-6 pt-4 border-t border-white/5 text-xs text-[#99999F]">
-                  {currentCreator.tiktok && <span>TikTok: <strong className="text-white">{currentCreator.tiktok}</strong></span>}
-                  {currentCreator.instagram && <span>IG: <strong className="text-white">{currentCreator.instagram}</strong></span>}
-                  <span>Kategori: <strong className="text-white">{currentCreator.category?.replace("_", " ")}</strong></span>
-                </div>
+            {/* Overview Stats Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono">
+              <div className="p-5 bg-[#141416] border border-white/10">
+                <span className="text-[10px] text-[#8F8E8B] uppercase tracking-widest block">PERINGKAT</span>
+                <span className="text-3xl font-display font-black text-[#D91F2C] mt-1 block" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+                  #{rank}
+                </span>
+                <span className="text-[10px] text-[#5A5957] block mt-1">DARI {creators.length} KREATOR</span>
               </div>
 
-              {/* Total Points */}
-              <div className="bg-[#171719] border border-white/10 p-6 rounded-sm flex flex-col justify-between">
-                <div className="flex items-center justify-between text-xs text-[#99999F] uppercase tracking-wider font-bold">
-                  <span>Poin Terverifikasi</span>
-                  <Trophy className="w-4 h-4 text-amber-400" />
-                </div>
-                <div className="my-4">
-                  <span
-                    className="text-4xl font-black text-amber-400"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    {currentCreator.totalPoints.toLocaleString()}
-                  </span>
-                  <span className="text-xs font-bold text-[#99999F] ml-1.5">PTS</span>
-                </div>
-                <span className="text-[11px] text-white/50">
-                  Total akumulasi dari {currentCreator.submissions.filter((s) => s.status === "APPROVED").length} video approved.
+              <div className="p-5 bg-[#141416] border border-white/10">
+                <span className="text-[10px] text-[#8F8E8B] uppercase tracking-widest block">TOTAL POIN</span>
+                <span className="text-3xl font-display font-black text-[#F4F0E8] mt-1 block" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+                  {currentCreator.totalPoints}
                 </span>
+                <span className="text-[10px] text-[#5A5957] block mt-1">AKUMULASI RESMI</span>
               </div>
 
-              {/* Leaderboard Rank */}
-              <div className="bg-[#171719] border border-white/10 p-6 rounded-sm flex flex-col justify-between">
-                <div className="flex items-center justify-between text-xs text-[#99999F] uppercase tracking-wider font-bold">
-                  <span>Peringkat Klasemen</span>
-                  <Flame className="w-4 h-4 text-[#EF3340]" />
-                </div>
-                <div className="my-4">
-                  <span
-                    className="text-4xl font-black text-white"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    #{rank}
-                  </span>
-                  <span className="text-xs font-bold text-[#99999F] ml-1.5">dari {creators.length} KREATOR</span>
-                </div>
-                <span className="text-[11px] text-white/50">
-                  {rank <= 3 ? "🔥 Posisi podium bonus hadiah tunai!" : "Tingkatkan submit konten untuk naik peringkat."}
+              <div className="p-5 bg-[#141416] border border-white/10">
+                <span className="text-[10px] text-[#8F8E8B] uppercase tracking-widest block">TOTAL SUBMISI</span>
+                <span className="text-3xl font-display font-black text-[#F4F0E8] mt-1 block" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+                  {currentCreator.submissions.length}
                 </span>
+                <span className="text-[10px] text-[#5A5957] block mt-1">KONTEN DIUNGGAH</span>
+              </div>
+
+              <div className="p-5 bg-[#141416] border border-white/10">
+                <span className="text-[10px] text-[#8F8E8B] uppercase tracking-widest block">STATUS KREATOR</span>
+                <span className="text-xl font-display font-black text-green-400 mt-2 block" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+                  {currentCreator.status}
+                </span>
+                <span className="text-[10px] text-[#5A5957] block mt-1">TERVERIFIKASI PANITIA</span>
               </div>
             </div>
 
-            {/* Submissions History Table */}
-            <div className="bg-[#171719] border border-white/10 rounded-sm p-6 sm:p-8">
-              <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
-                <div>
-                  <h3
-                    className="text-xl font-bold uppercase tracking-tight text-white flex items-center gap-2"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    <Video className="w-4 h-4 text-[#EF3340]" />
-                    RIWAYAT SUBMISI KONTEN ({currentCreator.submissions.length})
-                  </h3>
-                  <p className="text-xs text-[#99999F] mt-0.5">
-                    Daftar tautan publik video promosi yang telah diajukan ke kurator festival.
-                  </p>
-                </div>
-
-                <Link
-                  href="/creator#action-hub"
-                  className="bg-[#EF3340] hover:bg-[#D91F2C] text-white text-xs font-bold uppercase tracking-wider px-3.5 py-2 rounded-sm transition-all"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  + Submit Video Baru
-                </Link>
+            {/* Submissions Section */}
+            <div className="space-y-4">
+              <div className="border-b border-white/10 pb-3 flex justify-between items-baseline">
+                <h2 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+                  RIWAYAT SUBMISI KONTEN
+                </h2>
+                <span className="text-xs font-mono text-[#8F8E8B]">
+                  {currentCreator.submissions.length} KONTEN TERCATAT
+                </span>
               </div>
 
               {currentCreator.submissions.length === 0 ? (
-                <div className="text-center py-10 text-[#99999F] text-xs">
-                  Belum ada konten yang disubmit. Ajukan video Anda untuk mulai mengumpulkan poin.
+                <div className="p-12 text-center bg-[#141416] border border-white/10 text-xs font-mono text-[#8F8E8B]">
+                  BELUM ADA SUBMISI KONTEN DARI AKUN INI
                 </div>
               ) : (
-                <div className="divide-y divide-white/5">
+                <div className="border border-white/10 divide-y divide-white/10 bg-[#141416]">
                   {currentCreator.submissions.map((sub) => (
-                    <div key={sub.id} className="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div key={sub.id} className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono">
                       <div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm bg-white/5 border border-white/10 text-white/70">
-                            {sub.platform}
-                          </span>
-                          <span className="text-sm font-bold text-white tracking-tight">
-                            {sub.title || "Konten Kampanye JKB 2026"}
-                          </span>
-                        </div>
-                        <div className="mt-1 flex items-center gap-2 text-xs text-[#99999F]">
-                          <a
-                            href={sub.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[#EF3340] hover:underline flex items-center gap-1 truncate max-w-xs sm:max-w-md"
-                          >
-                            <ExternalLink className="w-3 h-3 shrink-0" />
-                            {sub.url}
-                          </a>
-                        </div>
-                        {sub.adminNote && (
-                          <p className="text-[11px] text-amber-400 mt-1">
-                            Catatan Kurator: {sub.adminNote}
-                          </p>
-                        )}
+                        <span className="text-[#F4F0E8] font-bold block">SUBMISI #{sub.id.slice(-6)}</span>
+                        <span className="text-[10px] text-[#8F8E8B]">STATUS: {sub.status}</span>
                       </div>
-
-                      <div className="flex items-center gap-4 self-end sm:self-center">
-                        <span
-                          className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-sm border ${
-                            sub.status === "APPROVED"
-                              ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
-                              : sub.status === "PENDING"
-                              ? "bg-amber-500/10 border-amber-500/30 text-amber-400"
-                              : "bg-red-500/10 border-red-500/30 text-red-400"
-                          }`}
-                        >
-                          {sub.status === "APPROVED" ? "TERVERIFIKASI" : sub.status === "PENDING" ? "MENUNGGU KURASI" : "DITOLAK"}
-                        </span>
-
-                        <span
-                          className="text-lg font-black text-amber-400 w-16 text-right"
-                          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                        >
-                          +{sub.points} PTS
-                        </span>
+                      <div className="text-right">
+                        <span className="text-sm font-bold text-[#D91F2C]">{sub.points} PTS</span>
                       </div>
                     </div>
                   ))}
@@ -282,51 +169,27 @@ export default async function CreatorDashboardPage({
               )}
             </div>
 
-            {/* Barcode Claims History */}
-            <div className="bg-[#171719] border border-white/10 rounded-sm p-6 sm:p-8">
-              <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
-                <div>
-                  <h3
-                    className="text-xl font-bold uppercase tracking-tight text-white flex items-center gap-2"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    <Ticket className="w-4 h-4 text-amber-400" />
-                    KLAIM TIKET BARCODE ({currentCreator.barcodeClaims.length})
-                  </h3>
-                  <p className="text-xs text-[#99999F] mt-0.5">
-                    Riwayat penukaran barcode tiket festival harian.
-                  </p>
-                </div>
+            {/* Barcode / Ticket Claims */}
+            <div className="space-y-4">
+              <div className="border-b border-white/10 pb-3 flex justify-between items-baseline">
+                <h2 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+                  KLAIM TIKET & MEDIA PASS
+                </h2>
+                <span className="text-xs font-mono text-[#8F8E8B]">
+                  {currentCreator.barcodeClaims.length} KLAIM
+                </span>
               </div>
 
               {currentCreator.barcodeClaims.length === 0 ? (
-                <div className="text-center py-8 text-[#99999F] text-xs">
-                  Belum ada klaim barcode tiket yang didaftarkan.
+                <div className="p-12 text-center bg-[#141416] border border-white/10 text-xs font-mono text-[#8F8E8B]">
+                  BELUM ADA KLAIM TIKET YANG DIAJUKAN
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="border border-white/10 divide-y divide-white/10 bg-[#141416]">
                   {currentCreator.barcodeClaims.map((claim) => (
-                    <div
-                      key={claim.id}
-                      className="bg-[#121215] border border-white/10 p-4 rounded-sm space-y-2"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-mono text-sm font-bold text-amber-400 tracking-wider">
-                          {claim.barcode}
-                        </span>
-                        <span
-                          className={`text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-sm border ${
-                            claim.status === "VERIFIED"
-                              ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
-                              : "bg-amber-500/10 border-amber-500/30 text-amber-400"
-                          }`}
-                        >
-                          {claim.status}
-                        </span>
-                      </div>
-                      <span className="text-[11px] text-[#99999F] block">
-                        Reward: +{claim.pointsAwarded || 50} Poin
-                      </span>
+                    <div key={claim.id} className="p-4 sm:p-5 flex items-center justify-between text-xs font-mono">
+                      <span className="text-[#F4F0E8] font-bold">KLAIM #{claim.id.slice(-6)}</span>
+                      <span className="text-[#8F8E8B]">STATUS: {claim.status}</span>
                     </div>
                   ))}
                 </div>
@@ -334,7 +197,9 @@ export default async function CreatorDashboardPage({
             </div>
           </>
         )}
+
       </section>
-    </div>
+
+    </main>
   );
 }

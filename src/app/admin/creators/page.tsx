@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { requireAdminSession, verifyAdminAction } from "@/lib/auth-guard";
 import {
   Video,
   Users,
@@ -23,6 +24,7 @@ export const metadata = {
 async function moderateSubmissionAction(formData: FormData) {
   "use server";
   try {
+    await verifyAdminAction();
     const submissionId = formData.get("submissionId") as string;
     const action = formData.get("action") as string; // "APPROVE" | "REJECT"
     const pointsAwarded = parseInt((formData.get("points") as string) || "100", 10);
@@ -89,6 +91,7 @@ async function moderateSubmissionAction(formData: FormData) {
 async function updateCreatorStatusAction(formData: FormData) {
   "use server";
   try {
+    await verifyAdminAction();
     const creatorId = formData.get("creatorId") as string;
     const status = formData.get("status") as string;
     const bonusPoints = parseInt((formData.get("bonusPoints") as string) || "0", 10);
@@ -112,6 +115,7 @@ async function updateCreatorStatusAction(formData: FormData) {
 async function verifyBarcodeAction(formData: FormData) {
   "use server";
   try {
+    await verifyAdminAction();
     const claimId = formData.get("claimId") as string;
     const action = formData.get("action") as string; // "VERIFY" | "REJECT"
 
@@ -160,6 +164,7 @@ async function verifyBarcodeAction(formData: FormData) {
 async function updateMediaAccreditationAction(formData: FormData) {
   "use server";
   try {
+    await verifyAdminAction();
     const mediaId = formData.get("mediaId") as string;
     const action = formData.get("action") as string; // "APPROVE" | "REJECT"
     const badgeNumber = (formData.get("badgeNumber") as string)?.trim() || null;
@@ -189,6 +194,7 @@ async function updateMediaAccreditationAction(formData: FormData) {
 }
 
 export default async function AdminCreatorsPage() {
+  await requireAdminSession();
   const [creators, submissions, barcodeClaims, accreditations] =
     await Promise.all([
       prisma.creatorProfile.findMany({

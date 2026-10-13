@@ -2,10 +2,13 @@ import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import { Swords, Trophy, CheckCircle2, Clock, Award, Shield } from "lucide-react";
+import { requireAdminSession, verifyAdminAction } from "@/lib/auth-guard";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminMatchesPage() {
+  await requireAdminSession();
+
   const matches = await prisma.match.findMany({
     include: {
       athlete1: true,
@@ -18,6 +21,7 @@ export default async function AdminMatchesPage() {
 
   async function updateMatchResult(formData: FormData) {
     "use server";
+    await verifyAdminAction();
     const matchId = formData.get("matchId") as string;
     const winnerId = formData.get("winnerId") as string;
     const status = formData.get("status") as string;

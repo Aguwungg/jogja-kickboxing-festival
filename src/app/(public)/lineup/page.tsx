@@ -1,12 +1,11 @@
 import prisma from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
-import { Music, Calendar, MapPin, Sparkles, ArrowRight } from "lucide-react";
-import { EVENT_CONFIG } from "@/lib/event-config";
+import { ArrowUpRight, Calendar, MapPin, Sparkles } from "lucide-react";
 
 export const metadata = {
-  title: "Lineup Musik & Panggung Festival — JKB 2026",
-  description: "Deretan penampil musik dan panggung festival Jogja Kickboxing Festival & Redy Championship 2: 12-14 Desember 2026 di GOR UNY Yogyakarta.",
+  title: "Lineup Musik & Panggung Festival | JKBF 2026",
+  description: "Deretan musisi dan performa panggung festival musik Jogja Kickboxing Festival di GOR UNY Yogyakarta.",
 };
 
 export default async function LineupPage() {
@@ -16,85 +15,115 @@ export default async function LineupPage() {
   });
 
   return (
-    <div className="flex-1 flex flex-col w-full min-h-screen text-[#F5F3EE] bg-[#09090B] pt-24 pb-20">
+    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F4F0E8] bg-[#0B0B0B] pt-24 pb-20">
       
-      {/* Editorial Header */}
-      <section className="relative w-full border-b border-white/10 overflow-hidden py-14 md:py-20 bg-[#171719]/40">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm border border-[#E2BA75]/30 bg-[#E2BA75]/10 text-[#E2BA75] text-xs font-bold tracking-widest uppercase">
-            <Music className="w-3.5 h-3.5" />
-            <span>THE STAGE • LIVE MUSIC FESTIVAL</span>
-          </div>
+      {/* Editorial Concert Header with Stage Backdrop */}
+      <section className="relative w-full border-b border-white/10 py-16 md:py-24 bg-[#141416] overflow-hidden">
+        {/* Background Concert Ambience */}
+        <div className="absolute inset-0 z-0 opacity-30">
+          <Image
+            src="/images/v9/06_FOTO_KONSER_PLACEHOLDER_INTERNAL.png"
+            alt="Panggung Festival Musik JKBF"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#141416] via-[#141416]/80 to-[#141416]/50" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+          <span className="v9-overline text-[#D91F2C]">
+            02 / MUSIC FESTIVAL • THE STAGE
+          </span>
 
           <h1
-            className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white leading-none"
+            className="v9-display-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#F4F0E8]"
             style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
-            LINEUP <span className="text-[#E2BA75]">MUSIK FESTIVAL</span>
+            LINEUP MUSIK
           </h1>
 
-          <p className="text-[#9A9AA2] text-sm sm:text-base max-w-2xl leading-relaxed">
-            Panggung musik spektakuler berpadu dengan tensi kejuaraan kickboxing. Rangkaian kurasi musisi pilihan untuk merayakan kultur dan energi anak muda Yogyakarta di GOR UNY.
+          <p className="text-base sm:text-lg text-[#F4F0E8] font-bold uppercase tracking-wider font-display">
+            DENTUMAN BASS. ENERGI PEMUDA YOGYAKARTA.
           </p>
 
-          <div className="flex flex-wrap items-center gap-3 text-xs text-[#C4C4CC] pt-2">
-            <span className="flex items-center gap-1.5 bg-[#171719] px-3 py-1.5 rounded-sm border border-white/5">
+          <p className="text-xs sm:text-sm text-[#8F8E8B] max-w-2xl leading-relaxed font-sans">
+            Menghadirkan harmoni musik indie, rock, dan beat kontemporer sebagai pengiring tensi pertarungan kickboxing. Tiga malam getaran musik di GOR UNY, 12—14 Desember 2026.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-4 pt-2 text-xs font-mono">
+            <span className="flex items-center gap-1.5 text-[#F4F0E8]">
               <Calendar className="w-3.5 h-3.5 text-[#D91F2C]" />
-              12–14 Desember 2026
+              12—14 DESEMBER 2026
             </span>
-            <span className="flex items-center gap-1.5 bg-[#171719] px-3 py-1.5 rounded-sm border border-white/5">
+            <span className="flex items-center gap-1.5 text-[#8F8E8B]">
               <MapPin className="w-3.5 h-3.5 text-[#D91F2C]" />
-              GOR UNY, Yogyakarta
+              GOR UNY, YOGYAKARTA
             </span>
           </div>
         </div>
       </section>
 
-      {/* Performers Section */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full">
+      {/* Performers Showcase */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full flex-1">
+        
         {performers.length === 0 ? (
-          /* Tasteful Announcement State */
-          <div className="bg-[#171719] border border-white/10 p-12 text-center rounded-sm space-y-4 max-w-xl mx-auto">
-            <div className="w-12 h-12 mx-auto rounded-full bg-[#E2BA75]/10 border border-[#E2BA75]/30 flex items-center justify-center text-[#E2BA75]">
+          /* High-Quality Teaser / Waiting for Official Release */
+          <div className="border border-white/10 bg-[#141416] p-12 sm:p-16 text-center space-y-5 max-w-2xl mx-auto">
+            <div className="w-12 h-12 mx-auto bg-[#0B0B0B] border border-white/10 flex items-center justify-center text-[#D91F2C]">
               <Sparkles className="w-6 h-6" />
             </div>
+
+            <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">
+              STATUS PENGUMUMAN KURASI
+            </span>
+
             <h2
-              className="text-2xl font-black uppercase text-white"
+              className="v9-display-title text-3xl sm:text-4xl text-[#F4F0E8]"
               style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
               LINEUP AKAN SEGERA DIUMUMKAN
             </h2>
-            <p className="text-xs sm:text-sm text-[#9A9AA2] leading-relaxed">
-              Daftar musisi dan jadwal tampil resmi festival JKB 2026 sedang dalam proses kurasi akhir dan akan diumumkan secara berkala melalui kanal resmi.
+
+            <p className="text-xs sm:text-sm text-[#8F8E8B] leading-relaxed font-sans max-w-lg mx-auto">
+              Kurasi musisi resmi sedang dalam proses finalisasi kontrak penampilan. Pengumuman fase pertama (Phase 1 Lineup) akan dirilis serentak di kanal resmi festival.
             </p>
-            <div className="pt-2">
+
+            <div className="pt-4 flex justify-center gap-4">
               <Link
                 href="/jadwal"
-                className="inline-flex items-center gap-1.5 font-display font-bold text-xs uppercase tracking-widest text-[#D91F2C] hover:underline"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                className="v9-btn-ghost text-xs font-display font-extrabold tracking-wider"
               >
-                <span>Lihat Jadwal Harian Acara</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span>LIHAT TIMETABLE HARIAN</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
+              <Link
+                href="/tiket"
+                className="v9-btn-red text-xs font-display font-extrabold tracking-wider"
+              >
+                <span>INFO TIKET FESTIVAL</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
         ) : (
-          /* Performer-First Grid (Songkick / Primavera Sound pattern) */
-          <div className="space-y-8">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
-              <h2
-                className="text-xl sm:text-2xl font-black uppercase text-white tracking-wide"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                PENAMPIL TERKONFIRMASI
-              </h2>
+          <div className="space-y-10">
+            <div className="flex justify-between items-baseline border-b border-white/10 pb-4">
+              <div>
+                <span className="v9-overline text-[#D91F2C]">ROSTER PENAMPIL</span>
+                <h2
+                  className="v9-display-title text-3xl text-[#F4F0E8] mt-1"
+                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                >
+                  MUSISI & BAND TERKONFIRMASI
+                </h2>
+              </div>
               <Link
                 href="/jadwal"
-                className="text-xs font-bold uppercase tracking-wider text-[#D91F2C] hover:underline flex items-center gap-1"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                className="text-xs font-mono text-[#D91F2C] hover:underline uppercase flex items-center gap-1"
               >
-                <span>Jadwal Panggung</span>
-                <ArrowRight className="w-3 h-3" />
+                <span>TIMETABLE PANGGUNG ↗</span>
               </Link>
             </div>
 
@@ -102,56 +131,49 @@ export default async function LineupPage() {
               {performers.map((p) => (
                 <div
                   key={p.id}
-                  className="bg-[#171719] border border-white/10 rounded-sm overflow-hidden flex flex-col group hover:border-[#E2BA75]/40 transition-all"
+                  className="bg-[#141416] border border-white/10 overflow-hidden flex flex-col justify-between group hover:border-[#D91F2C] transition-colors"
                 >
-                  <div className="relative aspect-[16/10] w-full bg-[#252529] overflow-hidden">
-                    <Image
-                      src={p.image || "/images/jkb/hero-concert.jpg"}
-                      alt={p.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#171719] via-transparent to-transparent" />
-                    {p.stage && (
-                      <div className="absolute top-3 left-3">
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm bg-black/75 border border-white/15 text-[#E2BA75] backdrop-blur-sm">
-                          {p.stage}
+                  <div className="h-64 bg-[#0B0B0B] relative overflow-hidden">
+                    {p.image ? (
+                      <Image
+                        src={p.image}
+                        alt={p.name}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover object-center grayscale contrast-125 group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0B0B0B]">
+                        <span className="font-display text-8xl font-black text-white/5" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+                          {p.name.charAt(0)}
                         </span>
                       </div>
                     )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#141416] via-transparent to-transparent" />
+                    <div className="absolute top-3 left-3 bg-[#D91F2C] text-white px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest font-bold">
+                      {p.stage || "LIVE ACT"}
+                    </div>
                   </div>
 
-                  <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
-                    <div>
-                      <h3
-                        className="text-2xl font-black uppercase text-white tracking-tight group-hover:text-[#E2BA75] transition-colors leading-tight"
-                        style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                      >
-                        {p.name}
-                      </h3>
-                      {p.description && (
-                        <p className="text-xs text-[#9A9AA2] leading-relaxed mt-1 line-clamp-3">
-                          {p.description}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-[#9A9AA2]">
-                      <span className="inline-flex items-center gap-1 text-[#E2BA75] font-semibold text-[11px] uppercase tracking-wider">
-                        <Sparkles className="w-3 h-3" />
-                        Panggung Festival
-                      </span>
-                      <span>GOR UNY</span>
-                    </div>
+                  <div className="p-6 space-y-2">
+                    <h3
+                      className="v9-display-title text-2xl text-[#F4F0E8] group-hover:text-white"
+                      style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                    >
+                      {p.name}
+                    </h3>
+                    <p className="text-xs text-[#8F8E8B] line-clamp-2 font-sans">
+                      {p.description || "Performa panggung festival di GOR UNY Yogyakarta."}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         )}
+
       </section>
 
-    </div>
+    </main>
   );
 }

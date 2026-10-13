@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import Link from "next/link";
+import { requireAdminSession } from "@/lib/auth-guard";
 import {
   Users,
   Calendar,
@@ -18,6 +19,8 @@ import {
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
+  await requireAdminSession();
+
   const [
     totalAthletes,
     publishedAthletes,

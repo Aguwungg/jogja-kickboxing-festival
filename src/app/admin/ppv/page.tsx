@@ -2,6 +2,7 @@ import React from "react";
 import prisma from "@/lib/prisma";
 import AdminPpvClient from "@/components/admin/AdminPpvClient";
 import { Radio, Shield } from "lucide-react";
+import { requireAdminSession } from "@/lib/auth-guard";
 
 export const metadata = {
   title: "Manajemen PPV & Broadcast Streaming — JKB Admin",
@@ -10,6 +11,7 @@ export const metadata = {
 };
 
 export default async function AdminPpvPage() {
+  await requireAdminSession();
   const [entitlements, products] = await Promise.all([
     prisma.entitlement.findMany({
       include: {

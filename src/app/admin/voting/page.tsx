@@ -1,10 +1,13 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { Vote, CheckCircle2, AlertCircle, BarChart3, Clock, Power } from "lucide-react";
+import { requireAdminSession, verifyAdminAction } from "@/lib/auth-guard";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminVotingPage() {
+  await requireAdminSession();
+
   const campaigns = await prisma.votingCampaign.findMany({
     orderBy: { startDate: "desc" },
     include: {
@@ -35,6 +38,7 @@ export default async function AdminVotingPage() {
 
   async function toggleCampaignStatus(id: string, currentStatus: string) {
     "use server";
+    await verifyAdminAction();
     const nextStatus = currentStatus === "ACTIVE" ? "CLOSED" : "ACTIVE";
     await prisma.votingCampaign.update({
       where: { id },

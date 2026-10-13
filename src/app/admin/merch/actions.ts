@@ -2,9 +2,11 @@
 
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { verifyAdminAction } from "@/lib/auth-guard";
 
 export async function updateVariantStockAction(variantId: string, stockQuantity: number) {
   try {
+    await verifyAdminAction();
     await prisma.productVariant.update({
       where: { id: variantId },
       data: { stockQuantity: Math.max(0, stockQuantity) },
@@ -19,6 +21,7 @@ export async function updateVariantStockAction(variantId: string, stockQuantity:
 
 export async function toggleProductActiveAction(productId: string, isActive: boolean) {
   try {
+    await verifyAdminAction();
     await prisma.product.update({
       where: { id: productId },
       data: { isActive },
@@ -38,6 +41,7 @@ export async function updateOrderStatusAction(
   trackingNumber?: string
 ) {
   try {
+    await verifyAdminAction();
     await prisma.order.update({
       where: { id: orderId },
       data: {
@@ -52,3 +56,4 @@ export async function updateOrderStatusAction(
     return { success: false, error: error.message };
   }
 }
+

@@ -1,99 +1,89 @@
-import { Shield, Lock, FileText, CheckCircle2 } from "lucide-react";
+import { Shield, Lock, FileText } from "lucide-react";
 
 export const metadata = {
-  title: "Kebijakan Privasi — JKB 2026",
-  description: "Kebijakan privasi resmi dan perlindungan data pribadi platform Jogja Kickboxing Festival 2026 sesuai UU No. 27 Tahun 2022.",
+  title: "Kebijakan Privasi & Perlindungan Data | JKBF 2026",
+  description: "Kebijakan privasi resmi dan perlindungan data pribadi platform digital Jogja Kickboxing Festival 2026 sesuai UU No. 27 Tahun 2022.",
 };
 
 export default function KebijakanPrivasiPage() {
   return (
-    <div className="flex-1 flex flex-col w-full min-h-screen text-[#F6F3EC] bg-[#09090b] pt-24 pb-20">
-      {/* Header Banner */}
-      <section className="border-b border-white/10 py-12 md:py-16 bg-[#171719]/40 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/15 bg-white/5 text-white/80 text-xs font-bold tracking-widest uppercase mb-4">
-            <Lock className="w-3.5 h-3.5 text-[#EF3340]" />
-            DOKUMEN HUKUM RESMI
-          </div>
+    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F4F0E8] bg-[#0B0B0B] pt-24 pb-20">
+      
+      {/* Editorial Header */}
+      <section className="relative w-full border-b border-white/10 py-16 md:py-24 bg-[#0B0B0B]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+          <span className="v9-overline text-[#D91F2C]">
+            KEPATUHAN HUKUM & PELINDUNGAN DATA
+          </span>
 
           <h1
-            className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white leading-none mb-4"
+            className="v9-display-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#F4F0E8]"
             style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
-            KEBIJAKAN <span className="text-[#EF3340]">PRIVASI</span>
+            KEBIJAKAN PRIVASI
           </h1>
 
-          <p className="text-[#99999F] text-base sm:text-lg font-sans max-w-2xl leading-relaxed">
-            Komitmen resmi Panitia Pelaksana JKB 2026 dalam melindungi dan menghormati data pribadi pengunjung, pemilih, atlet, dan pembeli tiket digital.
+          <p className="text-base sm:text-lg text-[#F4F0E8] font-bold uppercase tracking-wider font-display">
+            KOMITMEN PELINDUNGAN DATA PENGUNJUNG DAN PENGGUNA PLATFORM
+          </p>
+
+          <p className="text-xs sm:text-sm text-[#8F8E8B] max-w-2xl leading-relaxed font-sans">
+            Komitmen resmi Panitia Pelaksana Jogja Kickboxing Festival & Redy Championship 2 dalam mengumpulkan, mengelola, dan melindungi data pribadi sesuai Undang-Undang No. 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP).
           </p>
         </div>
       </section>
 
-      {/* Policy Content */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full font-sans text-sm text-[#99999F] leading-relaxed space-y-8">
-        <div className="bg-[#171719] border border-white/10 p-6 sm:p-8 rounded-sm">
-          <div className="flex items-center gap-3 text-white font-bold mb-3">
-            <Shield className="w-5 h-5 text-[#EF3340]" />
-            <h2 className="text-lg uppercase">1. Landasan Hukum & Kepatuhan</h2>
-          </div>
+      {/* Legal Content */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full font-sans text-xs sm:text-sm text-[#8F8E8B] leading-relaxed space-y-8 flex-1">
+        
+        {/* Landasan Hukum */}
+        <div className="bg-[#141416] border border-white/10 p-8 space-y-3">
+          <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">
+            PASAL 01
+          </span>
+          <h2 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+            LANDASAN HUKUM & PENGENDALI DATA
+          </h2>
           <p>
-            Kebijakan Privasi ini disusun berdasarkan ketentuan Undang-Undang Republik Indonesia Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP). Panitia Pelaksana Jogja Kickboxing Festival & Redy Championship 2 ("JKB 2026", "kami") bertindak sebagai Pengendali Data Pribadi atas setiap informasi yang Anda berikan melalui situs web resmi ini.
+            Kebijakan Privasi ini disusun berdasarkan ketentuan Undang-Undang Republik Indonesia Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP). Panitia Pelaksana Jogja Kickboxing Festival & Redy Championship 2 bertindak sebagai Pengendali Data Pribadi atas setiap informasi yang Anda berikan melalui situs web resmi ini.
           </p>
         </div>
 
-        <div className="bg-[#171719] border border-white/10 p-6 sm:p-8 rounded-sm space-y-4">
-          <div className="flex items-center gap-3 text-white font-bold">
-            <FileText className="w-5 h-5 text-[#EF3340]" />
-            <h2 className="text-lg uppercase">2. Data Pribadi yang Kami Kumpulkan</h2>
-          </div>
-          <p>Kami dapat mengumpulkan data pribadi Anda melalui aktivitas berikut:</p>
-          <ul className="space-y-2 pl-4 list-disc marker:text-[#EF3340]">
-            <li><strong className="text-white">Pendaftaran Akun & Autentikasi:</strong> Nama lengkap, alamat email, kata sandi terenkripsi, dan peran akun (penonton, kreator, admin).</li>
-            <li><strong className="text-white">Partisipasi Voting City Pride:</strong> Identitas pemilih terverifikasi guna menjamin integritas asas satu pemilih satu suara (one-vote-per-user).</li>
-            <li><strong className="text-white">Transaksi Merchandise & Tiket:</strong> Nama penerima, alamat pengiriman, nomor telepon, dan status pembayaran (data kartu/finansial diproses langsung oleh payment gateway terlisensi).</li>
-            <li><strong className="text-white">Formulir Kontak & Permintaan:</strong> Nama, nomor WhatsApp, email, dan rincian pesan inquiry.</li>
-            <li><strong className="text-white">Data Teknis Otomatis:</strong> Alamat IP tersanitasi, log peramban, dan cookie teknis untuk keamanan sesi dan pencegahan serangan siber.</li>
+        {/* Data yang Dikumpulkan */}
+        <div className="bg-[#141416] border border-white/10 p-8 space-y-4">
+          <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">
+            PASAL 02
+          </span>
+          <h2 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+            DATA PRIBADI YANG DIKUMPULKAN
+          </h2>
+          <p>Kami mengumpulkan data pribadi melalui aktivitas berikut:</p>
+          <ul className="space-y-2 list-disc pl-5 marker:text-[#D91F2C]">
+            <li><strong>Pendaftaran Akun & Autentikasi:</strong> Nama lengkap, alamat email, kata sandi terenkripsi, dan peran akun resmi.</li>
+            <li><strong>Partisipasi Voting City Pride:</strong> Identitas akun guna menjamin integritas asas satu pemilih satu suara (one-account-one-vote).</li>
+            <li><strong>Transaksi Merchandise:</strong> Nama pemesan, nomor WhatsApp, email, dan alamat pengiriman ekspedisi.</li>
+            <li><strong>Formulir Kontak & Kemitraan:</strong> Nama, nomor telepon, email, serta rincian pesan inquiry sponsor/media.</li>
           </ul>
         </div>
 
-        <div className="bg-[#171719] border border-white/10 p-6 sm:p-8 rounded-sm space-y-4">
-          <div className="flex items-center gap-3 text-white font-bold">
-            <CheckCircle2 className="w-5 h-5 text-[#EF3340]" />
-            <h2 className="text-lg uppercase">3. Tujuan Penggunaan Data Pribadi</h2>
-          </div>
-          <p>Data pribadi Anda digunakan semata-mata untuk kepentingan operasional resmi festival:</p>
-          <ul className="space-y-2 pl-4 list-disc marker:text-[#EF3340]">
-            <li>Menjamin keabsahan partisipasi voting publik City Pride dan mencegah manipulasi suara oleh bot.</li>
-            <li>Memproses verifikasi hak akses penayangan siaran berbayar Pay-Per-View (PPV BigMo).</li>
-            <li>Mengirimkan konfirmasi pesanan merchandise resmi dan pembaruan pengiriman logistik.</li>
-            <li>Menanggapi pertanyaan, proposal kemitraan, dan permohonan akreditasi media.</li>
-            <li>Mencegah aktivitas penipuan, pelanggaran keamanan, dan penyalahgunaan infrastruktur platform.</li>
-          </ul>
-        </div>
-
-        <div className="bg-[#171719] border border-white/10 p-6 sm:p-8 rounded-sm space-y-4">
-          <h2 className="text-lg uppercase text-white font-bold">4. Pembagian Data kepada Pihak Ketiga</h2>
+        {/* Keamanan & Hak Pemilik Data */}
+        <div className="bg-[#141416] border border-white/10 p-8 space-y-4">
+          <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">
+            PASAL 03
+          </span>
+          <h2 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+            KEAMANAN DAN HAK SUBJEK DATA
+          </h2>
           <p>
-            Kami tidak menjual, menyewakan, atau memperdagangkan data pribadi Anda kepada pihak mana pun. Data hanya dibagikan kepada mitra penyedia layanan resmi yang terikat perjanjian kerahasiaan ketat, antara lain:
+            Kami menerapkan enkripsi standar industri (TLS/HTTPS) dan kontrol akses berbasis peran (RBAC) untuk melindungi seluruh data dari akses tidak sah. Data tidak akan diperjualbelikan kepada pihak ketiga untuk kepentingan periklanan pihak luar.
           </p>
-          <ul className="space-y-2 pl-4 list-disc marker:text-[#EF3340]">
-            <li>Gerbang pembayaran resmi (payment gateway) untuk memproses transaksi finansial aman.</li>
-            <li>Penyedia platform tiket resmi (Rawooh) untuk penerbitan dan pemindaian barcode tiket di arena.</li>
-            <li>Pihak berwajib apabila diwajibkan secara tegas oleh penetapan hukum pengadilan Republik Indonesia.</li>
-          </ul>
-        </div>
-
-        <div className="bg-[#171719] border border-white/10 p-6 sm:p-8 rounded-sm space-y-4">
-          <h2 className="text-lg uppercase text-white font-bold">5. Hak Pemilik Data Pribadi</h2>
           <p>
-            Berdasarkan UU PDP, Anda berhak untuk meminta akses, perbaikan, pembaharuan, atau penghapusan data pribadi Anda yang tersimpan di server kami. Permintaan dapat diajukan secara tertulis melalui surat elektronik ke <span className="text-white font-mono font-bold">halo@jkbchampionship.id</span> dengan subjek "Permohonan Hak Subjek Data".
+            Anda memiliki hak untuk meminta peninjauan, koreksi, atau penghapusan data pribadi Anda dengan menghubungi sekretariat resmi melalui email: <strong>info@jogjakickboxing.com</strong>.
           </p>
         </div>
 
-        <p className="text-xs text-white/50 text-center pt-4">
-          Terakhir diperbarui: 11 Oktober 2026 • Versi 1.0 Dokumen Resmi Panitia JKB 2026
-        </p>
       </section>
-    </div>
+
+    </main>
   );
 }

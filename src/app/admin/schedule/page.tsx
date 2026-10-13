@@ -1,16 +1,20 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { Calendar, Plus, Clock, MapPin, Trash2, Eye, EyeOff } from "lucide-react";
+import { requireAdminSession, verifyAdminAction } from "@/lib/auth-guard";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminSchedulePage() {
+  await requireAdminSession();
+
   const scheduleItems = await prisma.scheduleItem.findMany({
     orderBy: [{ day: "asc" }, { id: "asc" }],
   });
 
   async function createScheduleItem(formData: FormData) {
     "use server";
+    await verifyAdminAction();
     const title = (formData.get("title") as string)?.trim();
     const category = formData.get("category") as string;
     const day = parseInt(formData.get("day") as string, 10);
@@ -42,6 +46,7 @@ export default async function AdminSchedulePage() {
 
   async function togglePublish(id: string, currentStatus: boolean) {
     "use server";
+    await verifyAdminAction();
     await prisma.scheduleItem.update({
       where: { id },
       data: { isPublished: !currentStatus },
@@ -52,6 +57,7 @@ export default async function AdminSchedulePage() {
 
   async function deleteScheduleItem(id: string) {
     "use server";
+    await verifyAdminAction();
     await prisma.scheduleItem.delete({ where: { id } });
     revalidatePath("/admin/schedule");
     revalidatePath("/jadwal");

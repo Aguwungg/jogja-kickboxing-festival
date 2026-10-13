@@ -2,6 +2,7 @@ import React from "react";
 import prisma from "@/lib/prisma";
 import AdminMerchClient from "@/components/admin/AdminMerchClient";
 import { Package, Shield } from "lucide-react";
+import { requireAdminSession } from "@/lib/auth-guard";
 
 export const metadata = {
   title: "Manajemen Merchandise & E-Commerce — JKB Admin",
@@ -10,6 +11,7 @@ export const metadata = {
 };
 
 export default async function AdminMerchPage() {
+  await requireAdminSession();
   const [orders, products] = await Promise.all([
     prisma.order.findMany({
       include: {

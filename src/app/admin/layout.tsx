@@ -23,13 +23,17 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { useRouter } from "next/navigation";
+import { hasAdminAccess } from "@/lib/rbac";
+
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
   const pathname = usePathname();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
   // Close mobile drawer on route change
@@ -37,9 +41,54 @@ export default function AdminLayout({
     setMobileDrawerOpen(false);
   }, [pathname]);
 
+  // Handle client-side redirect if unauthenticated
+  useEffect(() => {
+    if (pathname !== "/admin/login" && status === "unauthenticated") {
+      router.replace(`/admin/login?callbackUrl=${encodeURIComponent(pathname)}`);
+    }
+  }, [status, pathname, router]);
+
   // Do not wrap /admin/login with admin sidebar
   if (pathname === "/admin/login") {
     return <>{children}</>;
+  }
+
+  // Loading state
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen bg-[#09090B] flex flex-col items-center justify-center text-white space-y-3">
+        <div className="w-8 h-8 border-2 border-[#D91F2C] border-t-transparent rounded-full animate-spin" />
+        <p className="text-xs font-mono uppercase tracking-widest text-[#9A9AA2]">
+          Memverifikasi Otorisasi Sesi...
+        </p>
+      </div>
+    );
+  }
+
+  // Unauthenticated or Non-Admin state
+  const role = (session?.user as any)?.role;
+  const isAuthorized = status === "authenticated" && hasAdminAccess(role);
+
+  if (!isAuthorized) {
+    return (
+      <div className="min-h-screen bg-[#09090B] flex flex-col items-center justify-center px-4 text-center text-white space-y-4">
+        <div className="w-12 h-12 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-500">
+          <Shield className="w-6 h-6" />
+        </div>
+        <h2 className="text-2xl font-black uppercase tracking-tight">
+          Akses Terbatas Administrator
+        </h2>
+        <p className="text-xs text-[#9A9AA2] max-w-sm">
+          Sesi Anda tidak memiliki kredensial atau izin peran (role) yang sah untuk mengelola Command Center JKB 2026.
+        </p>
+        <button
+          onClick={() => signOut({ callbackUrl: "/admin/login" })}
+          className="px-5 py-2.5 rounded-sm bg-[#D91F2C] hover:bg-[#EF3340] text-xs font-bold uppercase tracking-wider text-white transition-colors"
+        >
+          Masuk Ulang dengan Akun Administrator
+        </button>
+      </div>
+    );
   }
 
   const menu = [
@@ -55,9 +104,9 @@ export default function AdminLayout({
     { name: "Voting City Pride", href: "/admin/voting", icon: Vote },
   ];
 
-  const userRole = (session?.user as any)?.role || "ADMIN";
+  const userRole = role || "PETUGAS";
   const userName = session?.user?.name || "Administrator";
-  const userEmail = session?.user?.email || "admin@jkb2026.id";
+  const userEmail = session?.user?.email || "-";
 
   const renderNavContent = () => (
     <>

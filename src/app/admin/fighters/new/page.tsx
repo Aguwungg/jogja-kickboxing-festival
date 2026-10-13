@@ -1,10 +1,14 @@
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { requireAdminSession, verifyAdminAction } from "@/lib/auth-guard";
 
-export default function NewFighterPage() {
+export default async function NewFighterPage() {
+  await requireAdminSession();
+
   async function createFighter(formData: FormData) {
     "use server";
+    await verifyAdminAction();
     
     const name = formData.get("name") as string;
     const division = formData.get("division") as string;

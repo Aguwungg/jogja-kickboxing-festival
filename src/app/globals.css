@@ -17,6 +17,18 @@
   --color-jkb-gold: #E2BA75;
   --color-jkb-gold-hover: #F0CB8E;
 
+  /* V9 Clean Cut Fight Culture Tokens */
+  --color-v9-black: #0B0B0B;
+  --color-v9-charcoal: #141416;
+  --color-v9-surface: #18181B;
+  --color-v9-border: rgba(255, 255, 255, 0.12);
+  --color-v9-red: #D91F2C;
+  --color-v9-red-hover: #B81521;
+  --color-v9-ivory: #F4F0E8;
+  --color-v9-ivory-surface: #FAF7F2;
+  --color-v9-grey: #8F8E8B;
+  --color-v9-muted: #5A5957;
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-barlow-condensed), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
@@ -65,16 +77,75 @@ body {
 
 /* Section Themes */
 .theme-dark {
-  background-color: #09090B;
-  color: #F5F3EE;
+  background-color: #0B0B0B;
+  color: #F4F0E8;
 }
 .theme-charcoal {
-  background-color: #171719;
-  color: #F5F3EE;
+  background-color: #141416;
+  color: #F4F0E8;
 }
 .theme-editorial-warm {
-  background-color: #F5F3EE;
-  color: #09090B;
+  background-color: #F4F0E8;
+  color: #0B0B0B;
+}
+
+/* V9 Clean Cut Utilities */
+.v9-section-dark {
+  background-color: #0B0B0B;
+  color: #F4F0E8;
+}
+.v9-section-ivory {
+  background-color: #F4F0E8;
+  color: #0B0B0B;
+}
+.v9-overline {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.v9-display-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+.v9-btn-red {
+  background-color: #D91F2C;
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.75rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.v9-btn-red:hover {
+  background-color: #B81521;
+}
+.v9-btn-ghost {
+  background-color: transparent;
+  border: 1px solid currentColor;
+  color: inherit;
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.75rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.15s ease;
+}
+.v9-btn-ghost:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Marquee animation */

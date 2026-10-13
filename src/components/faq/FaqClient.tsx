@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Search, ChevronDown, HelpCircle, MessageSquare } from "lucide-react";
+import { Search, ChevronDown, ChevronUp, MessageSquare } from "lucide-react";
 
 interface FaqItem {
   q: string;
@@ -13,62 +13,62 @@ interface FaqItem {
 const FAQ_DATA: FaqItem[] = [
   {
     category: "TIKET",
-    q: "Bagaimana informasi pembelian tiket resmi JKB 2026?",
-    a: "Informasi resmi penjualan tiket akan diumumkan oleh panitia pelaksana. Akses tiket akan difasilitasi melalui platform ticketing resmi terverifikasi tanpa perantara calo.",
+    q: "Bagaimana informasi pembelian tiket resmi JKBF 2026?",
+    a: "Informasi resmi penjualan tiket akan diumumkan oleh panitia pelaksana. Penjualan tiket akan difasilitasi melalui platform ticketing mitra RAWOOH tanpa perantara tidak resmi.",
   },
   {
     category: "TIKET",
     q: "Apakah tiket festival mencakup pertandingan dan konser musik?",
-    a: "Festival JKB 2026 mengusung konsep sportainment terpadu. Detail ketentuan hak akses harian atau terusan akan dirilis bersamaan dengan pengumuman skema tiket resmi.",
+    a: "Festival JKBF 2026 mengusung konsep sportainment terpadu. Detail ketentuan hak akses harian (Daily Pass) atau terusan (All-Access Pass) akan dirilis bersamaan dengan skema tiket resmi.",
   },
   {
     category: "TIKET",
-    q: "Bagaimana verifikasi tiket di lokasi GOR UNY?",
-    a: "Seluruh e-voucher resmi wajib ditukarkan dengan gelang tanda masuk fisik di loket verifikasi pintu masuk GOR UNY sebelum memasuki arena.",
+    q: "Bagaimana mekanisme penukaran tiket di lokasi GOR UNY?",
+    a: "Seluruh e-voucher resmi wajib ditukarkan dengan gelang tanda masuk fisik di loket verifikasi lobi barat GOR UNY sebelum memasuki arena pertandingan.",
   },
   {
     category: "COMBAT",
     q: "Aturan pertandingan apa yang digunakan pada Redy Championship 2?",
-    a: "Pertandingan menggunakan regulasi kickboxing resmi dengan wasit dan dewan juri bersertifikasi. Terdapat pembagian kelas pertandingan amatir dan profesional.",
+    a: "Pertandingan menggunakan regulasi kickboxing K-1 Rules dengan wasit dan 3 dewan juri bersertifikasi independen. Sistem eliminasi murni 3 ronde x 3 menit.",
   },
   {
     category: "COMBAT",
     q: "Divisi apa saja yang dipertandingkan dalam kejuaraan ini?",
-    a: "Redy Championship 2 mempertandingkan partai kejuaraan di berbagai divisi kelas berat resmi, memperebutkan sabuk juara festival.",
+    a: "Redy Championship 2 mempertandingkan 4 divisi sabuk emas: Bantamweight (57.0 KG), Featherweight (60.0 KG), Lightweight (63.5 KG), dan Welterweight (70.0 KG).",
   },
   {
     category: "COMBAT",
-    q: "Di mana saya dapat melihat daftar petarung?",
-    a: "Daftar petarung dan data atlet yang telah terverifikasi komite dapat diakses langsung melalui menu 'Pertandingan' atau 'Daftar Petarung' di website ini.",
+    q: "Di mana saya dapat melihat daftar petarung dan bagan?",
+    a: "Daftar petarung dan bagan turnamen resmi dapat diakses melalui menu 'Daftar Petarung' (/fighters) dan 'Bagan Turnamen' (/bracket) di website resmi ini.",
   },
   {
     category: "FESTIVAL",
-    q: "Pukul berapa pintu masuk (open gate) dibuka?",
-    a: "Jadwal resmi jam buka pintu masuk (open gate) setiap harinya akan diumumkan secara resmi oleh panitia pelaksana menyesuaikan rangkaian sesi laga.",
+    q: "Pukul berapa pintu masuk (open gate) dibuka setiap harinya?",
+    a: "Pintu masuk utama dibuka 2 jam sebelum laga pertama dimulai. Jadwal operasional harian terinci dapat dipantau pada halaman Jadwal (/jadwal).",
   },
   {
     category: "FESTIVAL",
-    q: "Apakah tersedia area makanan dan minuman di dalam venue?",
-    a: "Ya, area festival menyediakan tenant makanan dan minuman bagi pengunjung. Makanan dan minuman luar dilarang dibawa ke dalam arena pertandingan.",
+    q: "Apakah tersedia booth makanan dan merchandise di dalam venue?",
+    a: "Ya. Di selasar GOR UNY tersedia official merchandise store serta area tenant makanan dan minuman bagi pengunjung.",
   },
   {
     category: "ATURAN",
     q: "Apa saja barang yang dilarang dibawa ke arena GOR UNY?",
-    a: "Barang terlarang meliputi senjata tajam, senjata api, bahan peledak/flare/laser pointer, botol kaca, minuman beralkohol, zat terlarang, serta kamera profesional tanpa izin peliputan resmi.",
+    a: "Barang terlarang meliputi senjata tajam, senjata api, flare, laser pointer, botol kaca, minuman keras, zat terlarang, serta kamera profesional dengan lensa tele tanpa media pass resmi.",
   },
   {
     category: "ATURAN",
     q: "Apakah venue menyediakan akses ramah disabilitas?",
-    a: "Ya. GOR UNY memiliki jalur ramp akses bagi pengguna kursi roda serta area khusus penonton disabilitas demi kenyamanan dan keselamatan seluruh pengunjung.",
+    a: "Ya. GOR UNY memiliki ramp akses kursi roda serta area khusus penonton disabilitas demi kenyamanan dan keselamatan seluruh pengunjung festival.",
   },
 ];
 
 const CATEGORIES = [
-  { key: "ALL", label: "Semua Kategori" },
-  { key: "TIKET", label: "Tiket & Akses" },
-  { key: "COMBAT", label: "Pertandingan" },
-  { key: "FESTIVAL", label: "Festival Musik" },
-  { key: "ATURAN", label: "Aturan & Keselamatan" },
+  { key: "ALL", label: "SEMUA KATEGORI" },
+  { key: "TIKET", label: "TIKET & AKSES" },
+  { key: "COMBAT", label: "PERTANDINGAN" },
+  { key: "FESTIVAL", label: "FESTIVAL MUSIK" },
+  { key: "ATURAN", label: "ATURAN & KESELAMATAN" },
 ];
 
 export default function FaqClient() {
@@ -92,91 +92,78 @@ export default function FaqClient() {
   });
 
   return (
-    <div className="w-full">
-      {/* Search Input */}
-      <div className="relative mb-6">
-        <Search className="w-5 h-5 text-white/40 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Cari pertanyaan... (contoh: tiket, aturan, jam buka, barang dilarang)"
-          className="w-full bg-[#171719] border border-white/10 rounded-sm pl-12 pr-4 py-3.5 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#D91F2C] transition-colors font-sans"
-        />
-        {searchQuery && (
-          <button
-            onClick={() => setSearchQuery("")}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-white/50 hover:text-white"
-          >
-            Hapus
-          </button>
-        )}
+    <div className="w-full space-y-8 font-sans">
+      
+      {/* Search Input & Category Selector */}
+      <div className="space-y-4">
+        <div className="relative">
+          <Search className="w-4 h-4 text-[#8F8E8B] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Ketik kata kunci pertanyaan..."
+            className="w-full bg-[#141416] border border-white/10 pl-10 pr-4 py-3 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+          />
+        </div>
+
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-white/10">
+          {CATEGORIES.map((cat) => {
+            const isActive = activeCategory === cat.key;
+            return (
+              <button
+                key={cat.key}
+                type="button"
+                onClick={() => setActiveCategory(cat.key)}
+                className={`px-4 py-2 text-xs font-display font-extrabold uppercase tracking-wider transition-colors whitespace-nowrap ${
+                  isActive
+                    ? "bg-[#D91F2C] text-white"
+                    : "bg-[#141416] text-[#8F8E8B] hover:text-[#F4F0E8] border border-white/5"
+                }`}
+                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+              >
+                {cat.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Category Filter Chips */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
-        {CATEGORIES.map((cat) => {
-          const isActive = activeCategory === cat.key;
-          return (
-            <button
-              key={cat.key}
-              onClick={() => setActiveCategory(cat.key)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shrink-0 transition-all font-sans ${
-                isActive
-                  ? "bg-white text-[#09090b] shadow-sm"
-                  : "bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10"
-              }`}
-            >
-              {cat.label}
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Accordion List */}
+      {/* FAQ Accordion List */}
       {filteredFaqs.length === 0 ? (
-        <div className="bg-[#171719] border border-white/10 p-12 text-center rounded-sm">
-          <HelpCircle className="w-10 h-10 text-white/30 mx-auto mb-3" />
-          <h4
-            className="text-xl font-black uppercase text-white mb-2"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            TIDAK MENEMUKAN JAWABAN
-          </h4>
-          <p className="text-[#99999F] text-sm font-sans mb-4">
-            Pertanyaan yang Anda cari belum tersedia. Silakan hubungi sekretariat panitia pelaksana.
-          </p>
-          <Link
-            href="/kontak"
-            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#D91F2C] hover:underline"
-          >
-            <MessageSquare className="w-3.5 h-3.5" />
-            <span>Kirim Pesan ke Panitia</span>
-          </Link>
+        <div className="p-12 text-center bg-[#141416] border border-white/10 text-xs font-mono text-[#8F8E8B]">
+          TIDAK ADA PERTANYAAN DITEMUKAN
         </div>
       ) : (
-        <div className="space-y-3">
-          {filteredFaqs.map((faq, index) => {
-            const isOpen = openIndexes.includes(index);
+        <div className="border border-white/10 divide-y divide-white/10 bg-[#141416]">
+          {filteredFaqs.map((faq, idx) => {
+            const isOpen = openIndexes.includes(idx);
+
             return (
-              <div
-                key={index}
-                className="bg-[#171719] border border-white/10 rounded-sm overflow-hidden transition-colors"
-              >
+              <div key={faq.q} className="transition-colors hover:bg-white/[0.01]">
                 <button
                   type="button"
-                  onClick={() => toggleAccordion(index)}
-                  className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-white hover:text-[#D91F2C] transition-colors"
+                  onClick={() => toggleAccordion(idx)}
+                  className="w-full p-5 sm:p-6 text-left flex items-start justify-between gap-4"
                 >
-                  <span>{faq.q}</span>
-                  <ChevronDown
-                    className={`w-4 h-4 text-[#99999F] shrink-0 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-[#D91F2C]" : ""
-                    }`}
-                  />
+                  <div className="space-y-1">
+                    <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">
+                      {faq.category}
+                    </span>
+                    <h3
+                      className="font-display font-black text-lg sm:text-xl text-[#F4F0E8] uppercase"
+                      style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                    >
+                      {faq.q}
+                    </h3>
+                  </div>
+                  <div className="text-[#8F8E8B] mt-1 shrink-0">
+                    {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  </div>
                 </button>
+
                 {isOpen && (
-                  <div className="px-4 pb-5 sm:px-5 text-xs sm:text-sm text-[#99999F] font-sans leading-relaxed border-t border-white/5 pt-3">
+                  <div className="px-5 pb-6 sm:px-6 pt-1 border-t border-white/5 text-xs text-[#8F8E8B] font-sans leading-relaxed">
                     {faq.a}
                   </div>
                 )}
@@ -186,27 +173,24 @@ export default function FaqClient() {
         </div>
       )}
 
-      {/* Contact CTA */}
-      <div className="mt-12 p-6 sm:p-8 bg-[#171719] border border-white/10 rounded-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+      {/* Contact Callout */}
+      <div className="p-6 bg-[#141416] border-l-2 border-[#D91F2C] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h4
-            className="text-xl font-black uppercase text-white mb-1"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            PUNYA PERTANYAAN LAIN?
+          <h4 className="font-display font-black text-base text-[#F4F0E8] uppercase">
+            MASIH MEMILIKI PERTANYAAN LAIN?
           </h4>
-          <p className="text-xs text-[#99999F] font-sans">
-            Tim sekretariat JKB 2026 siap menjawab pertanyaan seputar festival dan kemitraan.
+          <p className="text-xs text-[#8F8E8B]">
+            Sekretariat resmi festival siap menjawab kebutuhan informasi tiket dan kemitraan Anda.
           </p>
         </div>
         <Link
           href="/kontak"
-          className="font-display font-bold text-xs uppercase tracking-widest px-5 py-3 bg-[#D91F2C] hover:bg-[#EF3340] text-white rounded-sm transition-all shrink-0"
-          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          className="v9-btn-ghost text-xs font-display font-extrabold tracking-wider whitespace-nowrap"
         >
-          Hubungi Sekretariat
+          <span>HUBUNGI KAMI ↗</span>
         </Link>
       </div>
+
     </div>
   );
 }
