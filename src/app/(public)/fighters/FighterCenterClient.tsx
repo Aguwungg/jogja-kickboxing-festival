@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, ArrowUpRight } from "lucide-react";
+import { Search, Trophy, User } from "lucide-react";
 
 type Fighter = {
   id: string;
@@ -58,51 +58,37 @@ export default function FighterCenterClient({
   }
 
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#F4F0E8] text-[#0B0B0B] pt-24 lg:pt-28 pb-24 overflow-x-hidden">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#0A0A0A] text-[#FAFAFA] pt-24 lg:pt-32 pb-28 overflow-x-hidden font-sans">
       
       {/* ═════════════════════════════════════════════════════════════════════
-          1. EDITORIAL SPLIT HERO
+          1. COMPACT HERO
       ═════════════════════════════════════════════ */}
-      <section className="relative w-full border-b border-black/10 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 min-h-[480px] lg:min-h-[540px]">
-          
-          <div className="lg:col-span-7 py-12 lg:py-20 flex flex-col justify-center space-y-6">
-            <div className="inline-flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#D91F2C]" />
-              <p className="font-technical text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
-                REDY CHAMPIONSHIP 2 • ATHLETE ROSTER
-              </p>
-            </div>
+      <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 pt-6 pb-8 w-full border-b border-white/10">
+        <div className="flex items-center gap-2.5 mb-3">
+          <span className="w-2.5 h-2.5 bg-[#D91F2C]" />
+          <p className="font-technical text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
+            REDY CHAMPIONSHIP 2 • ATHLETE ROSTER
+          </p>
+        </div>
 
-            <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl uppercase tracking-tight leading-[0.85] text-[#0B0B0B]">
-              PARA<br />
-              PETARUNG.
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.85] text-white">
+              DIREKTORI<br />
+              <span className="text-[#D91F2C]">PETARUNG 2026.</span>
             </h1>
-
-            <p className="text-sm sm:text-base text-[#5A5957] font-sans max-w-lg leading-relaxed">
-              Direktori resmi atlet kejuaraan. Data rekor tanding dan profil fisik disahkan melalui penimbangan resmi (Official Weigh-in).
-            </p>
           </div>
-
-          <div className="lg:col-span-5 relative min-h-[300px] lg:min-h-full -mx-5 sm:-mx-8 lg:mx-0">
-            <Image
-              src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
-              alt="Kickboxing Athletes Roster"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 40vw"
-              className="object-cover object-center grayscale contrast-125"
-            />
-          </div>
-
+          <p className="text-xs sm:text-sm text-white/60 font-sans max-w-sm sm:text-right">
+            Profil dan rekor resmi petarung 4 divisi sabuk emas. Timbang badan disahkan pada Official Weigh-in 12 Desember 2026.
+          </p>
         </div>
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════
           2. FILTER & SEARCH INTERFACE
       ═════════════════════════════════════════════ */}
-      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-10 w-full border-b border-black/10">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 py-6 w-full border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           
           {/* Search Box */}
           <form
@@ -114,23 +100,23 @@ export default function FighterCenterClient({
           >
             <input
               type="text"
-              placeholder="CARI NAMA PETARUNG ATAU CAMP..."
+              placeholder="Cari nama petarung atau camp..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-white border border-black/20 px-4 py-3 pl-11 text-xs uppercase tracking-wider text-[#0B0B0B] placeholder:text-[#8F8E8B] focus:outline-none focus:border-black font-sans"
+              className="w-full bg-[#141416] border border-white/10 px-3 py-2.5 pl-9 text-xs text-white placeholder:text-white/40 focus:outline-none focus:border-[#D91F2C] rounded"
             />
-            <Search className="w-4 h-4 text-[#8F8E8B] absolute left-4 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-white/40 absolute left-3 top-1/2 -translate-y-1/2" />
           </form>
 
           {/* Division Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
             <button
               type="button"
               onClick={() => applyFilters({ division: "" })}
-              className={`px-4 py-2 text-xs font-display tracking-wider uppercase transition-colors ${
+              className={`px-3.5 py-1.5 text-xs font-technical uppercase tracking-wider rounded transition-colors ${
                 !currentDivision
-                  ? "bg-[#0B0B0B] text-white"
-                  : "bg-white text-[#0B0B0B] border border-black/20 hover:bg-black/5"
+                  ? "bg-[#D91F2C] text-white font-bold"
+                  : "bg-[#141416] text-white/70 border border-white/10 hover:text-white"
               }`}
             >
               SEMUA KELAS
@@ -140,10 +126,10 @@ export default function FighterCenterClient({
                 key={div}
                 type="button"
                 onClick={() => applyFilters({ division: div })}
-                className={`px-4 py-2 text-xs font-display tracking-wider uppercase transition-colors ${
+                className={`px-3.5 py-1.5 text-xs font-technical uppercase tracking-wider rounded transition-colors ${
                   currentDivision === div
-                    ? "bg-[#0B0B0B] text-white"
-                    : "bg-white text-[#0B0B0B] border border-black/20 hover:bg-black/5"
+                    ? "bg-[#D91F2C] text-white font-bold"
+                    : "bg-[#141416] text-white/70 border border-white/10 hover:text-white"
                 }`}
               >
                 {div}
@@ -153,9 +139,9 @@ export default function FighterCenterClient({
               <button
                 type="button"
                 onClick={handleReset}
-                className="px-3 py-2 text-xs text-[#D91F2C] hover:underline font-technical uppercase font-bold"
+                className="px-2 py-1 text-xs text-[#D91F2C] hover:underline font-technical uppercase font-bold"
               >
-                RESET FILTER
+                RESET
               </button>
             )}
           </div>
@@ -163,62 +149,65 @@ export default function FighterCenterClient({
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════
-          3. ATHLETES GRID OR PRE-ANNOUNCEMENT STATE
+          3. ATHLETES 2-COLUMN MOBILE GRID
       ═════════════════════════════════════════════ */}
-      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-16 w-full">
+      <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 py-8 w-full flex-1">
         {fighters.length === 0 ? (
-          <div className="py-20 text-center border-t border-b border-black/15 space-y-4">
-            <p className="font-technical text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
-              OFFICIAL WEIGH-IN PENDING
-            </p>
-            <h3 className="font-display text-4xl sm:text-5xl uppercase tracking-wider text-[#0B0B0B]">
-              ATLET SEGERA DIUMUMKAN.
+          <div className="py-20 text-center border border-white/10 bg-[#121214] rounded p-6 space-y-3">
+            <Trophy className="w-8 h-8 text-[#D91F2C] mx-auto opacity-70" />
+            <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-wider text-white">
+              ATLET SEGERA DIUMUMKAN
             </h3>
-            <p className="text-sm text-[#5A5957] max-w-md mx-auto font-sans leading-relaxed">
-              Daftar atlet petarung resmi sedang dalam verifikasi medis dan penimbangan badan sebelum perilisan resmi bagan turnamen.
+            <p className="text-xs text-white/50 max-w-sm mx-auto font-sans">
+              Daftar atlet resmi sedang dalam tahap pengesahan medis dan penimbangan badan resmi.
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
             {fighters.map((fighter) => (
               <Link
                 key={fighter.id}
                 href={`/fighters/${fighter.slug}`}
-                className="group block bg-white border border-black/15 p-4 hover:border-black transition-all ring-corner-frame"
+                className="group flex flex-col bg-[#141416] border border-white/10 hover:border-[#D91F2C]/60 transition-all rounded overflow-hidden"
               >
-                <div className="relative aspect-[3/4] w-full bg-[#EDE8DE] overflow-hidden mb-4">
+                {/* 4:5 Aspect Ratio Photo */}
+                <div className="relative aspect-[4/5] w-full bg-[#1c1c1f] overflow-hidden">
                   {fighter.image ? (
                     <Image
                       src={fighter.image}
                       alt={fighter.name}
                       fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center text-center p-4">
-                      <span className="font-display text-4xl text-[#77716D] uppercase">JKBF</span>
-                      <span className="font-technical text-[10px] text-[#77716D] uppercase tracking-wider mt-1">OFFICIAL ATHLETE</span>
+                    <div className="w-full h-full flex items-center justify-center bg-black/40">
+                      <User className="w-10 h-10 text-white/30" />
                     </div>
                   )}
-                  <div className="absolute top-2 right-2 bg-[#0B0B0B] text-white font-technical text-[10px] uppercase font-bold px-2 py-0.5">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                  <span className="absolute top-2 right-2 bg-black/80 backdrop-blur-sm text-white font-technical text-[9px] uppercase font-bold px-2 py-0.5 rounded border border-white/10">
                     {fighter.weightClass}
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <span className="font-technical text-[10px] uppercase font-bold tracking-widest text-[#D91F2C] block">
+                  </span>
+                  <span className="absolute bottom-2 left-2 text-[#D91F2C] font-technical text-[9px] uppercase font-bold tracking-wider">
                     {fighter.division}
                   </span>
-                  <h3 className="font-display text-2xl uppercase tracking-wider text-[#0B0B0B] group-hover:text-[#D91F2C] transition-colors">
-                    {fighter.name}
-                  </h3>
-                  <p className="font-technical text-xs text-[#77716D]">
-                    {fighter.club || "Independen"}
-                  </p>
-                  <div className="pt-2 border-t border-black/10 flex items-center justify-between font-technical text-xs font-bold text-[#0B0B0B]">
-                    <span>REKOR:</span>
-                    <span>{fighter.wins}W - {fighter.losses}L - {fighter.draws}D</span>
+                </div>
+
+                {/* Details */}
+                <div className="p-3 sm:p-3.5 flex flex-col justify-between flex-1 space-y-1.5">
+                  <div>
+                    <h3 className="font-display text-lg sm:text-xl uppercase tracking-wider text-white group-hover:text-[#D91F2C] transition-colors line-clamp-1 leading-snug">
+                      {fighter.name}
+                    </h3>
+                    <p className="font-technical text-[10px] text-white/50 uppercase line-clamp-1">
+                      {fighter.club || "Independen"}
+                    </p>
+                  </div>
+
+                  <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-technical">
+                    <span className="text-white/40">REKOR:</span>
+                    <span className="text-white font-bold">{fighter.wins}W - {fighter.losses}L - {fighter.draws}D</span>
                   </div>
                 </div>
               </Link>

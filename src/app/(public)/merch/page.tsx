@@ -20,51 +20,32 @@ export default async function MerchPage() {
   });
 
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#F4F0E8] text-[#0B0B0B] pt-24 lg:pt-28 pb-24">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#0A0A0A] text-[#FAFAFA] pt-24 lg:pt-32 pb-28">
       
-      {/* ═════════════════════════════════════════════════════════════════════
-          1. EDITORIAL SPLIT MERCH HERO
-      ═════════════════════════════════════════════ */}
-      <section className="relative w-full border-b border-black/10 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 min-h-[480px] lg:min-h-[540px]">
-          
-          <div className="lg:col-span-7 py-12 lg:py-20 flex flex-col justify-center space-y-6">
-            <div className="inline-flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#D91F2C]" />
-              <p className="font-technical text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
-                OFFICIAL APPAREL • STREETWEAR
-              </p>
-            </div>
+      {/* Header */}
+      <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 pt-6 pb-8 w-full border-b border-white/10">
+        <div className="flex items-center gap-2.5 mb-3">
+          <span className="w-2.5 h-2.5 bg-[#D91F2C]" />
+          <p className="font-technical text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
+            OFFICIAL MERCHANDISE • STREETWEAR DROP
+          </p>
+        </div>
 
-            <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl uppercase tracking-tight leading-[0.85] text-[#0B0B0B]">
-              MERCH<br />
-              COLLECTION.
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.85] text-white">
+              TOKO MERCHANDISE<br />
+              <span className="text-[#D91F2C]">RESMI 2026.</span>
             </h1>
-
-            <p className="text-sm sm:text-base text-[#5A5957] font-sans max-w-lg leading-relaxed">
-              Fokus pertarungan. Koleksi merchandise resmi festival dan apparel streetwear edisi terbatas #JOGJAPUNYANYALI dengan standar bahan premium.
-            </p>
           </div>
-
-          {/* Right Minimalist Silhouette */}
-          <div className="lg:col-span-5 flex items-center justify-center py-12 lg:py-0 border-t lg:border-t-0 lg:border-l border-black/15">
-            <div className="w-60 sm:w-68 aspect-[3/4] bg-[#0B0B0B] flex flex-col items-center justify-center p-8 text-white shadow-2xl ring-corner-frame">
-              <span className="font-display text-5xl sm:text-6xl tracking-wider">
-                JKBF<span className="text-[#D91F2C]">.</span>
-              </span>
-              <p className="font-technical text-[10px] uppercase tracking-widest text-[#77716D] mt-2">
-                OFFICIAL APPAREL • 2026
-              </p>
-            </div>
-          </div>
-
+          <p className="text-xs sm:text-sm text-white/60 font-sans max-w-sm sm:text-right">
+            Apparel limited edition & fight gear resmi JKBF. Pengambilan langsung di Lobi Barat GOR UNY atau opsi ekspedisi.
+          </p>
         </div>
       </section>
 
-      {/* ═════════════════════════════════════════════════════════════════════
-          2. MERCH CATALOG GRID
-      ═════════════════════════════════════════════ */}
-      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-16 w-full flex-1">
+      {/* Merch Catalog Grid */}
+      <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 py-8 w-full flex-1">
         <MerchCatalogClient initialProducts={products} />
       </section>
 

@@ -22,29 +22,34 @@ export default async function BracketPage() {
   });
 
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#F4F0E8] text-[#0B0B0B] pt-24 lg:pt-28 pb-24">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#0A0A0A] text-[#FAFAFA] pt-24 lg:pt-32 pb-28">
       
-      {/* Editorial Header */}
-      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-8 pb-12 w-full">
-        <div className="inline-flex items-center gap-2 mb-3">
-          <span className="w-2 h-2 rounded-full bg-[#D91F2C]" />
+      {/* Broadsheet Editorial Header */}
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-6 pb-10 w-full border-b border-white/10">
+        <div className="flex items-center gap-2.5 mb-4">
+          <span className="w-2.5 h-2.5 bg-[#D91F2C]" />
           <p className="font-technical text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
-            STRUKTUR KOMPETISI • 8-MAN ELIMINATION
+            STRUKTUR KOMPETISI • 8-MAN K-1 ELIMINATION
           </p>
         </div>
 
-        <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl uppercase tracking-tight leading-[0.85] text-[#0B0B0B] mb-5">
-          BAGAN<br />
-          TURNAMEN.
-        </h1>
-
-        <p className="text-sm sm:text-base text-[#5A5957] max-w-xl font-sans leading-relaxed">
-          Ronde, bagan turnamen, dan alur eliminasi perebutan sabuk emas. Menampilkan struktur bagan resmi tanpa manipulasi hasil fiktif.
-        </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+          <div className="lg:col-span-8">
+            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl uppercase tracking-tight leading-[0.85] text-white">
+              BAGAN<br />
+              <span className="text-[#D91F2C]">TURNAMEN.</span>
+            </h1>
+          </div>
+          <div className="lg:col-span-4 lg:pb-2">
+            <p className="text-xs sm:text-sm text-white/60 font-sans leading-relaxed">
+              Jalur eliminasi murni perebutan 4 sabuk emas Redy Championship 2. Sudut Merah berhadapan dengan Sudut Biru dalam 3 ronde berkecepatan tinggi.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Bracket Tree Component */}
-      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 w-full flex-1">
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 w-full flex-1 pt-8">
         <BracketClient tournaments={tournaments} />
       </section>
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { Trophy, Swords, ShieldCheck, Scale, ArrowRight } from "lucide-react";
 
 export const metadata = {
   title: "Kejuaraan Kickboxing — Redy Championship 2 | JKBF 2026",
@@ -12,187 +12,172 @@ const DIVISIONS = [
     no: "01",
     name: "FEATHERWEIGHT",
     limit: "57.0 KG",
-    desc: "Kecepatan ekstrim, volume kombinasi striking blitzkrieg, dan manuver footwork agresif.",
-    belt: "SABUK EMAS FEATHERWEIGHT",
+    style: "SPEED & HIGH VOLUME STRIKING",
+    belt: "SABUK EMAS 57 KG",
+    quota: "8 PETARUNG",
   },
   {
     no: "02",
     name: "LIGHTWEIGHT",
     limit: "63.5 KG",
-    desc: "Keseimbangan presisi antara kelincahan bertahan dan pukulan counter berkekuatan tinggi.",
-    belt: "SABUK EMAS LIGHTWEIGHT",
+    style: "TECHNICAL COUNTER PRECISION",
+    belt: "SABUK EMAS 63.5 KG",
+    quota: "8 PETARUNG",
   },
   {
     no: "03",
     name: "WELTERWEIGHT",
     limit: "67.0 KG",
-    desc: "Low-kick penghancur, serangan kombinasi lutut tunggal, dan potensi KO seketika.",
-    belt: "SABUK EMAS WELTERWEIGHT",
+    style: "PRESSURE & HEAVY KO POWER",
+    belt: "SABUK EMAS 67 KG",
+    quota: "8 PETARUNG",
   },
   {
     no: "04",
     name: "MIDDLEWEIGHT",
     limit: "71.0 KG",
-    desc: "Dominasi fisik mutlak, benturan striking kelas berat, dan uji ketahanan stamina ronde penuh.",
-    belt: "SABUK EMAS MIDDLEWEIGHT",
+    style: "ABSOLUTE POWER & KNEE CLINCH",
+    belt: "SABUK EMAS 71 KG",
+    quota: "8 PETARUNG",
   },
 ];
 
 const RULES = [
   {
     number: "01",
-    title: "Format & Durasi Ronde",
-    desc: "3 Ronde x 3 Menit untuk seluruh partai eliminasi turnamen kejuaraan, dengan 1 menit jeda istirahat antar ronde.",
+    title: "FORMAT & DURASI",
+    desc: "3 Ronde × 3 Menit (1 Menit Jeda). Sistem eliminasi murni turnamen 8-man.",
   },
   {
     number: "02",
-    title: "Teknik Serangan Legal (K-1 Rules)",
-    desc: "Pukulan tinju lengkap (jab, cross, hook, uppercut, spinning backfist), tendangan kaki penuh ke seluruh tubuh legal, dan serangan lutut tunggal langsung.",
+    title: "SERANGAN LEGAL",
+    desc: "Pukulan tinju lengkap, spinning backfist, low/high kick, dan lutut tunggal langsung.",
   },
   {
     number: "03",
-    title: "Sistem Penilaian (10-Point Must)",
-    desc: "Dinilai independen oleh 3 juri tepi ring bersertifikasi berdasarkan efektivitas striking/knockdown, agresivitas efektif, dan penguasaan arena ring.",
+    title: "SISTEM PENILAIAN",
+    desc: "10-Point Must System oleh 3 Dewan Juri independen bersertifikasi resmi.",
   },
   {
     number: "04",
-    title: "Prosedur Knockdown & Keamanan",
-    desc: "Penerapan standing 8-count wajib. Aturan 3 knockdown dalam 1 ronde otomatis berakhir TKO demi keselamatan mutlak atlet petarung.",
+    title: "KNOCKDOWN & TKO",
+    desc: "Standing 8-count wajib. Aturan 3 knockdown dalam 1 ronde otomatis dinyatakan TKO.",
   },
 ];
 
 export default function ChampionshipPage() {
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#F4F0E8] text-[#0B0B0B] pt-24 lg:pt-28 pb-24">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#0A0A0A] text-[#FAFAFA] pt-24 lg:pt-32 pb-28">
       
       {/* ═════════════════════════════════════════════════════════════════════
-          1. FIGHT NIGHT EDITORIAL HERO
+          1. COMPACT HERO
       ═════════════════════════════════════════════ */}
-      <section className="relative w-full border-b border-black/10 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 min-h-[500px] lg:min-h-[580px]">
-          
-          {/* Left Text */}
-          <div className="lg:col-span-7 py-12 lg:py-20 flex flex-col justify-center space-y-6">
-            <div className="inline-flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#D91F2C]" />
-              <p className="font-technical text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
-                REDY CHAMPIONSHIP 2 • K-1 RULES
-              </p>
-            </div>
+      <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 pt-6 pb-8 w-full border-b border-white/10">
+        <div className="flex items-center gap-2.5 mb-3">
+          <span className="w-2.5 h-2.5 bg-[#D91F2C]" />
+          <p className="font-technical text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
+            REDY CHAMPIONSHIP 2 • K-1 RULES
+          </p>
+        </div>
 
-            <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl uppercase tracking-tight leading-[0.85] text-[#0B0B0B]">
-              REDY<br />
-              CHAMPIONSHIP 2
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.85] text-white">
+              KEJUARAAN KICKBOXING<br />
+              <span className="text-[#D91F2C]">SABUK EMAS 2026.</span>
             </h1>
-
-            <p className="text-sm sm:text-base text-[#5A5957] font-sans max-w-lg leading-relaxed">
-              Kejuaraan kickboxing profesional di Yogyakarta. Empat divisi sabuk emas, delapan petarung per kelas, bertarung di panggung GOR UNY, 12–14 Desember 2026.
-            </p>
-
-            <div className="pt-2 flex flex-wrap items-center gap-4">
-              <Link
-                href="/bracket"
-                className="font-display text-base tracking-wider uppercase text-white bg-[#0B0B0B] hover:bg-black px-7 py-3.5 transition-colors inline-flex items-center gap-2 ring-1 ring-black/40 shadow-sm"
-              >
-                <span>BAGAN TURNAMEN 8-MAN</span>
-                <span className="font-technical text-xs">↗</span>
-              </Link>
-              <Link
-                href="/fighters"
-                className="font-display text-base tracking-wider uppercase text-[#0B0B0B] hover:text-[#D91F2C] px-6 py-3.5 transition-colors inline-flex items-center gap-2 border border-black/25"
-              >
-                <span>DIREKTORI ATLET</span>
-                <span className="font-technical text-xs">↗</span>
-              </Link>
-            </div>
           </div>
-
-          {/* Right Image */}
-          <div className="lg:col-span-5 relative min-h-[320px] lg:min-h-full -mx-5 sm:-mx-8 lg:mx-0">
-            <Image
-              src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
-              alt="Kickboxing Fight Night Action"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 40vw"
-              className="object-cover object-center grayscale contrast-125"
-            />
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/bracket"
+              className="font-display text-xs sm:text-sm uppercase tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] px-5 py-2.5 rounded transition-all inline-flex items-center gap-1.5"
+            >
+              <span>BAGAN TURNAMEN</span>
+              <span className="font-technical text-xs">↗</span>
+            </Link>
+            <Link
+              href="/fighters"
+              className="font-display text-xs sm:text-sm uppercase tracking-wider text-white/80 hover:text-white border border-white/20 px-4 py-2.5 rounded transition-all inline-flex items-center gap-1.5"
+            >
+              <span>DAFTAR ATLET</span>
+              <span className="font-technical text-xs">↗</span>
+            </Link>
           </div>
-
         </div>
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════
-          2. DATA & DIVISI SABUK EMAS
+          2. EMPAT DIVISI SABUK EMAS (2-COL MOBILE, 4-COL DESKTOP)
       ═════════════════════════════════════════════ */}
-      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-20 lg:py-28 w-full">
+      <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 py-10 w-full flex-1 space-y-12">
         
-        <div className="mb-14 space-y-3">
-          <p className="font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
-            STRUKTUR KOMPETISI RESMI
-          </p>
-          <h2 className="font-display text-5xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-[#0B0B0B] leading-[0.88]">
-            EMPAT KELAS JUARA.
-          </h2>
-          <p className="text-sm text-[#5A5957] font-sans max-w-xl leading-relaxed">
-            Setiap divisi diikuti oleh delapan petarung dalam format turnamen eliminasi langsung K-1 rules hingga penentuan sabuk emas.
-          </p>
-        </div>
+        <div className="space-y-6">
+          <div className="flex items-center justify-between border-b border-white/10 pb-3">
+            <h2 className="font-display text-2xl sm:text-3xl uppercase tracking-wider text-white flex items-center gap-2">
+              <Trophy className="w-5 h-5 text-amber-400" /> EMPAT KELAS JUARA
+            </h2>
+            <span className="font-technical text-xs text-white/40">K-1 RULES • 8-MAN ELIMINATION</span>
+          </div>
 
-        {/* Divisions in Clean Open Rows */}
-        <div className="border-t border-black/15 divide-y divide-black/15 mb-20">
-          {DIVISIONS.map((div) => (
-            <div
-              key={div.name}
-              className="py-8 sm:py-10 grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-baseline transition-colors hover:bg-black/[0.02] px-2"
-            >
-              <span className="font-technical text-sm sm:text-base font-bold text-[#D91F2C] md:col-span-1">
-                {div.no}
-              </span>
-              <div className="md:col-span-4 space-y-1">
-                <h3 className="font-display text-3xl sm:text-4xl uppercase tracking-wider text-[#0B0B0B]">
-                  {div.name}
-                </h3>
-                <span className="font-technical text-xs uppercase font-bold tracking-widest text-[#D91F2C]">
-                  BATAS BOBOT: {div.limit}
-                </span>
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+            {DIVISIONS.map((div) => (
+              <div
+                key={div.no}
+                className="bg-[#141416] border border-white/10 hover:border-[#D91F2C]/60 transition-all rounded p-4 sm:p-5 flex flex-col justify-between space-y-4 group"
+              >
+                <div>
+                  <div className="flex items-center justify-between font-technical text-[10px] text-white/40 mb-2">
+                    <span className="text-[#D91F2C] font-bold">DIVISI {div.no}</span>
+                    <span>{div.quota}</span>
+                  </div>
+
+                  <h3 className="font-display text-xl sm:text-2xl uppercase tracking-wider text-white group-hover:text-[#D91F2C] transition-colors">
+                    {div.name}
+                  </h3>
+                  <span className="font-technical text-xs font-black text-[#D91F2C] block mt-0.5">
+                    BATAS {div.limit}
+                  </span>
+                </div>
+
+                <div className="pt-2 border-t border-white/5 space-y-1">
+                  <span className="font-technical text-[9px] uppercase tracking-wider text-white/40 block">
+                    GAYA: {div.style}
+                  </span>
+                  <span className="font-technical text-[10px] text-amber-400 font-bold uppercase block">
+                    ★ {div.belt}
+                  </span>
+                </div>
               </div>
-              <p className="text-sm text-[#5A5957] md:col-span-5 font-sans leading-relaxed">
-                {div.desc}
-              </p>
-              <div className="md:col-span-2 text-left md:text-right font-technical text-xs uppercase font-bold text-[#0B0B0B] tracking-wider">
-                {div.belt}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* ═════════════════════════════════════════════════════════════════════
-            3. REGULASI PERTANDINGAN (K-1 RULES)
+            3. REGULASI PERTANDINGAN (COMPACT 4 CARDS)
         ═════════════════════════════════════════════ */}
-        <div className="space-y-10 pt-10 border-t border-black/15">
-          <div>
-            <p className="font-technical text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C] mb-2">
-              STANDAR RESMI PERTANDINGAN
-            </p>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-[#0B0B0B]">
-              REGULASI K-1 RULES.
+        <div className="space-y-6 pt-6 border-t border-white/10">
+          <div className="flex items-center justify-between border-b border-white/10 pb-3">
+            <h2 className="font-display text-2xl sm:text-3xl uppercase tracking-wider text-white flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 text-[#D91F2C]" /> REGULASI RESMI K-1
             </h2>
+            <span className="font-technical text-xs text-white/40">STANDAR KICKBOXING INTERNASIONAL</span>
           </div>
 
-          <div className="border-t border-black/15 divide-y divide-black/15">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {RULES.map((rule) => (
               <div
                 key={rule.number}
-                className="py-8 grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline px-2"
+                className="bg-[#121214] border border-white/10 p-4 sm:p-5 rounded space-y-2"
               >
-                <span className="font-technical text-sm font-bold text-[#D91F2C] md:col-span-1">
-                  {rule.number}
-                </span>
-                <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-wider text-[#0B0B0B] md:col-span-4">
+                <div className="flex items-center justify-between font-technical text-xs">
+                  <span className="text-[#D91F2C] font-bold">PASAL {rule.number}</span>
+                </div>
+
+                <h3 className="font-display text-lg uppercase tracking-wider text-white">
                   {rule.title}
                 </h3>
-                <p className="text-sm text-[#5A5957] md:col-span-7 font-sans leading-relaxed">
+
+                <p className="font-sans text-xs text-white/60 leading-relaxed">
                   {rule.desc}
                 </p>
               </div>
