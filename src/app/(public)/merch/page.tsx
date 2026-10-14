@@ -1,7 +1,6 @@
 import React from "react";
 import prisma from "@/lib/prisma";
 import MerchCatalogClient from "@/components/merch/MerchCatalogClient";
-import { ShieldCheck, Truck, MapPin } from "lucide-react";
 
 export const metadata = {
   title: "Official Merch Store | JKBF 2026",
@@ -21,50 +20,58 @@ export default async function MerchPage() {
   });
 
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F4F0E8] bg-[#0B0B0B] pt-24 pb-20">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#F4F0E8] text-[#0B0B0B] pt-24 lg:pt-28 pb-24">
       
-      {/* Editorial Header */}
-      <section className="relative w-full border-b border-white/10 py-16 md:py-24 bg-[#0B0B0B]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="v9-overline text-[#D91F2C]">
-            APPAREL RESMI & FIGHT GEAR
-          </span>
+      {/* ═════════════════════════════════════════════════════════════════════
+          1. EDITORIAL SPLIT MERCH HERO (Matches 11_merch.png)
+      ═════════════════════════════════════════════ */}
+      <section className="relative w-full border-b border-black/10 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 min-h-[480px] lg:min-h-[540px]">
+          
+          <div className="lg:col-span-7 py-12 lg:py-20 flex flex-col justify-center space-y-6">
+            <p
+              className="text-[#D91F2C] text-xs sm:text-sm font-extrabold uppercase tracking-[0.24em]"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              OFFICIAL MERCH • STREETWEAR
+            </p>
 
-          <h1
-            className="v9-display-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#F4F0E8]"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            OFFICIAL MERCH
-          </h1>
+            <h1
+              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-[0.88] text-[#0B0B0B]"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              MERCH<br />
+              COLLECTION.
+            </h1>
 
-          <p className="text-base sm:text-lg text-[#F4F0E8] font-bold uppercase tracking-wider font-display">
-            WEAR THE GLORY. REP THE CITY.
-          </p>
-
-          <p className="text-xs sm:text-sm text-[#8F8E8B] max-w-2xl leading-relaxed font-sans">
-            Koleksi merchandise resmi Redy Championship 2 dan festival musik Jogja Kickboxing Festival. Menggunakan material heavyweight premium, cutting streetwear modern, dan grafis kampanye #JOGJAPUNYANYALI.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-6 pt-2 text-xs font-mono text-[#8F8E8B]">
-            <span className="flex items-center gap-1.5 text-[#F4F0E8]">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#D91F2C]" />
-              PRODUK RESMI TERVERIFIKASI
-            </span>
-            <span className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#D91F2C]" />
-              PICK-UP DI GOR UNY (12—14 DES)
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Truck className="w-3.5 h-3.5 text-[#D91F2C]" />
-              PENGIRIMAN NASIONAL
-            </span>
+            <p className="text-sm sm:text-base text-[#5A5957] font-sans max-w-lg leading-relaxed">
+              Fokus pertarungan. Koleksi merchandise resmi festival dan apparel streetwear edisi terbatas #JOGJAPUNYANYALI.
+            </p>
           </div>
+
+          {/* Right Minimalist Silhouette */}
+          <div className="lg:col-span-5 flex items-center justify-center py-12 lg:py-0 border-t lg:border-t-0 lg:border-l border-black/10">
+            <div className="w-56 sm:w-64 aspect-[3/4] bg-[#0B0B0B] flex flex-col items-center justify-center p-6 text-white shadow-xl">
+              <span
+                className="text-4xl sm:text-5xl font-black tracking-tight"
+                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+              >
+                JKBF<span className="text-[#D91F2C]">.</span>
+              </span>
+              <p className="text-[10px] uppercase font-mono tracking-widest text-[#8F8E8B] mt-2">
+                OFFICIAL APPAREL
+              </p>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* Catalog Client */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-1">
-        <MerchCatalogClient initialProducts={products as any} />
+      {/* ═════════════════════════════════════════════════════════════════════
+          2. MERCH CATALOG GRID
+      ═════════════════════════════════════════════ */}
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-16 w-full flex-1">
+        <MerchCatalogClient initialProducts={products} />
       </section>
 
     </main>

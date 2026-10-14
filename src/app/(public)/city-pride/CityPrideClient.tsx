@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Vote, ShieldCheck, CheckCircle2, AlertCircle, ChevronDown, ChevronUp } from "lucide-react";
+import { CheckCircle2, AlertCircle } from "lucide-react";
 
 const regions = [
   { id: "BANTUL", name: "BANTUL", tagline: "Tanah Para Pendekar & Pesisir Selatan" },
@@ -38,7 +39,6 @@ export default function CityPrideClient({
   const [errorMsg, setErrorMsg] = useState("");
   const [voteCounts, setVoteCounts] = useState(initialVoteCounts);
   const [totalVotes, setTotalVotes] = useState(initialTotalVotes);
-  const [showRules, setShowRules] = useState(false);
 
   const isActive = campaignStatus === "ACTIVE" && campaignId;
 
@@ -93,47 +93,74 @@ export default function CityPrideClient({
   }
 
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F4F0E8] bg-[#0B0B0B] pt-24 pb-20 overflow-x-hidden">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#F4F0E8] text-[#0B0B0B] pt-24 lg:pt-28 pb-24 overflow-x-hidden">
       
-      {/* Editorial Header */}
-      <section className="relative w-full border-b border-white/10 py-16 md:py-24 bg-[#0B0B0B]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="v9-overline text-[#D91F2C]">
-            GERAKAN KOMUNITAS / #JOGJAPUNYANYALI
-          </span>
+      {/* ═════════════════════════════════════════════════════════════════════
+          1. EDITORIAL SPLIT HERO (Matches 08_city_pride.png)
+      ═════════════════════════════════════════════ */}
+      <section className="relative w-full border-b border-black/10 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 min-h-[480px] lg:min-h-[540px]">
+          
+          <div className="lg:col-span-7 py-12 lg:py-20 flex flex-col justify-center space-y-6">
+            <p
+              className="text-[#D91F2C] text-xs sm:text-sm font-extrabold uppercase tracking-[0.24em]"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              KOMUNITAS JOGJA • GERAKAN DAERAH
+            </p>
 
-          <h1
-            className="v9-display-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#F4F0E8]"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            CITY PRIDE
-          </h1>
+            <h1
+              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-[0.88] text-[#0B0B0B]"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              KOTA<br />
+              PUNYA<br />
+              <span className="text-[#D91F2C]">NYALI.</span>
+            </h1>
 
-          <p className="text-base sm:text-lg text-[#F4F0E8] font-bold uppercase tracking-wider font-display">
-            SATUKAN SUARA KEHORMATAN KOTA DI ARENA FESTIVAL
-          </p>
-
-          <p className="text-xs sm:text-sm text-[#8F8E8B] max-w-2xl leading-relaxed font-sans">
-            Gerakan partisipasi komunitas pemuda dan suporter kickboxing di Daerah Istimewa Yogyakarta. Berikan dukungan resmi untuk wilayah kebanggaanmu menjelang laga 12—14 Desember 2026 di GOR UNY.
-          </p>
-
-          <div className="flex items-center gap-4 pt-2 text-xs font-mono">
-            <span className="text-[#F4F0E8]">
-              TOTAL SUARA TERCATAT: <strong className="text-[#D91F2C]">{totalVotes}</strong>
-            </span>
-            <span className="text-[#8F8E8B]">
-              STATUS KAMPANYE: <strong className={isActive ? "text-green-400" : "text-[#8F8E8B]"}>{campaignStatus}</strong>
-            </span>
+            <p className="text-sm sm:text-base text-[#5A5957] font-sans max-w-lg leading-relaxed">
+              Dukung wilayahmu. Rayakan kebanggaan bersama pemuda Bantul, Sleman, Kota Jogja, Kulon Progo, dan Gunungkidul.
+            </p>
           </div>
+
+          <div className="lg:col-span-5 relative min-h-[300px] lg:min-h-full -mx-5 sm:-mx-8 lg:mx-0">
+            <Image
+              src="/images/v9/06_FOTO_KONSER_PLACEHOLDER_INTERNAL.png"
+              alt="Komunitas Pemuda Jogja"
+              fill
+              sizes="(max-width: 1024px) 100vw, 40vw"
+              className="object-cover object-center grayscale contrast-125"
+            />
+          </div>
+
         </div>
       </section>
 
-      {/* Main Voting Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12 w-full flex-1">
-        
-        {/* Region Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {regions.map((reg) => {
+      {/* ═════════════════════════════════════════════════════════════════════
+          2. VOTING SECTION
+      ═════════════════════════════════════════════ */}
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-20 w-full space-y-12">
+        <div className="space-y-3 pb-8 border-b border-black/10">
+          <p
+            className="text-[#D91F2C] text-xs font-extrabold uppercase tracking-[0.24em]"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            VOTING SUPORTER WILAYAH
+          </p>
+          <h2
+            className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#0B0B0B]"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            DUKUNG WILAYAHMU.
+          </h2>
+          <p className="text-sm text-[#5A5957] font-sans max-w-xl">
+            Total {totalVotes.toLocaleString("id-ID")} suara terverifikasi telah diberikan oleh komunitas.
+          </p>
+        </div>
+
+        {/* Region Rows */}
+        <div className="border-t border-black/10 divide-y divide-black/10">
+          {regions.map((reg, idx) => {
             const isSelected = selectedRegion === reg.id;
             const pct = getPercentage(reg.id);
             const count = voteCounts[reg.id] || 0;
@@ -141,127 +168,84 @@ export default function CityPrideClient({
             return (
               <div
                 key={reg.id}
-                onClick={() => isActive && !hasUserVoted && setSelectedRegion(reg.id)}
-                className={`p-6 sm:p-8 bg-[#141416] border transition-all cursor-pointer flex flex-col justify-between space-y-6 ${
-                  isSelected
-                    ? "border-[#D91F2C] bg-[#141416]/90 shadow-xl"
-                    : "border-white/10 hover:border-white/20"
+                onClick={() => setSelectedRegion(reg.id)}
+                className={`py-8 sm:py-10 grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-center cursor-pointer transition-colors ${
+                  isSelected ? "bg-black/5" : "hover:bg-black/[0.02]"
                 }`}
               >
-                <div className="space-y-3">
-                  <div className="flex justify-between items-baseline">
-                    <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase">
-                      WILAYAH RESMI
-                    </span>
-                    <span className="font-mono text-sm font-bold text-[#F4F0E8]">
-                      {pct}%
-                    </span>
-                  </div>
+                <span className="text-[#D91F2C] font-mono text-sm sm:text-base font-bold md:col-span-1">
+                  {(idx + 1).toString().padStart(2, "0")}
+                </span>
 
+                <div className="md:col-span-4 space-y-1">
                   <h3
-                    className="v9-display-title text-3xl sm:text-4xl text-[#F4F0E8]"
+                    className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#0B0B0B]"
                     style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
                   >
                     {reg.name}
                   </h3>
-
-                  <p className="text-xs text-[#8F8E8B] font-sans leading-relaxed">
-                    {reg.tagline}
-                  </p>
+                  <p className="text-xs text-[#5A5957] font-sans">{reg.tagline}</p>
                 </div>
 
-                {/* Progress bar */}
-                <div className="space-y-2">
-                  <div className="w-full h-1 bg-[#0B0B0B] overflow-hidden">
+                <div className="md:col-span-5 space-y-2">
+                  <div className="w-full bg-black/10 h-2 overflow-hidden">
                     <div
-                      className="h-full bg-[#D91F2C] transition-all duration-500"
+                      className="bg-[#D91F2C] h-full transition-all duration-500"
                       style={{ width: `${pct}%` }}
                     />
                   </div>
-                  <div className="flex justify-between text-[10px] font-mono text-[#8F8E8B]">
-                    <span>{count} DUKUNGAN</span>
-                    <span>{isSelected ? "TERPILIH" : "PILIH WILAYAH"}</span>
+                  <div className="flex justify-between text-[11px] font-mono text-[#5A5957]">
+                    <span>{count.toLocaleString("id-ID")} SUARA</span>
+                    <span className="font-bold text-[#0B0B0B]">{pct}%</span>
                   </div>
+                </div>
+
+                <div className="md:col-span-2 text-left md:text-right">
+                  <span
+                    className={`inline-block px-4 py-2 text-xs font-display font-extrabold uppercase tracking-wider transition-colors ${
+                      isSelected
+                        ? "bg-[#D91F2C] text-white"
+                        : "border border-black/20 text-[#0B0B0B]"
+                    }`}
+                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                  >
+                    {isSelected ? "TERPILIH" : "PILIH"}
+                  </span>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Voting Action Hub */}
-        <div className="p-8 bg-[#141416] border border-white/10 space-y-6 max-w-2xl mx-auto text-center">
-          
-          {voteStatus === "success" && (
-            <div className="p-4 bg-green-950/40 border border-green-500/30 text-green-300 text-xs font-mono space-y-1">
-              <p className="font-bold">SUARA RESMI TELAH DICATAT!</p>
-              <p>Terima kasih telah menyuarakan kebanggaan wilayahmu untuk JKBF 2026.</p>
-            </div>
-          )}
+        {/* Voting Action Bar */}
+        <div className="pt-8 border-t border-black/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div>
+            {voteStatus === "success" && (
+              <p className="text-sm font-bold text-emerald-700 flex items-center gap-1.5 font-sans">
+                <CheckCircle2 className="w-4 h-4" /> Suara Anda telah berhasil dicatat resmi!
+              </p>
+            )}
+            {voteStatus === "duplicate" && (
+              <p className="text-sm text-[#5A5957] font-sans">
+                Akun Anda sudah memberikan suara pada kampanye ini. Terima kasih atas partisipasinya!
+              </p>
+            )}
+            {voteStatus === "unauthorized" && (
+              <p className="text-sm text-[#D91F2C] flex items-center gap-1.5 font-sans">
+                <AlertCircle className="w-4 h-4" /> Masuk akun diperlukan untuk verifikasi suara resmi.
+              </p>
+            )}
+          </div>
 
-          {voteStatus === "duplicate" && (
-            <div className="p-4 bg-[#0B0B0B] border border-white/10 text-[#8F8E8B] text-xs font-mono space-y-1">
-              <p className="font-bold text-[#F4F0E8]">SUARA ANDA SUDAH TERCATAT</p>
-              <p>Setiap akun hanya memiliki hak 1 (satu) kali suara resmi demi integritas voting komunitas.</p>
-            </div>
-          )}
-
-          {voteStatus === "unauthorized" && (
-            <div className="p-4 bg-[#0B0B0B] border border-[#D91F2C]/30 text-xs font-mono space-y-3">
-              <p className="text-[#F4F0E8] font-bold">AKUN DIPERLUKAN UNTUK VOTING</p>
-              <p className="text-[#8F8E8B]">{errorMsg || "Silakan masuk untuk memverifikasi hak suara Anda."}</p>
-              <Link
-                href="/admin/login"
-                className="v9-btn-red text-xs inline-flex"
-              >
-                MASUK DENGAN AKUN ↗
-              </Link>
-            </div>
-          )}
-
-          {voteStatus === "idle" && (
-            <div className="space-y-4">
-              <div className="text-xs font-mono text-[#8F8E8B]">
-                {selectedRegion ? (
-                  <span>WILAYAH DIPILIH: <strong className="text-[#D91F2C]">{selectedRegion}</strong></span>
-                ) : (
-                  <span>Pilih salah satu wilayah di atas untuk memberikan suara.</span>
-                )}
-              </div>
-
-              <button
-                type="button"
-                onClick={handleVote}
-                disabled={!selectedRegion || !isActive}
-                className={`v9-btn-red text-xs font-display font-black tracking-wider px-8 py-3.5 ${
-                  !selectedRegion || !isActive ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                <span>KIRIM DUKUNGAN RESMI</span>
-                <span>↗</span>
-              </button>
-            </div>
-          )}
-
-        </div>
-
-        {/* Campaign Rules Accordion */}
-        <div className="border border-white/10 bg-[#141416] p-6 max-w-2xl mx-auto">
           <button
             type="button"
-            onClick={() => setShowRules(!showRules)}
-            className="w-full flex justify-between items-center text-xs font-mono uppercase tracking-widest text-[#F4F0E8]"
+            onClick={handleVote}
+            disabled={!selectedRegion || voteStatus === "voting" || voteStatus === "duplicate"}
+            className="w-full sm:w-auto font-display font-extrabold text-sm uppercase tracking-wider text-white bg-[#0B0B0B] hover:bg-black disabled:opacity-40 disabled:pointer-events-none px-8 py-3.5 transition-colors"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
-            <span>KETENTUAN & MEKANISME VOTING CITY PRIDE</span>
-            {showRules ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            {voteStatus === "voting" ? "MENCATAT SUARA..." : "KIRIM SUARA DUKUNGAN ↗"}
           </button>
-
-          {showRules && (
-            <div className="pt-4 mt-4 border-t border-white/5 text-xs text-[#8F8E8B] font-sans space-y-2 leading-relaxed">
-              <p>1. Voting terbuka untuk seluruh warga dan komunitas di D.I. Yogyakarta.</p>
-              <p>2. Mekanisme 1 Akun = 1 Suara untuk menjaga keadilan dan validitas hasil.</p>
-              <p>3. Hasil voting City Pride merupakan suara solidaritas komunitas dan tidak mempengaruhi keputusan wasit atau hasil laga kickboxing di atas ring.</p>
-            </div>
-          )}
         </div>
 
       </section>

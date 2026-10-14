@@ -51,106 +51,110 @@ export default function ContactFormClient() {
   };
 
   return (
-    <div className="bg-[#141416] border border-white/10 p-8 sm:p-10 space-y-6 font-sans">
+    <div className="border border-black/15 bg-white/70 p-8 sm:p-10 space-y-6 font-sans">
       
       <div className="space-y-1">
-        <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">
-          FORMULIR INQUIRY RESMI
+        <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block font-bold">
+          FORMULIR PESAN
         </span>
-        <h2 className="v9-display-title text-2xl sm:text-3xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-          KIRIM PESAN KE PANITIA
-        </h2>
-        <p className="text-xs text-[#8F8E8B] leading-relaxed">
-          Tim sekretariat festival akan membalas pertanyaan atau proposal Anda dalam 1x24 jam kerja.
+        <h3
+          className="text-2xl sm:text-3xl font-black uppercase text-[#0B0B0B]"
+          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+        >
+          KIRIM PESAN LANGSUNG
+        </h3>
+        <p className="text-xs text-[#5A5957] leading-relaxed">
+          Tim panitia pelaksana akan membalas pertanyaan atau proposal Anda dalam 1x24 jam kerja.
         </p>
       </div>
 
       {status === "success" && (
-        <div className="p-4 bg-green-950/40 border border-green-500/30 text-green-300 text-xs font-mono space-y-1">
-          <p className="font-bold">PESAN BERHASIL TERKIRIM</p>
+        <div className="p-4 bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs font-mono space-y-1">
+          <p className="font-bold flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4" /> PESAN BERHASIL TERKIRIM</p>
           <p>{feedback}</p>
         </div>
       )}
 
       {status === "error" && (
-        <div className="p-4 bg-red-950/40 border border-red-500/30 text-red-300 text-xs font-mono space-y-1">
-          <p className="font-bold">GAGAL MENGIRIM PESAN</p>
+        <div className="p-4 bg-red-100 border border-red-300 text-red-800 text-xs font-mono space-y-1">
+          <p className="font-bold flex items-center gap-1.5"><AlertCircle className="w-4 h-4" /> GAGAL MENGIRIM PESAN</p>
           <p>{feedback}</p>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="space-y-1 sm:col-span-2">
-            <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">NAMA LENGKAP / INSTANSI</label>
-            <input
-              type="text"
-              required
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="Nama Lengkap"
-              className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
-            />
-          </div>
+        <div className="space-y-1">
+          <label className="text-[11px] font-mono uppercase text-[#5A5957] block">Nama Lengkap / Instansi *</label>
+          <input
+            type="text"
+            required
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            placeholder="Nama Lengkap Anda"
+            className="w-full bg-white border border-black/20 px-4 py-3 text-xs text-[#0B0B0B] placeholder-[#8F8E8B] focus:outline-none focus:border-[#D91F2C]"
+          />
+        </div>
 
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-1">
-            <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">EMAIL RESMI</label>
+            <label className="text-[11px] font-mono uppercase text-[#5A5957] block">Email Resmi *</label>
             <input
               type="email"
               required
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              placeholder="email@anda.com"
-              className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+              placeholder="email@domain.com"
+              className="w-full bg-white border border-black/20 px-4 py-3 text-xs text-[#0B0B0B] placeholder-[#8F8E8B] focus:outline-none focus:border-[#D91F2C]"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">NOMOR WHATSAPP</label>
+            <label className="text-[11px] font-mono uppercase text-[#5A5957] block">Nomor WhatsApp *</label>
             <input
               type="tel"
+              required
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              placeholder="0812xxxxxxxx"
-              className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+              placeholder="08xxxxxxxxxx"
+              className="w-full bg-white border border-black/20 px-4 py-3 text-xs text-[#0B0B0B] placeholder-[#8F8E8B] focus:outline-none focus:border-[#D91F2C]"
             />
           </div>
+        </div>
 
-          <div className="space-y-1 sm:col-span-2">
-            <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">TOPIK PERTANYAAN / KEMITRAAN</label>
-            <select
-              value={formData.subject}
-              onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-              className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
-            >
-              <option value="Kemitraan & Sponsor">Kemitraan & Sponsor Festival</option>
-              <option value="Pendaftaran Sasana & Atlet">Pendaftaran Sasana & Atlet Kickboxing</option>
-              <option value="Akreditasi Media & Peliputan">Akreditasi Media & Peliputan</option>
-              <option value="Informasi Tiket & Venue">Informasi Tiket & Venue GOR UNY</option>
-              <option value="Lainnya">Pertanyaan Umum Lainnya</option>
-            </select>
-          </div>
+        <div className="space-y-1">
+          <label className="text-[11px] font-mono uppercase text-[#5A5957] block">Kategori Topik</label>
+          <select
+            value={formData.subject}
+            onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+            className="w-full bg-white border border-black/20 px-3 py-3 text-xs text-[#0B0B0B] focus:outline-none focus:border-[#D91F2C]"
+          >
+            <option value="Kemitraan & Sponsor">Kemitraan & Sponsorship</option>
+            <option value="Media & Peliputan">Media Pers & Peliputan</option>
+            <option value="Tiket & Akses">Pertanyaan Tiket & Akses</option>
+            <option value="Kompetisi & Atlet">Kompetisi Kickboxing & Sasana</option>
+            <option value="Lainnya">Pertanyaan Umum Lainnya</option>
+          </select>
+        </div>
 
-          <div className="space-y-1 sm:col-span-2">
-            <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">PESAN LENGKAP</label>
-            <textarea
-              required
-              rows={4}
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              placeholder="Tuliskan pesan, pertanyaan, atau proposal Anda secara detail..."
-              className="w-full bg-[#0B0B0B] border border-white/10 p-3 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
-            />
-          </div>
+        <div className="space-y-1">
+          <label className="text-[11px] font-mono uppercase text-[#5A5957] block">Pesan / Uraian *</label>
+          <textarea
+            required
+            rows={4}
+            value={formData.message}
+            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            placeholder="Tuliskan pertanyaan atau proposal kemitraan Anda..."
+            className="w-full bg-white border border-black/20 px-4 py-3 text-xs text-[#0B0B0B] placeholder-[#8F8E8B] focus:outline-none focus:border-[#D91F2C]"
+          />
         </div>
 
         <button
           type="submit"
           disabled={status === "loading"}
-          className="v9-btn-red text-xs font-display font-black tracking-wider w-full py-3.5"
+          className="w-full font-display font-extrabold text-sm uppercase tracking-wider text-white bg-[#0B0B0B] hover:bg-black disabled:opacity-50 py-3.5 transition-colors"
+          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
         >
-          <span>{status === "loading" ? "MENGIRIM PESAN..." : "KIRIM PESAN KE SEKRETARIAT"}</span>
-          <span>↗</span>
+          {status === "loading" ? "MENGIRIM PESAN..." : "KIRIM PESAN SEKARANG ↗"}
         </button>
       </form>
 

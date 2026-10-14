@@ -1,52 +1,70 @@
-import React from "react";
 import prisma from "@/lib/prisma";
 import PpvLandingClient from "@/components/ppv/PpvLandingClient";
-import { Radio } from "lucide-react";
 
 export const metadata = {
-  title: "Pay-Per-View Live Streaming | JKBF 2026",
-  description:
-    "Informasi platform siaran langsung Pay-Per-View Redy Championship 2 dan Jogja Kickboxing Festival di GOR UNY Yogyakarta.",
+  title: "Pay-Per-View Live Stream | JKBF 2026",
+  description: "Siaran langsung resmi pertandingan kickboxing Redy Championship 2 dan panggung musik festival Jogja Kickboxing Festival.",
 };
 
-export default async function PpvPage() {
-  const ppvProducts = await prisma.pPVProduct.findMany({
+export default async function PpvLandingPage() {
+  const products = await prisma.pPVProduct.findMany({
     orderBy: { order: "asc" },
   });
 
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F4F0E8] bg-[#0B0B0B] pt-24 pb-20">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#0B0B0B] text-[#F4F0E8] pt-24 lg:pt-28 pb-24 overflow-x-hidden">
       
-      {/* Editorial Header */}
-      <section className="relative w-full border-b border-white/10 py-16 md:py-24 bg-[#0B0B0B]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="flex items-center gap-2">
-            <Radio className="w-4 h-4 text-[#D91F2C] animate-pulse" />
-            <span className="v9-overline text-[#D91F2C]">
-              OFFICIAL BROADCAST & DIGITAL STREAMING
-            </span>
+      {/* ═════════════════════════════════════════════════════════════════════
+          1. EDITORIAL SPLIT PPV HERO (Matches 22_ppv.png)
+      ═════════════════════════════════════════════ */}
+      <section className="relative w-full border-b border-white/10 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 min-h-[480px] lg:min-h-[540px]">
+          
+          <div className="lg:col-span-7 py-12 lg:py-20 flex flex-col justify-center space-y-6">
+            <p
+              className="text-[#D91F2C] text-xs sm:text-sm font-extrabold uppercase tracking-[0.24em]"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              SIARAN DIGITAL • LIVE PPV
+            </p>
+
+            <h1
+              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-[0.88] text-white"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              NONTON<br />
+              DARI MANA SAJA.
+            </h1>
+
+            <p className="text-sm sm:text-base text-[#8F8E8B] font-sans max-w-lg leading-relaxed">
+              Siaran langsung multi-kamera laga kickboxing Redy Championship 2. Akses siaran menunggu pengesahan resmi mitra penyiaran.
+            </p>
           </div>
 
-          <h1
-            className="v9-display-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#F4F0E8]"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            PAY-PER-VIEW STREAM
-          </h1>
+          {/* Minimalist Player Frame Right */}
+          <div className="lg:col-span-5 flex items-center justify-center py-12 lg:py-0 border-t lg:border-t-0 lg:border-l border-white/10">
+            <div className="w-full max-w-sm aspect-video bg-[#141416] border border-white/10 flex flex-col items-center justify-center text-center p-6 space-y-2">
+              <span className="w-3 h-3 rounded-full bg-[#D91F2C] animate-pulse" />
+              <p
+                className="text-lg font-black uppercase tracking-wider text-white"
+                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+              >
+                LIVE BROADCAST
+              </p>
+              <p className="text-[10px] font-mono text-[#8F8E8B] uppercase">
+                GOR UNY • 12–14 DESEMBER 2026
+              </p>
+            </div>
+          </div>
 
-          <p className="text-base sm:text-lg text-[#F4F0E8] font-bold uppercase tracking-wider font-display">
-            SIARAN DIGITAL LANGSUNG DARI ARENA GOR UNY
-          </p>
-
-          <p className="text-xs sm:text-sm text-[#8F8E8B] max-w-2xl leading-relaxed font-sans">
-            Layanan siaran langsung resmi partai kejuaraan kickboxing Redy Championship 2 bagi penonton yang menyaksikan dari luar kota atau luar arena. Menghadirkan feed multi-kamera dan audio komentator resmi.
-          </p>
         </div>
       </section>
 
-      {/* Main PPV Container */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-1">
-        <PpvLandingClient products={ppvProducts as any} />
+      {/* ═════════════════════════════════════════════════════════════════════
+          2. ACCESS FORM & PACKAGES
+      ═════════════════════════════════════════════ */}
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-20 w-full flex-1">
+        <PpvLandingClient products={products} />
       </section>
 
     </main>

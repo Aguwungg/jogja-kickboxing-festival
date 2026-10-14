@@ -3,17 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { verifyAccessCodeAction } from "@/app/(public)/ppv/actions";
-import {
-  Lock,
-  Radio,
-  Tv,
-  ArrowLeft,
-  Volume2,
-  VolumeX,
-  Play,
-  Pause,
-  AlertCircle,
-} from "lucide-react";
+import { ArrowLeft, AlertCircle, CheckCircle2 } from "lucide-react";
 
 interface Props {
   initialCode?: string;
@@ -31,9 +21,6 @@ export default function PpvWatchClient({ initialCode }: Props) {
     tier: string;
     resolution: string;
   } | null>(null);
-
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
     if (initialCode) {
@@ -63,50 +50,36 @@ export default function PpvWatchClient({ initialCode }: Props) {
   };
 
   return (
-    <div className="w-full space-y-6 font-sans">
+    <div className="w-full space-y-10 font-sans">
       
-      {/* Back Link & Title */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
-        <div>
-          <Link
-            href="/ppv"
-            className="inline-flex items-center gap-1.5 text-xs font-mono text-[#8F8E8B] hover:text-[#F4F0E8] uppercase tracking-wider mb-1 transition-colors"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>KEMBALI KE PPV STREAM</span>
-          </Link>
-          <h1
-            className="v9-display-title text-3xl sm:text-4xl text-[#F4F0E8]"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            RUANG SIARAN LANGSUNG ARENA
-          </h1>
-        </div>
-
-        <div className="flex items-center gap-2 text-xs font-mono">
-          <span className="flex items-center gap-1.5 text-[#D91F2C]">
-            <Radio className="w-3.5 h-3.5 animate-pulse" />
-            LIVE FEED GOR UNY
-          </span>
-        </div>
+        <Link
+          href="/ppv"
+          className="inline-flex items-center gap-1.5 text-xs font-mono text-[#8F8E8B] hover:text-white uppercase tracking-wider transition-colors"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span>KEMBALI KE PPV STREAM</span>
+        </Link>
+        <span className="text-xs font-mono text-[#D91F2C] uppercase font-bold">
+          • LIVE FEED STANDBY (GOR UNY)
+        </span>
       </div>
 
       {!isUnlocked ? (
-        /* Locked Gate View */
-        <div className="bg-[#141416] border border-white/10 p-8 sm:p-16 text-center max-w-xl mx-auto space-y-6">
-          <div className="w-12 h-12 mx-auto bg-[#0B0B0B] border border-white/10 flex items-center justify-center text-[#D91F2C]">
-            <Lock className="w-6 h-6" />
-          </div>
-
+        /* Code Input Gate */
+        <div className="border border-white/10 bg-[#141416] p-8 sm:p-14 text-center max-w-xl mx-auto space-y-6">
           <div className="space-y-2">
-            <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">
-              AKSES TERENKRIPSI
+            <span className="text-xs font-mono uppercase text-[#D91F2C] tracking-widest font-bold">
+              VERIFIKASI TIKET STREAMING
             </span>
-            <h2 className="v9-display-title text-3xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-              MASUKKAN KODE TIKET DIGITAL
-            </h2>
-            <p className="text-xs text-[#8F8E8B] max-w-sm mx-auto leading-relaxed">
-              Silakan masukkan kode tiket resmi yang Anda peroleh saat pemesanan paket siaran langsung.
+            <h3
+              className="text-3xl font-black uppercase text-white"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              MASUKKAN KODE AKSES
+            </h3>
+            <p className="text-xs text-[#8F8E8B] leading-relaxed">
+              Ketik kode unik dari tiket digital Anda untuk membuka live stream pertandingan.
             </p>
           </div>
 
@@ -115,70 +88,57 @@ export default function PpvWatchClient({ initialCode }: Props) {
               e.preventDefault();
               handleVerify(accessCode);
             }}
-            className="space-y-3"
+            className="space-y-4 pt-2"
           >
             <input
               type="text"
               value={accessCode}
               onChange={(e) => setAccessCode(e.target.value)}
-              placeholder="KODE AKSES STREAMING"
-              className="w-full bg-[#0B0B0B] border border-white/10 p-3 text-center text-sm font-mono uppercase text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
+              placeholder="JKBF-STREAM-XXXX"
+              className="w-full bg-[#0B0B0B] border border-white/20 px-4 py-3 text-xs font-mono uppercase text-white placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C] text-center"
             />
 
             {verificationError && (
-              <p className="text-xs font-mono text-[#D91F2C]">{verificationError}</p>
+              <div className="p-3 bg-red-950/40 border border-red-500/30 text-xs font-mono text-red-300 flex items-center gap-2 justify-center">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{verificationError}</span>
+              </div>
             )}
 
             <button
               type="submit"
               disabled={verificationLoading}
-              className="v9-btn-red text-xs font-display font-black tracking-wider w-full py-3.5"
+              className="w-full font-display font-extrabold text-sm uppercase tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] disabled:opacity-50 py-3.5 transition-colors"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
-              <span>{verificationLoading ? "MEMVERIFIKASI..." : "BUKA RUANG SIARAN ↗"}</span>
+              {verificationLoading ? "MEMVALIDASI KODE..." : "VERIFIKASI & BUKA PLAYER ↗"}
             </button>
           </form>
         </div>
       ) : (
-        /* Unlocked Stream Experience */
+        /* Video Stream Player Canvas */
         <div className="space-y-6">
-          <div className="relative aspect-video bg-[#000000] border border-white/10 overflow-hidden flex items-center justify-center">
-            {/* Stream Simulation Video Frame */}
-            <div className="text-center space-y-3 p-6">
-              <Tv className="w-12 h-12 text-[#D91F2C] mx-auto animate-pulse" />
-              <p className="text-xs font-mono text-[#8F8E8B] uppercase tracking-widest">
-                FEED MULTI-KAMERA AKTIF • {ticketDetails?.resolution || "1080P 60FPS"}
-              </p>
-              <h3 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-                SIARAN ARENA PERTANDINGAN BERJALAN
-              </h3>
-            </div>
-
-            {/* Overlay Controls */}
-            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono bg-[#0B0B0B]/80 p-3 border border-white/10">
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={() => setIsPlaying(!isPlaying)}
-                  className="text-[#F4F0E8] hover:text-[#D91F2C]"
-                >
-                  {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setIsMuted(!isMuted)}
-                  className="text-[#F4F0E8] hover:text-[#D91F2C]"
-                >
-                  {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                </button>
-                <span className="text-[10px] text-[#8F8E8B]">AUDIO ARENA KOMENTATOR RESMI</span>
-              </div>
-              <span className="text-[#D91F2C] font-bold">12—14 DESEMBER 2026</span>
-            </div>
+          <div className="relative aspect-video w-full bg-black border border-white/20 flex flex-col items-center justify-center p-8 text-center space-y-3">
+            <div className="w-3 h-3 rounded-full bg-[#D91F2C] animate-ping" />
+            <p
+              className="text-2xl sm:text-3xl font-black uppercase text-white tracking-wide"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              SIARAN LANGSUNG STANDBY
+            </p>
+            <p className="text-xs font-mono text-[#8F8E8B] max-w-md">
+              Feed video live dari GOR UNY Yogyakarta akan dimulai sesuai jadwal pertandingan resmi (12–14 Desember 2026).
+            </p>
           </div>
 
-          <div className="p-4 bg-[#141416] border border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-xs font-mono">
-            <span>PEMEGANG TIKET: <strong className="text-[#F4F0E8]">{ticketDetails?.customerName || "PENONTON RESMI"}</strong></span>
-            <span>PAKET: <strong className="text-[#D91F2C]">{ticketDetails?.productName}</strong></span>
+          <div className="p-4 bg-[#141416] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono">
+            <div>
+              <span className="text-[#8F8E8B] uppercase">AKUN TERVERIFIKASI: </span>
+              <span className="font-bold text-white">{ticketDetails?.customerName || "Penonton Terverifikasi"}</span>
+            </div>
+            <span className="text-emerald-400 font-bold flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4" /> KUALITAS SIARAN: {ticketDetails?.resolution || "1080P FULL HD"}
+            </span>
           </div>
         </div>
       )}

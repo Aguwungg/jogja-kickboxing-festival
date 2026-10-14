@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, Trophy, ArrowUpRight, Scale, ShieldAlert } from "lucide-react";
+import { Search, ArrowUpRight } from "lucide-react";
 
 type Fighter = {
   id: string;
@@ -58,32 +58,69 @@ export default function FighterCenterClient({
   }
 
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F4F0E8] bg-[#0B0B0B] pt-24 pb-20 overflow-x-hidden">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#F4F0E8] text-[#0B0B0B] pt-24 lg:pt-28 pb-24 overflow-x-hidden">
       
-      {/* Editorial Header */}
-      <section className="relative w-full border-b border-white/10 py-16 md:py-20 bg-[#0B0B0B]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="v9-overline text-[#D91F2C]">
-            ROSTER ATLET / REDY CHAMPIONSHIP 2
-          </span>
+      {/* ═════════════════════════════════════════════════════════════════════
+          1. EDITORIAL SPLIT HERO (Matches 03_fighters.png)
+      ═════════════════════════════════════════════ */}
+      <section className="relative w-full border-b border-black/10 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 min-h-[480px] lg:min-h-[540px]">
+          
+          <div className="lg:col-span-7 py-12 lg:py-20 flex flex-col justify-center space-y-5">
+            <p
+              className="text-[#D91F2C] text-xs sm:text-sm font-extrabold uppercase tracking-[0.24em]"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              REDY CHAMPIONSHIP 2
+            </p>
 
-          <h1
-            className="v9-display-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#F4F0E8]"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            DAFTAR PETARUNG
-          </h1>
+            <h1
+              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-[0.88] text-[#0B0B0B]"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              PARA<br />
+              PETARUNG.
+            </h1>
 
-          <p className="text-xs sm:text-sm text-[#8F8E8B] max-w-2xl leading-relaxed font-sans">
-            Direktori profil atlet kickboxing Redy Championship 2. Seluruh status kelayakan dan bobot resmi disahkan pada saat sesi timbang badan resmi (Official Weigh-in).
-          </p>
+            <p className="text-sm sm:text-base text-[#5A5957] font-sans max-w-lg leading-relaxed">
+              Profil resmi para petarung, ketika sudah disahkan melalui sesi timbang badan resmi (Official Weigh-in).
+            </p>
+          </div>
+
+          <div className="lg:col-span-5 relative min-h-[300px] lg:min-h-full -mx-5 sm:-mx-8 lg:mx-0">
+            <Image
+              src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
+              alt="Kickboxing Athletes"
+              fill
+              sizes="(max-width: 1024px) 100vw, 40vw"
+              className="object-cover object-center grayscale contrast-125"
+            />
+          </div>
+
         </div>
       </section>
 
-      {/* Filter and Search Bar */}
-      <section className="w-full bg-[#141416] border-b border-white/10 py-4 px-4 sm:px-6 lg:px-8 sticky top-16 z-30 shadow-xl">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          
+      {/* ═════════════════════════════════════════════════════════════════════
+          2. DATA & SEARCH SECTION
+      ═════════════════════════════════════════════ */}
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-16 lg:py-20 w-full space-y-10">
+        
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-black/10">
+          <div>
+            <p
+              className="text-[#D91F2C] text-xs font-extrabold uppercase tracking-[0.24em] mb-2"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              DATA & PROFIL
+            </p>
+            <h2
+              className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-[#0B0B0B]"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              DIREKTORI ATLET.
+            </h2>
+          </div>
+
           {/* Search Box */}
           <div className="relative w-full md:w-80">
             <Search className="w-4 h-4 text-[#8F8E8B] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -93,145 +130,107 @@ export default function FighterCenterClient({
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && applyFilters({ q: search })}
               placeholder="Cari atlet atau sasana..."
-              className="w-full bg-[#0B0B0B] border border-white/10 pl-9 pr-4 py-2 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+              className="w-full bg-white/60 border border-black/20 pl-9 pr-4 py-2.5 text-xs text-[#0B0B0B] placeholder-[#8F8E8B] focus:outline-none focus:border-[#D91F2C] transition-colors"
             />
           </div>
+        </div>
 
-          {/* Quick Selects */}
-          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto text-xs font-mono">
-            <select
-              value={currentDivision}
-              onChange={(e) => applyFilters({ division: e.target.value })}
-              className="bg-[#0B0B0B] border border-white/10 px-3 py-2 text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
-            >
-              <option value="">SEMUA DIVISI</option>
-              {divisions.map((d) => (
-                <option key={d} value={d}>{d}</option>
-              ))}
-            </select>
-
-            <select
-              value={currentWeight}
-              onChange={(e) => applyFilters({ weight: e.target.value })}
-              className="bg-[#0B0B0B] border border-white/10 px-3 py-2 text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
-            >
-              <option value="">SEMUA KELAS BERAT</option>
-              {weightClasses.map((w) => (
-                <option key={w} value={w}>{w}</option>
-              ))}
-            </select>
-
-            {(currentDivision || currentWeight || currentQuery) && (
+        {/* Division Filter Pills */}
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => applyFilters({ division: "" })}
+            className={`px-4 py-2 text-xs font-display font-extrabold uppercase tracking-wider transition-all ${
+              !currentDivision
+                ? "bg-[#0B0B0B] text-white"
+                : "bg-transparent text-[#0B0B0B] hover:bg-black/5 border border-black/20"
+            }`}
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            SEMUA DIVISI
+          </button>
+          {divisions.map((div) => {
+            const isActive = currentDivision === div;
+            return (
               <button
+                key={div}
                 type="button"
-                onClick={handleReset}
-                className="text-[#D91F2C] hover:underline font-bold uppercase tracking-wider text-[11px]"
+                onClick={() => applyFilters({ division: div })}
+                className={`px-4 py-2 text-xs font-display font-extrabold uppercase tracking-wider transition-all ${
+                  isActive
+                    ? "bg-[#0B0B0B] text-white"
+                    : "bg-transparent text-[#0B0B0B] hover:bg-black/5 border border-black/20"
+                }`}
+                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
               >
-                RESET ×
+                {div}
               </button>
-            )}
-          </div>
-
-        </div>
-      </section>
-
-      {/* Fighter Cards Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-1">
-        
-        {/* Count overview */}
-        <div className="flex items-center justify-between mb-8 text-xs text-[#8F8E8B] font-mono border-b border-white/10 pb-3">
-          <span>
-            TERCATAT: <strong className="text-[#F4F0E8]">{fighters.length}</strong> ATLET
-          </span>
-          <span className="text-[10px] text-[#5A5957] uppercase">
-            STATUS: MENUNGGU WEIGH-IN RESMI
-          </span>
+            );
+          })}
         </div>
 
+        {/* Athlete Grid */}
         {fighters.length === 0 ? (
-          <div className="p-16 text-center bg-[#141416] border border-white/10 space-y-4 max-w-md mx-auto">
-            <Scale className="w-8 h-8 text-[#8F8E8B] mx-auto" />
+          <div className="py-24 text-center border-t border-b border-black/10 space-y-3">
             <h3
-              className="v9-display-title text-2xl text-[#F4F0E8]"
+              className="text-2xl sm:text-3xl font-black uppercase text-[#0B0B0B]"
               style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
-              TIDAK ADA PETARUNG
+              ATLET SEGERA DIUMUMKAN
             </h3>
-            <p className="text-xs text-[#8F8E8B] leading-relaxed">
-              Tidak ada atlet yang cocok dengan kriteria filter pencarian.
+            <p className="text-sm text-[#5A5957] max-w-md mx-auto">
+              Tidak ada profil atlet yang cocok dengan filter pencarian. Daftar lengkap petarung disahkan setelah sesi penimbangan badan.
             </p>
             <button
-              type="button"
               onClick={handleReset}
-              className="v9-btn-red text-xs"
+              className="mt-4 px-6 py-2.5 bg-[#0B0B0B] text-white text-xs font-bold uppercase tracking-wider font-display"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
-              RESET PENCARIAN
+              RESET FILTER
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {fighters.map((f) => (
               <Link
                 key={f.id}
                 href={`/fighters/${f.slug}`}
-                className="group bg-[#141416] border border-white/10 hover:border-[#D91F2C] flex flex-col justify-between transition-colors overflow-hidden"
+                className="group border border-black/10 bg-white/40 hover:bg-white/80 p-5 flex flex-col justify-between transition-all"
               >
-                {/* Portrait container */}
-                <div className="h-64 sm:h-72 bg-[#0B0B0B] relative overflow-hidden">
-                  {f.image ? (
+                <div>
+                  <div className="relative aspect-[3/4] w-full bg-[#141416] overflow-hidden mb-4">
                     <Image
-                      src={f.image}
+                      src={f.image || "/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"}
                       alt={f.name}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       className="object-cover object-top grayscale contrast-125 group-hover:scale-105 transition-transform duration-300"
                     />
-                  ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#141416]">
-                      <span className="font-display text-8xl font-black text-white/5" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-                        {f.name.charAt(0)}
-                      </span>
-                      <span className="text-[10px] text-[#5A5957] font-mono uppercase tracking-widest mt-2">
-                        FOTO ATLET TERTUNDA
-                      </span>
+                    <div className="absolute top-2 right-2 bg-black/80 px-2 py-0.5 text-[10px] font-mono text-white">
+                      {f.weightClass}
                     </div>
-                  )}
+                  </div>
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#141416] via-transparent to-transparent" />
-                  
-                  {/* Division tag */}
-                  <div className="absolute top-3 left-3 bg-[#0B0B0B]/90 border border-white/10 px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest text-[#F4F0E8]">
+                  <span className="text-[10px] font-mono font-bold uppercase text-[#D91F2C] tracking-widest block">
                     {f.division}
-                  </div>
+                  </span>
+                  <h3
+                    className="text-2xl font-black uppercase tracking-tight text-[#0B0B0B] group-hover:text-[#D91F2C] transition-colors"
+                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                  >
+                    {f.name}
+                  </h3>
+                  <p className="text-xs text-[#5A5957] font-sans mt-0.5">
+                    {f.club || "Independen"}
+                  </p>
                 </div>
 
-                {/* Info block */}
-                <div className="p-5 space-y-3">
-                  <div>
-                    <span className="text-[10px] text-[#D91F2C] font-mono uppercase tracking-widest block">
-                      {f.weightClass || "KELAS BELUM DIVERIFIKASI"}
-                    </span>
-                    <h3
-                      className="v9-display-title text-2xl text-[#F4F0E8] group-hover:text-white transition-colors"
-                      style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                    >
-                      {f.name}
-                    </h3>
-                    <p className="text-xs text-[#8F8E8B] truncate mt-0.5 font-sans">
-                      {f.club || "Independen"}
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono">
-                    <span className="text-[#8F8E8B]">
-                      REKOR: <strong className="text-[#F4F0E8]">{f.wins}W - {f.losses}L</strong>
-                    </span>
-                    <span className="text-[#D91F2C] font-bold group-hover:translate-x-1 transition-transform flex items-center gap-0.5">
-                      PROFIL ↗
-                    </span>
-                  </div>
+                <div className="pt-4 mt-4 border-t border-black/10 flex items-center justify-between text-xs">
+                  <span className="font-mono text-[#5A5957]">
+                    REKOR: <strong className="text-[#0B0B0B]">{f.wins}W - {f.losses}L - {f.draws}D</strong>
+                  </span>
+                  <ArrowUpRight className="w-4 h-4 text-[#8F8E8B] group-hover:text-[#D91F2C] transition-colors" />
                 </div>
-
               </Link>
             ))}
           </div>

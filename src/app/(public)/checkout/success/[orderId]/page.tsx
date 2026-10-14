@@ -4,14 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { formatRupiah } from "@/lib/currency";
 import { getGatePolicy } from "@/lib/commercial-gates";
-import {
-  CheckCircle2,
-  Clock,
-  MapPin,
-  Truck,
-  ArrowLeft,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import PrintButton from "./PrintButton";
 import SimulatePaymentButton from "./SimulatePaymentButton";
 
@@ -47,118 +40,122 @@ export default async function OrderSuccessPage({ params }: Props) {
     notFound();
   }
 
-  const isPickup = order.deliveryMethod === "PICKUP_VENUE";
   const isPaid = order.paymentStatus === "PAID";
 
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F4F0E8] bg-[#0B0B0B] pt-24 pb-20 font-sans">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-1 space-y-6">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#F4F0E8] text-[#0B0B0B] pt-24 lg:pt-28 pb-24 font-sans">
+      <div className="max-w-[1000px] mx-auto px-5 sm:px-8 py-8 w-full flex-1 space-y-8">
         
         <Link
           href="/merch"
-          className="inline-flex items-center gap-1.5 text-xs font-mono text-[#8F8E8B] hover:text-[#F4F0E8] uppercase tracking-wider transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5A5957] hover:text-black uppercase tracking-wider transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>KEMBALI KE KATALOG MERCHANDISE</span>
         </Link>
 
+        {/* Editorial Title */}
+        <div className="space-y-3 pb-8 border-b border-black/10">
+          <p
+            className="text-[#D91F2C] text-xs font-extrabold uppercase tracking-[0.24em]"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            KONFIRMASI PESANAN • STATUS
+          </p>
+          <h1
+            className="text-5xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-[#0B0B0B]"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            STATUS PESANAN.
+          </h1>
+          <p className="text-sm text-[#5A5957]">
+            Bukti pesanan #{order.orderNumber} telah tercatat di basis data resmi JKBF.
+          </p>
+        </div>
+
         {/* E-Receipt Container */}
-        <div className="bg-[#141416] border border-white/10 p-6 sm:p-10 space-y-8">
+        <div className="border border-black/15 bg-white/70 p-6 sm:p-10 space-y-8 shadow-sm">
           
-          {/* Header Status */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-black/10">
             <div>
-              <span className="v9-overline text-[#D91F2C]">BUKTI PEMESANAN RESMI</span>
-              <h1
-                className="v9-display-title text-3xl sm:text-4xl text-[#F4F0E8] mt-1"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                PESANAN #{order.orderNumber}
-              </h1>
-              <p className="text-xs text-[#8F8E8B] font-mono mt-1">
-                TANGGAL: {new Date(order.createdAt).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}
+              <span className="text-[10px] font-mono text-[#8F8E8B] uppercase block">NOMOR PESANAN</span>
+              <p className="text-2xl font-black text-[#0B0B0B] font-mono">#{order.orderNumber}</p>
+              <p className="text-xs text-[#5A5957] font-mono mt-0.5">
+                {new Date(order.createdAt).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}
               </p>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <span
                 className={`px-3 py-1.5 text-xs font-mono font-bold uppercase ${
                   isPaid
-                    ? "bg-green-950/60 border border-green-500/30 text-green-400"
-                    : "bg-[#0B0B0B] border border-white/10 text-[#8F8E8B]"
+                    ? "bg-emerald-100 text-emerald-800 border border-emerald-300"
+                    : "bg-black/5 text-[#0B0B0B] border border-black/10"
                 }`}
               >
-                {isPaid ? "PEMBAYARAN TERKONFIRMASI" : "MENUNGGU PEMBAYARAN"}
+                {isPaid ? "LUNAS (SIMULASI)" : "MENUNGGU PEMBAYARAN"}
               </span>
               <PrintButton />
             </div>
           </div>
 
-          {/* Delivery & Recipient Details */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs font-mono bg-[#0B0B0B] border border-white/5 p-6">
+          {/* Recipient Details */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs font-mono p-5 bg-black/[0.02] border border-black/5">
             <div className="space-y-1">
-              <span className="text-[#8F8E8B] block text-[10px] uppercase">DATA PENERIMA</span>
-              <span className="text-[#F4F0E8] font-bold block">{order.customerName}</span>
-              <span className="text-[#8F8E8B] block">{order.guestEmail}</span>
-              <span className="text-[#8F8E8B] block">{order.customerPhone}</span>
+              <span className="text-[#8F8E8B] block text-[10px] uppercase">PENERIMA:</span>
+              <p className="font-bold text-sm text-[#0B0B0B]">{order.customerName}</p>
+              <p className="text-[#5A5957]">{order.guestEmail}</p>
+              <p className="text-[#5A5957]">{order.customerPhone}</p>
             </div>
 
             <div className="space-y-1">
-              <span className="text-[#8F8E8B] block text-[10px] uppercase">METODE PENGAMBILAN</span>
-              <span className="text-[#F4F0E8] font-bold block">
-                {isPickup ? "PICK-UP BOOTH GOR UNY (12—14 DES)" : "EKSPEDISI PENGIRIMAN"}
-              </span>
-              {!isPickup && (
-                <span className="text-[#8F8E8B] block">
-                  {order.shippingAddress}, {order.shippingCity} {order.shippingPostalCode}
-                </span>
-              )}
+              <span className="text-[#8F8E8B] block text-[10px] uppercase">METODE PENGIRIMAN:</span>
+              <p className="font-bold text-sm text-[#0B0B0B]">
+                {order.deliveryMethod === "PICKUP_VENUE" ? "PICK-UP GOR UNY (12—14 DESEMBER)" : "EKSPEDISI PENGIRIMAN"}
+              </p>
+              <p className="text-[#5A5957]">{order.courier}</p>
+              {order.shippingAddress && <p className="text-[#5A5957]">{order.shippingAddress}, {order.shippingCity}</p>}
             </div>
           </div>
 
-          {/* Order Items Table */}
-          <div className="space-y-3">
-            <span className="text-[10px] text-[#8F8E8B] font-mono uppercase tracking-widest block">
-              DAFTAR ITEM PESANAN
-            </span>
-            <div className="border border-white/10 divide-y divide-white/10 bg-[#0B0B0B]">
-              {order.orderItems.map((item) => (
-                <div key={item.id} className="p-4 flex justify-between items-center text-xs font-mono">
-                  <div>
-                    <span className="text-[#F4F0E8] font-bold block">
-                      {item.variant.product.name}
-                    </span>
-                    <span className="text-[10px] text-[#8F8E8B]">
-                      UKURAN: {item.variant.size || "ALL"} • JUMLAH: {item.quantity}
-                    </span>
-                  </div>
-                  <span className="text-[#F4F0E8] font-bold">
-                    {formatRupiah(item.price * item.quantity)}
-                  </span>
+          {/* Items Table */}
+          <div className="border-t border-black/10 divide-y divide-black/10">
+            {order.orderItems.map((item) => (
+              <div key={item.id} className="py-4 flex items-center justify-between text-xs font-mono">
+                <div>
+                  <p className="font-bold text-sm text-[#0B0B0B] uppercase">
+                    {item.variant?.product?.name || "Official Merchandise"}
+                  </p>
+                  <p className="text-[#5A5957]">
+                    Ukuran: {item.variant?.size || "All Size"} • Qty: {item.quantity}
+                  </p>
                 </div>
-              ))}
-            </div>
+                <span className="font-bold text-[#0B0B0B]">
+                  {formatRupiah(item.price * item.quantity)}
+                </span>
+              </div>
+            ))}
           </div>
 
-          {/* Totals */}
-          <div className="border-t border-white/10 pt-4 space-y-2 text-xs font-mono text-right">
-            <div className="flex justify-between text-[#8F8E8B]">
-              <span>SUBTOTAL ITEM</span>
+          {/* Pricing Totals */}
+          <div className="border-t border-black/10 pt-4 space-y-2 text-xs font-mono">
+            <div className="flex justify-between text-[#5A5957]">
+              <span>Subtotal Produk:</span>
               <span>{formatRupiah(order.totalAmount - order.shippingCost)}</span>
             </div>
-            <div className="flex justify-between text-[#8F8E8B]">
-              <span>BIAYA PENGIRIMAN</span>
-              <span>{isPickup ? "GRATIS" : formatRupiah(order.shippingCost)}</span>
+            <div className="flex justify-between text-[#5A5957]">
+              <span>Biaya Pengiriman:</span>
+              <span>{order.shippingCost === 0 ? "GRATIS" : formatRupiah(order.shippingCost)}</span>
             </div>
-            <div className="flex justify-between text-sm font-bold text-[#F4F0E8] pt-2 border-t border-white/5">
-              <span>TOTAL PESANAN</span>
-              <span className="text-[#D91F2C]">{formatRupiah(order.totalAmount)}</span>
+            <div className="flex justify-between text-base font-black text-[#0B0B0B] pt-2 border-t border-black/10">
+              <span>TOTAL PESANAN:</span>
+              <span>{formatRupiah(order.totalAmount)}</span>
             </div>
           </div>
 
-          {/* Staging Simulator Button */}
+          {/* Simulation Payment Gate for Staging Testing */}
           {policy.allowPaymentSimulator && !isPaid && (
-            <div className="pt-4 border-t border-white/10 flex justify-end">
+            <div className="pt-4 border-t border-black/10">
               <SimulatePaymentButton orderId={order.id} />
             </div>
           )}

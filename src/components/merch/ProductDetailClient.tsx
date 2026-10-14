@@ -5,15 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart, formatRupiah } from "@/lib/cart-context";
-import {
-  ShoppingBag,
-  ArrowLeft,
-  Truck,
-  MapPin,
-  ShieldCheck,
-  Plus,
-  Minus,
-} from "lucide-react";
+import { ArrowLeft, CheckCircle2, Plus, Minus } from "lucide-react";
 
 interface Variant {
   id: string;
@@ -96,102 +88,93 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
   };
 
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F4F0E8] bg-[#0B0B0B] pt-24 pb-20 overflow-x-hidden font-sans">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#F4F0E8] text-[#0B0B0B] pt-24 lg:pt-28 pb-24 overflow-x-hidden font-sans">
       
       {/* Breadcrumb Navigation */}
-      <div className="w-full py-4 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#8F8E8B] border-b border-white/5">
-        <Link href="/" className="hover:text-white transition-colors">BERANDA</Link>
-        <span>/</span>
-        <Link href="/merch" className="hover:text-white transition-colors">OFFICIAL MERCH</Link>
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-4 w-full flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#5A5957] border-b border-black/10">
+        <Link href="/merch" className="hover:text-black transition-colors flex items-center gap-1">
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span>KATALOG MERCHANDISE</span>
+        </Link>
         <span>/</span>
         <span className="text-[#D91F2C] font-bold">{product.name}</span>
       </div>
 
-      {/* Main Product Layout */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      {/* ═════════════════════════════════════════════════════════════════════
+          1. PRODUCT HERO & PURCHASE INTERACTION (Matches 12_merch_detail.png)
+      ═════════════════════════════════════════════ */}
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-12 lg:py-16 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* Left Column: Product Photography */}
-          <div className="lg:col-span-6 relative aspect-square sm:aspect-[4/5] bg-[#141416] border border-white/10 overflow-hidden">
-            {product.imageUrl ? (
-              <Image
-                src={product.imageUrl}
-                alt={product.name}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-center"
-              />
-            ) : (
-              <div className="w-full h-full flex flex-col items-center justify-center text-white/5 font-display text-9xl font-black">
-                JKBF
-              </div>
-            )}
-
+          {/* Left: Product Image */}
+          <div className="lg:col-span-6 relative aspect-square w-full bg-[#141416] border border-black/10 overflow-hidden shadow-sm">
+            <Image
+              src={product.imageUrl || "/images/v9/08_REFERENSI_FOTO_DAN_TEKSTUR.png"}
+              alt={product.name}
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-center grayscale contrast-125"
+            />
             {product.badge && (
-              <div className="absolute top-4 left-4 bg-[#D91F2C] text-white px-3 py-1 text-xs font-mono uppercase tracking-widest font-bold">
+              <div className="absolute top-4 left-4 bg-[#D91F2C] text-white px-3 py-1 text-xs font-mono font-bold tracking-widest uppercase">
                 {product.badge}
               </div>
             )}
           </div>
 
-          {/* Right Column: Buying Hub */}
-          <div className="lg:col-span-6 space-y-6">
-            
-            <div className="space-y-2 border-b border-white/10 pb-6">
-              <span className="text-xs text-[#D91F2C] font-mono uppercase tracking-widest block">
-                {product.category} • JKBF 2026 OFFICIAL
+          {/* Right: Product Buy Box */}
+          <div className="lg:col-span-6 space-y-8">
+            <div className="space-y-3">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D91F2C]">
+                {product.category} RESMI
               </span>
               <h1
-                className="v9-display-title text-4xl sm:text-5xl text-[#F4F0E8] leading-tight"
+                className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#0B0B0B] leading-none"
                 style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
               >
                 {product.name}
               </h1>
-              <p className="text-2xl font-mono font-bold text-[#F4F0E8] pt-2">
+              <p className="text-2xl sm:text-3xl font-black text-[#0B0B0B] font-mono pt-1">
                 {formatRupiah(product.price)}
               </p>
             </div>
 
-            {/* Description */}
-            <div className="space-y-2 text-xs text-[#8F8E8B] leading-relaxed">
-              <p>{product.description}</p>
-              {product.material && (
-                <p className="font-mono text-[#F4F0E8] pt-1">
-                  MATERIAL: <span className="text-[#8F8E8B]">{product.material}</span>
-                </p>
-              )}
-            </div>
+            <p className="text-sm text-[#5A5957] font-sans leading-relaxed border-t border-b border-black/10 py-4">
+              {product.description}
+            </p>
 
             {/* Size Variants */}
             {product.variants.length > 0 && (
-              <div className="space-y-2 pt-2">
+              <div className="space-y-3">
                 <div className="flex justify-between text-xs font-mono">
-                  <span className="text-[#8F8E8B]">PILIH UKURAN:</span>
-                  <span className="text-[#F4F0E8]">
-                    STOK TERSEDIA: {maxStock > 0 ? `${maxStock} PCS` : "HABIS"}
+                  <span className="text-[#5A5957] uppercase">Pilih Ukuran:</span>
+                  <span className="text-[#0B0B0B] font-bold">
+                    {selectedVariant?.size || "Standar"} ({maxStock} Tersedia)
                   </span>
                 </div>
-                <div className="flex flex-wrap gap-2">
+
+                <div className="flex flex-wrap gap-2.5">
                   {product.variants.map((v) => {
-                    const isSelected = v.id === selectedVariantId;
-                    const isOut = v.stockQuantity <= 0;
+                    const isSelected = selectedVariantId === v.id;
+                    const isOutOfStock = v.stockQuantity <= 0;
 
                     return (
                       <button
                         key={v.id}
                         type="button"
-                        disabled={isOut}
+                        disabled={isOutOfStock}
                         onClick={() => setSelectedVariantId(v.id)}
-                        className={`px-4 py-2 text-xs font-mono uppercase tracking-wider transition-colors ${
+                        className={`px-5 py-2.5 text-xs font-display font-black uppercase tracking-wider transition-all ${
                           isSelected
-                            ? "bg-[#D91F2C] text-white font-bold"
-                            : isOut
-                            ? "bg-[#141416] text-[#5A5957] border border-white/5 line-through cursor-not-allowed"
-                            : "bg-[#141416] text-[#F4F0E8] border border-white/10 hover:border-white/30"
+                            ? "bg-[#0B0B0B] text-white"
+                            : isOutOfStock
+                            ? "opacity-30 border border-black/10 line-through"
+                            : "border border-black/20 text-[#0B0B0B] hover:bg-black/5"
                         }`}
+                        style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
                       >
-                        {v.size || "ALL SIZE"}
+                        {v.size || "All Size"}
                       </button>
                     );
                   })}
@@ -200,68 +183,63 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
             )}
 
             {/* Quantity Selector */}
-            <div className="space-y-2 pt-2">
-              <span className="text-xs font-mono text-[#8F8E8B] block">JUMLAH PEMESANAN:</span>
-              <div className="flex items-center gap-3">
-                <div className="flex items-center border border-white/10 bg-[#141416]">
-                  <button
-                    type="button"
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    disabled={quantity <= 1}
-                    className="p-2.5 text-[#8F8E8B] hover:text-[#F4F0E8] disabled:opacity-30"
-                  >
-                    <Minus className="w-3.5 h-3.5" />
-                  </button>
-                  <span className="px-4 text-xs font-mono font-bold text-[#F4F0E8]">{quantity}</span>
-                  <button
-                    type="button"
-                    onClick={() => setQuantity(Math.min(maxStock, quantity + 1))}
-                    disabled={quantity >= maxStock}
-                    className="p-2.5 text-[#8F8E8B] hover:text-[#F4F0E8] disabled:opacity-30"
-                  >
-                    <Plus className="w-3.5 h-3.5" />
-                  </button>
-                </div>
+            <div className="flex items-center gap-4">
+              <span className="text-xs font-mono text-[#5A5957] uppercase">Jumlah:</span>
+              <div className="flex items-center border border-black/20 bg-white/60">
+                <button
+                  type="button"
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="p-2.5 hover:bg-black/5 text-[#0B0B0B]"
+                >
+                  <Minus className="w-3.5 h-3.5" />
+                </button>
+                <span className="px-4 py-1 text-sm font-bold font-mono text-[#0B0B0B]">
+                  {quantity}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setQuantity(Math.min(maxStock, quantity + 1))}
+                  className="p-2.5 hover:bg-black/5 text-[#0B0B0B]"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                </button>
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="pt-4 flex flex-col sm:flex-row gap-3">
-              <button
-                type="button"
-                onClick={handleAddToCart}
-                disabled={maxStock <= 0}
-                className="v9-btn-ghost text-xs font-display font-black tracking-wider py-3.5 flex-1"
-              >
-                <ShoppingBag className="w-4 h-4" />
-                <span>TAMBAH KE KERANJANG</span>
-              </button>
-              <button
-                type="button"
-                onClick={handleBuyNow}
-                disabled={maxStock <= 0}
-                className="v9-btn-red text-xs font-display font-black tracking-wider py-3.5 flex-1"
-              >
-                <span>BELI SEKARANG (CHECKOUT) ↗</span>
-              </button>
+            <div className="space-y-3 pt-2">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button
+                  type="button"
+                  disabled={maxStock <= 0}
+                  onClick={handleAddToCart}
+                  className="flex-1 font-display font-extrabold text-sm uppercase tracking-wider text-white bg-[#0B0B0B] hover:bg-black disabled:opacity-30 py-3.5 transition-colors"
+                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                >
+                  {maxStock > 0 ? "+ MASUKKAN KERANJANG" : "STOK HABIS"}
+                </button>
+                <button
+                  type="button"
+                  disabled={maxStock <= 0}
+                  onClick={handleBuyNow}
+                  className="flex-1 font-display font-extrabold text-sm uppercase tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] disabled:opacity-30 py-3.5 transition-colors"
+                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                >
+                  BELI SEKARANG ↗
+                </button>
+              </div>
+
+              {addedAlert && (
+                <p className="text-xs font-mono text-emerald-800 flex items-center gap-1.5 pt-1">
+                  <CheckCircle2 className="w-4 h-4" /> Berhasil ditambahkan ke keranjang belanja!
+                </p>
+              )}
             </div>
 
-            {addedAlert && (
-              <div className="p-3 bg-green-950/40 border border-green-500/30 text-green-300 text-xs font-mono text-center">
-                PRODUK BERHASIL DITAMBAHKAN KE KERANJANG!
-              </div>
-            )}
-
-            {/* Practical Shipping Policy */}
-            <div className="border-t border-white/10 pt-6 space-y-2 text-xs font-mono text-[#8F8E8B]">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#D91F2C]" />
-                <span>GRATIS ON-SITE PICKUP DI GOR UNY SAAT FESTIVAL</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Truck className="w-4 h-4 text-[#D91F2C]" />
-                <span>PENGIRIMAN EKSPEDISI TERSEDIA (JNE/J&T/SICEPAT)</span>
-              </div>
+            {/* Logistics Info */}
+            <div className="pt-6 border-t border-black/10 text-xs text-[#5A5957] space-y-1 font-mono">
+              <p>• PENGAMBILAN (PICK-UP) DI GOR UNY SAAT FESTIVAL (12–14 DESEMBER 2026).</p>
+              <p>• PENGIRIMAN EKSPEDISI JNE/J&T TERSEDIA UNTUK SELURUH WILAYAH INDONESIA.</p>
             </div>
 
           </div>
@@ -271,38 +249,39 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/10 w-full">
-          <div className="flex justify-between items-baseline mb-8">
-            <h2 className="v9-display-title text-2xl sm:text-3xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-              KOLEKSI APPAREL LAINNYA
-            </h2>
-            <Link href="/merch" className="text-xs font-mono text-[#D91F2C] hover:underline uppercase">
-              SEMUA PRODUK ↗
-            </Link>
-          </div>
+        <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-16 w-full border-t border-black/10 space-y-8">
+          <h3
+            className="text-2xl sm:text-3xl font-black uppercase text-[#0B0B0B]"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            PRODUK TERKAIT LAINNYA
+          </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             {relatedProducts.map((rel) => (
               <Link
                 key={rel.id}
                 href={`/merch/${rel.slug}`}
-                className="group bg-[#141416] border border-white/10 hover:border-[#D91F2C] p-4 flex gap-4 transition-colors"
+                className="group border border-black/10 bg-white/40 p-4 block hover:bg-white/80 transition-all"
               >
-                <div className="w-20 h-20 bg-[#0B0B0B] relative overflow-hidden flex-shrink-0">
-                  {rel.imageUrl ? (
-                    <Image src={rel.imageUrl} alt={rel.name} fill className="object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-xs font-mono text-white/10">JKBF</div>
-                  )}
+                <div className="relative aspect-square w-full bg-[#141416] mb-3 overflow-hidden">
+                  <Image
+                    src={rel.imageUrl || "/images/v9/08_REFERENSI_FOTO_DAN_TEKSTUR.png"}
+                    alt={rel.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                    className="object-cover object-center grayscale contrast-125 group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
-                <div className="space-y-1">
-                  <h3 className="font-display font-black text-lg text-[#F4F0E8] group-hover:text-white" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-                    {rel.name}
-                  </h3>
-                  <span className="text-xs font-mono font-bold text-[#D91F2C] block">
-                    {formatRupiah(rel.price)}
-                  </span>
-                </div>
+                <h4
+                  className="text-xl font-black uppercase tracking-tight text-[#0B0B0B] group-hover:text-[#D91F2C] transition-colors"
+                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                >
+                  {rel.name}
+                </h4>
+                <p className="text-xs font-mono font-bold text-[#0B0B0B] mt-1">
+                  {formatRupiah(rel.price)}
+                </p>
               </Link>
             ))}
           </div>

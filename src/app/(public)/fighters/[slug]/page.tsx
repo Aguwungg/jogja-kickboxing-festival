@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import prisma from "@/lib/prisma";
-import { ArrowUpRight, Scale, ShieldAlert } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export default async function FighterDetailPage({
   params,
@@ -29,171 +29,156 @@ export default async function FighterDetailPage({
   });
 
   const totalFights = fighter.wins + fighter.losses + fighter.draws;
-  const winRate = totalFights > 0 ? Math.round((fighter.wins / totalFights) * 100) : 0;
 
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F4F0E8] bg-[#0B0B0B] pt-24 pb-20 overflow-x-hidden">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#F4F0E8] text-[#0B0B0B] pt-24 lg:pt-28 pb-24 overflow-x-hidden">
       
       {/* Breadcrumb */}
-      <div className="w-full py-4 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#8F8E8B] border-b border-white/5">
-        <Link href="/" className="hover:text-white transition-colors">BERANDA</Link>
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-4 w-full flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#5A5957] border-b border-black/10">
+        <Link href="/" className="hover:text-black transition-colors">BERANDA</Link>
         <span>/</span>
-        <Link href="/fighters" className="hover:text-white transition-colors">DAFTAR PETARUNG</Link>
+        <Link href="/fighters" className="hover:text-black transition-colors">DAFTAR PETARUNG</Link>
         <span>/</span>
         <span className="text-[#D91F2C] font-bold">{fighter.name}</span>
       </div>
 
-      {/* Hero Banner & Tale of the Tape Header */}
-      <section className="relative w-full py-16 px-4 sm:px-6 lg:px-8 bg-[#141416] border-b border-white/10">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      {/* ═════════════════════════════════════════════════════════════════════
+          1. EDITORIAL SPLIT PROFILE HERO
+      ═════════════════════════════════════════════ */}
+      <section className="relative w-full border-b border-black/10 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 min-h-[500px] lg:min-h-[560px]">
           
-          {/* Fighter Photo Column */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative aspect-[3/4] w-full max-w-md mx-auto bg-[#0B0B0B] border border-white/10 overflow-hidden shadow-2xl">
-              {fighter.image ? (
-                <Image
-                  src={fighter.image}
-                  alt={fighter.name}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover object-top grayscale contrast-125"
-                />
-              ) : (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0B0B0B]">
-                  <span className="font-display text-9xl font-black text-white/5" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-                    {fighter.name.charAt(0)}
-                  </span>
-                  <p className="text-xs text-[#8F8E8B] uppercase tracking-widest mt-4 font-mono">POTRET ATLET</p>
-                </div>
-              )}
-              
-              <div className="absolute top-4 left-4 bg-[#D91F2C] text-white px-3 py-1 text-xs font-mono uppercase tracking-widest font-bold">
-                {fighter.division} DIVISI
+          {/* Left Fighter Details */}
+          <div className="lg:col-span-7 py-12 lg:py-20 flex flex-col justify-center space-y-6">
+            <p
+              className="text-[#D91F2C] text-xs sm:text-sm font-extrabold uppercase tracking-[0.24em]"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              REDY CHAMPIONSHIP 2 • {fighter.division}
+            </p>
+
+            <h1
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.88] text-[#0B0B0B]"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              {fighter.name}
+            </h1>
+
+            <p className="text-sm sm:text-base text-[#5A5957] font-sans max-w-lg leading-relaxed">
+              {fighter.club ? `Sasana / Tim: ${fighter.club}.` : "Petarung Independen."} Bertarung di divisi {fighter.division} dengan batas bobot {fighter.weightClass}.
+            </p>
+
+            {/* Fighter Record Summary */}
+            <div className="pt-2 flex items-center gap-8 font-mono border-t border-black/10 pt-6">
+              <div>
+                <span className="text-[10px] text-[#8F8E8B] uppercase tracking-widest block">MENANG</span>
+                <span className="text-3xl font-black text-[#0B0B0B]">{fighter.wins}</span>
+              </div>
+              <div className="border-l border-black/10 pl-8">
+                <span className="text-[10px] text-[#8F8E8B] uppercase tracking-widest block">KALAH</span>
+                <span className="text-3xl font-black text-[#5A5957]">{fighter.losses}</span>
+              </div>
+              <div className="border-l border-black/10 pl-8">
+                <span className="text-[10px] text-[#8F8E8B] uppercase tracking-widest block">SERI</span>
+                <span className="text-3xl font-black text-[#5A5957]">{fighter.draws}</span>
               </div>
             </div>
           </div>
 
-          {/* Fighter Info & Stats */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="space-y-2">
-              <span className="v9-overline text-[#D91F2C]">
-                #JOGJAPUNYANYALI • ROSTER RESMI
-              </span>
-              <h1
-                className="v9-display-title text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-[#F4F0E8] leading-[0.88]"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                {fighter.name}
-              </h1>
-              <p className="text-sm sm:text-base text-[#8F8E8B] font-mono">
-                {fighter.club || "Independen"} • {fighter.weightClass || "Belum Diverifikasi"}
-              </p>
-            </div>
-
-            {/* Record Grid */}
-            <div className="grid grid-cols-3 gap-3 pt-2 font-mono">
-              <div className="p-4 bg-[#0B0B0B] border border-white/10 text-center">
-                <span className="text-[10px] text-[#8F8E8B] uppercase tracking-widest block">MENANG (W)</span>
-                <span className="text-3xl font-display font-black text-[#F4F0E8] mt-1 block" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-                  {fighter.wins}
-                </span>
-              </div>
-              <div className="p-4 bg-[#0B0B0B] border border-white/10 text-center">
-                <span className="text-[10px] text-[#8F8E8B] uppercase tracking-widest block">KALAH (L)</span>
-                <span className="text-3xl font-display font-black text-[#8F8E8B] mt-1 block" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-                  {fighter.losses}
-                </span>
-              </div>
-              <div className="p-4 bg-[#0B0B0B] border border-white/10 text-center">
-                <span className="text-[10px] text-[#8F8E8B] uppercase tracking-widest block">SERI (D)</span>
-                <span className="text-3xl font-display font-black text-[#8F8E8B] mt-1 block" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-                  {fighter.draws}
-                </span>
-              </div>
-            </div>
-
-            {/* Tale of the Tape Specs */}
-            <div className="border border-white/10 bg-[#0B0B0B] divide-y divide-white/10 text-xs font-mono">
-              <div className="flex justify-between p-3">
-                <span className="text-[#8F8E8B]">DIVISI BERAT</span>
-                <span className="text-[#F4F0E8] font-bold">{fighter.division}</span>
-              </div>
-              <div className="flex justify-between p-3">
-                <span className="text-[#8F8E8B]">BATAS KELAS</span>
-                <span className="text-[#F4F0E8] font-bold">{fighter.weightClass || "-"}</span>
-              </div>
-              <div className="flex justify-between p-3">
-                <span className="text-[#8F8E8B]">SASANA / ASAL</span>
-                <span className="text-[#F4F0E8] font-bold">{fighter.club || "Independen"}</span>
-              </div>
-              <div className="flex justify-between p-3">
-                <span className="text-[#8F8E8B]">STATUS VERIFIKASI</span>
-                <span className="text-[#D91F2C] font-bold">TERDAFTAR RESMI JKBF</span>
-              </div>
-            </div>
-
-            {/* Pre-event notice */}
-            <p className="text-[11px] text-[#5A5957] font-mono leading-relaxed">
-              Catatan rekor dan statistik atlet diverifikasi berdasarkan data pendaftaran awal. Validasi akhir dilakukan pada saat timbang badan resmi (12 Desember 2026).
-            </p>
+          {/* Right Fighter Photo */}
+          <div className="lg:col-span-5 relative min-h-[360px] lg:min-h-full -mx-5 sm:-mx-8 lg:mx-0 bg-[#141416]">
+            <Image
+              src={fighter.image || "/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"}
+              alt={fighter.name}
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 40vw"
+              className="object-cover object-top grayscale contrast-125"
+            />
           </div>
 
         </div>
       </section>
 
-      {/* Related Fighters */}
-      {relatedFighters.length > 0 && (
-        <section className="w-full py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="flex justify-between items-baseline mb-8 border-b border-white/10 pb-3">
-            <h2
-              className="v9-display-title text-2xl sm:text-3xl text-[#F4F0E8]"
+      {/* ═════════════════════════════════════════════════════════════════════
+          2. TALE OF THE TAPE & VERIFIED DATA
+      ═════════════════════════════════════════════ */}
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-20 w-full space-y-12">
+        <div className="space-y-3">
+          <p
+            className="text-[#D91F2C] text-xs font-extrabold uppercase tracking-[0.24em]"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            SPESIFIKASI FISIK & ATLET
+          </p>
+          <h2
+            className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-[#0B0B0B]"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            TALE OF THE TAPE.
+          </h2>
+        </div>
+
+        {/* Clean Tale of the Tape Rows */}
+        <div className="border-t border-black/10 divide-y divide-black/10">
+          <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-4 items-baseline">
+            <span className="text-xs font-mono uppercase text-[#8F8E8B]">Divisi Resmi</span>
+            <span className="text-sm font-bold text-[#0B0B0B] md:col-span-3">{fighter.division}</span>
+          </div>
+          <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-4 items-baseline">
+            <span className="text-xs font-mono uppercase text-[#8F8E8B]">Kelas Bobot</span>
+            <span className="text-sm font-bold text-[#0B0B0B] md:col-span-3">{fighter.weightClass}</span>
+          </div>
+          <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-4 items-baseline">
+            <span className="text-xs font-mono uppercase text-[#8F8E8B]">Sasana / Camp</span>
+            <span className="text-sm font-bold text-[#0B0B0B] md:col-span-3">{fighter.club || "Independen"}</span>
+          </div>
+          <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-4 items-baseline">
+            <span className="text-xs font-mono uppercase text-[#8F8E8B]">Total Laga Profesional</span>
+            <span className="text-sm font-bold text-[#0B0B0B] md:col-span-3">{totalFights} Pertandingan</span>
+          </div>
+        </div>
+
+        {/* Related Fighters in same division */}
+        {relatedFighters.length > 0 && (
+          <div className="pt-12 border-t border-black/10 space-y-6">
+            <h3
+              className="text-2xl sm:text-3xl font-black uppercase text-[#0B0B0B]"
               style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
-              PETARUNG LAIN DI DIVISI {fighter.division.toUpperCase()}
-            </h2>
-            <Link href="/fighters" className="text-xs font-mono text-[#D91F2C] hover:underline uppercase">
-              SEMUA PETARUNG ↗
-            </Link>
-          </div>
+              PETARUNG LAIN DI DIVISI {fighter.division}
+            </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {relatedFighters.map((rel) => (
-              <Link
-                key={rel.id}
-                href={`/fighters/${rel.slug}`}
-                className="group bg-[#141416] border border-white/10 hover:border-[#D91F2C] p-4 transition-colors"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-[#0B0B0B] border border-white/10 relative overflow-hidden flex-shrink-0">
-                    {rel.image ? (
-                      <Image
-                        src={rel.image}
-                        alt={rel.name}
-                        fill
-                        className="object-cover grayscale contrast-125"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-xs font-mono text-[#8F8E8B]">
-                        {rel.name.charAt(0)}
-                      </div>
-                    )}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {relatedFighters.map((rel) => (
+                <Link
+                  key={rel.id}
+                  href={`/fighters/${rel.slug}`}
+                  className="group border border-black/10 bg-white/40 p-4 block hover:bg-white/80 transition-all"
+                >
+                  <div className="relative aspect-[4/5] w-full bg-[#141416] mb-3 overflow-hidden">
+                    <Image
+                      src={rel.image || "/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"}
+                      alt={rel.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 33vw"
+                      className="object-cover object-top grayscale contrast-125 group-hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
-                  <div>
-                    <h3 className="font-display font-black text-lg text-[#F4F0E8] group-hover:text-white" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-                      {rel.name}
-                    </h3>
-                    <p className="text-xs text-[#8F8E8B] font-mono">{rel.club || "Independen"}</p>
-                    <span className="text-[10px] text-[#D91F2C] font-mono mt-1 block">
-                      {rel.wins}W - {rel.losses}L
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
+                  <h4
+                    className="text-lg font-black uppercase tracking-tight text-[#0B0B0B] group-hover:text-[#D91F2C] transition-colors"
+                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                  >
+                    {rel.name}
+                  </h4>
+                  <p className="text-xs text-[#5A5957] font-sans mt-0.5">{rel.club || "Independen"}</p>
+                </Link>
+              ))}
+            </div>
           </div>
-        </section>
-      )}
+        )}
+
+      </section>
 
     </main>
   );

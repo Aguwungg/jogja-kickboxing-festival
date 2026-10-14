@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { Search, ChevronDown, ChevronUp, MessageSquare } from "lucide-react";
+import { Search, Plus, Minus } from "lucide-react";
 
 interface FaqItem {
   q: string;
@@ -92,22 +91,22 @@ export default function FaqClient() {
   });
 
   return (
-    <div className="w-full space-y-8 font-sans">
+    <div className="w-full space-y-10 font-sans max-w-4xl mx-auto">
       
-      {/* Search Input & Category Selector */}
-      <div className="space-y-4">
+      {/* Category Pills & Search */}
+      <div className="space-y-6 pb-6 border-b border-black/10">
         <div className="relative">
-          <Search className="w-4 h-4 text-[#8F8E8B] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-4 h-4 text-[#8F8E8B] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Ketik kata kunci pertanyaan..."
-            className="w-full bg-[#141416] border border-white/10 pl-10 pr-4 py-3 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+            placeholder="Cari pertanyaan, topik tiket, aturan..."
+            className="w-full bg-white/70 border border-black/20 pl-11 pr-4 py-3 text-xs text-[#0B0B0B] placeholder-[#8F8E8B] focus:outline-none focus:border-[#D91F2C]"
           />
         </div>
 
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-white/10">
+        <div className="flex flex-wrap items-center gap-2">
           {CATEGORIES.map((cat) => {
             const isActive = activeCategory === cat.key;
             return (
@@ -115,10 +114,10 @@ export default function FaqClient() {
                 key={cat.key}
                 type="button"
                 onClick={() => setActiveCategory(cat.key)}
-                className={`px-4 py-2 text-xs font-display font-extrabold uppercase tracking-wider transition-colors whitespace-nowrap ${
+                className={`px-4 py-2 text-xs font-display font-black uppercase tracking-wider transition-all ${
                   isActive
-                    ? "bg-[#D91F2C] text-white"
-                    : "bg-[#141416] text-[#8F8E8B] hover:text-[#F4F0E8] border border-white/5"
+                    ? "bg-[#0B0B0B] text-white"
+                    : "bg-transparent text-[#0B0B0B] hover:bg-black/5 border border-black/20"
                 }`}
                 style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
               >
@@ -129,67 +128,45 @@ export default function FaqClient() {
         </div>
       </div>
 
-      {/* FAQ Accordion List */}
+      {/* Accordion Rows */}
       {filteredFaqs.length === 0 ? (
-        <div className="p-12 text-center bg-[#141416] border border-white/10 text-xs font-mono text-[#8F8E8B]">
-          TIDAK ADA PERTANYAAN DITEMUKAN
+        <div className="py-20 text-center border-t border-b border-black/10">
+          <p className="text-sm text-[#5A5957]">
+            Tidak ada pertanyaan yang sesuai dengan kata kunci pencarian.
+          </p>
         </div>
       ) : (
-        <div className="border border-white/10 divide-y divide-white/10 bg-[#141416]">
-          {filteredFaqs.map((faq, idx) => {
-            const isOpen = openIndexes.includes(idx);
-
+        <div className="border-t border-black/10 divide-y divide-black/10">
+          {filteredFaqs.map((faq, index) => {
+            const isOpen = openIndexes.includes(index);
             return (
-              <div key={faq.q} className="transition-colors hover:bg-white/[0.01]">
+              <div key={index} className="py-6 sm:py-8 transition-colors">
                 <button
                   type="button"
-                  onClick={() => toggleAccordion(idx)}
-                  className="w-full p-5 sm:p-6 text-left flex items-start justify-between gap-4"
+                  onClick={() => toggleAccordion(index)}
+                  className="w-full flex items-start justify-between gap-6 text-left focus:outline-none"
                 >
-                  <div className="space-y-1">
-                    <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">
-                      {faq.category}
-                    </span>
-                    <h3
-                      className="font-display font-black text-lg sm:text-xl text-[#F4F0E8] uppercase"
-                      style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                    >
-                      {faq.q}
-                    </h3>
-                  </div>
-                  <div className="text-[#8F8E8B] mt-1 shrink-0">
-                    {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                  </div>
+                  <span
+                    className="text-xl sm:text-2xl font-black uppercase tracking-tight text-[#0B0B0B]"
+                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                  >
+                    {faq.q}
+                  </span>
+                  <span className="p-1 border border-black/20 rounded-none text-[#0B0B0B] shrink-0 mt-0.5">
+                    {isOpen ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
+                  </span>
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-6 sm:px-6 pt-1 border-t border-white/5 text-xs text-[#8F8E8B] font-sans leading-relaxed">
+                  <p className="mt-4 text-xs sm:text-sm text-[#5A5957] font-sans leading-relaxed max-w-2xl">
                     {faq.a}
-                  </div>
+                  </p>
                 )}
               </div>
             );
           })}
         </div>
       )}
-
-      {/* Contact Callout */}
-      <div className="p-6 bg-[#141416] border-l-2 border-[#D91F2C] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <h4 className="font-display font-black text-base text-[#F4F0E8] uppercase">
-            MASIH MEMILIKI PERTANYAAN LAIN?
-          </h4>
-          <p className="text-xs text-[#8F8E8B]">
-            Sekretariat resmi festival siap menjawab kebutuhan informasi tiket dan kemitraan Anda.
-          </p>
-        </div>
-        <Link
-          href="/kontak"
-          className="v9-btn-ghost text-xs font-display font-extrabold tracking-wider whitespace-nowrap"
-        >
-          <span>HUBUNGI KAMI ↗</span>
-        </Link>
-      </div>
 
     </div>
   );

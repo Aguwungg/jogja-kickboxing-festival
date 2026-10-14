@@ -1,16 +1,7 @@
 "use client";
 
 import React, { useState, useTransition } from "react";
-import {
-  Video,
-  Ticket,
-  Camera,
-  Newspaper,
-  ShieldCheck,
-  Send,
-  UserCheck,
-} from "lucide-react";
-import Link from "next/link";
+import { ArrowUpRight, CheckCircle2, AlertCircle } from "lucide-react";
 
 interface CreatorItem {
   id: string;
@@ -43,7 +34,7 @@ export default function CreatorClient({
   claimBarcodeAction,
   applyAccreditationAction,
 }: CreatorClientProps) {
-  const [activeFormTab, setActiveFormTab] = useState<"creator" | "media">("creator");
+  const [activeTab, setActiveTab] = useState<"creator" | "media">("creator");
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -82,51 +73,61 @@ export default function CreatorClient({
   return (
     <div className="w-full space-y-16 font-sans">
       
-      {/* 3 Step Guidance */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="p-6 bg-[#141416] border border-white/10 space-y-3">
-          <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">LANGKAH 01</span>
-          <h3 className="font-display font-black text-xl text-[#F4F0E8] uppercase" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-            DAFTAR KREATOR / MEDIA
+      {/* 3 Step Editorial Progression */}
+      <div className="border-t border-b border-white/10 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="space-y-2">
+          <span className="text-[#D91F2C] font-mono text-sm font-bold">01 PILIHAN</span>
+          <h3
+            className="text-2xl font-black uppercase text-white"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            PILIH JALUR ANDA
           </h3>
-          <p className="text-xs text-[#8F8E8B] leading-relaxed">
-            Isi formulir pendaftaran resmi dengan menyertakan tautan profil media sosial aktif atau portofolio peliputan olahraga/musik.
+          <p className="text-xs sm:text-sm text-[#8F8E8B] leading-relaxed">
+            Daftar sebagai Kreator Konten Digital atau ajukan Akreditasi Media Pers resmi liputan arena.
           </p>
         </div>
 
-        <div className="p-6 bg-[#141416] border border-white/10 space-y-3">
-          <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">LANGKAH 02</span>
-          <h3 className="font-display font-black text-xl text-[#F4F0E8] uppercase" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-            KURASI & MEDIA PASS
+        <div className="space-y-2 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8">
+          <span className="text-[#D91F2C] font-mono text-sm font-bold">02 DAFTAR</span>
+          <h3
+            className="text-2xl font-black uppercase text-white"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            LENGKAPI DATA RESMI
           </h3>
-          <p className="text-xs text-[#8F8E8B] leading-relaxed">
-            Tim media festival akan memvalidasi data pendaftaran. Kreator terpilih mendapatkan Media Pass dan area liputan khusus di GOR UNY.
+          <p className="text-xs sm:text-sm text-[#8F8E8B] leading-relaxed">
+            Masukkan portofolio dan akun media sosial aktif untuk verifikasi komite festival.
           </p>
         </div>
 
-        <div className="p-6 bg-[#141416] border border-white/10 space-y-3">
-          <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">LANGKAH 03</span>
-          <h3 className="font-display font-black text-xl text-[#F4F0E8] uppercase" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-            SUBMISI KONTEN & POIN
+        <div className="space-y-2 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8">
+          <span className="text-[#D91F2C] font-mono text-sm font-bold">03 DUKUNGAN</span>
+          <h3
+            className="text-2xl font-black uppercase text-white"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            AKSES DAN BENEFIT
           </h3>
-          <p className="text-xs text-[#8F8E8B] leading-relaxed">
-            Unggah tautan video reels/TikTok/YouTube setelah festival berlangsung untuk akumulasi poin di leaderboard kreator resmi.
+          <p className="text-xs sm:text-sm text-[#8F8E8B] leading-relaxed">
+            Kreator dan jurnalis terverifikasi memperoleh ID pass arena, akses media center, dan hak peliputan.
           </p>
         </div>
       </div>
 
-      {/* Registration & Accreditation Form Box */}
-      <div className="bg-[#141416] border border-white/10 p-8 sm:p-10 max-w-3xl mx-auto space-y-8">
-        
-        {/* Tab Switcher */}
-        <div className="flex border-b border-white/10 pb-4 gap-4">
+      {/* Mode Switcher */}
+      <div className="space-y-8">
+        <div className="flex items-center gap-3 border-b border-white/10 pb-4">
           <button
             type="button"
-            onClick={() => { setActiveFormTab("creator"); setFeedback(null); }}
-            className={`text-xs font-display font-extrabold uppercase tracking-wider pb-2 border-b-2 transition-colors ${
-              activeFormTab === "creator"
-                ? "border-[#D91F2C] text-[#F4F0E8]"
-                : "border-transparent text-[#8F8E8B] hover:text-[#F4F0E8]"
+            onClick={() => {
+              setActiveTab("creator");
+              setFeedback(null);
+            }}
+            className={`px-5 py-2.5 text-xs sm:text-sm font-display font-black uppercase tracking-wider transition-colors ${
+              activeTab === "creator"
+                ? "bg-[#D91F2C] text-white"
+                : "text-[#8F8E8B] hover:text-white"
             }`}
             style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
@@ -134,11 +135,14 @@ export default function CreatorClient({
           </button>
           <button
             type="button"
-            onClick={() => { setActiveFormTab("media"); setFeedback(null); }}
-            className={`text-xs font-display font-extrabold uppercase tracking-wider pb-2 border-b-2 transition-colors ${
-              activeFormTab === "media"
-                ? "border-[#D91F2C] text-[#F4F0E8]"
-                : "border-transparent text-[#8F8E8B] hover:text-[#F4F0E8]"
+            onClick={() => {
+              setActiveTab("media");
+              setFeedback(null);
+            }}
+            className={`px-5 py-2.5 text-xs sm:text-sm font-display font-black uppercase tracking-wider transition-colors ${
+              activeTab === "media"
+                ? "bg-[#D91F2C] text-white"
+                : "text-[#8F8E8B] hover:text-white"
             }`}
             style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
@@ -149,186 +153,167 @@ export default function CreatorClient({
         {/* Feedback Alert */}
         {feedback && (
           <div
-            className={`p-4 text-xs font-mono border ${
+            className={`p-4 text-xs font-mono flex items-center gap-2 ${
               feedback.type === "success"
-                ? "bg-green-950/40 border-green-500/30 text-green-300"
-                : "bg-red-950/40 border-red-500/30 text-red-300"
+                ? "bg-emerald-950/40 border border-emerald-500/30 text-emerald-300"
+                : "bg-red-950/40 border border-red-500/30 text-red-300"
             }`}
           >
-            {feedback.text}
+            {feedback.type === "success" ? <CheckCircle2 className="w-4 h-4" /> : <AlertCircle className="w-4 h-4" />}
+            <span>{feedback.text}</span>
           </div>
         )}
 
-        {/* Creator Form */}
-        {activeFormTab === "creator" ? (
-          <form onSubmit={handleRegister} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Creator Registration Form */}
+        {activeTab === "creator" && (
+          <form onSubmit={handleRegister} className="max-w-2xl space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="space-y-1">
-                <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">NAMA LENGKAP</label>
+                <label className="text-[11px] font-mono uppercase text-[#8F8E8B] block">Nama Lengkap</label>
                 <input
                   type="text"
                   name="name"
                   required
-                  placeholder="Nama Lengkap / Alias"
-                  className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+                  placeholder="Nama sesuai identitas"
+                  className="w-full bg-[#141416] border border-white/10 px-4 py-3 text-sm text-white placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">KATEGORI KONTEN</label>
-                <select
-                  name="category"
-                  className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
-                >
-                  <option value="SPORTS">Olahraga & Combat</option>
-                  <option value="LIFESTYLE">Lifestyle & Pemuda</option>
-                  <option value="MUSIC">Musik & Entertainment</option>
-                  <option value="PHOTO">Fotografi / Sinematografi</option>
-                </select>
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">INSTAGRAM (HANDLE)</label>
+                <label className="text-[11px] font-mono uppercase text-[#8F8E8B] block">Email Aktif</label>
                 <input
-                  type="text"
-                  name="instagram"
-                  placeholder="@username"
-                  className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">TIKTOK (HANDLE)</label>
-                <input
-                  type="text"
-                  name="tiktok"
-                  placeholder="@username"
-                  className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="email@domain.com"
+                  className="w-full bg-[#141416] border border-white/10 px-4 py-3 text-sm text-white placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
                 />
               </div>
             </div>
 
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div className="space-y-1">
+                <label className="text-[11px] font-mono uppercase text-[#8F8E8B] block">Instagram</label>
+                <input
+                  type="text"
+                  name="instagram"
+                  placeholder="@username"
+                  className="w-full bg-[#141416] border border-white/10 px-4 py-3 text-sm text-white placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-[11px] font-mono uppercase text-[#8F8E8B] block">TikTok</label>
+                <input
+                  type="text"
+                  name="tiktok"
+                  placeholder="@username"
+                  className="w-full bg-[#141416] border border-white/10 px-4 py-3 text-sm text-white placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-[11px] font-mono uppercase text-[#8F8E8B] block">Kategori Konten</label>
+                <select
+                  name="category"
+                  className="w-full bg-[#141416] border border-white/10 px-4 py-3 text-sm text-white focus:outline-none focus:border-[#D91F2C]"
+                >
+                  <option value="COMBAT">Combat Sports / Olahraga</option>
+                  <option value="MUSIC">Music & Festival Lifestyle</option>
+                  <option value="COMMUNITY">Youth Community & Culture</option>
+                </select>
+              </div>
+            </div>
+
             <div className="space-y-1">
-              <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">RENCANA LIPUTAN / BIO SINGKAT</label>
+              <label className="text-[11px] font-mono uppercase text-[#8F8E8B] block">Deskripsi Portofolio / Bio</label>
               <textarea
                 name="bio"
                 rows={3}
-                placeholder="Ceritakan rencana liputan dan konten yang akan Anda buat di JKBF 2026..."
-                className="w-full bg-[#0B0B0B] border border-white/10 p-3 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+                placeholder="Jelaskan secara singkat rencana peliputan atau karya yang akan Anda buat..."
+                className="w-full bg-[#141416] border border-white/10 px-4 py-3 text-sm text-white placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
               />
             </div>
 
             <button
               type="submit"
               disabled={isPending}
-              className="v9-btn-red text-xs font-display font-black tracking-wider w-full py-3"
+              className="font-display font-extrabold text-sm uppercase tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] px-8 py-3.5 transition-colors disabled:opacity-50"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
-              <span>{isPending ? "MEMPROSES PENDAFTARAN..." : "KIRIM PENDAFTARAN KREATOR"}</span>
-              <span>↗</span>
+              {isPending ? "MEMPROSES PENDAFTARAN..." : "KIRIM PENDAFTARAN KREATOR ↗"}
             </button>
           </form>
-        ) : (
-          <form onSubmit={handleMediaApply} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        )}
+
+        {/* Media Accreditation Form */}
+        {activeTab === "media" && (
+          <form onSubmit={handleMediaApply} className="max-w-2xl space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="space-y-1">
-                <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">NAMA JURNALIS / FOTOGRAFER</label>
+                <label className="text-[11px] font-mono uppercase text-[#8F8E8B] block">Nama Jurnalis / Fotografer</label>
                 <input
                   type="text"
-                  name="name"
+                  name="applicantName"
                   required
-                  placeholder="Nama Lengkap"
-                  className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+                  placeholder="Nama sesuai kartu pers"
+                  className="w-full bg-[#141416] border border-white/10 px-4 py-3 text-sm text-white placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">NAMA MEDIA / KANAL BERITA</label>
+                <label className="text-[11px] font-mono uppercase text-[#8F8E8B] block">Nama Media / Redaksi</label>
                 <input
                   type="text"
                   name="mediaOutlet"
                   required
-                  placeholder="Nama Kantor Berita / Media"
-                  className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+                  placeholder="Kantor redaksi / media pers"
+                  className="w-full bg-[#141416] border border-white/10 px-4 py-3 text-sm text-white placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
                 />
               </div>
+            </div>
 
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="space-y-1">
-                <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">EMAIL REDAKSI</label>
+                <label className="text-[11px] font-mono uppercase text-[#8F8E8B] block">Email Resmi Redaksi</label>
                 <input
                   type="email"
-                  name="email"
+                  name="applicantEmail"
                   required
-                  placeholder="redaksi@media.com"
-                  className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+                  placeholder="jurnalis@media.co.id"
+                  className="w-full bg-[#141416] border border-white/10 px-4 py-3 text-sm text-white placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">NOMOR WHATSAPP</label>
+                <label className="text-[11px] font-mono uppercase text-[#8F8E8B] block">Nomor WhatsApp / Kontak</label>
                 <input
-                  type="tel"
-                  name="phone"
+                  type="text"
+                  name="applicantPhone"
                   required
-                  placeholder="0812xxxxxxxx"
-                  className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+                  placeholder="08xxxxxxxxxx"
+                  className="w-full bg-[#141416] border border-white/10 px-4 py-3 text-sm text-white placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
                 />
               </div>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[11px] font-mono uppercase text-[#8F8E8B] block">Tautan Penugasan Liputan / Portofolio</label>
+              <input
+                type="url"
+                name="coveragePlanUrl"
+                placeholder="https://drive.google.com/... atau tautan artikel liputan"
+                className="w-full bg-[#141416] border border-white/10 px-4 py-3 text-sm text-white placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+              />
             </div>
 
             <button
               type="submit"
               disabled={isPending}
-              className="v9-btn-red text-xs font-display font-black tracking-wider w-full py-3"
+              className="font-display font-extrabold text-sm uppercase tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] px-8 py-3.5 transition-colors disabled:opacity-50"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
             >
-              <span>{isPending ? "MEMPROSES PENGAJUAN..." : "AJUKAN AKREDITASI PERS"}</span>
-              <span>↗</span>
+              {isPending ? "MEMPROSES PENGAJUAN..." : "AJUKAN AKREDITASI PERS ↗"}
             </button>
           </form>
-        )}
-
-      </div>
-
-      {/* Leaderboard Table Preview */}
-      <div className="space-y-6">
-        <div className="border-b border-white/10 pb-3 flex justify-between items-baseline">
-          <div>
-            <span className="v9-overline text-[#D91F2C]">PERINGKAT KREATOR</span>
-            <h2 className="v9-display-title text-3xl text-[#F4F0E8] mt-1" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-              LEADERBOARD KONTEN RESMI
-            </h2>
-          </div>
-          <Link
-            href="/creator/dashboard"
-            className="text-xs font-mono text-[#D91F2C] hover:underline uppercase"
-          >
-            LIHAT SEMUA DETAIL ↗
-          </Link>
-        </div>
-
-        {creators.length === 0 ? (
-          <div className="p-12 text-center bg-[#141416] border border-white/10 text-xs font-mono text-[#8F8E8B]">
-            BELUM ADA KREATOR TERAKREDITASI
-          </div>
-        ) : (
-          <div className="border border-white/10 divide-y divide-white/10 bg-[#141416]">
-            {creators.map((c, idx) => (
-              <div key={c.id} className="p-4 sm:p-5 flex items-center justify-between text-xs font-mono">
-                <div className="flex items-center gap-4">
-                  <span className="font-bold text-[#D91F2C] w-6">#{idx + 1}</span>
-                  <div>
-                    <span className="font-bold text-[#F4F0E8] block text-sm">{c.name}</span>
-                    <span className="text-[10px] text-[#8F8E8B]">
-                      {c.instagram ? `@${c.instagram}` : c.category || "CREATOR"}
-                    </span>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <span className="font-bold text-[#F4F0E8] text-sm">{c.totalPoints} PTS</span>
-                  <span className="text-[10px] text-[#8F8E8B] block">{c.submissions.length} SUBMISI</span>
-                </div>
-              </div>
-            ))}
-          </div>
         )}
       </div>
 

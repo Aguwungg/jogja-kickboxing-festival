@@ -4,7 +4,7 @@ import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart, formatRupiah } from "@/lib/cart-context";
-import { ShoppingBag, ArrowUpRight, Search } from "lucide-react";
+import { ArrowUpRight, Search } from "lucide-react";
 
 interface Variant {
   id: string;
@@ -34,7 +34,6 @@ export default function MerchCatalogClient({ initialProducts }: Props) {
   const { addItem } = useCart();
   const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [sortBy, setSortBy] = useState<string>("FEATURED");
 
   const categories = [
     { id: "ALL", label: "SEMUA KOLEKSI" },
@@ -43,22 +42,15 @@ export default function MerchCatalogClient({ initialProducts }: Props) {
   ];
 
   const filteredProducts = useMemo(() => {
-    return initialProducts
-      .filter((p) => {
-        const matchesCategory =
-          selectedCategory === "ALL" || p.category === selectedCategory;
-        const matchesSearch =
-          p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          (p.material && p.material.toLowerCase().includes(searchQuery.toLowerCase()));
-        return matchesCategory && matchesSearch;
-      })
-      .sort((a, b) => {
-        if (sortBy === "PRICE_LOW") return a.price - b.price;
-        if (sortBy === "PRICE_HIGH") return b.price - a.price;
-        return 0;
-      });
-  }, [initialProducts, selectedCategory, searchQuery, sortBy]);
+    return initialProducts.filter((p) => {
+      const matchesCategory =
+        selectedCategory === "ALL" || p.category === selectedCategory;
+      const matchesSearch =
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.description.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [initialProducts, selectedCategory, searchQuery]);
 
   const handleQuickAdd = (product: Product, e: React.MouseEvent) => {
     e.preventDefault();
@@ -79,13 +71,13 @@ export default function MerchCatalogClient({ initialProducts }: Props) {
   };
 
   return (
-    <div className="w-full space-y-10 font-sans">
+    <div className="w-full space-y-12 font-sans">
       
-      {/* Search and Category Filter Ribbon */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+      {/* Search and Category Filters */}
+      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6 pb-6 border-b border-black/10">
         
-        {/* Categories Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
+        {/* Category Tabs */}
+        <div className="flex flex-wrap items-center gap-2">
           {categories.map((c) => {
             const isActive = selectedCategory === c.id;
             return (
@@ -93,10 +85,10 @@ export default function MerchCatalogClient({ initialProducts }: Props) {
                 key={c.id}
                 type="button"
                 onClick={() => setSelectedCategory(c.id)}
-                className={`px-4 py-2 text-xs font-display font-extrabold uppercase tracking-wider transition-colors whitespace-nowrap ${
+                className={`px-4 sm:px-6 py-2.5 text-xs font-display font-black uppercase tracking-wider transition-all ${
                   isActive
-                    ? "bg-[#D91F2C] text-white"
-                    : "bg-[#141416] text-[#8F8E8B] hover:text-[#F4F0E8] border border-white/5"
+                    ? "bg-[#0B0B0B] text-white"
+                    : "bg-transparent text-[#0B0B0B] hover:bg-black/5 border border-black/20"
                 }`}
                 style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
               >
@@ -106,102 +98,93 @@ export default function MerchCatalogClient({ initialProducts }: Props) {
           })}
         </div>
 
-        {/* Search Input */}
+        {/* Search */}
         <div className="relative w-full md:w-72">
           <Search className="w-4 h-4 text-[#8F8E8B] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Cari produk apparel..."
-            className="w-full bg-[#141416] border border-white/10 pl-9 pr-4 py-2 text-xs text-[#F4F0E8] placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C]"
+            placeholder="Cari apparel atau aksesoris..."
+            className="w-full bg-white/70 border border-black/20 pl-9 pr-4 py-2 text-xs text-[#0B0B0B] placeholder-[#8F8E8B] focus:outline-none focus:border-[#D91F2C]"
           />
         </div>
-
       </div>
 
-      {/* Products Grid */}
+      {/* Product Grid */}
       {filteredProducts.length === 0 ? (
-        <div className="p-16 text-center bg-[#141416] border border-white/10 space-y-3 max-w-md mx-auto">
-          <ShoppingBag className="w-8 h-8 text-[#8F8E8B] mx-auto" />
-          <h3 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-            TIDAK ADA PRODUK
+        <div className="py-24 text-center border-t border-b border-black/10 space-y-3">
+          <h3
+            className="text-2xl sm:text-3xl font-black uppercase text-[#0B0B0B]"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            PRODUK SEGERA HADIR
           </h3>
-          <p className="text-xs text-[#8F8E8B]">
-            Tidak ada produk yang cocok dengan kata kunci pencarian.
+          <p className="text-sm text-[#5A5957] max-w-md mx-auto">
+            Katalog merchandise sedang dalam proses kurasi dan penyiapan kuota rilis resmi.
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
           {filteredProducts.map((p) => {
-            const totalStock = p.variants.reduce((acc, v) => acc + v.stockQuantity, 0);
-            const isOutOfStock = totalStock <= 0;
+            const defaultVariant = p.variants[0];
+            const hasStock = defaultVariant && defaultVariant.stockQuantity > 0;
 
             return (
               <Link
                 key={p.id}
                 href={`/merch/${p.slug}`}
-                className="group bg-[#141416] border border-white/10 hover:border-[#D91F2C] flex flex-col justify-between transition-colors overflow-hidden"
+                className="group border border-black/10 bg-white/40 hover:bg-white/80 p-6 flex flex-col justify-between transition-all"
               >
-                {/* Product Image */}
-                <div className="h-72 sm:h-80 bg-[#0B0B0B] relative overflow-hidden">
-                  {p.imageUrl ? (
+                <div>
+                  <div className="relative aspect-square w-full bg-[#141416] mb-5 overflow-hidden">
                     <Image
-                      src={p.imageUrl}
+                      src={p.imageUrl || "/images/v9/08_REFERENSI_FOTO_DAN_TEKSTUR.png"}
                       alt={p.name}
                       fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover object-center grayscale contrast-125 group-hover:scale-105 transition-transform duration-300"
                     />
-                  ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center text-white/5 font-display text-8xl font-black">
-                      JKBF
-                    </div>
-                  )}
+                    {p.badge && (
+                      <div className="absolute top-3 left-3 bg-[#D91F2C] text-white px-2.5 py-0.5 text-[10px] font-mono font-bold tracking-widest uppercase">
+                        {p.badge}
+                      </div>
+                    )}
+                  </div>
 
-                  {/* Badge */}
-                  {p.badge && (
-                    <div className="absolute top-3 left-3 bg-[#D91F2C] text-white px-2 py-0.5 text-[10px] font-mono uppercase tracking-widest font-bold">
-                      {p.badge}
-                    </div>
-                  )}
-
-                  {isOutOfStock && (
-                    <div className="absolute inset-0 bg-[#0B0B0B]/80 flex items-center justify-center">
-                      <span className="font-mono text-xs font-bold text-[#D91F2C] uppercase tracking-widest">
-                        HABIS TERJUAL
-                      </span>
-                    </div>
-                  )}
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#D91F2C] block">
+                    {p.category}
+                  </span>
+                  <h3
+                    className="text-2xl font-black uppercase tracking-tight text-[#0B0B0B] group-hover:text-[#D91F2C] transition-colors mt-1"
+                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                  >
+                    {p.name}
+                  </h3>
+                  <p className="text-xs text-[#5A5957] line-clamp-2 mt-1 font-sans">
+                    {p.description}
+                  </p>
                 </div>
 
-                {/* Product Details */}
-                <div className="p-5 space-y-3 flex flex-col justify-between flex-1">
-                  <div>
-                    <span className="text-[10px] text-[#8F8E8B] font-mono uppercase tracking-widest block">
-                      {p.category}
-                    </span>
-                    <h3
-                      className="v9-display-title text-xl text-[#F4F0E8] group-hover:text-white transition-colors mt-0.5"
-                      style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                <div className="pt-6 mt-6 border-t border-black/10 flex items-center justify-between">
+                  <span className="text-base font-black text-[#0B0B0B] font-mono">
+                    {formatRupiah(p.price)}
+                  </span>
+                  
+                  {hasStock ? (
+                    <button
+                      type="button"
+                      onClick={(e) => handleQuickAdd(p, e)}
+                      className="px-4 py-1.5 bg-[#0B0B0B] hover:bg-[#D91F2C] text-white text-[11px] font-mono uppercase tracking-wider transition-colors"
                     >
-                      {p.name}
-                    </h3>
-                    <p className="text-xs text-[#8F8E8B] line-clamp-1 font-sans mt-1">
-                      {p.material || p.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between font-mono">
-                    <span className="text-sm font-bold text-[#F4F0E8]">
-                      {formatRupiah(p.price)}
+                      + KERANJANG
+                    </button>
+                  ) : (
+                    <span className="text-xs text-[#8F8E8B] font-mono uppercase">
+                      HABIS
                     </span>
-                    <span className="text-xs text-[#D91F2C] font-bold group-hover:translate-x-1 transition-transform flex items-center gap-0.5">
-                      DETAIL ↗
-                    </span>
-                  </div>
+                  )}
                 </div>
-
               </Link>
             );
           })}

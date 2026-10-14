@@ -6,14 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart, formatRupiah } from "@/lib/cart-context";
 import { createOrderAction } from "@/app/(public)/checkout/actions";
-import {
-  ShoppingBag,
-  Truck,
-  MapPin,
-  ShieldCheck,
-  ArrowRight,
-  AlertCircle,
-} from "lucide-react";
+import { AlertCircle } from "lucide-react";
 
 export default function CheckoutClient() {
   const router = useRouter();
@@ -99,22 +92,28 @@ export default function CheckoutClient() {
         setIsSubmitting(false);
       }
     } catch {
-      setErrorMessage("Terjadi kesalahan sistem. Silakan coba kembali sesaat lagi.");
+      setErrorMessage("Terjadi gangguan koneksi ke server. Coba lagi.");
       setIsSubmitting(false);
     }
   };
 
   if (items.length === 0) {
     return (
-      <div className="p-16 text-center bg-[#141416] border border-white/10 space-y-4 max-w-md mx-auto">
-        <ShoppingBag className="w-8 h-8 text-[#8F8E8B] mx-auto" />
-        <h3 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
+      <div className="py-24 text-center border-t border-b border-black/10 space-y-4 max-w-lg mx-auto">
+        <h3
+          className="text-2xl sm:text-3xl font-black uppercase text-[#0B0B0B]"
+          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+        >
           KERANJANG BELANJA KOSONG
         </h3>
-        <p className="text-xs text-[#8F8E8B]">
-          Pilih produk merchandise resmi festival terlebih dahulu sebelum melanjutkan checkout.
+        <p className="text-sm text-[#5A5957]">
+          Anda belum memilih apparel atau official merchandise untuk dipesan.
         </p>
-        <Link href="/merch" className="v9-btn-red text-xs inline-flex">
+        <Link
+          href="/merch"
+          className="inline-block px-7 py-3.5 bg-[#0B0B0B] text-white text-xs font-bold uppercase tracking-wider font-display"
+          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+        >
           LIHAT KATALOG MERCHANDISE ↗
         </Link>
       </div>
@@ -122,152 +121,133 @@ export default function CheckoutClient() {
   }
 
   return (
-    <form onSubmit={handleSubmitOrder} className="grid grid-cols-1 lg:grid-cols-12 gap-10 font-sans">
+    <form onSubmit={handleSubmitOrder} className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 font-sans">
       
-      {/* Left Column: Customer and Delivery Details */}
-      <div className="lg:col-span-7 space-y-8">
+      {/* Left: Customer & Shipping Details */}
+      <div className="lg:col-span-7 space-y-10">
         
         {/* Contact Info */}
-        <div className="p-6 sm:p-8 bg-[#141416] border border-white/10 space-y-4">
-          <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">
-            LANGKAH 01
-          </span>
-          <h2 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-            DATA PEMESAN
-          </h2>
+        <div className="space-y-5">
+          <div className="border-b border-black/10 pb-3">
+            <span className="text-xs uppercase font-mono font-bold tracking-widest text-[#D91F2C]">
+              LANGKAH 01
+            </span>
+            <h3
+              className="text-2xl font-black uppercase text-[#0B0B0B]"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              IDENTITAS PEMESAN
+            </h3>
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-1 sm:col-span-2">
-              <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">NAMA LENGKAP</label>
+          <div className="space-y-4">
+            <div className="space-y-1">
+              <label className="text-xs font-mono uppercase text-[#5A5957] block">Nama Lengkap *</label>
               <input
                 type="text"
                 required
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
-                placeholder="Nama Lengkap"
-                className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
+                placeholder="Nama sesuai KTP/ID"
+                className="w-full bg-white/70 border border-black/20 px-4 py-3 text-sm text-[#0B0B0B] placeholder-[#8F8E8B] focus:outline-none focus:border-[#D91F2C]"
               />
             </div>
 
-            <div className="space-y-1">
-              <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">EMAIL KONFIRMASI</label>
-              <input
-                type="email"
-                required
-                value={guestEmail}
-                onChange={(e) => setGuestEmail(e.target.value)}
-                placeholder="email@anda.com"
-                className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
-              />
-            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="text-xs font-mono uppercase text-[#5A5957] block">Email Aktif *</label>
+                <input
+                  type="email"
+                  required
+                  value={guestEmail}
+                  onChange={(e) => setGuestEmail(e.target.value)}
+                  placeholder="email@domain.com"
+                  className="w-full bg-white/70 border border-black/20 px-4 py-3 text-sm text-[#0B0B0B] placeholder-[#8F8E8B] focus:outline-none focus:border-[#D91F2C]"
+                />
+              </div>
 
-            <div className="space-y-1">
-              <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">WHATSAPP / NO. HP</label>
-              <input
-                type="tel"
-                required
-                value={customerPhone}
-                onChange={(e) => setCustomerPhone(e.target.value)}
-                placeholder="0812xxxxxxxx"
-                className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
-              />
+              <div className="space-y-1">
+                <label className="text-xs font-mono uppercase text-[#5A5957] block">Nomor WhatsApp *</label>
+                <input
+                  type="tel"
+                  required
+                  value={customerPhone}
+                  onChange={(e) => setCustomerPhone(e.target.value)}
+                  placeholder="08xxxxxxxxxx"
+                  className="w-full bg-white/70 border border-black/20 px-4 py-3 text-sm text-[#0B0B0B] placeholder-[#8F8E8B] focus:outline-none focus:border-[#D91F2C]"
+                />
+              </div>
             </div>
           </div>
         </div>
 
         {/* Delivery Method */}
-        <div className="p-6 sm:p-8 bg-[#141416] border border-white/10 space-y-4">
-          <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">
-            LANGKAH 02
-          </span>
-          <h2 className="v9-display-title text-2xl text-[#F4F0E8]" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-            METODE PENERIMAAN
-          </h2>
+        <div className="space-y-5">
+          <div className="border-b border-black/10 pb-3">
+            <span className="text-xs uppercase font-mono font-bold tracking-widest text-[#D91F2C]">
+              LANGKAH 02
+            </span>
+            <h3
+              className="text-2xl font-black uppercase text-[#0B0B0B]"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              METODE PENGAMBILAN / PENGIRIMAN
+            </h3>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <button
-              type="button"
+            <div
               onClick={() => setDeliveryMethod("PICKUP_VENUE")}
-              className={`p-4 border text-left transition-colors ${
+              className={`p-5 border cursor-pointer transition-colors ${
                 deliveryMethod === "PICKUP_VENUE"
-                  ? "border-[#D91F2C] bg-[#0B0B0B]"
-                  : "border-white/10 bg-[#0B0B0B]/50 hover:border-white/20"
+                  ? "bg-black/5 border-black"
+                  : "border-black/20 bg-white/40 hover:bg-white/70"
               }`}
             >
-              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#F4F0E8]">
-                <MapPin className="w-4 h-4 text-[#D91F2C]" />
-                <span>PICK-UP DI GOR UNY</span>
-              </div>
-              <p className="text-[10px] text-[#8F8E8B] mt-1">
-                Ambil langsung di booth merchandise (Gratis).
-              </p>
-            </button>
+              <span className="text-[10px] font-mono font-bold text-[#D91F2C] uppercase block">GRATIS ONGKIR</span>
+              <p className="font-black text-base uppercase text-[#0B0B0B] mt-1">PICK-UP DI GOR UNY</p>
+              <p className="text-xs text-[#5A5957] mt-1">Ambil langsung di Booth Merchandise festival saat hari H (12—14 Des 2026).</p>
+            </div>
 
-            <button
-              type="button"
+            <div
               onClick={() => setDeliveryMethod("EXPEDITION")}
-              className={`p-4 border text-left transition-colors ${
+              className={`p-5 border cursor-pointer transition-colors ${
                 deliveryMethod === "EXPEDITION"
-                  ? "border-[#D91F2C] bg-[#0B0B0B]"
-                  : "border-white/10 bg-[#0B0B0B]/50 hover:border-white/20"
+                  ? "bg-black/5 border-black"
+                  : "border-black/20 bg-white/40 hover:bg-white/70"
               }`}
             >
-              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#F4F0E8]">
-                <Truck className="w-4 h-4 text-[#D91F2C]" />
-                <span>PENGIRIMAN EKSPEDISI</span>
-              </div>
-              <p className="text-[10px] text-[#8F8E8B] mt-1">
-                Dikirim via JNE/J&T ke alamat rumah.
-              </p>
-            </button>
+              <span className="text-[10px] font-mono font-bold text-[#5A5957] uppercase block">PENGIRIMAN RUMAH</span>
+              <p className="font-black text-base uppercase text-[#0B0B0B] mt-1">EKSPEDISI JNE / J&T</p>
+              <p className="text-xs text-[#5A5957] mt-1">Dikirim ke alamat lengkap seluruh Indonesia pasca-sesi festival.</p>
+            </div>
           </div>
 
           {deliveryMethod === "EXPEDITION" && (
-            <div className="space-y-4 pt-4 border-t border-white/5">
+            <div className="p-6 bg-white/60 border border-black/15 space-y-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">WILAYAH TUJUAN</label>
+                <label className="text-xs font-mono uppercase text-[#5A5957] block">Wilayah Pengiriman</label>
                 <select
                   value={shippingRegion}
                   onChange={(e) => setShippingRegion(e.target.value)}
-                  className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
+                  className="w-full bg-white border border-black/20 px-3 py-2 text-xs text-[#0B0B0B]"
                 >
                   <option value="DIY_JATENG">D.I. Yogyakarta & Jawa Tengah (Rp 15.000)</option>
-                  <option value="JAWA">Pulau Jawa Lainnya (Rp 25.000)</option>
+                  <option value="JAWA">Pulau Jawa (Jabar, Jatim, DKI, Banten) (Rp 25.000)</option>
                   <option value="LUAR_JAWA">Luar Pulau Jawa (Rp 45.000)</option>
                 </select>
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">ALAMAT LENGKAP PENGIRIMAN</label>
+                <label className="text-xs font-mono uppercase text-[#5A5957] block">Alamat Lengkap *</label>
                 <textarea
-                  required
                   rows={2}
+                  required
                   value={shippingAddress}
                   onChange={(e) => setShippingAddress(e.target.value)}
-                  placeholder="Nama jalan, RT/RW, nomor rumah, kelurahan, kecamatan"
-                  className="w-full bg-[#0B0B0B] border border-white/10 p-3 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
+                  placeholder="Nama jalan, nomor rumah, RT/RW, kelurahan, kecamatan..."
+                  className="w-full bg-white border border-black/20 px-4 py-2.5 text-xs text-[#0B0B0B] focus:outline-none"
                 />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1">
-                  <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">KOTA / KABUPATEN</label>
-                  <input
-                    type="text"
-                    value={shippingCity}
-                    onChange={(e) => setShippingCity(e.target.value)}
-                    className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-mono uppercase tracking-widest text-[#8F8E8B] block">KODE POS</label>
-                  <input
-                    type="text"
-                    value={shippingPostalCode}
-                    onChange={(e) => setShippingPostalCode(e.target.value)}
-                    className="w-full bg-[#0B0B0B] border border-white/10 px-3.5 py-2.5 text-xs text-[#F4F0E8] focus:outline-none focus:border-[#D91F2C]"
-                  />
-                </div>
               </div>
             </div>
           )}
@@ -275,58 +255,66 @@ export default function CheckoutClient() {
 
       </div>
 
-      {/* Right Column: Order Summary */}
+      {/* Right: Order Summary */}
       <div className="lg:col-span-5 space-y-6">
-        <div className="p-6 sm:p-8 bg-[#141416] border border-white/10 space-y-6 sticky top-24">
-          <span className="v9-overline text-[#D91F2C]">RINGKASAN PESANAN</span>
+        <div className="border border-black/15 bg-white/60 p-6 sm:p-8 space-y-6">
+          <h3
+            className="text-2xl font-black uppercase text-[#0B0B0B] border-b border-black/10 pb-4"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            RINGKASAN PESANAN
+          </h3>
 
-          {/* Cart Items List */}
-          <div className="divide-y divide-white/10 max-h-60 overflow-y-auto pr-1">
-            {items.map((i) => (
-              <div key={i.variantId} className="py-3 flex justify-between gap-3 text-xs font-mono">
+          <div className="divide-y divide-black/10 max-h-60 overflow-y-auto">
+            {items.map((item) => (
+              <div key={item.variantId} className="py-3 flex items-center justify-between text-xs">
                 <div>
-                  <span className="text-[#F4F0E8] font-bold block">{i.name}</span>
-                  <span className="text-[10px] text-[#8F8E8B]">
-                    {i.size} × {i.quantity}
-                  </span>
+                  <p className="font-bold text-[#0B0B0B] uppercase">{item.name}</p>
+                  <p className="text-[11px] text-[#5A5957] font-mono">
+                    Ukuran: {item.size || "All Size"} • Qty: {item.quantity}
+                  </p>
                 </div>
-                <span className="text-[#F4F0E8] font-bold">
-                  {formatRupiah(i.price * i.quantity)}
+                <span className="font-mono font-bold text-[#0B0B0B]">
+                  {formatRupiah(item.price * item.quantity)}
                 </span>
               </div>
             ))}
           </div>
 
-          {/* Calculation */}
-          <div className="border-t border-white/10 pt-4 space-y-2 text-xs font-mono">
-            <div className="flex justify-between text-[#8F8E8B]">
-              <span>SUBTOTAL PRODUK</span>
+          <div className="border-t border-black/10 pt-4 space-y-2 text-xs font-mono">
+            <div className="flex justify-between text-[#5A5957]">
+              <span>Subtotal Produk:</span>
               <span>{formatRupiah(subtotal)}</span>
             </div>
-            <div className="flex justify-between text-[#8F8E8B]">
-              <span>ONGKOS KIRIM</span>
-              <span>{deliveryMethod === "PICKUP_VENUE" ? "GRATIS" : formatRupiah(shippingCost)}</span>
+            <div className="flex justify-between text-[#5A5957]">
+              <span>Biaya Pengiriman:</span>
+              <span>{shippingCost === 0 ? "GRATIS" : formatRupiah(shippingCost)}</span>
             </div>
-            <div className="flex justify-between text-[#F4F0E8] text-sm font-bold pt-2 border-t border-white/5">
-              <span>TOTAL PEMBAYARAN</span>
-              <span className="text-[#D91F2C]">{formatRupiah(finalTotal)}</span>
+            <div className="flex justify-between text-base font-black text-[#0B0B0B] pt-2 border-t border-black/10">
+              <span>TOTAL PEMBAYARAN:</span>
+              <span>{formatRupiah(finalTotal)}</span>
             </div>
           </div>
 
           {errorMessage && (
-            <div className="p-3 bg-red-950/40 border border-red-500/30 text-red-300 text-xs font-mono">
-              {errorMessage}
+            <div className="p-3 bg-red-100 border border-red-300 text-xs font-mono text-red-800 flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              <span>{errorMessage}</span>
             </div>
           )}
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="v9-btn-red text-xs font-display font-black tracking-wider w-full py-4"
+            className="w-full font-display font-extrabold text-sm uppercase tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] disabled:opacity-50 py-4 transition-colors"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
-            <span>{isSubmitting ? "MEMPROSES PESANAN..." : "KONFIRMASI PESANAN SEKARANG"}</span>
-            <span>↗</span>
+            {isSubmitting ? "MEMPROSES PESANAN..." : "KONFIRMASI & BAYAR ↗"}
           </button>
+
+          <p className="text-[10px] font-mono text-[#8F8E8B] text-center leading-relaxed">
+            SIMULASI STAGING AKTIF • TIDAK ADA PENARIKAN SALDO NYATA
+          </p>
         </div>
       </div>
 

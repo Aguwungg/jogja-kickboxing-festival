@@ -1,156 +1,148 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Calendar, MapPin } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export const metadata = {
   title: "Tentang Festival — Di Balik Kalem | JKBF 2026",
   description: "Mengenal Jogja Kickboxing Festival & Redy Championship 2: Perpaduan kejuaraan tarung profesional dan festival musik pemuda di Yogyakarta.",
 };
 
+const PILLARS = [
+  {
+    number: "01",
+    title: "THE RING",
+    subtitle: "Pertarungan Kickboxing Profesional",
+    desc: "Kejuaraan bergengsi Redy Championship 2 dengan 4 divisi sabuk emas di bawah aturan standar K-1 Rules internasional.",
+    link: "/championship",
+  },
+  {
+    number: "02",
+    title: "THE STAGE",
+    subtitle: "Panggung Terbuka Festival Musik",
+    desc: "Tiga malam selebrasi musik dengan kurasi musisi indie rock, hip-hop, dan beat kontemporer pemuda Yogyakarta.",
+    link: "/lineup",
+  },
+  {
+    number: "03",
+    title: "THE CITY",
+    subtitle: "Gerakan Komunitas & City Pride",
+    desc: "Dukungan suporter wilayah Bantul, Sleman, Kota Jogja, Kulon Progo, dan Gunungkidul merayakan kebanggaan bersama.",
+    link: "/city-pride",
+  },
+];
+
 export default function TentangPage() {
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen text-[#F4F0E8] bg-[#0B0B0B] pt-24 pb-20">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#0B0B0B] text-[#F4F0E8] pt-24 lg:pt-28 pb-24 overflow-x-hidden">
       
-      {/* Editorial Header */}
-      <section className="relative w-full border-b border-white/10 py-16 md:py-24 bg-[#0B0B0B]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="v9-overline text-[#D91F2C]">
-            MANIFESTO FESTIVAL / #JOGJAPUNYANYALI
-          </span>
+      {/* ═════════════════════════════════════════════════════════════════════
+          1. EDITORIAL SPLIT MANIFESTO HERO (Matches 15_tentang.png)
+      ═════════════════════════════════════════════ */}
+      <section className="relative w-full border-b border-white/10 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 min-h-[480px] lg:min-h-[540px]">
+          
+          <div className="lg:col-span-7 py-12 lg:py-20 flex flex-col justify-center space-y-6">
+            <p
+              className="text-[#D91F2C] text-xs sm:text-sm font-extrabold uppercase tracking-[0.24em]"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              CERITA FESTIVAL • #JOGJAPUNYANYALI
+            </p>
 
-          <h1
-            className="v9-display-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#F4F0E8]"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            DI BALIK KALEM.
-          </h1>
+            <h1
+              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-[0.88] text-white"
+              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+            >
+              DI BALIK<br />
+              KALEM.
+            </h1>
 
-          <p className="text-base sm:text-lg text-[#F4F0E8] font-bold uppercase tracking-wider font-display">
-            ADA PERTARUNGAN. ADA ENERGI. ADA KEHORMATAN.
-          </p>
+            <p className="text-sm sm:text-base text-[#8F8E8B] font-sans max-w-lg leading-relaxed">
+              Ada semangat, musik, dan keberanian dari Jogja. Menyatukan disiplin olahraga tarung profesional dengan denyut panggung festival anak muda.
+            </p>
 
-          <p className="text-xs sm:text-sm text-[#8F8E8B] max-w-2xl leading-relaxed font-sans">
-            Yogyakarta kerap dikenal dengan ritme tenangnya. Namun di balik kesantunan budaya, tersimpan bara keberanian pemuda yang tak gentar di atas ring. Jogja Kickboxing Festival & Redy Championship 2 hadir menyatukan denyut sportivitas kickboxing profesional dengan dentuman panggung festival musik kontemporer.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-4 pt-2 text-xs font-mono">
-            <span className="flex items-center gap-1.5 text-[#F4F0E8]">
-              <Calendar className="w-3.5 h-3.5 text-[#D91F2C]" />
-              12—14 DESEMBER 2026
-            </span>
-            <span className="flex items-center gap-1.5 text-[#8F8E8B]">
-              <MapPin className="w-3.5 h-3.5 text-[#D91F2C]" />
-              GOR UNY, YOGYAKARTA
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* Editorial Story Section with Imagery */}
-      <section className="w-full py-16 border-b border-white/10 bg-[#141416]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <div className="lg:col-span-6 relative h-80 sm:h-96 bg-[#0B0B0B] border border-white/10 overflow-hidden">
-              <Image
-                src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
-                alt="Dokumentasi Kickboxing JKBF"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-center grayscale contrast-125"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-transparent to-transparent" />
-            </div>
-
-            <div className="lg:col-span-6 space-y-4">
-              <span className="v9-overline text-[#D91F2C]">01 / FILOSOFI KAMPANYE</span>
-              <h2
-                className="v9-display-title text-3xl sm:text-4xl text-[#F4F0E8]"
+            <div className="pt-2 flex flex-wrap gap-4">
+              <Link
+                href="/jadwal"
+                className="font-display font-extrabold text-xs sm:text-sm uppercase tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] px-7 py-3.5 transition-colors inline-flex items-center gap-1.5"
                 style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
               >
-                MENGAPA #JOGJAPUNYANYALI?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#8F8E8B] leading-relaxed font-sans">
-                #JOGJAPUNYANYALI bukan sekadar slogan media sosial. Ini adalah pernyataan sikap bahwa pemuda Yogyakarta memiliki daya juang tangguh, disiplin bela diri tinggi, dan respek tanpa pamrih. Ring kickboxing adalah tempat kejujuran tertinggi diuji.
-              </p>
-              <p className="text-xs sm:text-sm text-[#8F8E8B] leading-relaxed font-sans">
-                Setiap petarung yang melangkah melewati tali ring membawa nama sasana, keluarga, dan kehormatan wilayahnya. Kemenangan diraih bukan dengan amarah, melainkan presisi teknik dan ketabahan mental.
-              </p>
+                <span>JADWAL FESTIVAL ↗</span>
+              </Link>
             </div>
-
           </div>
+
+          <div className="lg:col-span-5 relative min-h-[300px] lg:min-h-full -mx-5 sm:-mx-8 lg:mx-0">
+            <Image
+              src="/images/v9/06_FOTO_KONSER_PLACEHOLDER_INTERNAL.png"
+              alt="Atmosfer Festival JKBF"
+              fill
+              sizes="(max-width: 1024px) 100vw, 40vw"
+              className="object-cover object-center grayscale contrast-125"
+            />
+          </div>
+
         </div>
       </section>
 
-      {/* 3 Pillars of Experience */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full space-y-12">
-        <div className="border-b border-white/10 pb-4">
-          <span className="v9-overline text-[#D91F2C]">STRUKTUR PENGALAMAN</span>
-          <h2
-            className="v9-display-title text-3xl sm:text-4xl text-[#F4F0E8] mt-1"
+      {/* ═════════════════════════════════════════════════════════════════════
+          2. 3 PILLARS OF EXPERIENCE
+      ═════════════════════════════════════════════ */}
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-20 w-full space-y-12">
+        <div className="space-y-3 pb-8 border-b border-white/10">
+          <p
+            className="text-[#D91F2C] text-xs font-extrabold uppercase tracking-[0.24em]"
             style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
-            TIGA PILAR UTAMA FESTIVAL
+            PENYELENGGARA • REDY CHAMPIONSHIP 2
+          </p>
+          <h2
+            className="text-4xl sm:text-5xl lg:text-7xl font-black uppercase tracking-tight text-white"
+            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+          >
+            SATU FESTIVAL. BANYAK CERITA.
           </h2>
+          <p className="text-sm text-[#8F8E8B] font-sans max-w-xl">
+            Tiga pilar pengalaman yang menjadikan Jogja Kickboxing Festival sebuah perayaan akbar olahraga dan seni di Yogyakarta.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          
-          {/* Pilar 1: The Ring */}
-          <div className="p-8 bg-[#141416] border border-white/10 space-y-4 flex flex-col justify-between">
-            <div className="space-y-3">
-              <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">01 / THE RING</span>
-              <h3 className="font-display font-black text-2xl text-[#F4F0E8] uppercase" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-                REDY CHAMPIONSHIP 2
-              </h3>
-              <p className="text-xs text-[#8F8E8B] leading-relaxed font-sans">
-                Kejuaraan kickboxing profesional dengan aturan ketat K-1 Rules. Mempertarungkan 4 sabuk emas bergengsi: Bantamweight, Featherweight, Lightweight, dan Welterweight.
+        {/* Clean 3 Pillars Rows */}
+        <div className="border-t border-white/10 divide-y divide-white/10">
+          {PILLARS.map((p) => (
+            <div
+              key={p.number}
+              className="py-10 grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-baseline transition-colors hover:bg-white/[0.02]"
+            >
+              <span className="text-[#D91F2C] font-mono text-sm sm:text-base font-bold md:col-span-1">
+                {p.number}
+              </span>
+              <div className="md:col-span-4 space-y-1">
+                <h3
+                  className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white"
+                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                >
+                  {p.title}
+                </h3>
+                <span className="text-xs uppercase font-mono text-[#8F8E8B]">{p.subtitle}</span>
+              </div>
+              <p className="text-sm text-[#8F8E8B] md:col-span-5 font-sans leading-relaxed">
+                {p.desc}
               </p>
+              <div className="md:col-span-2 text-left md:text-right">
+                <Link
+                  href={p.link}
+                  className="font-display font-black text-xs uppercase tracking-wider text-white hover:text-[#D91F2C] inline-flex items-center gap-1 transition-colors"
+                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                >
+                  <span>EKSPLORASI</span>
+                  <span>↗</span>
+                </Link>
+              </div>
             </div>
-            <div className="pt-4 border-t border-white/5">
-              <Link href="/championship" className="text-xs font-mono text-[#D91F2C] hover:underline flex items-center gap-1">
-                <span>DETAIL KEJUARAAN ↗</span>
-              </Link>
-            </div>
-          </div>
-
-          {/* Pilar 2: The Stage */}
-          <div className="p-8 bg-[#141416] border border-white/10 space-y-4 flex flex-col justify-between">
-            <div className="space-y-3">
-              <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">02 / THE STAGE</span>
-              <h3 className="font-display font-black text-2xl text-[#F4F0E8] uppercase" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-                LIVE MUSIC FESTIVAL
-              </h3>
-              <p className="text-xs text-[#8F8E8B] leading-relaxed font-sans">
-                Panggung musik anak muda yang menghadirkan performa band indie, musisi lokal Yogyakarta, dan panggung penutup spektakuler di malam grand final.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-white/5">
-              <Link href="/lineup" className="text-xs font-mono text-[#D91F2C] hover:underline flex items-center gap-1">
-                <span>LINEUP MUSIK ↗</span>
-              </Link>
-            </div>
-          </div>
-
-          {/* Pilar 3: The City */}
-          <div className="p-8 bg-[#141416] border border-white/10 space-y-4 flex flex-col justify-between">
-            <div className="space-y-3">
-              <span className="text-[10px] text-[#D91F2C] font-mono tracking-widest uppercase block">03 / THE CITY</span>
-              <h3 className="font-display font-black text-2xl text-[#F4F0E8] uppercase" style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}>
-                CITY PRIDE & KOMUNITAS
-              </h3>
-              <p className="text-xs text-[#8F8E8B] leading-relaxed font-sans">
-                Gerakan solidaritas pemuda lintas wilayah di D.I. Yogyakarta, pasar merchandise streetwear resmi, dan ruang temu kreator konten kreatif.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-white/5">
-              <Link href="/city-pride" className="text-xs font-mono text-[#D91F2C] hover:underline flex items-center gap-1">
-                <span>CITY PRIDE ↗</span>
-              </Link>
-            </div>
-          </div>
-
+          ))}
         </div>
+
       </section>
 
     </main>
