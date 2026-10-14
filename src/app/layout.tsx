@@ -1,25 +1,32 @@
 import type { Metadata } from "next";
-import { Inter, Barlow_Condensed } from "next/font/google";
+import { Bebas_Neue, Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
 import AuthProvider from "@/components/providers/AuthProvider";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas-neue",
+  weight: "400",
   subsets: ["latin"],
 });
 
-const barlowCondensed = Barlow_Condensed({
-  variable: "--font-barlow-condensed",
-  weight: ["400", "500", "600", "700", "800", "900"],
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
+  weight: ["400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  weight: ["500", "600", "700"],
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: {
     default: "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
-    template: "%s | JKB 2026",
+    template: "%s | JKBF 2026",
   },
-  description: "Official Digital Platform for Jogja Kickboxing Festival & Redy Championship 2. DI BALIK KALEM.",
+  description: "Official Digital Platform for Jogja Kickboxing Festival & Redy Championship 2. DI BALIK KALEM • #JOGJAPUNYANYALI.",
 };
 
 export default function RootLayout({
@@ -28,10 +35,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${inter.variable} ${barlowCondensed.variable} h-full antialiased dark`}>
-      <body className="min-h-full flex flex-col font-sans bg-jkb-black">
+    <html
+      lang="id"
+      className={`${bebasNeue.variable} ${plusJakartaSans.variable} ${spaceGrotesk.variable} h-full antialiased dark`}
+    >
+      <body className="min-h-full flex flex-col font-sans bg-jkb-black text-jkb-offwhite selection:bg-jkb-red selection:text-white">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
 }
+

@@ -3,50 +3,44 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#0B0B0B] border-t border-white/10 pt-20 pb-16 z-20 relative text-[#8F8E8B]">
+    <footer className="w-full bg-[#0B0B0B] border-t border-white/10 pt-16 pb-12 z-20 relative text-[#8F8E8B]">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-16 pb-16 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-14 pb-14 border-b border-white/10">
           {/* Brand Column */}
-          <div className="lg:col-span-2 space-y-5">
+          <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="inline-block group leading-none">
-              <span
-                className="font-display font-black text-4xl sm:text-5xl text-[#F4F0E8] tracking-tight group-hover:text-white transition-colors"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
+              <span className="font-display text-4xl sm:text-5xl text-[#F4F0E8] tracking-wider group-hover:text-white transition-colors">
                 JKBF<span className="text-[#D91F2C]">.</span>
               </span>
             </Link>
 
-            <div className="space-y-1">
-              <p className="text-xs uppercase tracking-[0.22em] text-[#D91F2C] font-extrabold">
+            <div className="space-y-0.5">
+              <p className="font-technical text-xs uppercase tracking-[0.22em] text-[#D91F2C] font-bold">
                 #JOGJAPUNYANYALI
               </p>
-              <p className="text-xs uppercase tracking-[0.18em] text-[#F4F0E8] font-bold">
+              <p className="font-display text-xl uppercase tracking-wider text-[#F4F0E8]">
                 DI BALIK KALEM.
               </p>
             </div>
 
             <p className="text-xs sm:text-sm text-[#8F8E8B] leading-relaxed max-w-sm font-sans">
               Festival kejuaraan kickboxing profesional dan panggung musik pemuda di Yogyakarta.
-              3 hari pertarungan, musik, dan gerakan kebanggaan kota.
+              Tiga hari pertarungan, musik, dan gerakan kebanggaan kota.
             </p>
 
-            <div className="pt-2 text-xs font-semibold text-[#F4F0E8] space-y-1">
-              <p>12—14 DESEMBER 2026</p>
-              <p className="text-[#8F8E8B]">GOR UNY, YOGYAKARTA</p>
+            <div className="pt-2 font-technical text-xs font-semibold text-[#F4F0E8] space-y-0.5">
+              <p className="text-white">12—14 DESEMBER 2026</p>
+              <p className="text-[#77716D]">GOR UNY, YOGYAKARTA</p>
             </div>
           </div>
 
-          {/* Col 2: Pertandingan */}
-          <div className="space-y-4">
-            <h4
-              className="font-extrabold text-xs uppercase tracking-[0.2em] text-[#F4F0E8]"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
-              Pertandingan
+          {/* Col 2: The Ring */}
+          <div className="space-y-3.5">
+            <h4 className="font-display text-base tracking-wider uppercase text-[#F4F0E8]">
+              The Ring (Pertandingan)
             </h4>
-            <ul className="space-y-2.5 text-xs font-semibold">
+            <ul className="space-y-2 text-xs font-medium">
               <li>
                 <Link href="/championship" className="hover:text-white transition-colors">
                   Redy Championship 2
@@ -70,15 +64,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3: Festival & Kota */}
-          <div className="space-y-4">
-            <h4
-              className="font-extrabold text-xs uppercase tracking-[0.2em] text-[#F4F0E8]"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
+          {/* Col 3: The Stage & The City */}
+          <div className="space-y-3.5">
+            <h4 className="font-display text-base tracking-wider uppercase text-[#F4F0E8]">
               Festival & Kota
             </h4>
-            <ul className="space-y-2.5 text-xs font-semibold">
+            <ul className="space-y-2 text-xs font-medium">
               <li>
                 <Link href="/lineup" className="hover:text-white transition-colors">
                   Lineup Musik
@@ -108,23 +99,20 @@ export default function Footer() {
           </div>
 
           {/* Col 4: Tiket & Informasi */}
-          <div className="space-y-4">
-            <h4
-              className="font-extrabold text-xs uppercase tracking-[0.2em] text-[#F4F0E8]"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
+          <div className="space-y-3.5">
+            <h4 className="font-display text-base tracking-wider uppercase text-[#F4F0E8]">
               Tiket & Bantuan
             </h4>
-            <ul className="space-y-2.5 text-xs font-semibold">
+            <ul className="space-y-2 text-xs font-medium">
               <li>
-                <Link href="/tiket" className="text-[#D91F2C] hover:underline inline-flex items-center gap-1 font-bold">
+                <Link href="/tiket" className="text-[#D91F2C] hover:underline inline-flex items-center gap-1 font-semibold">
                   <span>Info Tiket</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </Link>
               </li>
               <li>
                 <Link href="/merch" className="hover:text-white transition-colors">
-                  Official Merch
+                  Official Merchandise
                 </Link>
               </li>
               <li>
@@ -152,12 +140,14 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-[#5A5957]">
-          <p>© 2026 JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2. ALL RIGHTS RESERVED.</p>
+        <div className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-[#77716D]">
+          <p>© 2026 JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2.</p>
           <div className="flex items-center gap-6">
-            <span className="uppercase tracking-widest text-[#8F8E8B] font-bold">FIGHT CULTURE EDITORIAL</span>
+            <span className="font-technical text-[10px] uppercase tracking-widest text-[#8F8E8B]">
+              FIGHT NIGHT × JOGJA CULTURE
+            </span>
             <Link href="/admin/login" className="hover:text-white transition-colors">
-              Admin Access
+              Admin
             </Link>
           </div>
         </div>

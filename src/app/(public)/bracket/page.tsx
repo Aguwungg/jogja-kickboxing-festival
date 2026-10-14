@@ -26,23 +26,20 @@ export default async function BracketPage() {
       
       {/* Editorial Header */}
       <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-8 pb-12 w-full">
-        <p
-          className="text-[#D91F2C] text-xs sm:text-sm font-extrabold uppercase tracking-[0.24em] mb-4"
-          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-        >
-          PROGRES PERTANDINGAN
-        </p>
+        <div className="inline-flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 rounded-full bg-[#D91F2C]" />
+          <p className="font-technical text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
+            STRUKTUR KOMPETISI • 8-MAN ELIMINATION
+          </p>
+        </div>
 
-        <h1
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-[0.88] text-[#0B0B0B] mb-6"
-          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-        >
+        <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl uppercase tracking-tight leading-[0.85] text-[#0B0B0B] mb-5">
           BAGAN<br />
           TURNAMEN.
         </h1>
 
         <p className="text-sm sm:text-base text-[#5A5957] max-w-xl font-sans leading-relaxed">
-          Ronde, pertandingan dan alur perebutan sabuk emas. Menampilkan struktur bagan resmi tanpa rekayasa hasil simulasi.
+          Ronde, bagan turnamen, dan alur eliminasi perebutan sabuk emas. Menampilkan struktur bagan resmi tanpa manipulasi hasil fiktif.
         </p>
       </section>
 

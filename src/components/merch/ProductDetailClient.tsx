@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart, formatRupiah } from "@/lib/cart-context";
-import { ArrowLeft, CheckCircle2, Plus, Minus } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Plus, Minus, ArrowUpRight } from "lucide-react";
 
 interface Variant {
   id: string;
@@ -91,7 +91,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
     <main className="flex-1 flex flex-col w-full min-h-screen bg-[#F4F0E8] text-[#0B0B0B] pt-24 lg:pt-28 pb-24 overflow-x-hidden font-sans">
       
       {/* Breadcrumb Navigation */}
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-4 w-full flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#5A5957] border-b border-black/10">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-4 w-full flex items-center gap-2 text-xs font-technical uppercase tracking-widest text-[#77716D] border-b border-black/10">
         <Link href="/merch" className="hover:text-black transition-colors flex items-center gap-1">
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>KATALOG MERCHANDISE</span>
@@ -100,63 +100,60 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
         <span className="text-[#D91F2C] font-bold">{product.name}</span>
       </div>
 
-      {/* ═════════════════════════════════════════════════════════════════════
-          1. PRODUCT HERO & PURCHASE INTERACTION (Matches 12_merch_detail.png)
-      ═════════════════════════════════════════════ */}
+      {/* Main Product Section */}
       <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-12 lg:py-16 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* Left: Product Image */}
-          <div className="lg:col-span-6 relative aspect-square w-full bg-[#141416] border border-black/10 overflow-hidden shadow-sm">
-            <Image
-              src={product.imageUrl || "/images/v9/08_REFERENSI_FOTO_DAN_TEKSTUR.png"}
-              alt={product.name}
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-center grayscale contrast-125"
-            />
-            {product.badge && (
-              <div className="absolute top-4 left-4 bg-[#D91F2C] text-white px-3 py-1 text-xs font-mono font-bold tracking-widest uppercase">
-                {product.badge}
-              </div>
-            )}
+          {/* Left: Product Lookbook Image */}
+          <div className="lg:col-span-7">
+            <div className="relative aspect-[4/5] w-full bg-[#EDE8DE] border border-black/15 ring-corner-frame overflow-hidden">
+              <Image
+                src={product.imageUrl || "/images/v9/08_REFERENSI_FOTO_DAN_TEKSTUR.png"}
+                alt={product.name}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                className="object-cover object-center grayscale contrast-125 hover:grayscale-0 transition-all duration-300"
+              />
+              {product.badge && (
+                <span className="absolute top-4 left-4 bg-[#D91F2C] text-white font-technical text-xs uppercase font-bold tracking-widest px-3 py-1">
+                  {product.badge}
+                </span>
+              )}
+            </div>
           </div>
 
-          {/* Right: Product Buy Box */}
-          <div className="lg:col-span-6 space-y-8">
-            <div className="space-y-3">
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D91F2C]">
-                {product.category} RESMI
+          {/* Right: Buy Box & Options */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="space-y-2 border-b border-black/15 pb-6">
+              <span className="font-technical text-xs font-bold uppercase tracking-widest text-[#D91F2C]">
+                {product.category} {product.material ? `• ${product.material}` : ""}
               </span>
-              <h1
-                className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#0B0B0B] leading-none"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
+              <h1 className="font-display text-4xl sm:text-5xl uppercase tracking-tight text-[#0B0B0B]">
                 {product.name}
               </h1>
-              <p className="text-2xl sm:text-3xl font-black text-[#0B0B0B] font-mono pt-1">
+              <p className="font-technical text-3xl font-black text-[#0B0B0B] pt-2">
                 {formatRupiah(product.price)}
               </p>
             </div>
 
-            <p className="text-sm text-[#5A5957] font-sans leading-relaxed border-t border-b border-black/10 py-4">
+            {/* Description */}
+            <p className="text-sm text-[#5A5957] leading-relaxed font-sans">
               {product.description}
             </p>
 
-            {/* Size Variants */}
+            {/* Size Selector */}
             {product.variants.length > 0 && (
-              <div className="space-y-3">
-                <div className="flex justify-between text-xs font-mono">
-                  <span className="text-[#5A5957] uppercase">Pilih Ukuran:</span>
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center justify-between text-xs font-technical">
+                  <span className="text-[#77716D] uppercase">PILIH UKURAN:</span>
                   <span className="text-[#0B0B0B] font-bold">
-                    {selectedVariant?.size || "Standar"} ({maxStock} Tersedia)
+                    {selectedVariant?.size || "STANDAR"} (STOK: {maxStock})
                   </span>
                 </div>
-
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-2">
                   {product.variants.map((v) => {
-                    const isSelected = selectedVariantId === v.id;
+                    const isSelected = v.id === selectedVariantId;
                     const isOutOfStock = v.stockQuantity <= 0;
 
                     return (
@@ -165,16 +162,15 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
                         type="button"
                         disabled={isOutOfStock}
                         onClick={() => setSelectedVariantId(v.id)}
-                        className={`px-5 py-2.5 text-xs font-display font-black uppercase tracking-wider transition-all ${
+                        className={`min-w-12 px-4 py-2 text-xs font-display tracking-wider uppercase transition-all ${
                           isSelected
-                            ? "bg-[#0B0B0B] text-white"
+                            ? "bg-[#0B0B0B] text-white shadow-sm ring-1 ring-black"
                             : isOutOfStock
-                            ? "opacity-30 border border-black/10 line-through"
-                            : "border border-black/20 text-[#0B0B0B] hover:bg-black/5"
+                            ? "bg-black/5 text-black/30 border border-black/10 cursor-not-allowed line-through"
+                            : "bg-white text-[#0B0B0B] border border-black/25 hover:border-black"
                         }`}
-                        style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
                       >
-                        {v.size || "All Size"}
+                        {v.size || "ONE SIZE"}
                       </button>
                     );
                   })}
@@ -183,23 +179,26 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
             )}
 
             {/* Quantity Selector */}
-            <div className="flex items-center gap-4">
-              <span className="text-xs font-mono text-[#5A5957] uppercase">Jumlah:</span>
-              <div className="flex items-center border border-black/20 bg-white/60">
+            <div className="space-y-2 pt-2">
+              <span className="font-technical text-xs text-[#77716D] uppercase block">JUMLAH PESANAN:</span>
+              <div className="flex items-center border border-black/25 bg-white w-36">
                 <button
                   type="button"
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="p-2.5 hover:bg-black/5 text-[#0B0B0B]"
+                  className="px-3 py-2 text-black hover:bg-black/5"
+                  aria-label="Kurangi jumlah"
                 >
                   <Minus className="w-3.5 h-3.5" />
                 </button>
-                <span className="px-4 py-1 text-sm font-bold font-mono text-[#0B0B0B]">
+                <span className="flex-1 text-center font-technical text-sm font-bold text-black">
                   {quantity}
                 </span>
                 <button
                   type="button"
                   onClick={() => setQuantity(Math.min(maxStock, quantity + 1))}
-                  className="p-2.5 hover:bg-black/5 text-[#0B0B0B]"
+                  disabled={quantity >= maxStock}
+                  className="px-3 py-2 text-black hover:bg-black/5 disabled:opacity-30"
+                  aria-label="Tambah jumlah"
                 >
                   <Plus className="w-3.5 h-3.5" />
                 </button>
@@ -207,41 +206,43 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
             </div>
 
             {/* Action Buttons */}
-            <div className="space-y-3 pt-2">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  type="button"
-                  disabled={maxStock <= 0}
-                  onClick={handleAddToCart}
-                  className="flex-1 font-display font-extrabold text-sm uppercase tracking-wider text-white bg-[#0B0B0B] hover:bg-black disabled:opacity-30 py-3.5 transition-colors"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  {maxStock > 0 ? "+ MASUKKAN KERANJANG" : "STOK HABIS"}
-                </button>
-                <button
-                  type="button"
-                  disabled={maxStock <= 0}
-                  onClick={handleBuyNow}
-                  className="flex-1 font-display font-extrabold text-sm uppercase tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] disabled:opacity-30 py-3.5 transition-colors"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  BELI SEKARANG ↗
-                </button>
+            <div className="pt-4 space-y-3">
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                disabled={maxStock <= 0}
+                className="w-full py-4 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-base uppercase tracking-wider transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-md ring-1 ring-[#D91F2C]/50"
+              >
+                {maxStock <= 0 ? "STOK HABIS" : "TAMBAH KE KERANJANG ↗"}
+              </button>
+              <button
+                type="button"
+                onClick={handleBuyNow}
+                disabled={maxStock <= 0}
+                className="w-full py-3.5 bg-[#0B0B0B] hover:bg-black text-white font-display text-base uppercase tracking-wider transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                BELI SEKARANG (CHECKOUT)
+              </button>
+            </div>
+
+            {/* Feedback Alert */}
+            {addedAlert && (
+              <div className="p-4 bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-technical flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <span>Item berhasil dimasukkan ke keranjang belanja!</span>
+                </div>
+                <Link href="/checkout" className="underline font-bold font-display uppercase tracking-wider">
+                  CHECKOUT ↗
+                </Link>
               </div>
+            )}
 
-              {addedAlert && (
-                <p className="text-xs font-mono text-emerald-800 flex items-center gap-1.5 pt-1">
-                  <CheckCircle2 className="w-4 h-4" /> Berhasil ditambahkan ke keranjang belanja!
-                </p>
-              )}
+            {/* Logistics & Delivery note */}
+            <div className="pt-6 border-t border-black/10 space-y-2 text-xs font-technical text-[#77716D]">
+              <p>• Opsi Ambil di Tempat (Pick-up GOR UNY Yogyakarta saat hari festival).</p>
+              <p>• Opsi Pengiriman Ekspedisi (JNE / J&T) ke seluruh Indonesia.</p>
             </div>
-
-            {/* Logistics Info */}
-            <div className="pt-6 border-t border-black/10 text-xs text-[#5A5957] space-y-1 font-mono">
-              <p>• PENGAMBILAN (PICK-UP) DI GOR UNY SAAT FESTIVAL (12–14 DESEMBER 2026).</p>
-              <p>• PENGIRIMAN EKSPEDISI JNE/J&T TERSEDIA UNTUK SELURUH WILAYAH INDONESIA.</p>
-            </div>
-
           </div>
 
         </div>
@@ -249,37 +250,30 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (
-        <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-16 w-full border-t border-black/10 space-y-8">
-          <h3
-            className="text-2xl sm:text-3xl font-black uppercase text-[#0B0B0B]"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            PRODUK TERKAIT LAINNYA
+        <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-16 w-full border-t border-black/15">
+          <h3 className="font-display text-3xl uppercase tracking-wider text-[#0B0B0B] mb-8">
+            KOLEKSI TERKAIT LAINNYA
           </h3>
-
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             {relatedProducts.map((rel) => (
               <Link
                 key={rel.id}
                 href={`/merch/${rel.slug}`}
-                className="group border border-black/10 bg-white/40 p-4 block hover:bg-white/80 transition-all"
+                className="group block bg-white border border-black/15 p-4 hover:border-black transition-all ring-corner-frame"
               >
-                <div className="relative aspect-square w-full bg-[#141416] mb-3 overflow-hidden">
+                <div className="relative aspect-[4/5] w-full bg-[#EDE8DE] overflow-hidden mb-3">
                   <Image
                     src={rel.imageUrl || "/images/v9/08_REFERENSI_FOTO_DAN_TEKSTUR.png"}
                     alt={rel.name}
                     fill
                     sizes="(max-width: 640px) 100vw, 33vw"
-                    className="object-cover object-center grayscale contrast-125 group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover object-center grayscale contrast-125 group-hover:scale-105 transition-all duration-300"
                   />
                 </div>
-                <h4
-                  className="text-xl font-black uppercase tracking-tight text-[#0B0B0B] group-hover:text-[#D91F2C] transition-colors"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
+                <h4 className="font-display text-xl uppercase tracking-wider text-[#0B0B0B] group-hover:text-[#D91F2C] transition-colors">
                   {rel.name}
                 </h4>
-                <p className="text-xs font-mono font-bold text-[#0B0B0B] mt-1">
+                <p className="font-technical text-sm font-bold text-[#0B0B0B] mt-1">
                   {formatRupiah(rel.price)}
                 </p>
               </Link>

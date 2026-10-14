@@ -63,11 +63,11 @@ const FAQ_DATA: FaqItem[] = [
 ];
 
 const CATEGORIES = [
-  { key: "ALL", label: "SEMUA KATEGORI" },
+  { key: "ALL", label: "SEMUA PERTANYAAN" },
   { key: "TIKET", label: "TIKET & AKSES" },
-  { key: "COMBAT", label: "PERTANDINGAN" },
+  { key: "COMBAT", label: "PERTANDINGAN K-1" },
   { key: "FESTIVAL", label: "FESTIVAL MUSIK" },
-  { key: "ATURAN", label: "ATURAN & KESELAMATAN" },
+  { key: "ATURAN", label: "REGULASI & KEAMANAN" },
 ];
 
 export default function FaqClient() {
@@ -91,18 +91,18 @@ export default function FaqClient() {
   });
 
   return (
-    <div className="w-full space-y-10 font-sans max-w-4xl mx-auto">
+    <div className="w-full space-y-12 max-w-5xl mx-auto">
       
-      {/* Category Pills & Search */}
-      <div className="space-y-6 pb-6 border-b border-black/10">
+      {/* Search Bar & Category Filter Pills */}
+      <div className="space-y-6 pb-8 border-b border-white/10">
         <div className="relative">
-          <Search className="w-4 h-4 text-[#8F8E8B] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-4 h-4 text-white/40 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Cari pertanyaan, topik tiket, aturan..."
-            className="w-full bg-white/70 border border-black/20 pl-11 pr-4 py-3 text-xs text-[#0B0B0B] placeholder-[#8F8E8B] focus:outline-none focus:border-[#D91F2C]"
+            placeholder="Cari topik pertanyaan tiket, pintu masuk, aturan K-1..."
+            className="w-full bg-[#121212] border border-white/10 pl-11 pr-4 py-3.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#D91F2C] transition-colors font-sans"
           />
         </div>
 
@@ -114,12 +114,11 @@ export default function FaqClient() {
                 key={cat.key}
                 type="button"
                 onClick={() => setActiveCategory(cat.key)}
-                className={`px-4 py-2 text-xs font-display font-black uppercase tracking-wider transition-all ${
+                className={`px-4 py-2 text-xs font-technical uppercase tracking-wider transition-all border ${
                   isActive
-                    ? "bg-[#0B0B0B] text-white"
-                    : "bg-transparent text-[#0B0B0B] hover:bg-black/5 border border-black/20"
+                    ? "bg-[#D91F2C] text-white border-[#D91F2C]"
+                    : "bg-[#141414] text-white/70 border-white/10 hover:border-white/30 hover:text-white"
                 }`}
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
               >
                 {cat.label}
               </button>
@@ -130,37 +129,54 @@ export default function FaqClient() {
 
       {/* Accordion Rows */}
       {filteredFaqs.length === 0 ? (
-        <div className="py-20 text-center border-t border-b border-black/10">
-          <p className="text-sm text-[#5A5957]">
+        <div className="py-20 text-center border-t border-b border-white/10">
+          <p className="text-sm text-white/50 font-sans">
             Tidak ada pertanyaan yang sesuai dengan kata kunci pencarian.
           </p>
         </div>
       ) : (
-        <div className="border-t border-black/10 divide-y divide-black/10">
+        <div className="divide-y divide-white/10 border-t border-b border-white/10">
           {filteredFaqs.map((faq, index) => {
             const isOpen = openIndexes.includes(index);
+            const itemNumber = (index + 1).toString().padStart(2, "0");
+
             return (
-              <div key={index} className="py-6 sm:py-8 transition-colors">
+              <div
+                key={index}
+                className={`py-6 sm:py-8 transition-colors ${
+                  isOpen ? "bg-white/[0.02]" : "hover:bg-white/[0.01]"
+                }`}
+              >
                 <button
                   type="button"
                   onClick={() => toggleAccordion(index)}
-                  className="w-full flex items-start justify-between gap-6 text-left focus:outline-none"
+                  aria-expanded={isOpen}
+                  className="w-full flex items-start justify-between gap-6 text-left focus:outline-none group"
                 >
-                  <span
-                    className="text-xl sm:text-2xl font-black uppercase tracking-tight text-[#0B0B0B]"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
-                    {faq.q}
-                  </span>
-                  <span className="p-1 border border-black/20 rounded-none text-[#0B0B0B] shrink-0 mt-0.5">
+                  <div className="flex items-start gap-4 sm:gap-6">
+                    <span className="text-sm font-technical text-white/30 shrink-0 mt-1">
+                      {itemNumber}
+                    </span>
+                    <span className="text-xl sm:text-2xl font-display uppercase tracking-wide text-white group-hover:text-[#D91F2C] transition-colors leading-snug">
+                      {faq.q}
+                    </span>
+                  </div>
+                  <span className="p-1.5 border border-white/20 text-white shrink-0 mt-1 group-hover:border-[#D91F2C] transition-colors">
                     {isOpen ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
                   </span>
                 </button>
 
                 {isOpen && (
-                  <p className="mt-4 text-xs sm:text-sm text-[#5A5957] font-sans leading-relaxed max-w-2xl">
-                    {faq.a}
-                  </p>
+                  <div className="pl-9 sm:pl-12 pr-6 pt-4 animate-fadeIn">
+                    <p className="text-sm sm:text-base text-white/70 font-sans leading-relaxed max-w-3xl">
+                      {faq.a}
+                    </p>
+                    <div className="mt-3 inline-block">
+                      <span className="text-[10px] font-technical uppercase tracking-widest text-[#D91F2C] bg-[#D91F2C]/10 px-2 py-0.5 border border-[#D91F2C]/20">
+                        {faq.category}
+                      </span>
+                    </div>
+                  </div>
                 )}
               </div>
             );

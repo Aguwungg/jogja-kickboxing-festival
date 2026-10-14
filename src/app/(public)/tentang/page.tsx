@@ -36,38 +36,35 @@ export default function TentangPage() {
     <main className="flex-1 flex flex-col w-full min-h-screen bg-[#0B0B0B] text-[#F4F0E8] pt-24 lg:pt-28 pb-24 overflow-x-hidden">
       
       {/* ═════════════════════════════════════════════════════════════════════
-          1. EDITORIAL SPLIT MANIFESTO HERO (Matches 15_tentang.png)
+          1. EDITORIAL SPLIT MANIFESTO HERO
       ═════════════════════════════════════════════ */}
       <section className="relative w-full border-b border-white/10 overflow-hidden">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 min-h-[480px] lg:min-h-[540px]">
           
           <div className="lg:col-span-7 py-12 lg:py-20 flex flex-col justify-center space-y-6">
-            <p
-              className="text-[#D91F2C] text-xs sm:text-sm font-extrabold uppercase tracking-[0.24em]"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
-              CERITA FESTIVAL • #JOGJAPUNYANYALI
-            </p>
+            <div className="inline-flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#D91F2C]" />
+              <p className="font-technical text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
+                MANIFESTO FESTIVAL • #JOGJAPUNYANYALI
+              </p>
+            </div>
 
-            <h1
-              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-[0.88] text-white"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
+            <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-[0.85] text-white">
               DI BALIK<br />
-              KALEM.
+              <span className="text-[#D91F2C]">KALEM.</span>
             </h1>
 
             <p className="text-sm sm:text-base text-[#8F8E8B] font-sans max-w-lg leading-relaxed">
-              Ada semangat, musik, dan keberanian dari Jogja. Menyatukan disiplin olahraga tarung profesional dengan denyut panggung festival anak muda.
+              Ada semangat, musik, dan keberanian dari Jogja. Menyatukan disiplin olahraga tarung profesional dengan denyut panggung festival anak muda di panggung GOR UNY 2026.
             </p>
 
             <div className="pt-2 flex flex-wrap gap-4">
               <Link
                 href="/jadwal"
-                className="font-display font-extrabold text-xs sm:text-sm uppercase tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] px-7 py-3.5 transition-colors inline-flex items-center gap-1.5"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                className="font-display text-base tracking-wider uppercase text-white bg-[#D91F2C] hover:bg-[#B81521] px-7 py-3.5 transition-colors inline-flex items-center gap-2 ring-1 ring-[#D91F2C]/50 shadow-sm"
               >
-                <span>JADWAL FESTIVAL ↗</span>
+                <span>JADWAL FESTIVAL</span>
+                <span className="font-technical text-xs">↗</span>
               </Link>
             </div>
           </div>
@@ -77,6 +74,7 @@ export default function TentangPage() {
               src="/images/v9/06_FOTO_KONSER_PLACEHOLDER_INTERNAL.png"
               alt="Atmosfer Festival JKBF"
               fill
+              priority
               sizes="(max-width: 1024px) 100vw, 40vw"
               className="object-cover object-center grayscale contrast-125"
             />
@@ -90,20 +88,14 @@ export default function TentangPage() {
       ═════════════════════════════════════════════ */}
       <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-20 w-full space-y-12">
         <div className="space-y-3 pb-8 border-b border-white/10">
-          <p
-            className="text-[#D91F2C] text-xs font-extrabold uppercase tracking-[0.24em]"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
-            PENYELENGGARA • REDY CHAMPIONSHIP 2
+          <p className="font-technical text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
+            TIGA PILAR PENGALAMAN • JKBF 2026
           </p>
-          <h2
-            className="text-4xl sm:text-5xl lg:text-7xl font-black uppercase tracking-tight text-white"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-7xl font-black uppercase tracking-tight text-white leading-[0.88]">
             SATU FESTIVAL. BANYAK CERITA.
           </h2>
-          <p className="text-sm text-[#8F8E8B] font-sans max-w-xl">
-            Tiga pilar pengalaman yang menjadikan Jogja Kickboxing Festival sebuah perayaan akbar olahraga dan seni di Yogyakarta.
+          <p className="text-sm text-[#8F8E8B] font-sans max-w-xl leading-relaxed">
+            Tiga pilar pengalaman yang menjadikan Jogja Kickboxing Festival sebuah perayaan akbar olahraga, musik, dan kebanggaan bersama di Yogyakarta.
           </p>
         </div>
 
@@ -112,19 +104,16 @@ export default function TentangPage() {
           {PILLARS.map((p) => (
             <div
               key={p.number}
-              className="py-10 grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-baseline transition-colors hover:bg-white/[0.02]"
+              className="py-10 grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-baseline transition-colors hover:bg-white/[0.02] px-2"
             >
-              <span className="text-[#D91F2C] font-mono text-sm sm:text-base font-bold md:col-span-1">
+              <span className="font-technical text-sm sm:text-base font-bold text-[#D91F2C] md:col-span-1">
                 {p.number}
               </span>
               <div className="md:col-span-4 space-y-1">
-                <h3
-                  className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
+                <h3 className="font-display text-3xl uppercase tracking-wider text-white">
                   {p.title}
                 </h3>
-                <span className="text-xs uppercase font-mono text-[#8F8E8B]">{p.subtitle}</span>
+                <span className="font-technical text-xs uppercase text-[#8F8E8B]">{p.subtitle}</span>
               </div>
               <p className="text-sm text-[#8F8E8B] md:col-span-5 font-sans leading-relaxed">
                 {p.desc}
@@ -132,11 +121,10 @@ export default function TentangPage() {
               <div className="md:col-span-2 text-left md:text-right">
                 <Link
                   href={p.link}
-                  className="font-display font-black text-xs uppercase tracking-wider text-white hover:text-[#D91F2C] inline-flex items-center gap-1 transition-colors"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+                  className="font-display text-sm uppercase tracking-wider text-white hover:text-[#D91F2C] inline-flex items-center gap-1 transition-colors"
                 >
                   <span>EKSPLORASI</span>
-                  <span>↗</span>
+                  <span className="font-technical text-xs">↗</span>
                 </Link>
               </div>
             </div>

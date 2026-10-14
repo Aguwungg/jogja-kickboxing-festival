@@ -34,7 +34,7 @@ export default async function FighterDetailPage({
     <main className="flex-1 flex flex-col w-full min-h-screen bg-[#F4F0E8] text-[#0B0B0B] pt-24 lg:pt-28 pb-24 overflow-x-hidden">
       
       {/* Breadcrumb */}
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-4 w-full flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#5A5957] border-b border-black/10">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-4 w-full flex items-center gap-2 text-xs font-technical uppercase tracking-widest text-[#77716D] border-b border-black/10">
         <Link href="/" className="hover:text-black transition-colors">BERANDA</Link>
         <span>/</span>
         <Link href="/fighters" className="hover:text-black transition-colors">DAFTAR PETARUNG</Link>
@@ -50,43 +50,40 @@ export default async function FighterDetailPage({
           
           {/* Left Fighter Details */}
           <div className="lg:col-span-7 py-12 lg:py-20 flex flex-col justify-center space-y-6">
-            <p
-              className="text-[#D91F2C] text-xs sm:text-sm font-extrabold uppercase tracking-[0.24em]"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
-              REDY CHAMPIONSHIP 2 • {fighter.division}
-            </p>
+            <div className="inline-flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#D91F2C]" />
+              <p className="font-technical text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
+                REDY CHAMPIONSHIP 2 • {fighter.division}
+              </p>
+            </div>
 
-            <h1
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.88] text-[#0B0B0B]"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
+            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.85] text-[#0B0B0B]">
               {fighter.name}
             </h1>
 
             <p className="text-sm sm:text-base text-[#5A5957] font-sans max-w-lg leading-relaxed">
-              {fighter.club ? `Sasana / Tim: ${fighter.club}.` : "Petarung Independen."} Bertarung di divisi {fighter.division} dengan batas bobot {fighter.weightClass}.
+              {fighter.club ? `Sasana / Tim: ${fighter.club}.` : "Petarung Independen."} Berlaga di divisi {fighter.division} ({fighter.weightClass}) di bawah regulasi kejuaraan K-1 rules.
             </p>
 
             {/* Fighter Record Summary */}
-            <div className="pt-2 flex items-center gap-8 font-mono border-t border-black/10 pt-6">
+            <div className="pt-4 flex items-center gap-8 font-technical border-t border-black/15">
               <div>
-                <span className="text-[10px] text-[#8F8E8B] uppercase tracking-widest block">MENANG</span>
-                <span className="text-3xl font-black text-[#0B0B0B]">{fighter.wins}</span>
+                <span className="text-[10px] text-[#77716D] uppercase tracking-widest block font-bold">MENANG</span>
+                <span className="font-display text-4xl font-black text-[#0B0B0B]">{fighter.wins}</span>
               </div>
-              <div className="border-l border-black/10 pl-8">
-                <span className="text-[10px] text-[#8F8E8B] uppercase tracking-widest block">KALAH</span>
-                <span className="text-3xl font-black text-[#5A5957]">{fighter.losses}</span>
+              <div className="border-l border-black/15 pl-8">
+                <span className="text-[10px] text-[#77716D] uppercase tracking-widest block font-bold">KALAH</span>
+                <span className="font-display text-4xl font-black text-[#5A5957]">{fighter.losses}</span>
               </div>
-              <div className="border-l border-black/10 pl-8">
-                <span className="text-[10px] text-[#8F8E8B] uppercase tracking-widest block">SERI</span>
-                <span className="text-3xl font-black text-[#5A5957]">{fighter.draws}</span>
+              <div className="border-l border-black/15 pl-8">
+                <span className="text-[10px] text-[#77716D] uppercase tracking-widest block font-bold">SERI</span>
+                <span className="font-display text-4xl font-black text-[#5A5957]">{fighter.draws}</span>
               </div>
             </div>
           </div>
 
           {/* Right Fighter Photo */}
-          <div className="lg:col-span-5 relative min-h-[360px] lg:min-h-full -mx-5 sm:-mx-8 lg:mx-0 bg-[#141416]">
+          <div className="lg:col-span-5 relative min-h-[360px] lg:min-h-full -mx-5 sm:-mx-8 lg:mx-0 bg-[#EDE8DE]">
             <Image
               src={fighter.image || "/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"}
               alt={fighter.name}
@@ -105,47 +102,38 @@ export default async function FighterDetailPage({
       ═════════════════════════════════════════════ */}
       <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-20 w-full space-y-12">
         <div className="space-y-3">
-          <p
-            className="text-[#D91F2C] text-xs font-extrabold uppercase tracking-[0.24em]"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
+          <p className="font-technical text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
             SPESIFIKASI FISIK & ATLET
           </p>
-          <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-[#0B0B0B]"
-            style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-          >
+          <h2 className="font-display text-4xl sm:text-5xl uppercase tracking-tight text-[#0B0B0B]">
             TALE OF THE TAPE.
           </h2>
         </div>
 
         {/* Clean Tale of the Tape Rows */}
-        <div className="border-t border-black/10 divide-y divide-black/10">
-          <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-4 items-baseline">
-            <span className="text-xs font-mono uppercase text-[#8F8E8B]">Divisi Resmi</span>
-            <span className="text-sm font-bold text-[#0B0B0B] md:col-span-3">{fighter.division}</span>
+        <div className="border-t border-black/15 divide-y divide-black/15">
+          <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-4 items-baseline px-2">
+            <span className="text-xs font-technical uppercase text-[#77716D]">Divisi Resmi</span>
+            <span className="text-sm font-bold text-[#0B0B0B] md:col-span-3 font-technical">{fighter.division}</span>
           </div>
-          <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-4 items-baseline">
-            <span className="text-xs font-mono uppercase text-[#8F8E8B]">Kelas Bobot</span>
-            <span className="text-sm font-bold text-[#0B0B0B] md:col-span-3">{fighter.weightClass}</span>
+          <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-4 items-baseline px-2">
+            <span className="text-xs font-technical uppercase text-[#77716D]">Kelas Bobot</span>
+            <span className="text-sm font-bold text-[#0B0B0B] md:col-span-3 font-technical">{fighter.weightClass}</span>
           </div>
-          <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-4 items-baseline">
-            <span className="text-xs font-mono uppercase text-[#8F8E8B]">Sasana / Camp</span>
+          <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-4 items-baseline px-2">
+            <span className="text-xs font-technical uppercase text-[#77716D]">Sasana / Camp</span>
             <span className="text-sm font-bold text-[#0B0B0B] md:col-span-3">{fighter.club || "Independen"}</span>
           </div>
-          <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-4 items-baseline">
-            <span className="text-xs font-mono uppercase text-[#8F8E8B]">Total Laga Profesional</span>
-            <span className="text-sm font-bold text-[#0B0B0B] md:col-span-3">{totalFights} Pertandingan</span>
+          <div className="py-5 grid grid-cols-2 md:grid-cols-4 gap-4 items-baseline px-2">
+            <span className="text-xs font-technical uppercase text-[#77716D]">Total Pertandingan</span>
+            <span className="text-sm font-bold text-[#0B0B0B] md:col-span-3 font-technical">{totalFights} Laga Resmi</span>
           </div>
         </div>
 
         {/* Related Fighters in same division */}
         {relatedFighters.length > 0 && (
-          <div className="pt-12 border-t border-black/10 space-y-6">
-            <h3
-              className="text-2xl sm:text-3xl font-black uppercase text-[#0B0B0B]"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
+          <div className="pt-12 border-t border-black/15 space-y-6">
+            <h3 className="font-display text-3xl uppercase text-[#0B0B0B] tracking-wider">
               PETARUNG LAIN DI DIVISI {fighter.division}
             </h3>
 
@@ -154,9 +142,9 @@ export default async function FighterDetailPage({
                 <Link
                   key={rel.id}
                   href={`/fighters/${rel.slug}`}
-                  className="group border border-black/10 bg-white/40 p-4 block hover:bg-white/80 transition-all"
+                  className="group border border-black/15 bg-white p-4 block hover:border-black transition-all ring-corner-frame"
                 >
-                  <div className="relative aspect-[4/5] w-full bg-[#141416] mb-3 overflow-hidden">
+                  <div className="relative aspect-[4/5] w-full bg-[#EDE8DE] mb-3 overflow-hidden">
                     <Image
                       src={rel.image || "/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"}
                       alt={rel.name}
@@ -165,13 +153,10 @@ export default async function FighterDetailPage({
                       className="object-cover object-top grayscale contrast-125 group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <h4
-                    className="text-lg font-black uppercase tracking-tight text-[#0B0B0B] group-hover:text-[#D91F2C] transition-colors"
-                    style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                  >
+                  <h4 className="font-display text-2xl uppercase tracking-wider text-[#0B0B0B] group-hover:text-[#D91F2C] transition-colors">
                     {rel.name}
                   </h4>
-                  <p className="text-xs text-[#5A5957] font-sans mt-0.5">{rel.club || "Independen"}</p>
+                  <p className="font-technical text-xs text-[#77716D] mt-0.5">{rel.club || "Independen"}</p>
                 </Link>
               ))}
             </div>

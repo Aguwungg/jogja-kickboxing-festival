@@ -55,31 +55,28 @@ export default function PpvWatchClient({ initialCode }: Props) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
         <Link
           href="/ppv"
-          className="inline-flex items-center gap-1.5 text-xs font-mono text-[#8F8E8B] hover:text-white uppercase tracking-wider transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-technical text-[#8F8E8B] hover:text-white uppercase tracking-wider transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>KEMBALI KE PPV STREAM</span>
         </Link>
-        <span className="text-xs font-mono text-[#D91F2C] uppercase font-bold">
-          • LIVE FEED STANDBY (GOR UNY)
+        <span className="text-xs font-technical text-[#D91F2C] uppercase font-bold">
+          • LIVE FEED STANDBY (GOR UNY ARENA)
         </span>
       </div>
 
       {!isUnlocked ? (
         /* Code Input Gate */
-        <div className="border border-white/10 bg-[#141416] p-8 sm:p-14 text-center max-w-xl mx-auto space-y-6">
+        <div className="border border-white/15 bg-[#141416] p-8 sm:p-14 text-center max-w-xl mx-auto space-y-6 ring-corner-frame">
           <div className="space-y-2">
-            <span className="text-xs font-mono uppercase text-[#D91F2C] tracking-widest font-bold">
+            <span className="text-xs font-technical uppercase text-[#D91F2C] tracking-widest font-bold">
               VERIFIKASI TIKET STREAMING
             </span>
-            <h3
-              className="text-3xl font-black uppercase text-white"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
+            <h3 className="font-display text-4xl uppercase tracking-wider text-white">
               MASUKKAN KODE AKSES
             </h3>
             <p className="text-xs text-[#8F8E8B] leading-relaxed">
-              Ketik kode unik dari tiket digital Anda untuk membuka live stream pertandingan.
+              Ketik kode unik dari tiket digital Anda untuk membuka live stream pertandingan kickboxing.
             </p>
           </div>
 
@@ -94,12 +91,12 @@ export default function PpvWatchClient({ initialCode }: Props) {
               type="text"
               value={accessCode}
               onChange={(e) => setAccessCode(e.target.value)}
-              placeholder="JKBF-STREAM-XXXX"
-              className="w-full bg-[#0B0B0B] border border-white/20 px-4 py-3 text-xs font-mono uppercase text-white placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C] text-center"
+              placeholder="CONTOH: JKB-VIP-2026"
+              className="w-full bg-[#0B0B0B] border border-white/20 px-4 py-3 text-xs font-technical uppercase text-white placeholder-[#5A5957] focus:outline-none focus:border-[#D91F2C] text-center"
             />
 
             {verificationError && (
-              <div className="p-3 bg-red-950/40 border border-red-500/30 text-xs font-mono text-red-300 flex items-center gap-2 justify-center">
+              <div className="p-3 bg-red-950/40 border border-red-500/50 text-red-400 text-xs font-technical flex items-center gap-2 text-left">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{verificationError}</span>
               </div>
@@ -108,38 +105,53 @@ export default function PpvWatchClient({ initialCode }: Props) {
             <button
               type="submit"
               disabled={verificationLoading}
-              className="w-full font-display font-extrabold text-sm uppercase tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] disabled:opacity-50 py-3.5 transition-colors"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
+              className="w-full py-3.5 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-base uppercase tracking-wider transition-all disabled:opacity-50"
             >
-              {verificationLoading ? "MEMVALIDASI KODE..." : "VERIFIKASI & BUKA PLAYER ↗"}
+              {verificationLoading ? "MEMVERIFIKASI KODE..." : "BUKA PEMUTAR SIARAN ↗"}
             </button>
           </form>
+
+          <p className="text-[11px] font-technical text-[#5A5957]">
+            Kode demonstrasi staging: <code className="text-white">JKB-VIP-2026</code>
+          </p>
         </div>
       ) : (
-        /* Video Stream Player Canvas */
+        /* Video Player Canvas */
         <div className="space-y-6">
-          <div className="relative aspect-video w-full bg-black border border-white/20 flex flex-col items-center justify-center p-8 text-center space-y-3">
-            <div className="w-3 h-3 rounded-full bg-[#D91F2C] animate-ping" />
-            <p
-              className="text-2xl sm:text-3xl font-black uppercase text-white tracking-wide"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
-              SIARAN LANGSUNG STANDBY
-            </p>
-            <p className="text-xs font-mono text-[#8F8E8B] max-w-md">
-              Feed video live dari GOR UNY Yogyakarta akan dimulai sesuai jadwal pertandingan resmi (12–14 Desember 2026).
-            </p>
+          <div className="relative aspect-video w-full bg-[#141416] border border-white/20 ring-corner-frame flex flex-col items-center justify-center p-8 text-center space-y-4 shadow-2xl overflow-hidden">
+            <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center bg-black/60">
+              <span className="w-4 h-4 bg-[#D91F2C] rounded-full animate-ping" />
+            </div>
+
+            <div className="space-y-1">
+              <span className="font-technical text-xs font-bold text-[#D91F2C] uppercase tracking-widest">
+                LIVE FEED STANDBY
+              </span>
+              <h3 className="font-display text-3xl sm:text-4xl uppercase tracking-wider text-white">
+                SIARAN AKAN DIMULAI PADA HARI PERTANDINGAN
+              </h3>
+              <p className="text-xs text-[#8F8E8B] font-technical max-w-md mx-auto">
+                GOR UNY Colombo, Yogyakarta • 12–14 Desember 2026
+              </p>
+            </div>
+
+            <div className="pt-2 font-technical text-xs text-white/80 border-t border-white/10 flex items-center gap-6">
+              <span>RESOLUSI: {ticketDetails?.resolution || "1080P FHD"}</span>
+              <span>MULTI-CAMERA: ACTIVE</span>
+              <span>AUDIO: 5.1 ARENA MIX</span>
+            </div>
           </div>
 
-          <div className="p-4 bg-[#141416] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono">
-            <div>
-              <span className="text-[#8F8E8B] uppercase">AKUN TERVERIFIKASI: </span>
-              <span className="font-bold text-white">{ticketDetails?.customerName || "Penonton Terverifikasi"}</span>
+          {/* Entitlement Banner */}
+          {ticketDetails && (
+            <div className="p-4 bg-white/5 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-technical text-xs">
+              <div className="flex items-center gap-2 text-emerald-400">
+                <CheckCircle2 className="w-4 h-4 shrink-0" />
+                <span>AKSES TERVERIFIKASI: {ticketDetails.productName} ({ticketDetails.tier})</span>
+              </div>
+              <span className="text-[#8F8E8B]">NAMA PEMEGANG: {ticketDetails.customerName || "PEMEGANG TIKET"}</span>
             </div>
-            <span className="text-emerald-400 font-bold flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4" /> KUALITAS SIARAN: {ticketDetails?.resolution || "1080P FULL HD"}
-            </span>
-          </div>
+          )}
         </div>
       )}
 

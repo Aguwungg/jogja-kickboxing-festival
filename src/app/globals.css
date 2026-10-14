@@ -17,25 +17,26 @@
   --color-jkb-gold: #E2BA75;
   --color-jkb-gold-hover: #F0CB8E;
 
-  /* V9 Clean Cut Fight Culture Tokens */
-  --color-v9-black: #0B0B0B;
-  --color-v9-charcoal: #141416;
-  --color-v9-surface: #18181B;
-  --color-v9-border: rgba(255, 255, 255, 0.12);
-  --color-v9-red: #D91F2C;
-  --color-v9-red-hover: #B81521;
-  --color-v9-ivory: #F4F0E8;
-  --color-v9-ivory-surface: #FAF7F2;
-  --color-v9-grey: #8F8E8B;
-  --color-v9-muted: #5A5957;
+  /* V10 Art-Directed Fight Night × Jogja Culture Tokens */
+  --color-v10-black: #0B0B0B;
+  --color-v10-charcoal: #141416;
+  --color-v10-surface: #18181B;
+  --color-v10-ivory: #F4F0E8;
+  --color-v10-ivory-surface: #EDE8DE;
+  --color-v10-red: #D91F2C;
+  --color-v10-red-glow: #FF2A3B;
+  --color-v10-stone: #77716D;
+  --color-v10-border: rgba(255, 255, 255, 0.12);
+  --color-v10-border-dark: rgba(11, 11, 11, 0.12);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-barlow-condensed), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bebas-neue), sans-serif;
+  --font-mono: var(--font-space-grotesk), monospace;
 }
 
 :root {
-  --background: #09090B;
-  --foreground: #F5F3EE;
+  --background: #0B0B0B;
+  --foreground: #F4F0E8;
 }
 
 * { box-sizing: border-box; }
@@ -49,10 +50,46 @@ body {
   overflow-x: hidden;
 }
 
-/* Display typography */
+/* V10 Display Typography */
 .font-display {
   font-family: var(--font-display);
+  letter-spacing: 0.03em;
 }
+
+.font-technical {
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+
+/* V10 Editorial Signature: Ring Corner Line */
+.ring-corner-frame {
+  position: relative;
+}
+.ring-corner-frame::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 16px;
+  height: 16px;
+  border-top: 2px solid #D91F2C;
+  border-left: 2px solid #D91F2C;
+  pointer-events: none;
+  z-index: 10;
+}
+.ring-corner-frame::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 16px;
+  height: 16px;
+  border-bottom: 2px solid #D91F2C;
+  border-right: 2px solid #D91F2C;
+  pointer-events: none;
+  z-index: 10;
+}
+
 
 /* Editorial layout utilities */
 .editorial-container {

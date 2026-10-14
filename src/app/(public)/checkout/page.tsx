@@ -17,28 +17,25 @@ export default function CheckoutPage() {
       <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-8 pb-10 w-full border-b border-black/10">
         <Link
           href="/merch"
-          className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5A5957] hover:text-black uppercase tracking-wider transition-colors mb-6"
+          className="inline-flex items-center gap-1.5 text-xs font-technical text-[#77716D] hover:text-black uppercase tracking-wider transition-colors mb-6"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>KEMBALI KE KATALOG MERCHANDISE</span>
         </Link>
 
-        <p
-          className="text-[#D91F2C] text-xs sm:text-sm font-extrabold uppercase tracking-[0.24em] mb-4"
-          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-        >
-          TRANSAKSI SEGERA AKTIF • CHECKOUT
-        </p>
+        <div className="inline-flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 rounded-full bg-[#D91F2C]" />
+          <p className="font-technical text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
+            TRANSAKSI TERPROTEKSI • CHECKOUT RESMI
+          </p>
+        </div>
 
-        <h1
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-[0.88] text-[#0B0B0B]"
-          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-        >
+        <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl uppercase tracking-tight leading-[0.85] text-[#0B0B0B]">
           CHECKOUT.
         </h1>
 
-        <p className="text-sm sm:text-base text-[#5A5957] max-w-xl font-sans mt-4">
-          Lengkapi identitas penonton untuk reservasi produk dan pilihan pick-up GOR UNY Yogyakarta.
+        <p className="text-sm sm:text-base text-[#5A5957] max-w-xl font-sans mt-3 leading-relaxed">
+          Lengkapi data pemesan untuk reservasi produk resmi dan pemilihan metode pengambilan di GOR UNY atau ekspedisi.
         </p>
       </section>
 

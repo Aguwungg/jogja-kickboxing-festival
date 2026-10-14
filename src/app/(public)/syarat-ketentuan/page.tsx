@@ -36,58 +36,74 @@ const ARTICLES = [
 
 export default function SyaratKetentuanPage() {
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#F4F0E8] text-[#0B0B0B] pt-24 lg:pt-28 pb-24 font-sans">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#0A0A0A] text-[#FAFAFA] pt-28 lg:pt-36 pb-32">
       
       {/* ═════════════════════════════════════════════════════════════════════
-          1. EDITORIAL HEADER (Matches 18_syarat.png)
+          1. EDITORIAL HEADER — V10 BROADSHEET HERO
       ═════════════════════════════════════════════ */}
-      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-8 pb-12 w-full border-b border-black/10">
-        <p
-          className="text-[#D91F2C] text-xs sm:text-sm font-extrabold uppercase tracking-[0.24em] mb-4"
-          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-        >
-          INFORMASI HUKUM • REGULASI RESMI
-        </p>
+      <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 pt-6 pb-16 w-full border-b border-white/10">
+        <div className="flex items-center gap-3 mb-6">
+          <span className="w-2.5 h-2.5 bg-[#D91F2C]" />
+          <p className="text-[#D91F2C] text-xs font-technical uppercase tracking-[0.25em]">
+            INFORMASI HUKUM • REGULASI RESMI PENONTON
+          </p>
+        </div>
 
-        <h1
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-[0.88] text-[#0B0B0B]"
-          style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-        >
-          SYARAT &<br />
-          KETENTUAN.
-        </h1>
-
-        <p className="text-sm sm:text-base text-[#5A5957] max-w-xl font-sans mt-4">
-          Dokumen yang jelas dan mudah dibaca. Mengatur tata tertib penonton, tiket, dan keamanan venue GOR UNY Yogyakarta.
-        </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+          <div className="lg:col-span-8">
+            <h1 className="text-6xl sm:text-8xl lg:text-9xl font-display font-black uppercase tracking-tight leading-[0.85] text-white">
+              SYARAT &<br />
+              <span className="text-[#D91F2C]">KETENTUAN.</span>
+            </h1>
+          </div>
+          <div className="lg:col-span-4 lg:pb-3">
+            <p className="text-base text-white/60 font-sans leading-relaxed">
+              Peraturan resmi yang mengikat bagi seluruh pengunjung, pemegang tiket, dan delegasi festival di kawasan arena GOR UNY Yogyakarta.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════
           2. ARTICLES IN SPACIOUS EDITORIAL ROWS
       ═════════════════════════════════════════════ */}
-      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-16 w-full flex-1">
-        <div className="border-t border-black/10 divide-y divide-black/10">
+      <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 py-16 w-full flex-1">
+        <div className="border-t border-white/10 divide-y divide-white/10">
           {ARTICLES.map((article) => (
             <div
               key={article.number}
-              className="py-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-baseline"
+              className="py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
             >
-              <span className="text-[#D91F2C] font-mono text-sm font-bold md:col-span-1">
-                {article.number}
-              </span>
-              <h3
-                className="text-2xl font-black uppercase text-[#0B0B0B] md:col-span-4"
-                style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-              >
-                {article.title}
-              </h3>
-              <div className="md:col-span-7 space-y-3 text-sm text-[#5A5957] leading-relaxed">
+              <div className="lg:col-span-1">
+                <span className="text-[#D91F2C] font-technical text-2xl font-bold">
+                  {article.number}
+                </span>
+              </div>
+              <div className="lg:col-span-4">
+                <h3 className="text-2xl sm:text-3xl font-display uppercase tracking-wide text-white leading-snug">
+                  {article.title}
+                </h3>
+              </div>
+              <div className="lg:col-span-7 space-y-4 text-sm sm:text-base text-white/70 font-sans leading-relaxed">
                 {article.items.map((item, idx) => (
-                  <p key={idx}>• {item}</p>
+                  <div key={idx} className="flex items-start gap-3">
+                    <span className="text-[#D91F2C] font-bold shrink-0 mt-1.5">•</span>
+                    <p>{item}</p>
+                  </div>
                 ))}
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ═════════════════════════════════════════════════════════════════════
+          3. COMPLIANCE FOOTNOTE
+      ═════════════════════════════════════════════ */}
+      <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 pt-8 w-full border-t border-white/10">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-technical text-white/40 uppercase tracking-wider">
+          <p>DIPERBARUI RESMI: OKTOBER 2026 • PANITIA PELAKSANA JKBF</p>
+          <p>#JOGJAPUNYANYALI • GOR UNY YOGYAKARTA</p>
         </div>
       </section>
 
