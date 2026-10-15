@@ -15,6 +15,7 @@ const DIVISIONS = [
     style: "SPEED & HIGH VOLUME STRIKING",
     belt: "SABUK EMAS 57 KG",
     quota: "8 PETARUNG",
+    img: "/images/jkb/fighter-1.jpg",
   },
   {
     no: "02",
@@ -23,6 +24,7 @@ const DIVISIONS = [
     style: "TECHNICAL COUNTER PRECISION",
     belt: "SABUK EMAS 63.5 KG",
     quota: "8 PETARUNG",
+    img: "/images/jkb/fighter-3.jpg",
   },
   {
     no: "03",
@@ -31,6 +33,7 @@ const DIVISIONS = [
     style: "PRESSURE & HEAVY KO POWER",
     belt: "SABUK EMAS 67 KG",
     quota: "8 PETARUNG",
+    img: "/images/jkb/fighter-5.jpg",
   },
   {
     no: "04",
@@ -39,6 +42,7 @@ const DIVISIONS = [
     style: "ABSOLUTE POWER & KNEE CLINCH",
     belt: "SABUK EMAS 71 KG",
     quota: "8 PETARUNG",
+    img: "/images/jkb/fighter-4.jpg",
   },
 ];
 
@@ -67,49 +71,63 @@ const RULES = [
 
 export default function ChampionshipPage() {
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#0A0A0A] text-[#FAFAFA] pt-24 lg:pt-32 pb-28">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#0A0A0A] text-[#FAFAFA] overflow-x-hidden">
       
       {/* ═════════════════════════════════════════════════════════════════════
-          1. COMPACT HERO
+          1. CINEMATIC HERO WITH CHAMPIONSHIP BELT
       ═════════════════════════════════════════════ */}
-      <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 pt-6 pb-8 w-full border-b border-white/10">
-        <div className="flex items-center gap-2.5 mb-3">
-          <span className="w-2.5 h-2.5 bg-[#D91F2C]" />
-          <p className="font-technical text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
-            REDY CHAMPIONSHIP 2 • K-1 RULES
-          </p>
+      <section className="relative w-full min-h-[50svh] lg:min-h-[60vh] flex items-end overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/championship/belt-hero.jpg"
+            alt="Championship Belt Redy Championship 2"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/60 to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/70 via-transparent to-transparent" />
         </div>
 
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-          <div>
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 w-full relative z-10 pb-10 lg:pb-14 pt-32 lg:pt-40">
+          <div className="flex items-center gap-2.5 mb-3">
+            <span className="w-2.5 h-2.5 bg-[#D91F2C]" />
+            <p className="font-technical text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
+              REDY CHAMPIONSHIP 2 • K-1 RULES
+            </p>
+          </div>
+
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.85] text-white">
-              KEJUARAAN KICKBOXING<br />
+              KEJUARAAN<br />
               <span className="text-[#D91F2C]">SABUK EMAS 2026.</span>
             </h1>
-          </div>
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href="/bracket"
-              className="font-display text-xs sm:text-sm uppercase tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] px-5 py-2.5 rounded transition-all inline-flex items-center gap-1.5"
-            >
-              <span>BAGAN TURNAMEN</span>
-              <span className="font-technical text-xs">↗</span>
-            </Link>
-            <Link
-              href="/fighters"
-              className="font-display text-xs sm:text-sm uppercase tracking-wider text-white/80 hover:text-white border border-white/20 px-4 py-2.5 rounded transition-all inline-flex items-center gap-1.5"
-            >
-              <span>DAFTAR ATLET</span>
-              <span className="font-technical text-xs">↗</span>
-            </Link>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                href="/bracket"
+                className="font-display text-xs sm:text-sm uppercase tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] px-5 py-2.5 rounded transition-all inline-flex items-center gap-1.5"
+              >
+                <span>BAGAN TURNAMEN</span>
+                <span className="font-technical text-xs">↗</span>
+              </Link>
+              <Link
+                href="/fighters"
+                className="font-display text-xs sm:text-sm uppercase tracking-wider text-white/80 hover:text-white border border-white/20 px-4 py-2.5 rounded transition-all inline-flex items-center gap-1.5 bg-black/50 backdrop-blur-sm"
+              >
+                <span>DAFTAR ATLET</span>
+                <span className="font-technical text-xs">↗</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════
-          2. EMPAT DIVISI SABUK EMAS (2-COL MOBILE, 4-COL DESKTOP)
+          2. EMPAT DIVISI SABUK EMAS — VISUAL CARDS WITH FIGHTER IMAGES
       ═════════════════════════════════════════════ */}
-      <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 py-10 w-full flex-1 space-y-12">
+      <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 py-12 lg:py-16 w-full flex-1 space-y-14">
         
         <div className="space-y-6">
           <div className="flex items-center justify-between border-b border-white/10 pb-3">
@@ -119,33 +137,48 @@ export default function ChampionshipPage() {
             <span className="font-technical text-xs text-white/40">K-1 RULES • 8-MAN ELIMINATION</span>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {DIVISIONS.map((div) => (
               <div
                 key={div.no}
-                className="bg-[#141416] border border-white/10 hover:border-[#D91F2C]/60 transition-all rounded p-4 sm:p-5 flex flex-col justify-between space-y-4 group"
+                className="bg-[#141416] border border-white/10 hover:border-[#D91F2C]/60 transition-all rounded overflow-hidden flex flex-col group"
               >
-                <div>
-                  <div className="flex items-center justify-between font-technical text-[10px] text-white/40 mb-2">
-                    <span className="text-[#D91F2C] font-bold">DIVISI {div.no}</span>
-                    <span>{div.quota}</span>
-                  </div>
-
-                  <h3 className="font-display text-xl sm:text-2xl uppercase tracking-wider text-white group-hover:text-[#D91F2C] transition-colors">
-                    {div.name}
-                  </h3>
-                  <span className="font-technical text-xs font-black text-[#D91F2C] block mt-0.5">
-                    BATAS {div.limit}
+                {/* Fighter Photo */}
+                <div className="relative aspect-[4/3] w-full bg-[#1c1c1f] overflow-hidden">
+                  <Image
+                    src={div.img}
+                    alt={div.name}
+                    fill
+                    sizes="(max-width: 640px) 50vw, 25vw"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#141416] via-transparent to-transparent" />
+                  <span className="absolute top-2 left-2 bg-[#D91F2C] text-white font-technical text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded">
+                    DIVISI {div.no}
+                  </span>
+                  <span className="absolute top-2 right-2 bg-black/70 backdrop-blur-sm text-white/70 font-technical text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded border border-white/10">
+                    {div.quota}
                   </span>
                 </div>
 
-                <div className="pt-2 border-t border-white/5 space-y-1">
-                  <span className="font-technical text-[9px] uppercase tracking-wider text-white/40 block">
-                    GAYA: {div.style}
-                  </span>
-                  <span className="font-technical text-[10px] text-amber-400 font-bold uppercase block">
-                    ★ {div.belt}
-                  </span>
+                <div className="p-3.5 sm:p-4 flex flex-col justify-between flex-1 space-y-2">
+                  <div>
+                    <h3 className="font-display text-lg sm:text-xl uppercase tracking-wider text-white group-hover:text-[#D91F2C] transition-colors leading-snug">
+                      {div.name}
+                    </h3>
+                    <span className="font-technical text-xs font-black text-[#D91F2C] block mt-0.5">
+                      BATAS {div.limit}
+                    </span>
+                  </div>
+
+                  <div className="pt-2 border-t border-white/5 space-y-1">
+                    <span className="font-technical text-[9px] uppercase tracking-wider text-white/40 block">
+                      {div.style}
+                    </span>
+                    <span className="font-technical text-[10px] text-amber-400 font-bold uppercase block">
+                      ★ {div.belt}
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}

@@ -15,7 +15,7 @@ const STAGES = [
     location: "MAIN ARENA • GOR UNY",
     genre: "ROCK • ALTERNATIVE • ANTHEMIC",
     schedule: "START 19:00 WIB",
-    img: "/images/lineup/the-sound-of-nyali.png",
+    img: "/images/lineup/ring-stage.jpg",
   },
   {
     code: "02",
@@ -23,7 +23,7 @@ const STAGES = [
     location: "CULTURAL HALL",
     genre: "HIP-HOP • FOLK • INDIE",
     schedule: "START 16:30 WIB",
-    img: "/images/lineup/jogja-hiphop-cyphers.png",
+    img: "/images/lineup/heritage-stage.jpg",
   },
   {
     code: "03",
@@ -31,7 +31,7 @@ const STAGES = [
     location: "OUTDOOR SOUND PLAZA",
     genre: "ELECTRONIC • BEATS • DUB",
     schedule: "START 15:00 WIB",
-    img: "/images/lineup/strike-and-sounds.png",
+    img: "/images/lineup/underground-beat.jpg",
   },
 ];
 
@@ -99,7 +99,7 @@ export default async function LineupPage() {
                   {/* Square Artist Image */}
                   <div className="relative aspect-square w-full bg-[#1c1c1f] overflow-hidden">
                     <Image
-                      src={p.image || "/images/lineup/the-sound-of-nyali.png"}
+                      src={p.image || "/images/lineup/ring-stage.jpg"}
                       alt={p.name}
                       fill
                       sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
@@ -134,9 +134,9 @@ export default async function LineupPage() {
             /* Teaser Cards if roster is awaiting announcement */
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
               {[
-                { name: "THE SOUND OF NYALI", stage: "THE RING STAGE", genre: "ROCK / ANTHEM", img: "/images/lineup/the-sound-of-nyali.png" },
-                { name: "JOGJA HIP-HOP CYPHERS", stage: "HERITAGE STAGE", genre: "HIP-HOP / CYPHER", img: "/images/lineup/jogja-hiphop-cyphers.png" },
-                { name: "STRIKE & SOUNDS", stage: "UNDERGROUND BEAT", genre: "ELECTRONIC / BASS", img: "/images/lineup/strike-and-sounds.png" },
+                { name: "THE SOUND OF NYALI", stage: "THE RING STAGE", genre: "ROCK / ANTHEM", img: "/images/lineup/ring-stage.jpg" },
+                { name: "JOGJA HIP-HOP CYPHERS", stage: "HERITAGE STAGE", genre: "HIP-HOP / CYPHER", img: "/images/lineup/heritage-stage.jpg" },
+                { name: "STRIKE & SOUNDS", stage: "UNDERGROUND BEAT", genre: "ELECTRONIC / BASS", img: "/images/lineup/underground-beat.jpg" },
                 { name: "SECRET HEADLINER", stage: "THE RING STAGE", genre: "FASE 1 ANNOUNCEMENT", img: "/images/v9/06_FOTO_KONSER_PLACEHOLDER_INTERNAL.png" },
               ].map((item, idx) => (
                 <div

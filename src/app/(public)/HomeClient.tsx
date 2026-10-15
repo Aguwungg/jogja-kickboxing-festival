@@ -187,21 +187,21 @@ export default function HomeClient() {
                 location: "MAIN INDOOR ARENA",
                 highlight: "ROCK & ANTHEMIC SOUNDTRACK",
                 schedule: "12–14 DES • START 19:00 WIB",
-                img: "/images/lineup/the-sound-of-nyali.png",
+                img: "/images/lineup/ring-stage.jpg",
               },
               {
                 stage: "HERITAGE STAGE",
                 location: "CULTURAL HALL GOR UNY",
                 highlight: "ALTERNATIVE & INDIE SOUNDS",
                 schedule: "12–14 DES • START 16:30 WIB",
-                img: "/images/lineup/jogja-hiphop-cyphers.png",
+                img: "/images/lineup/heritage-stage.jpg",
               },
               {
                 stage: "UNDERGROUND BEAT",
                 location: "OUTDOOR PLAZA GOR UNY",
                 highlight: "HIP-HOP & ELECTRONIC BEATS",
                 schedule: "12–14 DES • START 15:00 WIB",
-                img: "/images/lineup/strike-and-sounds.png",
+                img: "/images/lineup/underground-beat.jpg",
               },
             ].map((st, idx) => (
               <div
