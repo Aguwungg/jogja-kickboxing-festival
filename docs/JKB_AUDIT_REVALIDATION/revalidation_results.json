@@ -1,0 +1,461 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "title": "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
+      "h1": "JOGJA PUNYA NYALI.",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/jadwal",
+      "title": "Jadwal Acara & Pertandingan — JKB 2026 | JKB 2026",
+      "h1": "JADWAL PERTANDINGAN & FESTIVAL",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/fighters",
+      "title": "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
+      "h1": "KENALI PARA PETARUNG",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/fighters/fighter-demo-01",
+      "title": "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
+      "h1": "FIGHTER DEMO 01",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/championship",
+      "title": "Kejuaraan Kickboxing — Redy Championship 2 | JKB 2026 | JKB 2026",
+      "h1": "REDY CHAMPIONSHIP 2: 4 SABUK EMAS",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/bracket",
+      "title": "Pohon Turnamen (Live Bracket) — JKB 2026 | JKB 2026",
+      "h1": "POHON TURNAMEN & HASIL LAGA",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 4,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/lineup",
+      "title": "Lineup Musik & Panggung Festival — JKB 2026 | JKB 2026",
+      "h1": "LINEUP MUSIK FESTIVAL",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/city-pride",
+      "title": "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
+      "h1": "VOTE KOTA KEBANGGAANMU",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/creator",
+      "title": "Creator Hub & Akreditasi Media — JKB 2026 | JKB 2026",
+      "h1": "CREATOR HUB & MEDIA ACCREDITATION",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/creator/dashboard",
+      "title": "Dashboard Personal Kreator — JKB 2026 | JKB 2026",
+      "h1": "DASHBOARD PERSONAL KREATOR",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/merch",
+      "title": "Official Merch Store — JKB 2026 | JKB 2026",
+      "h1": "WEAR THE GLORY. REP THE CITY.",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/merch/jkb-tee-black",
+      "title": "JKB 2026 Official Fighter Tee — Black Onyx — Official Merch JKB 2026 | JKB 2026",
+      "h1": "JKB 2026 OFFICIAL FIGHTER TEE — BLACK ONYX",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/tiket",
+      "title": "Info Tiket Resmi — JKB 2026 | JKB 2026",
+      "h1": "TIKET JKB 2026",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/venue",
+      "title": "Panduan Lokasi & Venue GOR UNY — JKB 2026 | JKB 2026",
+      "h1": "GOR UNY, YOGYAKARTA",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/tentang",
+      "title": "Tentang JKB 2026 — Sportainment Festival Yogyakarta | JKB 2026",
+      "h1": "DI BALIK KALEM, ADA PERTARUNGAN.",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/faq",
+      "title": "Tanya Jawab (FAQ) — JKB 2026 | JKB 2026",
+      "h1": "PERTANYAAN SERING DIAJUKAN",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/kontak",
+      "title": "Kontak & Sekretariat Resmi — JKB 2026 | JKB 2026",
+      "h1": "HUBUNGI PANITIA PELAKSANA",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/syarat-ketentuan",
+      "title": "Syarat & Ketentuan — JKB 2026 | JKB 2026",
+      "h1": "SYARAT & KETENTUAN",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/kebijakan-privasi",
+      "title": "Kebijakan Privasi — JKB 2026 | JKB 2026",
+      "h1": "KEBIJAKAN PRIVASI",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/checkout",
+      "title": "Checkout Official Merchandise — JKB 2026 | JKB 2026",
+      "h1": "CHECKOUT & PEMBAYARAN MERCHANDISE",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/checkout/success/cmv3vsisx000ejbo8u2fwp0zo",
+      "title": "Konfirmasi Pesanan — JKB 2026 | JKB 2026",
+      "h1": "TERIMA KASIH ATAS DUKUNGANMU!",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/ppv",
+      "title": "Pay-Per-View Live Streaming — JKB 2026 | JKB 2026",
+      "h1": "RINGSIDE SEAT. FROM ANYWHERE.",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/ppv/watch",
+      "title": "Live Broadcast Room — JKB 2026 PPV | JKB 2026",
+      "h1": "REDY CHAMPIONSHIP 2 × BIGMO CREATOR CLASH",
+      "status": 200,
+      "type": "PUBLIC",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/admin/login",
+      "title": "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
+      "h1": "JKB 2026 COMMAND",
+      "status": 200,
+      "type": "ADMIN",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/admin",
+      "title": "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
+      "h1": "COMMAND CENTER OVERVIEW",
+      "status": 200,
+      "type": "ADMIN",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/admin/fighters",
+      "title": "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
+      "h1": "FIGHTER MANAGEMENT",
+      "status": 200,
+      "type": "ADMIN",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/admin/fighters/new",
+      "title": "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
+      "h1": "ADD NEW FIGHTER",
+      "status": 200,
+      "type": "ADMIN",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/admin/schedule",
+      "title": "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
+      "h1": "MANAJEMEN JADWAL & RUNDOWN FESTIVAL",
+      "status": 200,
+      "type": "ADMIN",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/admin/matches",
+      "title": "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
+      "h1": "OPERATOR PERTANDINGAN & KONTROL BRACKET",
+      "status": 200,
+      "type": "ADMIN",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/admin/lineup",
+      "title": "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
+      "h1": "MANAJEMEN LINEUP MUSIK & HIBURAN",
+      "status": 200,
+      "type": "ADMIN",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/admin/voting",
+      "title": "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
+      "h1": "AUDIT & KONTROL VOTING CITY PRIDE",
+      "status": 200,
+      "type": "ADMIN",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/admin/creators",
+      "title": "Manajemen Creator & Media — Admin JKB 2026 | JKB 2026",
+      "h1": "MANAJEMEN KREATOR & AKREDITASI MEDIA",
+      "status": 200,
+      "type": "ADMIN",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/admin/merch",
+      "title": "Manajemen Merchandise & E-Commerce — JKB Admin | JKB 2026",
+      "h1": "OFFICIAL MERCH STORE & ORDERS",
+      "status": 200,
+      "type": "ADMIN",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/admin/messages",
+      "title": "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
+      "h1": "INBOX PESAN & INQUIRY MASUK",
+      "status": 200,
+      "type": "ADMIN",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    },
+    {
+      "route": "/admin/ppv",
+      "title": "Manajemen PPV & Broadcast Streaming — JKB Admin | JKB 2026",
+      "h1": "PAY-PER-VIEW PLATFORM & STREAMING CONTROL",
+      "status": 200,
+      "type": "ADMIN",
+      "imagesBroken": 0,
+      "consoleErrors": [],
+      "networkErrors": []
+    }
+  ],
+  "interactions": [
+    {
+      "testId": "INT-01",
+      "name": "Mobile Navigation Drawer Open & Scroll",
+      "route": "/",
+      "viewport": "390x844",
+      "beforeShot": "reval_01_mobile_nav_drawer_before.png",
+      "afterShot": "reval_01_mobile_nav_drawer_open_after.png",
+      "scrolledShot": "reval_01_mobile_nav_drawer_scrolled_after.png",
+      "expected": "Hamburger button toggles open full-screen/sliding drawer with all primary and secondary navigation links visible.",
+      "actual": "Drawer visibly mounted, mobile links displayed.",
+      "stateChanged": true,
+      "verdict": "PASS",
+      "notes": "Previous audit used invalid selector button[aria-label=\"Buka menu navigasi\"] producing identical hash to closed homepage."
+    },
+    {
+      "testId": "INT-02",
+      "name": "Schedule Date Switching & Item Expansion",
+      "route": "/jadwal",
+      "viewport": "1440x900",
+      "beforeShot": "reval_02_schedule_day1_before.png",
+      "afterShot": "reval_02_schedule_item_expanded_after.png",
+      "expected": "Clicking 13 DES / 14 DES updates timeline. Clicking \"Lihat Detail\" toggles button to \"Tutup Detail\" and displays description text.",
+      "actual": "Day switching works. Expand toggle succeeded (hasCloseBtn=true, hasDesc=true).",
+      "stateChanged": true,
+      "verdict": "PASS",
+      "notes": "Day 3 displays incorrect weekday (\"Minggu, 14 Desember 2026\" instead of \"Senin, 14 Desember 2026\")."
+    },
+    {
+      "testId": "INT-03",
+      "name": "Fighter Search & Empty Results Filter",
+      "route": "/fighters",
+      "viewport": "1440x900",
+      "beforeShot": "reval_03_fighters_search_before.png",
+      "afterShot": "reval_03_fighters_empty_results_after.png",
+      "expected": "Clicking \"Cari\" filters roster list. Query with no matches displays \"TIDAK ADA PETARUNG DITEMUKAN\" empty state.",
+      "actual": "Empty state correctly rendered.",
+      "stateChanged": true,
+      "verdict": "PASS",
+      "notes": "Previous audit merely set input value without clicking \"Cari\" or pressing Enter, so no filtering or empty state was shown."
+    },
+    {
+      "testId": "INT-04",
+      "name": "Bracket Round Progression Switch (Mobile)",
+      "route": "/bracket",
+      "viewport": "390x844",
+      "beforeShot": "reval_04_bracket_mobile_round_before.png",
+      "afterShot": "reval_04_bracket_mobile_round_final_after.png",
+      "expected": "Clicking \"FINAL\" round filter switches mobile view to Final bout and displays champion crown badge if completed.",
+      "actual": "Final round displayed with champion badge.",
+      "stateChanged": true,
+      "verdict": "PASS",
+      "notes": "Tournament Progression Mode properly toggles rounds on mobile."
+    },
+    {
+      "testId": "INT-05",
+      "name": "City Pride Region Selection",
+      "route": "/city-pride",
+      "viewport": "1440x900",
+      "beforeShot": "reval_05_city_pride_initial_before.png",
+      "afterShot": "reval_05_city_pride_region_selected_after.png",
+      "expected": "Clicking region card applies active styling, displays \"Terpilih ✓\", and updates selected region summary.",
+      "actual": "Region Sleman successfully selected with active indicator.",
+      "stateChanged": true,
+      "verdict": "PASS",
+      "notes": "Submission action is intentionally blocked/safe-read-only to avoid modifying vote counts."
+    },
+    {
+      "testId": "INT-06",
+      "name": "Creator Hub Media Accreditation Tab Switch",
+      "route": "/creator",
+      "viewport": "1440x900",
+      "beforeShot": "reval_06_creator_tab_before.png",
+      "afterShot": "reval_06_creator_media_tab_after.png",
+      "expected": "Clicking \"Akreditasi Media Massa\" switches form from Creator Registration to Media Accreditation form.",
+      "actual": "Tab successfully switched and media fields rendered.",
+      "stateChanged": true,
+      "verdict": "PASS",
+      "notes": "Previous audit captured top viewport (hero) where #action-hub was scrolled off-screen, making screenshot identical to default landing."
+    },
+    {
+      "testId": "INT-07",
+      "name": "Merchandise Variant Selection (Size XL)",
+      "route": "/merch/jkb-tee-black",
+      "viewport": "1440x900",
+      "beforeShot": "reval_07_merch_variant_initial_before.png",
+      "afterShot": "reval_07_merch_variant_xl_after.png",
+      "expected": "Clicking XL button applies active border and updates variant label to XL.",
+      "actual": "Variant XL selected and stock reflected.",
+      "stateChanged": true,
+      "verdict": "PASS",
+      "notes": "Variant selection functions properly in React client state."
+    },
+    {
+      "testId": "INT-08",
+      "name": "FAQ Accordion Expand Interaction",
+      "route": "/faq",
+      "viewport": "1440x900",
+      "beforeShot": "reval_08_faq_initial_before.png",
+      "afterShot": "reval_08_faq_item3_opened_after.png",
+      "expected": "Clicking FAQ question item toggles expansion and displays corresponding answer.",
+      "actual": "Third question expanded and answer revealed.",
+      "stateChanged": true,
+      "verdict": "PASS",
+      "notes": "Questions 1 and 2 are open by default; clicking Question 3 successfully expanded it."
+    }
+  ]
+}
