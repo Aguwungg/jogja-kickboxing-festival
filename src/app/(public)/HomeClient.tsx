@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin, Calendar, Flame } from "lucide-react";
 import CountdownTimer from "@/components/home/CountdownTimer";
+import { EVENT_CONFIG } from "@/lib/event-config";
 
 export default function HomeClient() {
   return (
@@ -113,21 +114,16 @@ export default function HomeClient() {
             </Link>
           </div>
 
-          {/* 4 Compact Divisions Grid */}
+          {/* 4 Compact Divisions Grid from Single Source of Truth */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {[
-              { no: "01", name: "BANTAMWEIGHT", limit: "57.0 KG", style: "SPEED & HIGH VOLUME", status: "8 FIGHTERS" },
-              { no: "02", name: "FEATHERWEIGHT", limit: "60.0 KG", style: "TECHNICAL PRECISION", status: "8 FIGHTERS" },
-              { no: "03", name: "LIGHTWEIGHT", limit: "63.5 KG", style: "PRESSURE & CLINCH KNEE", status: "8 FIGHTERS" },
-              { no: "04", name: "WELTERWEIGHT", limit: "70.0 KG", style: "HEAVY KO POWER", status: "8 FIGHTERS" },
-            ].map((division) => (
+            {EVENT_CONFIG.divisions.map((division) => (
               <div
                 key={division.no}
-                className="p-5 sm:p-6 bg-[#121212] border border-white/10 hover:border-[#D91F2C]/50 transition-all space-y-4 group relative"
+                className="p-5 sm:p-6 bg-[#121212] border border-white/10 hover:border-[#D91F2C]/50 transition-all space-y-4 group relative rounded-lg"
               >
                 <div className="flex items-center justify-between font-technical text-xs">
                   <span className="text-[#D91F2C] font-bold">DIVISI {division.no}</span>
-                  <span className="text-white/40">{division.status}</span>
+                  <span className="text-white/40">{division.quota}</span>
                 </div>
 
                 <div>
@@ -139,9 +135,12 @@ export default function HomeClient() {
                   </p>
                 </div>
 
-                <div className="pt-2 border-t border-white/10">
+                <div className="pt-2 border-t border-white/10 space-y-1">
                   <span className="font-technical text-[10px] uppercase tracking-wider text-white/50 block">
                     GAYA: {division.style}
+                  </span>
+                  <span className="font-technical text-[10px] text-amber-400 font-bold uppercase block">
+                    ★ {division.belt}
                   </span>
                 </div>
               </div>
