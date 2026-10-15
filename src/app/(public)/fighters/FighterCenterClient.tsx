@@ -82,6 +82,24 @@ export default function FighterCenterClient({
             Profil dan rekor resmi petarung 4 divisi sabuk emas. Timbang badan disahkan pada Official Weigh-in 12 Desember 2026.
           </p>
         </div>
+
+        {/* Verification Status Banner */}
+        <div className="mt-6 p-4 bg-[#141416] border-l-4 border-[#D91F2C] border-y border-r border-white/10 rounded flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="space-y-0.5">
+            <span className="font-technical text-[10px] text-[#D91F2C] font-bold uppercase tracking-wider block">
+              STATUS AKREDITASI • KEJUARAAN REDY CHAMPIONSHIP 2
+            </span>
+            <p className="font-sans text-xs text-white/70">
+              Profil di bawah menampilkan atlet kandidat yang telah masuk proses seleksi & pra-kualifikasi sasana. Roster final 32 atlet (8 per divisi) akan disahkan pada Technical Meeting 11 Desember 2026.
+            </p>
+          </div>
+          <Link
+            href="/kontak"
+            className="font-technical text-xs font-bold text-[#D91F2C] hover:underline whitespace-nowrap self-start sm:self-auto"
+          >
+            PENDAFTARAN SASANA ↗
+          </Link>
+        </div>
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════

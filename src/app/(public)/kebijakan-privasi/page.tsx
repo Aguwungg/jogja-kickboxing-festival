@@ -16,7 +16,7 @@ const PRIVACY_ARTICLES = [
     number: "02",
     title: "DATA PRIBADI YANG DIKUMPULKAN",
     items: [
-      "Pendaftaran Akun & Autentikasi: Nama lengkap, alamat email, dan kata sandi terenkripsi.",
+      "Pendaftaran Akun & Autentikasi: Nama lengkap, alamat email, dan kata sandi yang dilindungi dengan algoritma password hashing searah standar industri (bcrypt).",
       "Partisipasi Voting City Pride: Identitas akun guna menjamin integritas asas satu pemilih satu suara (one-account-one-vote).",
       "Transaksi Merchandise: Nama pemesan, nomor WhatsApp, email, dan alamat tujuan pengiriman ekspedisi.",
       "Formulir Kontak & Kemitraan: Nama, nomor telepon, email, serta rincian pesan inquiry sponsorship/media.",
@@ -26,7 +26,7 @@ const PRIVACY_ARTICLES = [
     number: "03",
     title: "KEAMANAN DAN HAK SUBJEK DATA",
     items: [
-      "Kami menerapkan enkripsi standar industri (TLS/HTTPS) dan kontrol akses berbasis peran (RBAC) untuk melindungi seluruh data dari akses tidak sah.",
+      "Kami menerapkan enkripsi transmisi standar industri (TLS/HTTPS), pengamanan hash kata sandi (bcrypt), dan kontrol akses berbasis peran (RBAC) untuk melindungi seluruh data dari akses tidak sah.",
       "Data pengunjung tidak akan diperjualbelikan kepada pihak ketiga mana pun untuk kepentingan komersial pihak luar.",
       "Anda berhak meminta peninjauan, koreksi, atau penghapusan data pribadi Anda dengan menghubungi panitia melalui info@jogjakickboxing.id.",
     ],

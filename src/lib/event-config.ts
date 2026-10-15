@@ -14,14 +14,53 @@
  */
 
 export const EVENT_CONFIG = {
-  // Official Identity
   name: "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
-  shortName: "JKB 2026",
+  shortName: "JKBF 2026",
   championshipName: "Redy Championship 2",
   edition: "2nd Edition",
   campaign: "#JOGJAPUNYANYALI",
   tagline: "Festival Kickboxing Terbesar di Indonesia & Panggung Musik Spektakuler",
   creativeDirection: "GLORY Kickboxing × We The Fest",
+
+  // 4 Official K-1 Championship Divisions (Single Source of Truth)
+  divisions: [
+    {
+      no: "01",
+      name: "BANTAMWEIGHT",
+      limit: "57.0 KG",
+      style: "SPEED & HIGH VOLUME STRIKING",
+      belt: "SABUK EMAS BANTAMWEIGHT",
+      quota: "8 PETARUNG",
+      img: "/images/jkb/fighter-1.jpg",
+    },
+    {
+      no: "02",
+      name: "FEATHERWEIGHT",
+      limit: "60.0 KG",
+      style: "TECHNICAL COUNTER PRECISION",
+      belt: "SABUK EMAS FEATHERWEIGHT",
+      quota: "8 PETARUNG",
+      img: "/images/jkb/fighter-2.jpg",
+    },
+    {
+      no: "03",
+      name: "LIGHTWEIGHT",
+      limit: "63.5 KG",
+      style: "PRESSURE & CLINCH KNEE",
+      belt: "SABUK EMAS LIGHTWEIGHT",
+      quota: "8 PETARUNG",
+      img: "/images/jkb/fighter-3.jpg",
+    },
+    {
+      no: "04",
+      name: "WELTERWEIGHT",
+      limit: "70.0 KG",
+      style: "HEAVY KO POWER & POWER STRIKING",
+      belt: "SABUK EMAS WELTERWEIGHT",
+      quota: "8 PETARUNG",
+      img: "/images/jkb/fighter-5.jpg",
+    },
+  ],
 
   // Dates & Schedule (12–14 December 2026)
   dates: {

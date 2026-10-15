@@ -107,7 +107,7 @@ export default function JadwalClient({ initialItems }: JadwalClientProps) {
                 {/* Time Slot */}
                 <div className="md:col-span-3 text-left md:text-right">
                   <span className="font-technical text-sm sm:text-base font-bold text-[#0B0B0B] tracking-wider uppercase">
-                    {item.timeSlot} WIB
+                    {item.timeSlot.replace(/\s*WIB\s*$/i, "").trim()} WIB
                   </span>
                 </div>
               </div>

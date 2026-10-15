@@ -11,7 +11,7 @@ interface Props {
 const FALLBACK_PRODUCTS: Record<string, any> = {
   "jkb-tee-black": {
     id: "cmv3ni1ht0008sy6waccfdtor",
-    name: "JKB 2026 Official Fighter Tee — Black Onyx",
+    name: "JKBF 2026 Official Fighter Tee — Black Onyx",
     slug: "jkb-tee-black",
     description: "Kaos resmi edisi kejuaraan JKBF 2026. Bahan cotton combed 24s premium dengan sablon plastisol tahan lama bertema Di Balik Kalem.",
     price: 199000,
@@ -29,7 +29,7 @@ const FALLBACK_PRODUCTS: Record<string, any> = {
   },
   "jkb-handwrap-red": {
     id: "cmv3ni1hv0009sy6wc9ji7xsu",
-    name: "JKB Official Combat Handwrap 4.5M — Crimson Red",
+    name: "JKBF Official Combat Handwrap 4.5M — Crimson Red",
     slug: "jkb-handwrap-red",
     description: "Handwrap semi-elastis panjang 4.5 meter standar turnamen K-1. Melindungi pergelangan tangan dan buku jari dengan sirkulasi udara maksimal.",
     price: 89000,
@@ -41,7 +41,7 @@ const FALLBACK_PRODUCTS: Record<string, any> = {
   },
   "jkb-hoodie-charcoal": {
     id: "cmv3ni1hx000asy6w4pxak5wb",
-    name: "JKB Stadium Heavy Pullover Hoodie — Charcoal Grey",
+    name: "JKBF Stadium Heavy Pullover Hoodie — Charcoal Grey",
     slug: "jkb-hoodie-charcoal",
     description: "Heavyweight fleece hoodie 330gsm dengan fit boxy streetwear. Dilengkapi bordir logo kejuaraan di dada dan detail sabuk emas di lengan.",
     price: 349000,
@@ -57,7 +57,7 @@ const FALLBACK_PRODUCTS: Record<string, any> = {
   },
   "jkb-sparring-gloves": {
     id: "cmv3vsisv000djbo81c4serc9",
-    name: "JKB Pro Leather Sparring Gloves — Crimson Gold",
+    name: "JKBF Pro Leather Sparring Gloves — Crimson Gold",
     slug: "jkb-sparring-gloves",
     description: "Sarung tinju sparring kulit asli dengan multi-layer padding untuk peredaman benturan optimal. Desain eksklusif merah marun dan emas.",
     price: 489000,

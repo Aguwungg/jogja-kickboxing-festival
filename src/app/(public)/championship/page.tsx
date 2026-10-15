@@ -1,50 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Trophy, Swords, ShieldCheck, Scale, ArrowRight } from "lucide-react";
+import { EVENT_CONFIG } from "@/lib/event-config";
 
 export const metadata = {
   title: "Kejuaraan Kickboxing — Redy Championship 2 | JKBF 2026",
   description: "Informasi resmi kejuaraan kickboxing profesional Redy Championship 2, 4 divisi sabuk emas, dan regulasi pertarungan K-1 di GOR UNY Yogyakarta.",
 };
 
-const DIVISIONS = [
-  {
-    no: "01",
-    name: "FEATHERWEIGHT",
-    limit: "57.0 KG",
-    style: "SPEED & HIGH VOLUME STRIKING",
-    belt: "SABUK EMAS 57 KG",
-    quota: "8 PETARUNG",
-    img: "/images/jkb/fighter-1.jpg",
-  },
-  {
-    no: "02",
-    name: "LIGHTWEIGHT",
-    limit: "63.5 KG",
-    style: "TECHNICAL COUNTER PRECISION",
-    belt: "SABUK EMAS 63.5 KG",
-    quota: "8 PETARUNG",
-    img: "/images/jkb/fighter-3.jpg",
-  },
-  {
-    no: "03",
-    name: "WELTERWEIGHT",
-    limit: "67.0 KG",
-    style: "PRESSURE & HEAVY KO POWER",
-    belt: "SABUK EMAS 67 KG",
-    quota: "8 PETARUNG",
-    img: "/images/jkb/fighter-5.jpg",
-  },
-  {
-    no: "04",
-    name: "MIDDLEWEIGHT",
-    limit: "71.0 KG",
-    style: "ABSOLUTE POWER & KNEE CLINCH",
-    belt: "SABUK EMAS 71 KG",
-    quota: "8 PETARUNG",
-    img: "/images/jkb/fighter-4.jpg",
-  },
-];
+const DIVISIONS = EVENT_CONFIG.divisions;
 
 const RULES = [
   {

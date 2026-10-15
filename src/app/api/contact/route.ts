@@ -52,8 +52,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: "Terima kasih! Pesan dan pertanyaan Anda telah berhasil dikirim ke panitia resmi JKB 2026.",
+      message: "Pesan Anda berhasil diterima oleh panitia pelaksana JKBF 2026.",
       id: contact.id,
+      referenceCode: `JKBF-CNT-${contact.id.slice(-5).toUpperCase()}`,
     });
   } catch (error) {
     console.error("Error submitting contact message:", error);

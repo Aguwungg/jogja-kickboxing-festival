@@ -69,7 +69,7 @@ export default function HomeClient() {
                 href="/tiket"
                 className="font-display text-base sm:text-lg tracking-wider uppercase text-white bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 px-8 sm:px-10 py-4 transition-all inline-flex items-center gap-2.5 rounded shadow-[0_4px_25px_rgba(217,31,44,0.4)] group"
               >
-                <span>AMANKAN TIKET SEKARANG</span>
+                <span>INFO TIKET & JADWAL RILIS</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
@@ -339,7 +339,7 @@ export default function HomeClient() {
                 href="/tiket"
                 className="font-display text-base tracking-wider uppercase text-white bg-[#D91F2C] hover:bg-[#B81521] px-8 py-4 transition-all inline-flex items-center gap-2 rounded shadow-lg"
               >
-                <span>TIKET RESMI RAWOOH</span>
+                <span>INFO & JADWAL TIKET</span>
                 <span className="font-technical text-xs">↗</span>
               </Link>
               <Link
