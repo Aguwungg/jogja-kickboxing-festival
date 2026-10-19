@@ -1,352 +1,327 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
+  ArrowUpRight,
   MapPin,
   Calendar,
-  Flame,
   Trophy,
   Music,
-  Ticket,
-  Play,
-  X,
-  Check,
-  ShieldCheck,
+  Shield,
+  Layers,
+  Flame,
   ChevronDown,
-  ChevronRight,
-  ExternalLink,
-  Volume2,
-  Sparkles
 } from "lucide-react";
 import CountdownTimer from "@/components/home/CountdownTimer";
 
-const TICKET_TIERS = [
+const DIVISIONS = [
+  { name: "FEATHERWEIGHT", limit: "57.0 KG", desc: "Kecepatan kilat & teknik tendangan akrobatik" },
+  { name: "LIGHTWEIGHT", limit: "63.5 KG", desc: "Kombinasi pukulan eksplosif & intensitas tinggi" },
+  { name: "WELTERWEIGHT", limit: "67.0 KG", desc: "Divisi paling kompetitif dengan determinasi baja" },
+  { name: "MIDDLEWEIGHT", limit: "71.0 KG", desc: "Kekuatan pukulan telak & perebutan takhta bergengsi" },
+];
+
+const SCHEDULE_DAYS = [
   {
-    id: "tribun",
-    name: "TRIBUN REGULER",
-    tag: "AKSES 1 HARI",
-    price: "Rp 150.000",
-    desc: "Pandangan sudut terbaik dari tribun melingkar arena GOR UNY dan akses konser panggung festival musik harian.",
-    popular: false,
-    benefits: [
-      "Kursi tribun bernomor",
-      "Akses penuh panggung festival musik",
-      "Akses food bazaar & culture hub",
-      "E-ticket langsung ke WhatsApp & Email",
-    ],
+    day: "HARI 01",
+    date: "SABTU, 12 DESEMBER 2026",
+    headline: "OPENING CEREMONY & BABAK PENYISIHAN",
+    description: "Upacara pembukaan kejuaraan, penyisihan 32 atlet di 4 divisi K-1, dan konser musik sesi pertama.",
+    badge: "PENYISIHAN K-1",
   },
   {
-    id: "ringside",
-    name: "RINGSIDE FLOOR VIP",
-    tag: "SISI RING RESMI",
-    price: "Rp 500.000",
-    desc: "Duduk tepat di lantai tepi ring laga kickboxing dengan jarak pandang sangat dekat, merchandise eksklusif, & fast-track entry.",
-    popular: true,
-    benefits: [
-      "Kursi VIP tepat di sisi Ring Laga",
-      "Official Tournament Merch Pack",
-      "Pintu masuk jalur khusus VIP (Fast-track)",
-      "Akses eksklusif Press Conference & Timbang Badan",
-    ],
+    day: "HARI 02",
+    date: "MINGGU, 13 DESEMBER 2026",
+    headline: "BABAK PEREMPAT & SEMIFINAL",
+    description: "Pertarungan memanas menuju babak 4 besar, panggung musik sore, dan temu atlet di Culture Hub.",
+    badge: "SEMIFINAL",
   },
   {
-    id: "festival-pass",
-    name: "3-DAY ALL ACCESS PASS",
-    tag: "TERUSAN 3 HARI",
-    price: "Rp 275.000",
-    desc: "Akses lengkap 3 hari penuh dari sesi timbang badan pembuka, babak penyisihan, semifinal, hingga Grand Final & konser puncak.",
-    popular: false,
-    benefits: [
-      "Akses terusan selama 3 hari penuh",
-      "Bebas keluar-masuk (Re-entry wristband)",
-      "Diskon 15% Official Merch Booth",
-      "Priority voting untuk City Pride Award",
-    ],
+    day: "HARI 03",
+    date: "SENIN, 14 DESEMBER 2026",
+    headline: "4 LAGA SABUK EMAS & GRAND FINAL KONSER",
+    description: "Puncak kejuaraan perebutan 4 Sabuk Emas K-1 Redy Championship 2 ditutup konser festival musik spektakuler.",
+    badge: "CHAMPIONSHIP NIGHT",
   },
 ];
 
 export default function HomeClient() {
-  const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);
-  const [isTeaserModalOpen, setIsTeaserModalOpen] = useState(false);
-  const [selectedTier, setSelectedTier] = useState(TICKET_TIERS[1]); // Default VIP
-
   return (
-    <main className="flex-1 flex flex-col w-full text-[#F4F0E8] bg-[#0B0B0B] overflow-x-hidden">
+    <main className="flex-1 flex flex-col w-full text-[#F4F0E8] bg-[#09090B] overflow-x-hidden selection:bg-[#D91F2C] selection:text-white">
       
       {/* ═════════════════════════════════════════════════════════════════════
-          1. CINEMATIC FIGHT POSTER HERO (SYMMETRICAL CENTER AXIS)
-          Fokus 100% pada visual poster monumental, countdown center, dan aksi cepat
+          1. MONUMENTAL FIGHT FESTIVAL POSTER (HERO)
+          Fokus: Logo Resmi Emblem JKBF, Estetika Poster Kejuaraan Dunia,
+          Tanpa Badge Emoji AI, Simetri Pusat, dan Countdown Timer Presisi.
       ═════════════════════════════════════════════ */}
-      <section className="relative w-full min-h-[100svh] pt-24 sm:pt-28 pb-12 sm:pb-16 flex flex-col justify-center items-center text-center border-b border-white/10 bg-[#0B0B0B] overflow-hidden">
+      <section className="relative w-full min-h-[100svh] pt-24 sm:pt-28 pb-16 sm:pb-20 flex flex-col justify-center items-center text-center border-b border-white/10 bg-[#09090B] overflow-hidden">
         
-        {/* Dominant Documentary Background Photo */}
+        {/* Authentic Documentary Arena Photo Background */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
-            alt="Dokumentasi Laga Kickboxing JKBF"
+            alt="Dokumentasi Pertarungan Kickboxing JKBF"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center lg:object-[center_35%] grayscale contrast-125 saturate-50 opacity-50"
+            className="object-cover object-center lg:object-[center_35%] grayscale contrast-125 saturate-50 opacity-40"
           />
-          {/* Radial & Vignette Overlays for Maximum Center Contrast */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(11,11,11,0.3)_0%,#0B0B0B_85%)]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-transparent to-[#0B0B0B]/85" />
-          
-          {/* Dramatic Stadium Center Backlight */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] sm:w-[950px] h-[350px] sm:h-[480px] bg-[#D91F2C]/18 rounded-full blur-[140px] pointer-events-none" />
+          {/* Film Grain & Dramatic Arena Spotlight Vignette */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(9,9,11,0.4)_0%,#09090B_80%)]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#09090B] via-transparent to-[#09090B]/90" />
         </div>
 
-        <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 w-full relative z-10 py-6 sm:py-10 flex flex-col items-center">
-          <div className="flex flex-col items-center max-w-4xl space-y-6 sm:space-y-7">
+        {/* Poster Content Canvas */}
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12 w-full relative z-10 py-6 sm:py-8 flex flex-col items-center">
+          <div className="flex flex-col items-center max-w-4xl space-y-6 sm:space-y-8">
             
-            {/* Festival Identity Kicker */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-black/70 backdrop-blur-md border border-[#D91F2C]/40 rounded-full shadow-[0_0_20px_rgba(217,31,44,0.18)]">
-              <Flame className="w-3.5 h-3.5 text-[#D91F2C] animate-pulse" />
-              <p className="font-technical text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
-                #JOGJAPUNYANYALI &nbsp;•&nbsp; DI BALIK KALEM
-              </p>
+            {/* OFFICIAL EVENT EMBLEM LOGO */}
+            <div className="relative w-48 sm:w-64 md:w-72 lg:w-80 h-24 sm:h-32 md:h-36 transition-transform duration-300 hover:scale-[1.02]">
+              <Image
+                src="/JKBF Kickboxing Festival Emblem 1.png"
+                alt="Jogja Kickboxing Festival Official Emblem"
+                fill
+                priority
+                className="object-contain drop-shadow-[0_10px_35px_rgba(0,0,0,0.95)]"
+                sizes="(max-width: 640px) 200px, (max-width: 1024px) 280px, 320px"
+              />
             </div>
 
-            {/* Monumental Headline */}
-            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-[7.2rem] uppercase tracking-tight text-white leading-[0.88] drop-shadow-[0_10px_35px_rgba(0,0,0,0.95)]">
-              JOGJA KICKBOXING<br />
-              <span className="text-[#D91F2C] drop-shadow-[0_0_35px_rgba(217,31,44,0.45)]">FESTIVAL 2026</span>
-            </h1>
+            {/* Official Kicker & Campaign Identity */}
+            <div className="flex items-center gap-3 text-xs sm:text-sm font-technical uppercase tracking-[0.25em] text-[#8F8E8B]">
+              <span className="text-[#D91F2C] font-bold">#JOGJAPUNYANYALI</span>
+              <span className="text-white/30">•</span>
+              <span>REDY CHAMPIONSHIP 2</span>
+            </div>
 
-            {/* Venue & Date Centered Pill */}
-            <div className="inline-flex flex-wrap items-center justify-center gap-2.5 sm:gap-6 text-xs sm:text-sm font-technical text-white/90 bg-white/5 border border-white/10 px-5 py-2.5 rounded-full backdrop-blur-md shadow-lg">
-              <span className="inline-flex items-center gap-1.5 font-bold">
-                <MapPin className="w-4 h-4 text-[#D91F2C]" /> GOR UNY, YOGYAKARTA
+            {/* Monumental Manifesto Title */}
+            <div className="space-y-2">
+              <p className="font-technical text-xs sm:text-sm uppercase tracking-[0.3em] text-white/70 font-semibold">
+                FESTIVAL KEJUARAAN KICKBOXING & PANGGUNG MUSIK
+              </p>
+              <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] uppercase tracking-tight text-white leading-[0.92]">
+                DI BALIK KALEM, <span className="text-[#D91F2C]">KITA BERTARUNG.</span>
+              </h1>
+            </div>
+
+            {/* Event Coordinates & Verified Facts */}
+            <div className="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm font-technical text-white/90 bg-[#141416]/90 border border-white/15 px-5 sm:px-7 py-3 ring-corner-frame shadow-2xl backdrop-blur-md">
+              <span className="inline-flex items-center gap-2 font-bold tracking-wider">
+                <Calendar className="w-4 h-4 text-[#D91F2C]" />
+                12 – 14 DESEMBER 2026
               </span>
               <span className="text-white/30 hidden sm:inline">•</span>
-              <span className="inline-flex items-center gap-1.5 font-bold">
-                <Calendar className="w-4 h-4 text-[#D91F2C]" /> 12 – 14 DESEMBER 2026
+              <span className="inline-flex items-center gap-2 font-bold tracking-wider">
+                <MapPin className="w-4 h-4 text-[#D91F2C]" />
+                GOR UNY, YOGYAKARTA
+              </span>
+              <span className="text-white/30 hidden md:inline">•</span>
+              <span className="hidden md:inline-flex items-center gap-1.5 text-white/60 tracking-wider">
+                4 DIVISI SABUK EMAS K-1
               </span>
             </div>
 
-            {/* Live Centered Countdown Timer */}
-            <div className="pt-2 pb-2 w-full flex flex-col items-center">
+            {/* Live Centered Countdown Timer (Sharp Athletic Frame) */}
+            <div className="pt-2 pb-1 w-full flex flex-col items-center">
               <p className="font-technical text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-white/50 mb-3 font-semibold">
                 HITUNG MUNDUR MENUJU HARI PERTANDINGAN:
               </p>
               <CountdownTimer />
             </div>
 
-            {/* Action Buttons: Quick Ticket & Teaser Video */}
-            <div className="pt-3 flex flex-wrap items-center justify-center gap-3.5 sm:gap-4 w-full">
-              <button
-                type="button"
-                onClick={() => setIsTicketModalOpen(true)}
-                className="font-display text-base sm:text-lg tracking-wider uppercase text-white bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 px-8 sm:px-12 py-4 sm:py-4.5 transition-all inline-flex items-center gap-3 rounded-md shadow-[0_0_35px_rgba(217,31,44,0.5)] ring-1 ring-[#D91F2C]/60 group cursor-pointer"
+            {/* Direct High-Impact Action CTAs (No generic modal popups) */}
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-4 w-full">
+              <Link
+                href="/tiket"
+                className="font-display text-base sm:text-lg tracking-wider uppercase text-white bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 px-8 sm:px-12 py-4 sm:py-4.5 transition-all inline-flex items-center gap-3 shadow-[0_4px_30px_rgba(217,31,44,0.45)] ring-1 ring-[#D91F2C]/70 group"
               >
-                <Ticket className="w-5 h-5 text-white/90" />
-                <span>AMANKAN TIKET SEKARANG</span>
+                <span>INFO TIKET & PEMESANAN</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-              </button>
+              </Link>
               
-              <button
-                type="button"
-                onClick={() => setIsTeaserModalOpen(true)}
-                className="font-display text-base sm:text-lg tracking-wider uppercase text-white/90 hover:text-white border border-white/20 hover:border-white px-6 sm:px-8 py-4 sm:py-4.5 transition-all inline-flex items-center gap-2.5 bg-black/50 backdrop-blur-sm rounded-md cursor-pointer hover:bg-white/5 shadow-md"
+              <Link
+                href="/jadwal"
+                className="font-display text-base sm:text-lg tracking-wider uppercase text-white/90 hover:text-white border border-white/25 hover:border-white px-7 sm:px-9 py-4 sm:py-4.5 transition-all inline-flex items-center gap-2.5 bg-[#141416]/80 hover:bg-white/10"
               >
-                <Play className="w-4 h-4 text-[#D91F2C] fill-[#D91F2C]" />
-                <span>TONTON TEASER (30s)</span>
-              </button>
+                <span>JADWAL 3 HARI</span>
+                <ArrowUpRight className="w-4 h-4 text-[#D91F2C]" />
+              </Link>
+
+              <Link
+                href="/championship"
+                className="font-display text-base sm:text-lg tracking-wider uppercase text-white/75 hover:text-white border border-white/15 hover:border-white/30 px-6 sm:px-8 py-4 sm:py-4.5 transition-all inline-flex items-center gap-2 bg-transparent"
+              >
+                <span>BAGAN TURNAMEN K-1</span>
+                <ArrowUpRight className="w-4 h-4 text-white/60" />
+              </Link>
             </div>
 
-            {/* Sub-CTA Trust Strip */}
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 pt-2 text-[10px] sm:text-[11px] font-technical tracking-[0.15em] text-white/45 uppercase font-medium">
-              <span>⚡ 32 Atlet Elit K-1</span>
-              <span className="hidden sm:inline text-white/20">•</span>
-              <span>🎸 3 Hari Stage Musik</span>
-              <span className="hidden sm:inline text-white/20">•</span>
-              <span>📍 GOR UNY 10K Seats</span>
-              <span className="hidden sm:inline text-white/20">•</span>
-              <span>🔒 Pembayaran Resmi QRIS & VA</span>
+            {/* Division Ticker Strip */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 w-full pt-4 max-w-3xl border-t border-white/10">
+              {DIVISIONS.map((div) => (
+                <div key={div.name} className="p-2 sm:p-2.5 bg-[#121214] border border-white/5 text-center">
+                  <span className="font-display text-xs sm:text-sm text-white tracking-wider block">
+                    {div.name}
+                  </span>
+                  <span className="font-technical text-[10px] text-[#D91F2C] font-bold">
+                    MAKS {div.limit}
+                  </span>
+                </div>
+              ))}
             </div>
 
           </div>
         </div>
 
-        {/* Bottom subtle scroll cue */}
-        <div className="relative z-10 w-full text-center pb-2 pt-6">
+        {/* Scroll Indicator */}
+        <div className="relative z-10 w-full text-center pt-8 pb-2">
           <a
-            href="#highlights"
-            className="inline-flex items-center gap-2 text-[11px] font-technical uppercase tracking-[0.2em] text-white/40 hover:text-white/80 transition-colors"
+            href="#pillars"
+            className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-technical uppercase tracking-[0.25em] text-white/40 hover:text-white transition-colors"
           >
-            <span>Scroll untuk Eksplorasi 3 Pilar Utama</span>
-            <ChevronDown className="w-3.5 h-3.5" />
+            <span>EKSPLORASI TIGA PILAR FESTIVAL</span>
+            <ChevronDown className="w-3.5 h-3.5 text-[#D91F2C]" />
           </a>
         </div>
       </section>
 
 
       {/* ═════════════════════════════════════════════════════════════════════
-          2. RUNNING MARQUEE TICKER (TRANSISI ELEGAN)
+          2. THE 3 CORE PILLARS (EDITORIAL SCENE BREAKDOWN)
+          Pemisahan tegas: The Ring (Combat), The Stage (Music), The City (Culture)
       ═════════════════════════════════════════════ */}
-      <div className="w-full bg-[#121214] border-y border-white/10 py-3.5 overflow-hidden select-none relative z-20">
-        <div className="flex w-max animate-marquee font-technical text-xs sm:text-sm uppercase tracking-[0.25em] text-white/75 font-bold items-center gap-8">
-          <span>#JOGJAPUNYANYALI</span>
-          <span className="text-[#D91F2C]">✦</span>
-          <span>12–14 DESEMBER 2026</span>
-          <span className="text-[#D91F2C]">✦</span>
-          <span>GOR UNY YOGYAKARTA</span>
-          <span className="text-[#D91F2C]">✦</span>
-          <span>4 DIVISI SABUK EMAS K-1</span>
-          <span className="text-[#D91F2C]">✦</span>
-          <span>FESTIVAL MUSIK 3 HARI</span>
-          <span className="text-[#D91F2C]">✦</span>
-          <span>KUOTA RINGSIDE TERBATAS</span>
-          <span className="text-[#D91F2C]">✦</span>
-          <span>STANDAR INTERNASIONAL</span>
-          <span className="text-[#D91F2C]">✦</span>
-          {/* Seamless duplicate for continuous looping */}
-          <span>#JOGJAPUNYANYALI</span>
-          <span className="text-[#D91F2C]">✦</span>
-          <span>12–14 DESEMBER 2026</span>
-          <span className="text-[#D91F2C]">✦</span>
-          <span>GOR UNY YOGYAKARTA</span>
-          <span className="text-[#D91F2C]">✦</span>
-          <span>4 DIVISI SABUK EMAS K-1</span>
-          <span className="text-[#D91F2C]">✦</span>
-          <span>FESTIVAL MUSIK 3 HARI</span>
-          <span className="text-[#D91F2C]">✦</span>
-          <span>KUOTA RINGSIDE TERBATAS</span>
-          <span className="text-[#D91F2C]">✦</span>
-          <span>STANDAR INTERNASIONAL</span>
-          <span className="text-[#D91F2C]">✦</span>
-        </div>
-      </div>
-
-
-      {/* ═════════════════════════════════════════════════════════════════════
-          3. THE 3 CORE PILLARS (RINGKAS, PADAT, ART-DIRECTED)
-          3 Kartu utama: Sabuk Emas, Musik, dan Arena UNY
-      ═════════════════════════════════════════════ */}
-      <section id="highlights" className="w-full bg-[#101012] text-[#F4F0E8] py-16 sm:py-24 border-b border-white/10 relative">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <section id="pillars" className="w-full bg-[#0D0D0F] text-[#F4F0E8] py-20 sm:py-28 border-b border-white/10 relative">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12">
           
-          {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 pb-6 border-b border-white/10">
+          {/* Section Editorial Header */}
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16 pb-8 border-b border-white/10">
             <div>
-              <div className="inline-flex items-center gap-2 font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold mb-2">
-                <span>01</span>
-                <span>•</span>
-                <span>3 PILAR UTAMA FESTIVAL</span>
+              <div className="inline-flex items-center gap-2.5 font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold mb-3">
+                <span className="w-2 h-2 bg-[#D91F2C]" />
+                <span>ARSITEKTUR FESTIVAL</span>
               </div>
-              <h2 className="font-display text-3xl sm:text-5xl uppercase tracking-tight text-white leading-none">
-                BUKAN SEKADAR LAGA, INI PERAYAAN.
+              <h2 className="font-display text-4xl sm:text-6xl uppercase tracking-tight text-white leading-none">
+                TIGA PILAR, SATU PERAYAAN KOTA.
               </h2>
             </div>
-            <p className="font-technical text-xs sm:text-sm text-white/60 max-w-md">
-              Kombinasi turnamen sabuk emas K-1, panggung festival musik 3 hari, dan atmosfer 10.000 penonton di GOR UNY Yogyakarta.
+            <p className="font-sans text-sm sm:text-base text-white/60 max-w-xl leading-relaxed">
+              Bukan sekadar pertarungan, Jogja Kickboxing Festival menyatukan sabuk emas turnamen K-1, energi panggung konser musik Yogyakarta, dan kebanggaan komunitas lokal.
             </p>
           </div>
 
-          {/* 3 Pillar Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          {/* 3 Large Asymmetric Editorial Panels */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
             
-            {/* Card 1: The Ring */}
-            <div className="group relative bg-[#161618] border border-white/10 rounded-xl overflow-hidden flex flex-col hover:border-[#D91F2C]/60 transition-all duration-300 shadow-xl">
-              <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/60">
+            {/* Pillar 1: The Ring */}
+            <div className="group relative bg-[#141416] border border-white/10 flex flex-col justify-between hover:border-[#D91F2C]/60 transition-all duration-300 ring-corner-frame">
+              <div className="relative aspect-[16/11] w-full overflow-hidden bg-black">
                 <Image
                   src="/images/championship/belt-hero.jpg"
                   alt="4 Sabuk Emas K-1 JKBF"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-80"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#161618] via-transparent to-transparent" />
-                <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 bg-black/80 border border-[#D91F2C]/50 rounded-full text-[10px] font-technical uppercase tracking-wider text-[#D91F2C] font-bold backdrop-blur-md">
-                  <Trophy className="w-3 h-3" /> 4 DIVISI SABUK EMAS
+                <div className="absolute inset-0 bg-gradient-to-t from-[#141416] via-transparent to-transparent" />
+                <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1 bg-black/80 border border-[#D91F2C]/60 text-[10px] font-technical uppercase tracking-widest text-[#D91F2C] font-bold">
+                  <Trophy className="w-3.5 h-3.5" /> THE RING
                 </div>
               </div>
-              <div className="p-6 flex-1 flex flex-col justify-between">
+              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-display text-2xl uppercase tracking-wider text-white mb-2">
-                    THE CHAMPIONSHIP RING
+                  <span className="font-technical text-[10px] uppercase tracking-[0.2em] text-white/40 block mb-1">
+                    REDY CHAMPIONSHIP 2
+                  </span>
+                  <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-wider text-white mb-3">
+                    EMPAT SABUK EMAS K-1
                   </h3>
                   <p className="text-xs sm:text-sm text-white/65 leading-relaxed font-sans mb-6">
-                    Turnamen resmi sistem gugur 32 petarung elit nasional memperebutkan gelar raja K-1 di 4 kelas berat berbeda.
+                    Turnamen resmi sistem gugur 32 petarung pilihan dari sasana-sasana terbaik tanah air. Memperebutkan gelar takhta K-1 di 4 divisi berat resmi.
                   </p>
                 </div>
                 <Link
-                  href="/bracket"
-                  className="inline-flex items-center justify-between text-xs font-technical uppercase tracking-[0.15em] text-[#D91F2C] hover:text-white font-bold pt-4 border-t border-white/5 transition-colors group-hover:border-[#D91F2C]/30"
+                  href="/championship"
+                  className="inline-flex items-center justify-between text-xs font-technical uppercase tracking-[0.18em] text-[#D91F2C] hover:text-white font-bold pt-4 border-t border-white/10 transition-colors group-hover:border-[#D91F2C]/40"
                 >
-                  <span>Bagan Laga & Petarung</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <span>Lihat Regulasi & Divisi Laga</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                 </Link>
               </div>
             </div>
 
-            {/* Card 2: The Stage */}
-            <div className="group relative bg-[#161618] border border-white/10 rounded-xl overflow-hidden flex flex-col hover:border-[#D91F2C]/60 transition-all duration-300 shadow-xl">
-              <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/60">
+            {/* Pillar 2: The Stage */}
+            <div className="group relative bg-[#141416] border border-white/10 flex flex-col justify-between hover:border-[#D91F2C]/60 transition-all duration-300 ring-corner-frame">
+              <div className="relative aspect-[16/11] w-full overflow-hidden bg-black">
                 <Image
                   src="/images/lineup/ring-stage.jpg"
-                  alt="Festival Musik JKBF"
+                  alt="Panggung Festival Musik JKBF"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-80"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#161618] via-transparent to-transparent" />
-                <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 bg-black/80 border border-white/20 rounded-full text-[10px] font-technical uppercase tracking-wider text-white font-bold backdrop-blur-md">
-                  <Music className="w-3 h-3 text-[#D91F2C]" /> PANGGUNG 3 HARI
+                <div className="absolute inset-0 bg-gradient-to-t from-[#141416] via-transparent to-transparent" />
+                <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1 bg-black/80 border border-white/30 text-[10px] font-technical uppercase tracking-widest text-white font-bold">
+                  <Music className="w-3.5 h-3.5 text-[#D91F2C]" /> THE STAGE
                 </div>
               </div>
-              <div className="p-6 flex-1 flex flex-col justify-between">
+              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-display text-2xl uppercase tracking-wider text-white mb-2">
-                    FESTIVAL OF SOUND & FOOD
+                  <span className="font-technical text-[10px] uppercase tracking-[0.2em] text-white/40 block mb-1">
+                    SOUND OF YOGYAKARTA
+                  </span>
+                  <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-wider text-white mb-3">
+                    PANGGUNG MUSIK 3 HARI
                   </h3>
                   <p className="text-xs sm:text-sm text-white/65 leading-relaxed font-sans mb-6">
-                    Panggung kolaborasi musisi lintas genre, visual art show, dan festival kuliner UMKM khas Yogyakarta dari siang hingga malam.
+                    Energi musik independen dan pertunjukan band lintas genre berpadu dengan ketegangan arena. Panggung festival hidup dari siang hingga laga utama usai.
                   </p>
                 </div>
                 <Link
                   href="/lineup"
-                  className="inline-flex items-center justify-between text-xs font-technical uppercase tracking-[0.15em] text-[#D91F2C] hover:text-white font-bold pt-4 border-t border-white/5 transition-colors group-hover:border-[#D91F2C]/30"
+                  className="inline-flex items-center justify-between text-xs font-technical uppercase tracking-[0.18em] text-[#D91F2C] hover:text-white font-bold pt-4 border-t border-white/10 transition-colors group-hover:border-[#D91F2C]/40"
                 >
                   <span>Lineup Panggung Musik</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                 </Link>
               </div>
             </div>
 
-            {/* Card 3: The Venue & Ticket */}
-            <div className="group relative bg-[#161618] border border-white/10 rounded-xl overflow-hidden flex flex-col hover:border-[#D91F2C]/60 transition-all duration-300 shadow-xl">
-              <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/60">
+            {/* Pillar 3: The City */}
+            <div className="group relative bg-[#141416] border border-white/10 flex flex-col justify-between hover:border-[#D91F2C]/60 transition-all duration-300 ring-corner-frame">
+              <div className="relative aspect-[16/11] w-full overflow-hidden bg-black">
                 <Image
                   src="/images/venue/gor-uny-arena.jpg"
                   alt="Arena GOR UNY Yogyakarta"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-80"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#161618] via-transparent to-transparent" />
-                <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 bg-black/80 border border-white/20 rounded-full text-[10px] font-technical uppercase tracking-wider text-white font-bold backdrop-blur-md">
-                  <MapPin className="w-3 h-3 text-[#D91F2C]" /> GOR UNY ARENA
+                <div className="absolute inset-0 bg-gradient-to-t from-[#141416] via-transparent to-transparent" />
+                <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1 bg-black/80 border border-white/30 text-[10px] font-technical uppercase tracking-widest text-white font-bold">
+                  <MapPin className="w-3.5 h-3.5 text-[#D91F2C]" /> THE VENUE
                 </div>
               </div>
-              <div className="p-6 flex-1 flex flex-col justify-between">
+              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-display text-2xl uppercase tracking-wider text-white mb-2">
-                    10.000 KAPASITAS PENONTON
+                  <span className="font-technical text-[10px] uppercase tracking-[0.2em] text-white/40 block mb-1">
+                    GOR UNY COLOMBO
+                  </span>
+                  <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-wider text-white mb-3">
+                    ATMOSFER 10.000 PENONTON
                   </h3>
                   <p className="text-xs sm:text-sm text-white/65 leading-relaxed font-sans mb-6">
-                    Pilihan kategori tiket mulai dari Festival Pass, Tribune, hingga Ringside VIP Eksklusif tepat di tepi ring pertarungan.
+                    Arena melingkar legendaris di jantung Yogyakarta. Menampung antusiasme penonton dengan zona Tribun berjarak pandang luas hingga kursi Ringside VIP tepi kanvas.
                   </p>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setIsTicketModalOpen(true)}
-                  className="inline-flex items-center justify-between text-xs font-technical uppercase tracking-[0.15em] text-[#D91F2C] hover:text-white font-bold pt-4 border-t border-white/5 transition-colors group-hover:border-[#D91F2C]/30 cursor-pointer w-full text-left"
+                <Link
+                  href="/venue"
+                  className="inline-flex items-center justify-between text-xs font-technical uppercase tracking-[0.18em] text-[#D91F2C] hover:text-white font-bold pt-4 border-t border-white/10 transition-colors group-hover:border-[#D91F2C]/40"
                 >
-                  <span>Pilih Kategori Tiket</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
+                  <span>Panduan Lokasi & Denah GOR</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                </Link>
               </div>
             </div>
 
@@ -357,236 +332,118 @@ export default function HomeClient() {
 
 
       {/* ═════════════════════════════════════════════════════════════════════
-          4. COMPACT ACTION BANNER (CALL TO ACTION TERAKHIR)
+          3. CHRONOLOGICAL 3-DAY TIMELINE (NO FAKE HOURS, HONEST FACTS)
       ═════════════════════════════════════════════ */}
-      <section className="w-full bg-[#0B0B0B] py-14 sm:py-16 border-b border-white/10">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="p-8 sm:p-12 bg-gradient-to-r from-[#141416] via-[#1A1A1E] to-[#141416] border border-white/10 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-            <div className="space-y-2 text-center md:text-left">
-              <span className="font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
-                JADILAH SAKSI SEJARAH LAGA DI YOGYAKARTA
+      <section className="w-full bg-[#09090B] text-[#F4F0E8] py-20 sm:py-28 border-b border-white/10">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-6 border-b border-white/10">
+            <div>
+              <span className="font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold block mb-2">
+                RANGKAIAN ACARA
               </span>
-              <h3 className="font-display text-3xl sm:text-4xl uppercase text-white leading-tight">
-                KUOTA TIKET RINGSIDE & FESTIVAL TERBATAS
-              </h3>
-              <p className="font-technical text-xs sm:text-sm text-white/60">
-                12 – 14 Desember 2026 • GOR UNY, D.I. Yogyakarta
-              </p>
+              <h2 className="font-display text-3xl sm:text-5xl uppercase tracking-tight text-white leading-none">
+                TIGA HARI INTENSITAS TINGGI
+              </h2>
             </div>
-            
-            <div className="flex-shrink-0">
-              <button
-                type="button"
-                onClick={() => setIsTicketModalOpen(true)}
-                className="font-display text-base sm:text-lg tracking-wider uppercase text-white bg-[#D91F2C] hover:bg-[#B81521] px-8 sm:px-10 py-4 transition-all inline-flex items-center gap-2 rounded shadow-[0_4px_25px_rgba(217,31,44,0.4)] active:scale-95 cursor-pointer"
-              >
-                <span>PESAN TIKET SEKARANG</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+            <Link
+              href="/jadwal"
+              className="font-display text-sm tracking-wider uppercase text-white hover:text-[#D91F2C] inline-flex items-center gap-2 transition-colors border-b border-[#D91F2C] pb-1 self-start md:self-auto"
+            >
+              <span>BUKA JADWAL LENGKAP & RUNDOWN</span>
+              <ArrowUpRight className="w-4 h-4 text-[#D91F2C]" />
+            </Link>
           </div>
+
+          {/* Timeline Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {SCHEDULE_DAYS.map((item, idx) => (
+              <div
+                key={item.day}
+                className="p-6 sm:p-8 bg-[#121214] border border-white/10 flex flex-col justify-between hover:border-white/30 transition-all"
+              >
+                <div>
+                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
+                    <span className="font-technical text-xs font-bold text-[#D91F2C] tracking-widest">
+                      {item.day}
+                    </span>
+                    <span className="font-technical text-[10px] uppercase tracking-wider text-white/50 bg-white/5 px-2.5 py-1">
+                      {item.badge}
+                    </span>
+                  </div>
+                  <p className="font-technical text-xs text-white/60 mb-2">
+                    {item.date}
+                  </p>
+                  <h3 className="font-display text-2xl uppercase tracking-wider text-white mb-3">
+                    {item.headline}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-white/65 leading-relaxed font-sans">
+                    {item.description}
+                  </p>
+                </div>
+
+                <div className="pt-6 mt-6 border-t border-white/5 flex items-center justify-between text-xs font-technical text-white/50">
+                  <span>GOR UNY Colombo</span>
+                  <Link href="/jadwal" className="text-[#D91F2C] hover:text-white font-bold inline-flex items-center gap-1">
+                    <span>Rincian</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
 
       {/* ═════════════════════════════════════════════════════════════════════
-          MODAL 1: QUICK TICKET SELECTOR (INSTANT CHECKOUT MODAL)
+          4. OFFICIAL TICKETING & SAFETY ASSURANCE CALLOUT
       ═════════════════════════════════════════════ */}
-      {isTicketModalOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
-          onClick={() => setIsTicketModalOpen(false)}
-        >
-          <div
-            className="relative w-full max-w-3xl bg-[#141416] border border-white/15 rounded-2xl shadow-2xl overflow-hidden p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header */}
-            <div className="flex items-start justify-between border-b border-white/10 pb-5">
-              <div>
-                <span className="font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
-                  OFFICIAL TICKETING • JKBF 2026
-                </span>
-                <h3 className="font-display text-3xl sm:text-4xl uppercase text-white tracking-wide mt-1">
-                  PILIH KATEGORI TIKET
-                </h3>
-                <p className="text-xs sm:text-sm text-white/60 mt-1">
-                  12 – 14 Desember 2026 • GOR UNY, Yogyakarta
-                </p>
+      <section className="w-full bg-[#111114] text-[#F4F0E8] py-16 sm:py-20 border-b border-white/10">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12">
+          <div className="p-8 sm:p-12 lg:p-16 bg-[#161619] border border-white/15 flex flex-col lg:flex-row items-center justify-between gap-8 ring-corner-frame shadow-2xl">
+            
+            <div className="space-y-4 text-center lg:text-left max-w-2xl">
+              <div className="inline-flex items-center gap-2 font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
+                <Shield className="w-4 h-4 text-[#D91F2C]" />
+                <span>OFFICIAL TICKETING GATEWAY</span>
               </div>
-              <button
-                type="button"
-                onClick={() => setIsTicketModalOpen(false)}
-                className="p-2 text-white/50 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-colors cursor-pointer"
-                aria-label="Tutup"
+              <h2 className="font-display text-3xl sm:text-5xl uppercase tracking-tight text-white leading-tight">
+                AMANKAN KURSI ANDA DI GOR UNY
+              </h2>
+              <p className="font-sans text-sm sm:text-base text-white/70 leading-relaxed">
+                Tersedia kategori Tribun Reguler bernomor, 3-Day Festival Pass, dan kursi eksklusif Ringside VIP tepi kanvas ring kejuaraan. Pemesanan resmi bebas calo.
+              </p>
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2 font-technical text-xs text-white/50">
+                <span>✓ E-Ticket Terverifikasi</span>
+                <span>•</span>
+                <span>✓ Akses Penuh Festival Musik</span>
+                <span>•</span>
+                <span>✓ Kuota Ringside Terbatas</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-4 flex-shrink-0 w-full sm:w-auto">
+              <Link
+                href="/tiket"
+                className="w-full sm:w-auto text-center font-display text-base sm:text-lg tracking-wider uppercase text-white bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 px-8 sm:px-10 py-4 transition-all inline-flex items-center justify-center gap-2.5 shadow-lg ring-1 ring-[#D91F2C]/60"
               >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Ticket Options Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {TICKET_TIERS.map((tier) => {
-                const isSelected = selectedTier.id === tier.id;
-                return (
-                  <div
-                    key={tier.id}
-                    onClick={() => setSelectedTier(tier)}
-                    className={`relative p-5 rounded-xl border transition-all cursor-pointer flex flex-col justify-between ${
-                      isSelected
-                        ? "bg-[#D91F2C]/10 border-[#D91F2C] ring-1 ring-[#D91F2C]/50 shadow-[0_0_25px_rgba(217,31,44,0.2)]"
-                        : "bg-[#18181C] border-white/10 hover:border-white/30"
-                    }`}
-                  >
-                    {tier.popular && (
-                      <span className="absolute -top-2.5 right-3 bg-[#D91F2C] text-white text-[9px] font-technical uppercase tracking-widest font-bold px-2 py-0.5 rounded-full shadow">
-                        FAVORIT
-                      </span>
-                    )}
-                    <div>
-                      <span className="text-[10px] font-technical uppercase tracking-wider text-white/50 font-bold block mb-1">
-                        {tier.tag}
-                      </span>
-                      <h4 className="font-display text-xl uppercase tracking-wider text-white">
-                        {tier.name}
-                      </h4>
-                      <p className="font-display text-2xl text-[#D91F2C] font-black my-2">
-                        {tier.price}
-                      </p>
-                      <p className="text-[11px] text-white/65 leading-relaxed mb-4">
-                        {tier.desc}
-                      </p>
-                    </div>
-
-                    <ul className="space-y-1.5 pt-3 border-t border-white/10 text-[10px] sm:text-[11px] text-white/80 font-sans">
-                      {tier.benefits.map((b, idx) => (
-                        <li key={idx} className="flex items-start gap-1.5">
-                          <Check className="w-3.5 h-3.5 text-[#D91F2C] flex-shrink-0 mt-0.5" />
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Modal Footer / Checkout Action */}
-            <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="text-center sm:text-left">
-                <p className="text-xs text-white/50 font-technical">PILIHAN ANDA:</p>
-                <p className="font-display text-xl text-white">
-                  {selectedTier.name} — <span className="text-[#D91F2C]">{selectedTier.price}</span>
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3 w-full sm:w-auto">
-                <Link
-                  href="/tiket"
-                  onClick={() => setIsTicketModalOpen(false)}
-                  className="flex-1 sm:flex-none text-center font-display text-sm uppercase px-5 py-3.5 border border-white/20 hover:border-white text-white/80 hover:text-white rounded transition-colors"
-                >
-                  INFO DETAIL DENAH KURSI
-                </Link>
-                <Link
-                  href={`/checkout?tier=${selectedTier.id}`}
-                  onClick={() => setIsTicketModalOpen(false)}
-                  className="flex-1 sm:flex-none text-center font-display text-base uppercase px-8 py-3.5 bg-[#D91F2C] hover:bg-[#B81521] text-white rounded shadow-[0_0_20px_rgba(217,31,44,0.4)] transition-all font-bold"
-                >
-                  LANJUT PEMESANAN ↗
-                </Link>
-              </div>
+                <span>LIHAT KATEGORI TIKET</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/venue"
+                className="w-full sm:w-auto text-center font-display text-base tracking-wider uppercase text-white/80 hover:text-white border border-white/20 hover:border-white px-7 py-4 transition-all inline-flex items-center justify-center gap-2 bg-[#121214]"
+              >
+                <span>PANDUAN DENAH VENUE</span>
+                <ArrowUpRight className="w-4 h-4 text-[#D91F2C]" />
+              </Link>
             </div>
 
           </div>
         </div>
-      )}
-
-
-      {/* ═════════════════════════════════════════════════════════════════════
-          MODAL 2: CINEMATIC TEASER TRAILER POPUP
-      ═════════════════════════════════════════════ */}
-      {isTeaserModalOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-xl animate-in fade-in duration-200"
-          onClick={() => setIsTeaserModalOpen(false)}
-        >
-          <div
-            className="relative w-full max-w-4xl bg-[#141416] border border-white/20 rounded-2xl shadow-[0_0_60px_rgba(217,31,44,0.25)] overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Top Bar */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-black/60">
-              <div className="flex items-center gap-2">
-                <Flame className="w-4 h-4 text-[#D91F2C]" />
-                <span className="font-technical text-xs uppercase tracking-widest text-white/90 font-bold">
-                  OFFICIAL EVENT TEASER • JOGJA KICKBOXING FESTIVAL 2026
-                </span>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsTeaserModalOpen(false)}
-                className="p-1.5 text-white/60 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-colors cursor-pointer"
-                aria-label="Tutup"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Video Player Display */}
-            <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
-              <Image
-                src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
-                alt="Teaser Preview"
-                fill
-                className="object-cover opacity-45 filter contrast-125"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-              
-              {/* Center Play Icon & Pulse Atmosphere */}
-              <div className="relative z-10 flex flex-col items-center text-center p-6 space-y-4 max-w-lg">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#D91F2C] flex items-center justify-center text-white shadow-[0_0_40px_rgba(217,31,44,0.8)] ring-4 ring-white/20 animate-pulse">
-                  <Play className="w-8 h-8 sm:w-10 sm:h-10 fill-white ml-1" />
-                </div>
-                <div>
-                  <h4 className="font-display text-3xl sm:text-4xl uppercase text-white tracking-wider">
-                    DI BALIK KALEM, ADA NYALI BESAR
-                  </h4>
-                  <p className="text-xs sm:text-sm text-white/70 font-sans mt-1">
-                    Dokumentasi eksklusif persiapan 32 atlet elit tanah air menuju laga akbar di GOR UNY Yogyakarta.
-                  </p>
-                </div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/20 rounded-full text-[10px] font-technical uppercase tracking-widest text-[#D91F2C] font-bold">
-                  <span>RESMI DIRILIS KANAL YOUTUBE @JOGJAKICKBOXING</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Modal Bottom Action Bar */}
-            <div className="px-6 py-4 bg-[#101012] border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
-              <div className="text-xs text-white/50 font-technical">
-                DURASI: 00:45 • RESOLUSI 4K MASTER CINEMATIC AUDIO
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setIsTeaserModalOpen(false);
-                  setIsTicketModalOpen(true);
-                }}
-                className="font-display text-sm tracking-wider uppercase text-white bg-[#D91F2C] hover:bg-[#B81521] px-6 py-2.5 rounded transition-all inline-flex items-center gap-2 cursor-pointer shadow-md"
-              >
-                <span>AMANKAN TIKET FESTIVAL</span>
-                <Ticket className="w-4 h-4" />
-              </button>
-            </div>
-
-          </div>
-        </div>
-      )}
+      </section>
 
     </main>
   );

@@ -1,9 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#0B0B0B] border-t border-white/10 pt-12 sm:pt-16 pb-10 z-20 relative text-[#8F8E8B]">
+    <footer className="w-full bg-[#09090B] border-t border-white/10 pt-12 sm:pt-16 pb-10 z-20 relative text-[#8F8E8B]">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
         {/* Main Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-10 border-b border-white/10">
@@ -11,9 +12,15 @@ export default function Footer() {
           {/* Brand & Manifesto Column (7 cols on Desktop) */}
           <div className="lg:col-span-6 space-y-4">
             <Link href="/" className="inline-block group leading-none">
-              <span className="font-display text-3xl sm:text-4xl text-[#F4F0E8] tracking-wider group-hover:text-white transition-colors">
-                JKBF<span className="text-[#D91F2C]">.</span>
-              </span>
+              <div className="relative h-11 w-24 sm:h-12 sm:w-28 transition-transform duration-200 group-hover:scale-105">
+                <Image
+                  src="/JKBF Kickboxing Festival Emblem 1.png"
+                  alt="Jogja Kickboxing Festival Official Logo"
+                  fill
+                  className="object-contain object-left"
+                  sizes="120px"
+                />
+              </div>
             </Link>
 
             <div className="space-y-0.5">

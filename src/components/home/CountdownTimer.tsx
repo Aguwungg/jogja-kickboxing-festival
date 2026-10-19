@@ -72,13 +72,10 @@ export default function CountdownTimer() {
 
   return (
     <div className="w-fit mx-auto relative group">
-      {/* Subtle outer glow on hover */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-[#D91F2C]/20 via-transparent to-[#D91F2C]/20 rounded-2xl blur-lg opacity-60 group-hover:opacity-100 transition duration-700 pointer-events-none" />
-      
-      {/* Main Glass Panel */}
-      <div className="relative bg-black/75 backdrop-blur-xl border border-white/15 px-4 sm:px-8 lg:px-10 py-4 sm:py-5 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.8)] ring-1 ring-white/10 overflow-hidden">
-        {/* Ambient bottom light */}
-        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D91F2C] to-transparent opacity-80" />
+      {/* Sharp Athletic Frame with Ring-Corner Accents */}
+      <div className="relative bg-[#0D0D0E]/90 border border-white/15 px-5 sm:px-9 lg:px-12 py-4 sm:py-5 shadow-2xl ring-corner-frame">
+        {/* Subtle top indicator */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-[2px] bg-[#D91F2C]" />
         
         {/* Horizontal flex — never wraps */}
         <div className="flex items-center justify-center gap-1 sm:gap-2">
