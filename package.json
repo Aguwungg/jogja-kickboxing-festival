@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "cp prisma/dev.db dev.db 2>/dev/null || true; prisma generate && next build",
+    "build": "export DATABASE_URL=\"${DATABASE_URL:-file:./dev.db}\"; cp prisma/dev.db dev.db 2>/dev/null || true; prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
     "postinstall": "prisma generate"
