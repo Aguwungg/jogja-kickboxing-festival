@@ -1,12 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { EVENT_CONFIG } from "@/lib/event-config";
 
 interface TimeLeft {
   days: number;
   hours: number;
   minutes: number;
   seconds: number;
+}
+
+interface CountdownTimerProps {
+  targetIso?: string;
 }
 
 function TimeUnit({ value, label, accent = false }: { value: string; label: string; accent?: boolean }) {
@@ -40,9 +45,10 @@ function Separator() {
   );
 }
 
-export default function CountdownTimer() {
-  // Target: 12 Desember 2026, 09:00:00 WIB (UTC+7)
-  const targetDate = new Date("2026-12-12T09:00:00+07:00").getTime();
+export default function CountdownTimer({ targetIso }: CountdownTimerProps) {
+  // Target: Configurable via props or EVENT_CONFIG SSOT (12 Desember 2026, 09:00:00 WIB)
+  const targetDateStr = targetIso || EVENT_CONFIG.dates.startIso;
+  const targetDate = new Date(targetDateStr).getTime();
 
   const calculateTimeLeft = (): TimeLeft => {
     const now = new Date().getTime();
