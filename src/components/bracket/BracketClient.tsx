@@ -172,8 +172,8 @@ export default function BracketClient({ tournaments }: BracketClientProps) {
       {/* ═════════════════════════════════════════════════════════════════════
           4. DESKTOP & MOBILE TOURNAMENT BRACKET TREE
       ═════════════════════════════════════════════ */}
-      <div className="w-full overflow-x-auto pb-6">
-        <div className="min-w-[980px] lg:min-w-0 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch relative">
+      <div className="w-full pb-6">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch relative">
           
           {/* ─────────────────────────────────────────────────────────────
               COLUMN 1: PEREMPAT FINAL (Quarterfinals - 4 Bouts)

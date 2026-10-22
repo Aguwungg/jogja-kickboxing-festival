@@ -62,7 +62,7 @@ body {
 }
 
 /* V10 Editorial Signature: Ring Corner Line */
-.ring-corner-frame {
+.ring-corner-frame:not(.absolute):not(\!absolute):not(.fixed) {
   position: relative;
 }
 .ring-corner-frame::before {

@@ -153,7 +153,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 4 }}
                   transition={{ duration: 0.15, ease: "easeOut" }}
-                  className="absolute top-full right-0 mt-2.5 w-64 bg-[#121214] border border-white/15 shadow-2xl p-1.5 z-50 ring-corner-frame"
+                  className="!absolute top-full right-0 mt-2 w-64 bg-[#121214]/95 backdrop-blur-xl border border-white/15 shadow-2xl rounded-md p-1.5 z-50"
                 >
                   {secondaryNavLinks.map((subItem) => {
                     const isActive = pathname === subItem.href;
@@ -162,7 +162,7 @@ export default function Navbar() {
                         key={subItem.name}
                         href={subItem.href}
                         onClick={() => setIsMoreOpen(false)}
-                        className={`px-3 py-2.5 block transition-colors ${
+                        className={`px-3 py-2.5 block transition-colors rounded ${
                           isActive
                             ? "bg-[#D91F2C]/15 border-l-2 border-[#D91F2C] text-white"
                             : "hover:bg-white/5 text-[#8F8E8B] hover:text-white"

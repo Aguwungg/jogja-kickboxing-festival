@@ -324,55 +324,56 @@ export default function LineupPosterClient({ initialPerformers = [] }: Props) {
           </div>
         </div>
       ) : (
-        /* MODE B: ARTIST CARDS GRID */
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        /* MODE B: ARTIST CARDS GRID (SHOPEE/TOKPED STYLE 2-COL MOBILE) */
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
           {filteredPerformers.map((item) => (
             <div
               key={item.id}
-              className="group bg-[#121214] border border-white/10 hover:border-[#D91F2C]/60 transition-all rounded-lg overflow-hidden flex flex-col shadow-lg"
+              className="group bg-[#121214] border border-white/10 hover:border-[#D91F2C]/60 transition-all rounded-lg overflow-hidden flex flex-col shadow-md"
             >
               {/* Concert Image Container */}
-              <div className="relative aspect-[16/10] w-full bg-[#18181b] overflow-hidden">
+              <div className="relative aspect-[4/5] sm:aspect-[16/11] w-full bg-[#18181b] overflow-hidden">
                 <Image
                   src={item.image}
                   alt={item.name}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover object-center group-hover:scale-105 transition-transform duration-500 contrast-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#121214] via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#121214] via-black/20 to-transparent" />
                 
                 {/* Stage Badge */}
-                <div className="absolute top-3 left-3 bg-[#D91F2C] text-white font-technical text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded shadow">
+                <div className="absolute top-2 left-2 bg-[#D91F2C] text-white font-technical text-[9px] sm:text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded shadow">
                   {item.stage}
                 </div>
 
                 {/* Genre Tag */}
                 {item.genre && (
-                  <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm border border-white/10 text-white/80 font-technical text-[10px] uppercase px-2 py-0.5 rounded">
+                  <div className="absolute top-2 right-2 bg-black/80 backdrop-blur-sm border border-white/10 text-white/90 font-technical text-[9px] sm:text-[10px] uppercase px-1.5 sm:px-2 py-0.5 rounded">
                     {item.genre}
                   </div>
                 )}
               </div>
 
               {/* Card Body */}
-              <div className="p-5 flex flex-col justify-between flex-1 space-y-4">
-                <div className="space-y-1.5">
-                  <h3 className="font-display text-2xl uppercase tracking-wider text-white group-hover:text-[#D91F2C] transition-colors leading-tight">
+              <div className="p-3 sm:p-4 flex flex-col justify-between flex-1 space-y-2">
+                <div className="space-y-1">
+                  <h3 className="font-display text-base sm:text-xl uppercase tracking-wider text-white group-hover:text-[#D91F2C] transition-colors leading-tight line-clamp-1">
                     {item.name}
                   </h3>
-                  <p className="font-sans text-xs text-white/60 leading-relaxed line-clamp-2">
+                  <p className="font-sans text-xs text-white/60 leading-relaxed line-clamp-2 hidden sm:block">
                     {item.description}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-white/5 space-y-1.5 font-technical text-xs">
-                  <div className="flex items-center justify-between text-white/50">
-                    <span className="flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5 text-[#D91F2C]" /> {item.day || "12–14 DESEMBER 2026"}
+                <div className="pt-2 border-t border-white/5 font-technical text-[10px] sm:text-xs">
+                  <div className="flex items-center justify-between text-white/60">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3 text-[#D91F2C] shrink-0" />
+                      <span className="truncate">{item.day ? item.day.split(",")[0] : "12-14 DES"}</span>
                     </span>
-                    <span className="flex items-center gap-1 text-[#D91F2C] font-bold">
-                      <Clock className="w-3.5 h-3.5" /> {item.time || "19:00 WIB"}
+                    <span className="flex items-center gap-1 text-[#D91F2C] font-bold shrink-0">
+                      <Clock className="w-3 h-3 shrink-0" /> {item.time || "19:00"}
                     </span>
                   </div>
                 </div>
