@@ -147,52 +147,52 @@ export default function ChampionshipPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 border border-white/10">
             {DIVISIONS.map((div) => (
-              <div
+              <Link
                 key={div.no}
-                className="bg-[#141416] border border-white/10 hover:border-[#D91F2C]/60 transition-all rounded-lg overflow-hidden flex flex-col group shadow-lg"
+                href="/bracket"
+                className="bg-[#0E0E10] hover:bg-[#141416] p-6 flex flex-col justify-between transition-colors group"
               >
-                {/* Fighter Photo Container */}
-                <div className="relative aspect-[4/3] w-full bg-[#1c1c1f] overflow-hidden">
-                  <Image
-                    src={div.img}
-                    alt={div.name}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#141416] via-transparent to-transparent" />
-                  <span className="absolute top-2.5 left-2.5 bg-[#D91F2C] text-white font-technical text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded shadow">
-                    DIVISI {div.no}
-                  </span>
-                  <span className="absolute top-2.5 right-2.5 bg-black/80 backdrop-blur-sm text-white/80 font-technical text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded border border-white/10">
-                    {div.quota}
-                  </span>
-                </div>
+                <div>
+                  <div className="relative aspect-[4/5] w-full bg-black mb-5 overflow-hidden">
+                    <Image
+                      src={div.img}
+                      alt={div.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-500 grayscale contrast-125"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0E0E10] via-transparent to-transparent" />
+                    <span className="absolute top-2.5 left-2.5 bg-[#D91F2C] text-white font-technical text-[9px] uppercase font-bold tracking-widest px-2 py-0.5">
+                      DIVISI {div.no}
+                    </span>
+                    <span className="absolute top-2.5 right-2.5 bg-black/80 text-white/90 font-technical text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 border border-white/10">
+                      {div.quota}
+                    </span>
+                  </div>
 
-                <div className="p-4 sm:p-5 flex flex-col justify-between flex-1 space-y-3">
-                  <div>
-                    <h3 className="font-display text-xl sm:text-2xl uppercase tracking-wider text-white group-hover:text-[#D91F2C] transition-colors leading-snug">
+                  <div className="space-y-1">
+                    <span className="font-technical text-xs font-bold text-[#D91F2C] block">
+                      BATAS {div.limit}
+                    </span>
+                    <h3 className="font-display text-2xl uppercase tracking-wider text-white group-hover:text-[#D91F2C] transition-colors">
                       {div.name}
                     </h3>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="font-technical text-xs font-black text-[#D91F2C] px-2 py-0.5 bg-[#D91F2C]/10 rounded border border-[#D91F2C]/20">
-                        BATAS {div.limit}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="pt-3 border-t border-white/5 space-y-1.5">
-                    <span className="font-technical text-[10px] uppercase tracking-wider text-white/50 block">
+                    <p className="font-technical text-[11px] text-amber-400 font-bold uppercase tracking-wide">
+                      {div.belt}
+                    </p>
+                    <p className="font-sans text-xs text-white/50 leading-relaxed pt-2">
                       {div.style}
-                    </span>
-                    <span className="font-technical text-[11px] text-amber-400 font-bold uppercase block">
-                      ★ {div.belt}
-                    </span>
+                    </p>
                   </div>
                 </div>
-              </div>
+
+                <div className="pt-4 mt-6 border-t border-white/10 flex items-center justify-between text-xs font-technical uppercase tracking-wider text-white/60 group-hover:text-white transition-colors">
+                  <span>Bagan Turnamen</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#D91F2C] group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -213,22 +213,22 @@ export default function ChampionshipPage() {
             <span className="font-technical text-xs text-white/40">STANDAR FEDERASI NASIONAL K-1</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 border border-white/10">
             {RULES.map((rule) => (
               <div
                 key={rule.number}
-                className="bg-[#121214] border border-white/10 p-5 rounded-lg space-y-2 hover:border-white/20 transition-all"
+                className="bg-[#0E0E10] hover:bg-[#141416] p-6 space-y-2 transition-colors"
               >
-                <div className="flex items-center justify-between font-technical text-xs">
+                <div className="flex items-center justify-between font-technical text-xs mb-2">
                   <span className="text-[#D91F2C] font-bold">PASAL {rule.number}</span>
                   <span className="text-white/30">K-1 CODEX</span>
                 </div>
 
-                <h3 className="font-display text-lg uppercase tracking-wider text-white">
+                <h3 className="font-display text-xl uppercase tracking-wider text-white">
                   {rule.title}
                 </h3>
 
-                <p className="font-sans text-xs text-white/60 leading-relaxed">
+                <p className="font-sans text-xs text-white/50 leading-relaxed pt-1">
                   {rule.desc}
                 </p>
               </div>
