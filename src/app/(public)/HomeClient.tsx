@@ -82,21 +82,21 @@ export default function HomeClient() {
           </div>
         </div>
 
-        {/* Center Hero Monument — GLORY x BYON Typography */}
-        <div className="relative z-10 max-w-[1400px] mx-auto w-full my-auto py-4 sm:py-8 text-center sm:text-left flex flex-col items-center sm:items-start justify-center">
+        {/* Center Hero Monument — GLORY x BYON Typography (Full Center Symmetry) */}
+        <div className="relative z-10 max-w-[1400px] mx-auto w-full my-auto py-6 sm:py-10 text-center flex flex-col items-center justify-center">
           
           {/* Tagline Badge */}
-          <p className="font-technical text-xs sm:text-sm uppercase tracking-[0.3em] text-[#D91F2C] font-bold mb-2 sm:mb-3">
+          <p className="font-technical text-xs sm:text-sm uppercase tracking-[0.3em] text-[#D91F2C] font-bold mb-2 sm:mb-3 text-center">
             #JOGJAPUNYANYALI • DI BALIK KALEM, ADA NYALI
           </p>
 
           {/* Monumental Headline */}
-          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] xl:text-[6.4rem] uppercase tracking-tight text-[#F4F0E8] leading-[0.92] max-w-5xl">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] xl:text-[6.4rem] uppercase tracking-tight text-[#F4F0E8] leading-[0.92] max-w-5xl mx-auto text-center">
             JOGJAKARTA KICKBOXING FESTIVAL 2026
           </h1>
 
           {/* Date & Location Pill */}
-          <div className="mt-3 sm:mt-4 flex flex-wrap items-center justify-center sm:justify-start gap-2.5 sm:gap-4 text-xs sm:text-sm md:text-base font-technical text-[#8F8E8B]">
+          <div className="mt-3 sm:mt-4 flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 text-xs sm:text-sm md:text-base font-technical text-[#8F8E8B]">
             <div className="inline-flex items-center gap-1.5 text-[#F4F0E8]">
               <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D91F2C]" />
               <span className="font-bold">12–14 DESEMBER 2026</span>
@@ -114,10 +114,10 @@ export default function HomeClient() {
           </div>
 
           {/* ═════════════════════════════════════════════════════════════════════
-              BYON COMBAT SIGNATURE COUNTDOWN (4 STARK WHITE CARDS)
+              BYON COMBAT SIGNATURE COUNTDOWN (4 STARK WHITE CARDS - CENTERED)
               Live ticking towards Dec 12, 2026 with high contrast combat cards.
           ═════════════════════════════════════════════════════════════════════ */}
-          <div className="mt-5 sm:mt-6 w-full max-w-xs sm:max-w-md md:max-w-lg">
+          <div className="mt-5 sm:mt-6 w-full max-w-xs sm:max-w-md md:max-w-lg mx-auto">
             <div className="grid grid-cols-4 gap-2 sm:gap-3 md:gap-3.5">
               {/* Days */}
               <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.7)] flex flex-col items-center justify-center transition-transform hover:scale-105">
@@ -161,8 +161,8 @@ export default function HomeClient() {
             </div>
           </div>
 
-          {/* Clean Dual Action Pairing — BYON Simplicity */}
-          <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
+          {/* Clean Dual Action Pairing — BYON Simplicity (Centered) */}
+          <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto mx-auto">
             <Link
               href="/tiket"
               className="w-full sm:w-auto text-center px-8 sm:px-10 py-3.5 sm:py-3.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all shadow-xl shadow-red-950/40 inline-flex items-center justify-center gap-2 rounded-md"
