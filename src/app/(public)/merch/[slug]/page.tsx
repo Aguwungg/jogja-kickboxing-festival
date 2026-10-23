@@ -139,9 +139,5 @@ export default async function ProductDetailPage({ params }: Props) {
     notFound();
   }
 
-  return (
-    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#0A0A0A] text-[#FAFAFA] pt-24 lg:pt-32 pb-28">
-      <ProductDetailClient product={product} relatedProducts={relatedProducts} />
-    </main>
-  );
+  return <ProductDetailClient product={product} relatedProducts={relatedProducts} />;
 }

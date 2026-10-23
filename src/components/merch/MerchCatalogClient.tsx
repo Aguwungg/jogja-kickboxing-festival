@@ -75,10 +75,10 @@ export default function MerchCatalogClient({ initialProducts }: Props) {
     <div className="w-full space-y-6 font-sans">
       
       {/* Category Tabs & Compact Search Bar */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pb-5 border-b border-white/10">
         
-        {/* Category Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+        {/* Category Segmented Tabs */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
           {categories.map((c) => {
             const isActive = selectedCategory === c.id;
             return (
@@ -86,10 +86,10 @@ export default function MerchCatalogClient({ initialProducts }: Props) {
                 key={c.id}
                 type="button"
                 onClick={() => setSelectedCategory(c.id)}
-                className={`px-4 py-2 text-xs font-technical uppercase tracking-wider transition-all rounded shrink-0 ${
+                className={`px-4 py-2 text-xs font-technical uppercase tracking-wider transition-all whitespace-nowrap shrink-0 border ${
                   isActive
-                    ? "bg-[#D91F2C] text-white shadow-md font-bold"
-                    : "bg-[#141416] text-white/70 hover:text-white border border-white/10"
+                    ? "bg-[#D91F2C] text-white font-bold border-[#D91F2C] shadow-md shadow-red-950/40"
+                    : "bg-[#141416] text-white/70 border-white/10 hover:text-white hover:border-white/30"
                 }`}
               >
                 {c.label}
@@ -99,28 +99,37 @@ export default function MerchCatalogClient({ initialProducts }: Props) {
         </div>
 
         {/* Compact Search Input */}
-        <div className="relative w-full sm:w-64">
+        <div className="relative w-full sm:w-72">
           <input
             type="text"
-            placeholder="Cari kaos, sarung tinju..."
+            placeholder="Cari kaos, sarung tinju, hoodie..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[#141416] border border-white/10 px-3 py-2 pl-9 text-xs text-white placeholder:text-white/40 focus:outline-none focus:border-[#D91F2C] rounded"
+            className="w-full bg-[#141416] border border-white/15 px-3 py-2.5 pl-9 text-xs text-white placeholder:text-white/40 focus:outline-none focus:border-[#D91F2C] font-sans"
           />
           <Search className="w-3.5 h-3.5 text-white/40 absolute left-3 top-1/2 -translate-y-1/2" />
         </div>
       </div>
 
-      {/* Shopee-Style 2-Column Mobile Grid, 3/4-Column Desktop Grid */}
+      {/* Gymshark / UFC Store Editorial Product Grid */}
       {filteredProducts.length === 0 ? (
-        <div className="py-20 text-center border border-white/10 bg-[#121214] rounded p-6 space-y-3">
-          <ShoppingBag className="w-8 h-8 text-[#D91F2C] mx-auto opacity-70" />
+        <div className="py-20 text-center border border-white/10 bg-[#141416] p-8 space-y-3">
+          <ShoppingBag className="w-10 h-10 text-[#D91F2C] mx-auto opacity-70" />
           <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-wider text-white">
             PRODUK TIDAK DITEMUKAN
           </h3>
           <p className="text-xs text-white/50 max-w-sm mx-auto font-sans">
             Tidak ada merchandise yang sesuai dengan kata kunci pencarian Anda.
           </p>
+          <button
+            onClick={() => {
+              setSelectedCategory("ALL");
+              setSearchQuery("");
+            }}
+            className="mt-4 px-4 py-2 bg-[#D91F2C] text-white font-technical text-xs uppercase tracking-wider font-bold"
+          >
+            RESET PENCARIAN
+          </button>
         </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
@@ -132,53 +141,55 @@ export default function MerchCatalogClient({ initialProducts }: Props) {
               <Link
                 key={p.id}
                 href={`/merch/${p.slug}`}
-                className="group flex flex-col bg-[#141416] border border-white/10 hover:border-[#D91F2C]/60 transition-all rounded overflow-hidden"
+                className="group flex flex-col bg-[#141416] border border-white/10 hover:border-[#D91F2C] transition-all overflow-hidden"
               >
-                {/* 1:1 Aspect Square Product Image (Shopee Style) */}
+                {/* 1:1 Aspect Square Product Image with Grayscale Contrast */}
                 <div className="relative aspect-square w-full bg-[#1c1c1f] overflow-hidden">
                   <Image
                     src={p.imageUrl || "/images/v9/08_REFERENSI_FOTO_DAN_TEKSTUR.png"}
                     alt={p.name}
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover object-center grayscale contrast-110 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-500"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                  
                   {p.badge && (
-                    <span className="absolute top-2 left-2 bg-[#D91F2C] text-white font-technical text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded shadow">
+                    <span className="absolute top-2.5 left-2.5 bg-[#D91F2C] text-white font-technical text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 border border-[#D91F2C]/40">
                       {p.badge}
                     </span>
                   )}
-                  <span className={`absolute bottom-2 right-2 font-technical text-[9px] uppercase font-bold px-1.5 py-0.5 rounded backdrop-blur-sm ${
-                    inStock ? "bg-black/75 text-emerald-400" : "bg-black/75 text-red-400"
+                  
+                  <span className={`absolute bottom-2.5 right-2.5 font-technical text-[9px] uppercase font-bold px-2 py-0.5 backdrop-blur-sm border ${
+                    inStock 
+                      ? "bg-black/80 text-emerald-400 border-emerald-500/30" 
+                      : "bg-black/80 text-red-400 border-red-500/30"
                   }`}>
                     {inStock ? "TERSEDIA" : "HABIS"}
                   </span>
                 </div>
 
-                {/* Compact Product Details */}
-                <div className="p-3 sm:p-3.5 flex flex-col justify-between flex-1 space-y-2">
+                {/* Editorial Product Details */}
+                <div className="p-3 sm:p-4 flex flex-col justify-between flex-1 space-y-2 bg-[#141416]">
                   <div className="space-y-1">
-                    <span className="font-technical text-[9px] uppercase tracking-wider text-white/40 block">
+                    <span className="font-technical text-[10px] uppercase text-[#D91F2C] font-bold block">
                       {p.category}
                     </span>
-                    <h3 className="font-sans text-xs sm:text-sm font-bold text-white line-clamp-2 group-hover:text-[#D91F2C] transition-colors leading-snug">
+                    <h3 className="font-display text-base sm:text-lg uppercase tracking-wider text-white group-hover:text-[#D91F2C] transition-colors line-clamp-2 leading-tight">
                       {p.name}
                     </h3>
                   </div>
 
-                  <div className="pt-2 border-t border-white/5 flex items-center justify-between">
-                    <div>
-                      <span className="font-technical text-xs sm:text-sm font-black text-[#D91F2C] block">
-                        {formatRupiah(p.price)}
-                      </span>
-                    </div>
-
+                  <div className="pt-2 border-t border-white/10 flex items-center justify-between">
+                    <span className="font-technical text-sm sm:text-base font-bold text-white">
+                      {formatRupiah(p.price)}
+                    </span>
                     {inStock && (
                       <button
                         type="button"
                         onClick={(e) => handleQuickAdd(p, e)}
                         title="Tambah Cepat ke Keranjang"
-                        className="p-1.5 bg-white/10 hover:bg-[#D91F2C] text-white rounded transition-colors"
+                        className="p-1.5 bg-white/5 border border-white/15 hover:border-[#D91F2C] hover:bg-[#D91F2C] text-white transition-all"
                       >
                         <Plus className="w-3.5 h-3.5" />
                       </button>
