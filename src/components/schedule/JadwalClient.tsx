@@ -1,187 +1,293 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { Clock, Trophy, Music, Calendar } from "lucide-react";
+import { useState } from "react";
+import Link from "next/link";
+import { Clock, Calendar, ArrowUpRight, Info, ShieldCheck } from "lucide-react";
 
-interface ScheduleItemData {
-  id: string;
+interface TimelineEntry {
+  time: string;
   title: string;
-  category: string;
-  day: number;
-  timeSlot: string;
-  location: string;
-  description: string | null;
-  isHighlight: boolean;
+  badge: string;
+  arena: string;
+  isMain?: boolean;
 }
 
-interface JadwalClientProps {
-  initialItems: ScheduleItemData[];
-}
+const OFFICIAL_THB_SCHEDULE: Record<number, {
+  date: string;
+  theme: string;
+  entries: TimelineEntry[];
+}> = {
+  1: {
+    date: "Sabtu, 12 Desember 2026",
+    theme: "BABAK PENYISIHAN & KONSER PEMBUKA",
+    entries: [
+      {
+        time: "08:00 – 12:00 WIB",
+        title: "Babak Penyisihan (Preliminary Rounds) Sesi Pagi",
+        badge: "TATAMI & RINGSPORT",
+        arena: "Ring Kejuaraan & Tatami A/B",
+      },
+      {
+        time: "12:00 – 13:00 WIB",
+        title: "Istirahat Resmi & Persiapan Sesi Siang",
+        badge: "BREAK",
+        arena: "GOR UNY",
+      },
+      {
+        time: "13:00 – 17:30 WIB",
+        title: "Lanjutan Babak Penyisihan Kejurda DIY 2026 & Redy Open II",
+        badge: "KOMPETISI RESMI",
+        arena: "Ring Kejuaraan 1 & 2",
+        isMain: true,
+      },
+      {
+        time: "17:30 – 18:30 WIB",
+        title: "Break Pertandingan & Persiapan Panggung Musik",
+        badge: "TRANSISI",
+        arena: "Area Panggung Utama",
+      },
+      {
+        time: "18:30 – 21:00 WIB",
+        title: "Panggung Konser Musik: Sound of Yogyakarta Fase 1",
+        badge: "KONSER MUSIK",
+        arena: "Panggung Utama Festival",
+        isMain: true,
+      },
+    ],
+  },
+  2: {
+    date: "Minggu, 13 Desember 2026",
+    theme: "PEREMPAT FINAL & PARTAI BINTANG",
+    entries: [
+      {
+        time: "08:00 – 12:00 WIB",
+        title: "Babak Perempat Final (Quarter Finals) Kejurda & Redy Open",
+        badge: "PEREMPAT FINAL",
+        arena: "Ring Kejuaraan 1 & 2",
+      },
+      {
+        time: "12:00 – 13:00 WIB",
+        title: "Istirahat Resmi & Sterilisasi Kanvas Ring",
+        badge: "BREAK",
+        arena: "GOR UNY",
+      },
+      {
+        time: "13:00 – 17:00 WIB",
+        title: "Partai Bintang & Mega Bintang — Sesi Eksibisi Nasional",
+        badge: "PARTAI BINTANG",
+        arena: "Ring Utama Kejuaraan",
+        isMain: true,
+      },
+      {
+        time: "17:00 – 18:30 WIB",
+        title: "Break & Cooldown Atlet",
+        badge: "TRANSISI",
+        arena: "Backstage & Athletes Lounge",
+      },
+      {
+        time: "18:30 – 22:00 WIB",
+        title: "Partai Puncak Laga Bintang & Mega Bintang (Invitation Only)",
+        badge: "MAIN EVENT",
+        arena: "Ring Utama Kejuaraan",
+        isMain: true,
+      },
+    ],
+  },
+  3: {
+    date: "Senin, 14 Desember 2026",
+    theme: "SEMIFINAL, FINAL & CLOSING CEREMONY",
+    entries: [
+      {
+        time: "08:00 – 12:00 WIB",
+        title: "Babak Semifinal Kejurda DIY 2026 & Redy Open Championship II",
+        badge: "SEMIFINAL",
+        arena: "Ring Kejuaraan 1 & 2",
+      },
+      {
+        time: "12:00 – 13:00 WIB",
+        title: "Istirahat Resmi Atlet & Wasit Juri",
+        badge: "BREAK",
+        arena: "GOR UNY",
+      },
+      {
+        time: "13:00 – 17:30 WIB",
+        title: "BABAK FINAL & PENENTUAN JUARA KEJURDA & REDY OPEN II",
+        badge: "BABAK FINAL",
+        arena: "Ring Utama Kejuaraan",
+        isMain: true,
+      },
+      {
+        time: "17:30 – 18:30 WIB",
+        title: "Upacara Penghargaan Pemenang (UPP) & Pengalungan Medali",
+        badge: "UPP MEDALI",
+        arena: "Podium Kejuaraan",
+        isMain: true,
+      },
+      {
+        time: "18:30 – 21:00 WIB",
+        title: "Grand Closing Music Concert: Spektakuler Penutupan",
+        badge: "KONSER MUSIK",
+        arena: "Panggung Utama Festival",
+        isMain: true,
+      },
+      {
+        time: "21:00 – 22:00 WIB",
+        title: "Closing Ceremony & Selebrasi Kemenangan JKBF 2026",
+        badge: "CLOSING",
+        arena: "GOR UNY Main Hall",
+      },
+    ],
+  },
+};
 
-const DAY_TABS = [
-  { day: 1, label: "HARI 1 • SABTU 12 DESEMBER", shortLabel: "SAB 12", fullDate: "Sabtu, 12 Desember 2026", theme: "BABAK PENYISIHAN & PEMBUKAAN" },
-  { day: 2, label: "HARI 2 • MINGGU 13 DESEMBER", shortLabel: "MIN 13", fullDate: "Minggu, 13 Desember 2026", theme: "PEREMPAT FINAL & PANGGUNG FASE 1" },
-  { day: 3, label: "HARI 3 • SENIN 14 DESEMBER", shortLabel: "SEN 14", fullDate: "Senin, 14 Desember 2026", theme: "SEMIFINAL, GRAND FINAL & SELEBRASI" },
-];
-
-const CATEGORIES = [
-  { id: "ALL", label: "SEMUA AGENDA" },
-  { id: "COMBAT", label: "RING KICKBOXING", icon: Trophy },
-  { id: "MUSIC", label: "PANGGUNG MUSIK", icon: Music },
-];
-
-export default function JadwalClient({ initialItems }: JadwalClientProps) {
-  const [selectedDay, setSelectedDay] = useState<number>(1);
-  const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
-
-  const filteredItems = useMemo(() => {
-    return initialItems.filter((item) => {
-      const matchDay = item.day === selectedDay;
-      const matchCategory =
-        selectedCategory === "ALL" ||
-        (selectedCategory === "COMBAT" && item.category === "COMBAT") ||
-        (selectedCategory === "MUSIC" && (item.category === "MUSIC" || item.category === "FESTIVAL"));
-      return matchDay && matchCategory;
-    });
-  }, [initialItems, selectedDay, selectedCategory]);
-
-  const currentDayInfo = DAY_TABS.find((d) => d.day === selectedDay) || DAY_TABS[0];
+export default function JadwalClient() {
+  const [activeDay, setActiveDay] = useState<number>(1);
+  const currentSchedule = OFFICIAL_THB_SCHEDULE[activeDay];
 
   return (
-    <div className="w-full space-y-8 font-sans">
+    <div className="w-full max-w-5xl mx-auto space-y-10">
       
-      {/* ═════════════════════════════════════════════════════════════════════
-          1. DAY SELECTOR & CATEGORY FILTER BAR
-      ═════════════════════════════════════════════ */}
-      <div className="space-y-4 border-b border-white/10 pb-6">
-        
-        {/* Day Tabs */}
-        <div className="flex flex-wrap items-center gap-2.5">
-          {DAY_TABS.map((tab) => {
-            const isActive = selectedDay === tab.day;
-            return (
-              <button
-                key={tab.day}
-                type="button"
-                onClick={() => setSelectedDay(tab.day)}
-                className={`px-5 sm:px-6 py-3 text-xs sm:text-sm font-display tracking-wider uppercase transition-all rounded ${
-                  isActive
-                    ? "bg-[#D91F2C] text-white shadow-lg shadow-red-950/40 ring-1 ring-[#D91F2C]"
-                    : "bg-[#141416] text-white/70 hover:text-white hover:bg-white/10 border border-white/10"
-                }`}
-              >
-                <span className="hidden sm:inline">{tab.label}</span>
-                <span className="sm:hidden">{tab.shortLabel}</span>
-              </button>
-            );
-          })}
-        </div>
+      {/* 3 Main Day Tabs — Sole Primary Control */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {[1, 2, 3].map((dayNumber) => {
+          const item = OFFICIAL_THB_SCHEDULE[dayNumber];
+          const isActive = activeDay === dayNumber;
 
-        {/* Sub-bar: Day Theme & Category Filter Chips */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
-          <div className="flex items-center gap-2 text-xs font-technical uppercase tracking-wider text-white/50">
-            <Calendar className="w-3.5 h-3.5 text-[#D91F2C]" />
-            <span className="font-bold text-white">{currentDayInfo.fullDate}</span>
-            <span>•</span>
-            <span className="text-[#D91F2C]">{currentDayInfo.theme}</span>
-          </div>
-
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-            {CATEGORIES.map((cat) => {
-              const isSelected = selectedCategory === cat.id;
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-3 py-1.5 rounded text-[11px] font-technical uppercase tracking-wider transition-all whitespace-nowrap ${
-                    isSelected
-                      ? "bg-white text-black font-bold"
-                      : "bg-[#141416] text-white/70 hover:text-white border border-white/10"
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
+          return (
+            <button
+              key={dayNumber}
+              type="button"
+              onClick={() => setActiveDay(dayNumber)}
+              className={`p-4 sm:p-5 text-left transition-all border ${
+                isActive
+                  ? "bg-[#141416] border-[#D91F2C] shadow-lg shadow-red-950/20 ring-1 ring-[#D91F2C]"
+                  : "bg-[#0F0F11] border-white/10 hover:border-white/20 hover:bg-[#141416]"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className={`font-technical text-xs font-bold uppercase tracking-[0.2em] ${
+                  isActive ? "text-[#D91F2C]" : "text-[#77716D]"
+                }`}>
+                  HARI {dayNumber.toString().padStart(2, "0")}
+                </span>
+                {isActive && <span className="w-2 h-2 rounded-full bg-[#D91F2C]" />}
+              </div>
+              <h3 className="font-display text-xl sm:text-2xl uppercase tracking-wider text-[#F4F0E8] mt-1">
+                {item.date.split(",")[0]}
+              </h3>
+              <p className="font-technical text-[11px] text-[#8F8E8B] mt-0.5">
+                {item.date.split(",")[1]?.trim()}
+              </p>
+            </button>
+          );
+        })}
       </div>
 
-      {/* ═════════════════════════════════════════════════════════════════════
-          2. TIMETABLE LIST (TASK-ORIENTED, TIME-FIRST, MINIMAL DIVIDERS)
-      ═════════════════════════════════════════════ */}
-      {filteredItems.length === 0 ? (
-        <div className="py-20 text-center border border-white/10 bg-[#121214] rounded-lg p-6 space-y-3">
-          <Clock className="w-8 h-8 text-[#8F8E8B] mx-auto opacity-60" />
-          <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-wider text-white">
-            AGENDA RESMI SEGERA DIUMUMKAN
-          </h3>
-          <p className="text-xs sm:text-sm text-white/50 max-w-md mx-auto font-sans leading-relaxed">
-            Rundown detail untuk kategori ini sedang dalam tahap sinkronisasi akhir dengan panitia pelaksana JKBF.
-          </p>
+      {/* Day Theme Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10">
+        <div className="flex items-center gap-2.5">
+          <Calendar className="w-4 h-4 text-[#D91F2C]" />
+          <span className="font-technical text-sm font-bold uppercase tracking-wider text-[#F4F0E8]">
+            {currentSchedule.date}
+          </span>
+          <span className="text-white/20">•</span>
+          <span className="font-technical text-xs text-[#D91F2C] uppercase tracking-wider font-semibold">
+            {currentSchedule.theme}
+          </span>
         </div>
-      ) : (
-        <div className="border border-white/10 rounded-lg overflow-hidden divide-y divide-white/5 bg-[#121214]">
-          {filteredItems.map((item, index) => {
-            const rowNumber = (index + 1).toString().padStart(2, "0");
-            const isCombat = item.category === "COMBAT";
 
-            return (
-              <div
-                key={item.id}
-                className="p-4 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center transition-colors hover:bg-white/[0.03]"
-              >
-                {/* Index / Category Icon */}
-                <div className="md:col-span-1 flex items-center gap-2">
-                  <span className="font-technical text-sm sm:text-base font-bold text-[#D91F2C]">
-                    {rowNumber}
-                  </span>
-                </div>
+        <span className="font-technical text-xs text-[#77716D]">
+          VENUE: GOR UNY COLOMBO
+        </span>
+      </div>
 
-                {/* Main Content */}
-                <div className="md:col-span-6 space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-technical text-[10px] uppercase font-bold tracking-widest text-white/40">
-                      {item.location} • {isCombat ? "RING KICKBOXING" : "PANGGUNG FESTIVAL"}
-                    </span>
-                    {item.isHighlight && (
-                      <span className="font-technical text-[9px] bg-[#D91F2C] text-white px-2 py-0.5 rounded font-bold uppercase tracking-wider">
-                        ★ PARTAI UTAMA
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="font-display text-lg sm:text-2xl uppercase tracking-wider text-white">
-                    {item.title}
-                  </h3>
-                  {item.description && (
-                    <p className="text-xs text-white/60 leading-relaxed font-sans line-clamp-2">
-                      {item.description}
-                    </p>
-                  )}
-                </div>
-
-                {/* Status / Category Tag */}
-                <div className="md:col-span-2 text-xs text-white/50 font-sans">
-                  <span className="font-technical text-[10px] sm:text-[11px] text-white/60 uppercase tracking-wider bg-white/5 px-2.5 py-1 rounded border border-white/5">
-                    {item.location}
-                  </span>
-                </div>
-
-                {/* Time Slot (Prominent Time-First) */}
-                <div className="md:col-span-3 text-left md:text-right">
-                  <span className="font-technical text-base sm:text-lg font-bold text-white tracking-wider uppercase block">
-                    {item.timeSlot.replace(/\s*WIB\s*$/i, "").trim()} WIB
-                  </span>
-                  <span className="font-technical text-[10px] text-[#D91F2C] uppercase font-bold">
-                    GOR UNY YOGYAKARTA
-                  </span>
-                </div>
+      {/* Vertical Clean Timeline (Left Time, Right Agenda) */}
+      <div className="border border-white/10 bg-[#121214] divide-y divide-white/5">
+        {currentSchedule.entries.map((entry, index) => {
+          return (
+            <div
+              key={index}
+              className={`p-5 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center transition-colors ${
+                entry.isMain ? "bg-white/[0.02]" : "hover:bg-white/[0.01]"
+              }`}
+            >
+              {/* Left Column: Time Slot */}
+              <div className="md:col-span-3 flex md:flex-col items-baseline md:items-start justify-between gap-1">
+                <span className="font-technical text-base sm:text-lg font-bold text-[#F4F0E8] tracking-wider">
+                  {entry.time}
+                </span>
+                <span className="font-technical text-[10px] text-[#77716D] uppercase">
+                  WAKTU INDONESIA BARAT
+                </span>
               </div>
-            );
-          })}
+
+              {/* Right Column: Title, Badge, & Arena */}
+              <div className="md:col-span-9 space-y-2">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className={`font-technical text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 border ${
+                    entry.isMain
+                      ? "bg-[#D91F2C]/15 border-[#D91F2C] text-[#D91F2C]"
+                      : "bg-white/5 border-white/10 text-[#8F8E8B]"
+                  }`}>
+                    {entry.badge}
+                  </span>
+                  <span className="text-white/20 text-xs">•</span>
+                  <span className="font-technical text-xs text-[#8F8E8B]">
+                    {entry.arena}
+                  </span>
+                </div>
+
+                <h4 className="font-display text-xl sm:text-2xl uppercase tracking-wider text-[#F4F0E8]">
+                  {entry.title}
+                </h4>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Participant Weigh-In Note & Technical Disclaimer */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+        {/* Weigh-in Box */}
+        <div className="p-4 bg-[#141416] border border-white/10 flex items-start gap-3">
+          <ShieldCheck className="w-5 h-5 text-[#D91F2C] shrink-0 mt-0.5" />
+          <div className="space-y-1">
+            <h5 className="font-display text-sm uppercase tracking-wider text-white">
+              REGISTRASI & TIMBANG BADAN (10 DES)
+            </h5>
+            <p className="font-sans text-xs text-[#8F8E8B] leading-relaxed">
+              Pemeriksaan medis resmi dan timbang badan dilaksanakan pada <strong>Rabu, 10 Desember 2026 pukul 09.00–12.00 WIB</strong> di GOR UNY.
+            </p>
+            <Link
+              href="/tentang#regulasi"
+              className="inline-flex items-center gap-1 text-[11px] font-technical text-[#D91F2C] hover:underline pt-1"
+            >
+              <span>Lihat Panduan & Aturan Atlet</span>
+              <ArrowUpRight className="w-3 h-3" />
+            </Link>
+          </div>
         </div>
-      )}
+
+        {/* Technical Disclaimer Box */}
+        <div className="p-4 bg-[#141416] border border-white/10 flex items-start gap-3">
+          <Info className="w-5 h-5 text-[#8F8E8B] shrink-0 mt-0.5" />
+          <div className="space-y-1">
+            <h5 className="font-display text-sm uppercase tracking-wider text-white">
+              PENYESUAIAN MATCHMAKING
+            </h5>
+            <p className="font-sans text-xs text-[#8F8E8B] leading-relaxed">
+              Jadwal partai pertandingan dapat mengalami penyesuaian teknis urutan laga berdasarkan hasil verifikasi timbang badan dan keputusan panitia pelaksana.
+            </p>
+            <Link
+              href="/tentang#thb"
+              className="inline-flex items-center gap-1 text-[11px] font-technical text-[#8F8E8B] hover:text-white pt-1"
+            >
+              <span>Unduh Dokumen THB Lengkap (PDF)</span>
+              <ArrowUpRight className="w-3 h-3" />
+            </Link>
+          </div>
+        </div>
+      </div>
 
     </div>
   );
