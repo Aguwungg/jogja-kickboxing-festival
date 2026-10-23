@@ -178,7 +178,7 @@ export default function LineupPosterClient({ initialPerformers = [] }: Props) {
       {/* ═════════════════════════════════════════════════════════════════════
           CONTROLS: STAGE SELECTOR & POSTER/CARD VIEW TOGGLE
       ═════════════════════════════════════════════ */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 p-3 bg-[#111113] border border-white/10 rounded-lg backdrop-blur-md">
+      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 p-3 sm:p-4 bg-[#141416] border border-white/10 backdrop-blur-md">
         {/* Stage Filter Buttons */}
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 md:pb-0">
           {STAGES.map((s) => {
@@ -187,10 +187,10 @@ export default function LineupPosterClient({ initialPerformers = [] }: Props) {
               <button
                 key={s.id}
                 onClick={() => setSelectedStage(s.id)}
-                className={`font-technical text-xs uppercase tracking-wider px-3.5 py-2 rounded transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
+                className={`font-technical text-xs uppercase tracking-wider px-3.5 py-2 transition-all whitespace-nowrap shrink-0 border ${
                   isActive
-                    ? "bg-[#D91F2C] text-white font-bold shadow-md shadow-red-950/40"
-                    : "bg-white/5 text-white/70 hover:text-white hover:bg-white/10"
+                    ? "bg-[#D91F2C] text-white font-bold border-[#D91F2C] shadow-md shadow-red-950/40"
+                    : "bg-[#0B0B0B] text-white/70 border-white/10 hover:text-white hover:border-white/30"
                 }`}
               >
                 <span>{s.name}</span>
@@ -206,20 +206,20 @@ export default function LineupPosterClient({ initialPerformers = [] }: Props) {
           </span>
           <button
             onClick={() => setViewMode("POSTER")}
-            className={`px-3 py-1.5 rounded font-technical text-xs uppercase flex items-center gap-1.5 transition-all ${
+            className={`px-3 py-1.5 font-technical text-xs uppercase flex items-center gap-1.5 transition-all border ${
               viewMode === "POSTER"
-                ? "bg-white text-black font-bold"
-                : "bg-white/5 text-white/60 hover:text-white"
+                ? "bg-white text-black font-bold border-white"
+                : "bg-[#0B0B0B] text-white/60 border-white/10 hover:text-white"
             }`}
           >
             <AlignLeft className="w-3.5 h-3.5" /> POSTER BILLING
           </button>
           <button
             onClick={() => setViewMode("CARDS")}
-            className={`px-3 py-1.5 rounded font-technical text-xs uppercase flex items-center gap-1.5 transition-all ${
+            className={`px-3 py-1.5 font-technical text-xs uppercase flex items-center gap-1.5 transition-all border ${
               viewMode === "CARDS"
-                ? "bg-white text-black font-bold"
-                : "bg-white/5 text-white/60 hover:text-white"
+                ? "bg-white text-black font-bold border-white"
+                : "bg-[#0B0B0B] text-white/60 border-white/10 hover:text-white"
             }`}
           >
             <LayoutGrid className="w-3.5 h-3.5" /> GRID FOTO
@@ -228,10 +228,10 @@ export default function LineupPosterClient({ initialPerformers = [] }: Props) {
       </div>
 
       {/* ═════════════════════════════════════════════════════════════════════
-          MODE A: FESTIVAL BILLING POSTER (SÓNAR / WE THE FEST STYLE)
+          MODE A: FESTIVAL BILLING POSTER (SÓNAR FESTIVAL BENCHMARK)
       ═════════════════════════════════════════════ */}
       {viewMode === "POSTER" ? (
-        <div className="relative bg-gradient-to-b from-[#141416] via-[#0E0E10] to-[#0B0B0B] border border-white/15 rounded-xl p-6 sm:p-10 lg:p-14 overflow-hidden shadow-2xl">
+        <div className="relative bg-gradient-to-b from-[#141416] via-[#0E0E10] to-[#0B0B0B] border border-white/15 p-6 sm:p-10 lg:p-14 overflow-hidden shadow-2xl">
           {/* Subtle Ambient Concert Glow */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-48 bg-[#D91F2C]/15 blur-[120px] pointer-events-none" />
           <div className="absolute bottom-0 right-0 w-80 h-80 bg-orange-600/10 blur-[100px] pointer-events-none" />
@@ -251,7 +251,7 @@ export default function LineupPosterClient({ initialPerformers = [] }: Props) {
 
           {/* Tier 1: HEADLINERS (Monumental Bold Type) */}
           <div className="py-10 text-center space-y-6 relative z-10 border-b border-white/10">
-            <span className="font-technical text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold px-3 py-1 bg-[#D91F2C]/10 border border-[#D91F2C]/20 rounded-full inline-block">
+            <span className="font-technical text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold px-3 py-1 bg-[#D91F2C]/10 border border-[#D91F2C]/20 inline-block">
               HEADLINERS
             </span>
             <div className="flex flex-wrap items-center justify-center gap-x-8 sm:gap-x-14 gap-y-4">
@@ -324,39 +324,39 @@ export default function LineupPosterClient({ initialPerformers = [] }: Props) {
           </div>
         </div>
       ) : (
-        /* MODE B: ARTIST CARDS GRID (SHOPEE/TOKPED STYLE 2-COL MOBILE) */
+        /* MODE B: ARTIST CARDS GRID (EDITORIAL CONCERT PHOTOGRAPHY) */
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
           {filteredPerformers.map((item) => (
             <div
               key={item.id}
-              className="group bg-[#121214] border border-white/10 hover:border-[#D91F2C]/60 transition-all rounded-lg overflow-hidden flex flex-col shadow-md"
+              className="group bg-[#141416] border border-white/10 hover:border-[#D91F2C] transition-all overflow-hidden flex flex-col"
             >
               {/* Concert Image Container */}
-              <div className="relative aspect-[4/5] sm:aspect-[16/11] w-full bg-[#18181b] overflow-hidden">
+              <div className="relative aspect-[4/5] sm:aspect-[16/11] w-full bg-[#1c1c1f] overflow-hidden">
                 <Image
                   src={item.image}
                   alt={item.name}
                   fill
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500 contrast-110"
+                  className="object-cover object-center grayscale contrast-110 group-hover:scale-105 group-hover:grayscale-0 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#121214] via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#141416] via-black/20 to-transparent" />
                 
                 {/* Stage Badge */}
-                <div className="absolute top-2 left-2 bg-[#D91F2C] text-white font-technical text-[9px] sm:text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded shadow">
+                <div className="absolute top-2.5 left-2.5 bg-[#D91F2C] text-white font-technical text-[9px] sm:text-[10px] uppercase font-bold tracking-wider px-2 py-0.5">
                   {item.stage}
                 </div>
 
                 {/* Genre Tag */}
                 {item.genre && (
-                  <div className="absolute top-2 right-2 bg-black/80 backdrop-blur-sm border border-white/10 text-white/90 font-technical text-[9px] sm:text-[10px] uppercase px-1.5 sm:px-2 py-0.5 rounded">
+                  <div className="absolute top-2.5 right-2.5 bg-black/80 backdrop-blur-sm border border-white/15 text-white/90 font-technical text-[9px] sm:text-[10px] uppercase px-1.5 sm:px-2 py-0.5">
                     {item.genre}
                   </div>
                 )}
               </div>
 
               {/* Card Body */}
-              <div className="p-3 sm:p-4 flex flex-col justify-between flex-1 space-y-2">
+              <div className="p-3 sm:p-4 flex flex-col justify-between flex-1 space-y-2 bg-[#141416]">
                 <div className="space-y-1">
                   <h3 className="font-display text-base sm:text-xl uppercase tracking-wider text-white group-hover:text-[#D91F2C] transition-colors leading-tight line-clamp-1">
                     {item.name}
@@ -366,7 +366,7 @@ export default function LineupPosterClient({ initialPerformers = [] }: Props) {
                   </p>
                 </div>
 
-                <div className="pt-2 border-t border-white/5 font-technical text-[10px] sm:text-xs">
+                <div className="pt-2 border-t border-white/10 font-technical text-[10px] sm:text-xs">
                   <div className="flex items-center justify-between text-white/60">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-3 h-3 text-[#D91F2C] shrink-0" />
@@ -405,19 +405,19 @@ export default function LineupPosterClient({ initialPerformers = [] }: Props) {
           {STAGES.filter((s) => s.id !== "ALL").map((st) => (
             <div
               key={st.code}
-              className="bg-[#121214] border border-white/10 hover:border-white/30 transition-all rounded-lg overflow-hidden flex flex-col group shadow-lg"
+              className="bg-[#141416] border border-white/10 hover:border-white/30 transition-all overflow-hidden flex flex-col group"
             >
               {/* Stage Photo */}
-              <div className="relative aspect-[16/10] w-full bg-[#18181b] overflow-hidden">
+              <div className="relative aspect-[16/10] w-full bg-[#1c1c1f] overflow-hidden">
                 <Image
                   src={st.img || "/images/lineup/ring-stage.jpg"}
                   alt={st.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover object-center grayscale contrast-110 group-hover:scale-105 group-hover:grayscale-0 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#121214] via-black/40 to-transparent" />
-                <div className="absolute top-3 left-3 bg-black/80 backdrop-blur-sm border border-white/20 px-2.5 py-1 rounded text-white font-technical text-xs font-bold">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#141416] via-black/40 to-transparent" />
+                <div className="absolute top-3 left-3 bg-black/80 backdrop-blur-sm border border-white/20 px-2.5 py-1 text-white font-technical text-xs font-bold">
                   ZONA {st.code}
                 </div>
               </div>
@@ -437,7 +437,7 @@ export default function LineupPosterClient({ initialPerformers = [] }: Props) {
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-white/5 space-y-1 text-xs font-technical">
+                <div className="pt-3 border-t border-white/10 space-y-1 text-xs font-technical">
                   <div className="text-white/40 flex justify-between">
                     <span>Waktu Mulai:</span>
                     <span className="text-white font-bold">{st.time}</span>
