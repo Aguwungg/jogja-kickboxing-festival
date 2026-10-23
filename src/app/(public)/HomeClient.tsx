@@ -6,19 +6,40 @@ import Link from "next/link";
 import { ArrowUpRight, Calendar, MapPin, Shield } from "lucide-react";
 import { EVENT_CONFIG } from "@/lib/event-config";
 
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
 export default function HomeClient() {
-  // Configurable event date from SSOT
-  const [daysLeft, setDaysLeft] = useState<number | null>(null);
+  // Live ticking combat countdown towards Dec 12, 2026 09:00 WIB
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
 
   useEffect(() => {
     const targetDate = new Date(EVENT_CONFIG.dates.startIso).getTime();
-    const now = new Date().getTime();
-    const diff = targetDate - now;
-    if (diff > 0) {
-      setDaysLeft(Math.floor(diff / (1000 * 60 * 60 * 24)));
-    } else {
-      setDaysLeft(0);
-    }
+    
+    const calculateTime = (): TimeLeft => {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+      if (difference <= 0) {
+        return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+      }
+      return {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    };
+
+    setTimeLeft(calculateTime());
+    const interval = setInterval(() => {
+      setTimeLeft(calculateTime());
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -26,9 +47,9 @@ export default function HomeClient() {
       
       {/* =========================================================================
           SECTION 01: HERO (BYON IMPACT x GLORY HEADLINE)
-          Clean, confident, zero card clutter, focused conversion pairing.
+          Clean, confident, zero card clutter, focused event poster aesthetic.
          ========================================================================= */}
-      <section className="relative min-h-[92vh] flex flex-col justify-between pt-24 sm:pt-28 pb-10 sm:pb-12 px-4 sm:px-8 lg:px-12 border-b border-white/10">
+      <section className="relative min-h-[88vh] flex flex-col justify-between pt-24 sm:pt-28 pb-10 sm:pb-12 px-4 sm:px-8 lg:px-12 border-b border-white/10">
         
         {/* Authentic Atmospheric Photographic Background */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -54,58 +75,105 @@ export default function HomeClient() {
             </span>
           </div>
 
-          {daysLeft !== null && (
-            <div className="hidden sm:inline-flex items-center gap-2 text-[#8F8E8B] tracking-wider uppercase">
-              <span>HITUNG MUNDUR:</span>
-              <span className="text-[#D91F2C] font-bold">H-{daysLeft} HARI</span>
-            </div>
-          )}
+          <div className="hidden sm:inline-flex items-center gap-2 text-[#8F8E8B] tracking-wider uppercase text-[11px]">
+            <span>GOR UNY YOGYAKARTA</span>
+            <span className="text-white/20">•</span>
+            <span className="text-[#D91F2C] font-bold">12–14 DESEMBER 2026</span>
+          </div>
         </div>
 
         {/* Center Hero Monument — GLORY x BYON Typography */}
-        <div className="relative z-10 max-w-[1400px] mx-auto w-full my-auto py-12 sm:py-16 text-center sm:text-left flex flex-col items-center sm:items-start justify-center">
+        <div className="relative z-10 max-w-[1400px] mx-auto w-full my-auto py-4 sm:py-8 text-center sm:text-left flex flex-col items-center sm:items-start justify-center">
           
           {/* Tagline Badge */}
-          <p className="font-technical text-xs sm:text-sm uppercase tracking-[0.3em] text-[#D91F2C] font-bold mb-3 sm:mb-4">
+          <p className="font-technical text-xs sm:text-sm uppercase tracking-[0.3em] text-[#D91F2C] font-bold mb-2 sm:mb-3">
             #JOGJAPUNYANYALI • DI BALIK KALEM, ADA NYALI
           </p>
 
           {/* Monumental Headline */}
-          <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-[6.8rem] xl:text-[8rem] uppercase tracking-tight text-[#F4F0E8] leading-[0.92] max-w-5xl">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] xl:text-[6.4rem] uppercase tracking-tight text-[#F4F0E8] leading-[0.92] max-w-5xl">
             JOGJAKARTA KICKBOXING FESTIVAL 2026
           </h1>
 
           {/* Date & Location Pill */}
-          <div className="mt-5 sm:mt-7 flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-5 text-sm sm:text-base font-technical text-[#8F8E8B]">
+          <div className="mt-3 sm:mt-4 flex flex-wrap items-center justify-center sm:justify-start gap-2.5 sm:gap-4 text-xs sm:text-sm md:text-base font-technical text-[#8F8E8B]">
             <div className="inline-flex items-center gap-1.5 text-[#F4F0E8]">
-              <Calendar className="w-4 h-4 text-[#D91F2C]" />
+              <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D91F2C]" />
               <span className="font-bold">12–14 DESEMBER 2026</span>
             </div>
             <span className="text-white/20">•</span>
             <div className="inline-flex items-center gap-1.5 text-[#F4F0E8]">
-              <MapPin className="w-4 h-4 text-[#D91F2C]" />
+              <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D91F2C]" />
               <span>GOR UNY, YOGYAKARTA</span>
             </div>
             <span className="hidden md:inline text-white/20">•</span>
             <div className="hidden md:inline-flex items-center gap-1.5 text-[#8F8E8B]">
-              <Shield className="w-4 h-4 text-[#D91F2C]" />
+              <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D91F2C]" />
               <span>WAKO RULES (TATAMI & RINGSPORT)</span>
             </div>
           </div>
 
+          {/* ═════════════════════════════════════════════════════════════════════
+              BYON COMBAT SIGNATURE COUNTDOWN (4 STARK WHITE CARDS)
+              Live ticking towards Dec 12, 2026 with high contrast combat cards.
+          ═════════════════════════════════════════════════════════════════════ */}
+          <div className="mt-5 sm:mt-6 w-full max-w-xs sm:max-w-md md:max-w-lg">
+            <div className="grid grid-cols-4 gap-2 sm:gap-3 md:gap-3.5">
+              {/* Days */}
+              <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.7)] flex flex-col items-center justify-center transition-transform hover:scale-105">
+                <span className="font-sans text-[10px] sm:text-xs font-bold text-[#D91F2C] tracking-wide mb-0.5">
+                  Days
+                </span>
+                <span className="font-display text-2xl sm:text-4xl md:text-5xl font-black text-[#D91F2C] leading-none tabular-nums">
+                  {timeLeft ? timeLeft.days : 49}
+                </span>
+              </div>
+
+              {/* Hours */}
+              <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.7)] flex flex-col items-center justify-center transition-transform hover:scale-105">
+                <span className="font-sans text-[10px] sm:text-xs font-bold text-[#D91F2C] tracking-wide mb-0.5">
+                  Hours
+                </span>
+                <span className="font-display text-2xl sm:text-4xl md:text-5xl font-black text-[#D91F2C] leading-none tabular-nums">
+                  {timeLeft ? String(timeLeft.hours).padStart(2, "0") : "10"}
+                </span>
+              </div>
+
+              {/* Minutes */}
+              <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.7)] flex flex-col items-center justify-center transition-transform hover:scale-105">
+                <span className="font-sans text-[10px] sm:text-xs font-bold text-[#D91F2C] tracking-wide mb-0.5">
+                  Minutes
+                </span>
+                <span className="font-display text-2xl sm:text-4xl md:text-5xl font-black text-[#D91F2C] leading-none tabular-nums">
+                  {timeLeft ? String(timeLeft.minutes).padStart(2, "0") : "37"}
+                </span>
+              </div>
+
+              {/* Seconds */}
+              <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-3.5 shadow-[0_10px_30px_rgba(0,0,0,0.7)] flex flex-col items-center justify-center transition-transform hover:scale-105">
+                <span className="font-sans text-[10px] sm:text-xs font-bold text-[#D91F2C] tracking-wide mb-0.5">
+                  Seconds
+                </span>
+                <span className="font-display text-2xl sm:text-4xl md:text-5xl font-black text-[#D91F2C] leading-none tabular-nums">
+                  {timeLeft ? String(timeLeft.seconds).padStart(2, "0") : "38"}
+                </span>
+              </div>
+            </div>
+          </div>
+
           {/* Clean Dual Action Pairing — BYON Simplicity */}
-          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+          <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
             <Link
               href="/tiket"
-              className="w-full sm:w-auto text-center px-8 sm:px-10 py-4 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-lg sm:text-xl tracking-wider uppercase transition-all shadow-xl shadow-red-950/40 inline-flex items-center justify-center gap-2"
+              className="w-full sm:w-auto text-center px-8 sm:px-10 py-3.5 sm:py-3.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all shadow-xl shadow-red-950/40 inline-flex items-center justify-center gap-2 rounded-md"
             >
               <span>BELI TIKET RESMI</span>
-              <ArrowUpRight className="w-5 h-5 text-white" />
+              <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </Link>
 
             <Link
               href="/jadwal"
-              className="w-full sm:w-auto text-center px-8 sm:px-10 py-4 bg-[#141416]/90 hover:bg-white/10 border border-white/15 text-[#F4F0E8] hover:text-white font-display text-lg sm:text-xl tracking-wider uppercase transition-all backdrop-blur-sm"
+              className="w-full sm:w-auto text-center px-8 sm:px-10 py-3.5 sm:py-3.5 bg-[#141416]/90 hover:bg-white/10 border border-white/15 text-[#F4F0E8] hover:text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all backdrop-blur-sm rounded-md"
             >
               <span>JADWAL 3 HARI</span>
             </Link>
