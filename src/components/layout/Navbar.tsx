@@ -26,7 +26,7 @@ const navGroups: NavGroup[] = [
     items: [
       { title: "Musik & Lineup", href: "/lineup", desc: "Panggung musik 3 hari & penampil" },
       { title: "Panduan Lokasi (Venue)", href: "/venue", desc: "GOR UNY Colombo Yogyakarta" },
-      { title: "Official Merchandise", href: "/merch", desc: "Streetwear & apparel resmi JKBF" },
+      { title: "Aktivitas Budaya & UMKM", href: "/tentang#festival", desc: "Pameran, kuliner lokal & kultur Jogja" },
     ],
   },
   {
@@ -202,13 +202,13 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Primary CTA Action — Beli Tiket */}
+        {/* Primary CTA Action — Jadwal 3 Hari */}
         <div className="flex items-center gap-3">
           <Link
-            href="/tiket"
+            href="/jadwal"
             className="font-display text-sm sm:text-[15px] tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 px-5 py-2 sm:px-6 sm:py-2.5 transition-all inline-flex items-center gap-1.5 shadow-md shadow-red-950/40"
           >
-            <span>BELI TIKET</span>
+            <span>JADWAL 3 HARI</span>
             <ArrowUpRight className="w-4 h-4 text-white" />
           </Link>
 
@@ -260,14 +260,6 @@ export default function Navbar() {
                     className="flex items-center justify-between py-1.5 font-display text-lg tracking-wider text-[#F4F0E8] hover:text-[#D91F2C] border-b border-white/5"
                   >
                     <span>VENUE & LOKASI GOR UNY</span>
-                    <ArrowUpRight className="w-4 h-4 text-[#77716D]" />
-                  </Link>
-                  <Link
-                    href="/merch"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-between py-1.5 font-display text-lg tracking-wider text-[#F4F0E8] hover:text-[#D91F2C] border-b border-white/5"
-                  >
-                    <span>OFFICIAL MERCHANDISE</span>
                     <ArrowUpRight className="w-4 h-4 text-[#77716D]" />
                   </Link>
                 </div>
@@ -388,11 +380,11 @@ export default function Navbar() {
               {/* Fixed CTA inside Drawer */}
               <div className="pt-2">
                 <Link
-                  href="/tiket"
+                  href="/jadwal"
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-full text-center block py-3.5 bg-[#D91F2C] text-white font-display text-base tracking-wider uppercase transition-colors hover:bg-[#B81521] shadow-lg shadow-red-950/40 font-bold"
                 >
-                  BELI TIKET MASUK ↗
+                  LIHAT JADWAL 3 HARI ↗
                 </Link>
               </div>
             </div>

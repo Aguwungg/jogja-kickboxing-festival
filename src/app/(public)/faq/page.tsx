@@ -31,7 +31,7 @@ export default function FaqPage() {
           </div>
           <div className="lg:col-span-4 lg:pb-3">
             <p className="text-base text-white/60 font-sans leading-relaxed">
-              Semua hal penting mengenai akses tiket, regulasi sabuk emas K-1, fasilitas festival musik, dan tata tertib di GOR UNY Yogyakarta.
+              Semua hal penting mengenai jadwal laga, regulasi WAKO, panggung festival musik, dan tata tertib di GOR UNY Yogyakarta.
             </p>
           </div>
         </div>
@@ -54,10 +54,10 @@ export default function FaqPage() {
               <HelpCircle className="w-4 h-4" /> BUTUH BANTUAN LAIN?
             </span>
             <h3 className="text-2xl sm:text-3xl font-display uppercase tracking-wide text-white">
-              Punya Pertanyaan Khusus Terkait Tiket atau Acara?
+              Punya Pertanyaan Khusus Terkait Kejuaraan?
             </h3>
             <p className="text-xs sm:text-sm text-white/60 font-sans max-w-xl">
-              Tim sekretariat dan panitia pelaksana JKBF siap menjawab kebutuhan kemitraan, media pers, atau kendala tiket Anda.
+              Tim sekretariat dan panitia pelaksana JKBF siap melayani informasi regulasi atlet, pendaftaran kontingen, atau kemitraan.
             </p>
           </div>
 

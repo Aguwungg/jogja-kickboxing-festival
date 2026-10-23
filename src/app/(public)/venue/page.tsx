@@ -32,10 +32,10 @@ const ACCESS_OPTIONS = [
   },
   {
     number: "04",
-    icon: Ticket,
-    title: "TICKET BOX WRISTBAND",
-    location: "LOKET BARAT ARENA",
-    desc: "Penukaran e-voucher fisik mulai pukul 09:30 WIB setiap hari acara.",
+    icon: Clock,
+    title: "MEJA INFORMASI & PINTU MASUK",
+    location: "LOBI BARAT ARENA GOR UNY",
+    desc: "Pusat informasi penonton, registrasi atlet & screening medis dibuka pukul 08:00 WIB.",
   },
 ];
 
@@ -85,10 +85,10 @@ export default function VenuePage() {
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
               <Link
-                href="/tiket"
+                href="/jadwal"
                 className="font-display text-xs sm:text-sm uppercase tracking-wider text-white/80 hover:text-white border border-white/20 px-4 py-2.5 rounded transition-all inline-flex items-center gap-1.5 bg-black/50 backdrop-blur-sm"
               >
-                <span>INFO TIKET</span>
+                <span>JADWAL 3 HARI</span>
                 <span className="font-technical text-xs">↗</span>
               </Link>
             </div>

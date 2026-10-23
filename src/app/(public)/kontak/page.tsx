@@ -97,18 +97,18 @@ export default function KontakPage() {
                 </div>
               </div>
 
-              {/* Ticket Help Link */}
+              {/* Event Guide & Schedule */}
               <div className="flex items-start gap-3.5 pt-2 border-t border-white/10">
-                <div className="p-2 bg-white/5 border border-white/10 text-white/60 shrink-0 mt-0.5 rounded">
-                  <Ticket className="w-4 h-4" />
+                <div className="p-2 bg-white/5 border border-white/10 text-[#D91F2C] shrink-0 mt-0.5 rounded">
+                  <Clock className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="text-white/40 block text-[10px] font-technical uppercase tracking-wider">BANTUAN TIKET FESTIVAL</span>
+                  <span className="text-white/40 block text-[10px] font-technical uppercase tracking-wider">PANDUAN ACARA & JADWAL</span>
                   <p className="text-xs text-white/70 font-sans mt-0.5 leading-relaxed">
-                    Pertanyaan terkait jadwal presale dan kategori tiket dapat dilihat di panduan resmi.
+                    Rundown resmi dan petunjuk teknis kejuaraan dapat diakses melalui jadwal 3 hari.
                   </p>
-                  <Link href="/tiket" className="text-xs text-[#D91F2C] hover:underline font-technical uppercase font-bold inline-flex items-center gap-1 mt-1">
-                    <span>LIHAT INFO TIKET LENGKAP</span>
+                  <Link href="/jadwal" className="text-xs text-[#D91F2C] hover:underline font-technical uppercase font-bold inline-flex items-center gap-1 mt-1">
+                    <span>LIHAT JADWAL 3 HARI</span>
                     <ArrowUpRight className="w-3 h-3" />
                   </Link>
                 </div>

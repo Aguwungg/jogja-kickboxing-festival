@@ -80,10 +80,10 @@ export default function LineupPage() {
             </div>
 
             <Link
-              href="/tiket"
+              href="/jadwal"
               className="self-start lg:self-end px-7 py-3.5 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-base tracking-wider uppercase transition-colors inline-flex items-center gap-2 shadow-lg shadow-red-950/40"
             >
-              <span>BELI TIKET FESTIVAL</span>
+              <span>LIHAT JADWAL 3 HARI</span>
               <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>

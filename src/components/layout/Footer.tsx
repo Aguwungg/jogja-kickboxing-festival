@@ -108,13 +108,13 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/merch" className="hover:text-white transition-colors">
-                    Official Apparel & Merch
+                  <Link href="/tentang#festival" className="hover:text-white transition-colors">
+                    Aktivitas & Ekshibisi
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tiket" className="text-[#D91F2C] hover:underline inline-flex items-center gap-1 font-semibold">
-                    <span>Beli Tiket Masuk</span>
+                  <Link href="/jadwal" className="text-[#D91F2C] hover:underline inline-flex items-center gap-1 font-semibold">
+                    <span>Jadwal 3 Hari</span>
                     <ArrowUpRight className="w-3 h-3" />
                   </Link>
                 </li>

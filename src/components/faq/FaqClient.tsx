@@ -6,24 +6,24 @@ import { Search, Plus, Minus } from "lucide-react";
 interface FaqItem {
   q: string;
   a: string;
-  category: "TIKET" | "COMBAT" | "FESTIVAL" | "ATURAN";
+  category: "AKSES" | "COMBAT" | "FESTIVAL" | "ATURAN";
 }
 
 const FAQ_DATA: FaqItem[] = [
   {
-    category: "TIKET",
-    q: "Bagaimana informasi pembelian tiket resmi JKBF 2026?",
-    a: "Informasi resmi penjualan tiket akan diumumkan oleh panitia pelaksana. Penjualan tiket akan difasilitasi melalui platform ticketing mitra RAWOOH tanpa perantara tidak resmi.",
+    category: "AKSES",
+    q: "Kapan jadwal resmi penjualan tiket diumumkan?",
+    a: "Informasi resmi penjualan tiket masuk akan diumumkan secara terbuka oleh panitia pelaksana setelah integrasi sistem mitra resmi rampung. Saat ini pemesanan tiket belum dibuka.",
   },
   {
-    category: "TIKET",
-    q: "Apakah tiket festival mencakup pertandingan dan konser musik?",
-    a: "Festival JKBF 2026 mengusung konsep sportainment terpadu. Detail ketentuan hak akses harian (Daily Pass) atau terusan (All-Access Pass) akan dirilis bersamaan dengan skema tiket resmi.",
+    category: "AKSES",
+    q: "Apakah akses acara mencakup pertandingan dan konser musik?",
+    a: "Festival JKBF 2026 mengusung konsep sportainment terpadu. Ketentuan hak akses harian dan terusan akan dirilis bersamaan dengan pengumuman skema tiket resmi.",
   },
   {
-    category: "TIKET",
-    q: "Bagaimana mekanisme penukaran tiket di lokasi GOR UNY?",
-    a: "Seluruh e-voucher resmi wajib ditukarkan dengan gelang tanda masuk fisik di loket verifikasi lobi barat GOR UNY sebelum memasuki arena pertandingan.",
+    category: "AKSES",
+    q: "Bagaimana akses masuk ke lokasi GOR UNY?",
+    a: "Seluruh pengunjung, kontingen, dan atlet dapat mengakses venue melalui Lobi Barat GOR UNY Jalan Colombo No. 1, Sleman, D.I. Yogyakarta.",
   },
   {
     category: "COMBAT",
@@ -64,7 +64,7 @@ const FAQ_DATA: FaqItem[] = [
 
 const CATEGORIES = [
   { key: "ALL", label: "SEMUA PERTANYAAN" },
-  { key: "TIKET", label: "TIKET & AKSES" },
+  { key: "AKSES", label: "AKSES & KUNJUNGAN" },
   { key: "COMBAT", label: "PERTANDINGAN K-1" },
   { key: "FESTIVAL", label: "FESTIVAL MUSIK" },
   { key: "ATURAN", label: "REGULASI & KEAMANAN" },
@@ -101,7 +101,7 @@ export default function FaqClient() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Cari topik pertanyaan tiket, pintu masuk, aturan K-1..."
+            placeholder="Cari topik pertanyaan pintu masuk, jadwal, aturan WAKO..."
             className="w-full bg-[#121212] border border-white/10 pl-11 pr-4 py-3.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#D91F2C] transition-colors font-sans"
           />
         </div>

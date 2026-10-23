@@ -164,18 +164,18 @@ export default function HomeClient() {
           {/* Clean Dual Action Pairing — BYON Simplicity (Centered) */}
           <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto mx-auto">
             <Link
-              href="/tiket"
+              href="/jadwal"
               className="w-full sm:w-auto text-center px-8 sm:px-10 py-3.5 sm:py-3.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all shadow-xl shadow-red-950/40 inline-flex items-center justify-center gap-2 rounded-md"
             >
-              <span>BELI TIKET RESMI</span>
+              <span>JADWAL 3 HARI</span>
               <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </Link>
 
             <Link
-              href="/jadwal"
+              href="/championship"
               className="w-full sm:w-auto text-center px-8 sm:px-10 py-3.5 sm:py-3.5 bg-[#141416]/90 hover:bg-white/10 border border-white/15 text-[#F4F0E8] hover:text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all backdrop-blur-sm rounded-md"
             >
-              <span>JADWAL 3 HARI</span>
+              <span>KEJUARAAN & PETARUNG</span>
             </Link>
           </div>
         </div>
@@ -354,7 +354,7 @@ export default function HomeClient() {
                   THE FESTIVAL
                 </h3>
                 <p className="font-technical text-xs sm:text-sm text-[#D91F2C] uppercase tracking-wider font-semibold mt-1">
-                  KONSER MUSIK 3 HARI • APPAREL MERCH • YOUTH CULTURE
+                  PANGGUNG MUSIK 3 HARI • EKSHIBISI • YOUTH CULTURE
                 </p>
               </div>
 
@@ -370,7 +370,7 @@ export default function HomeClient() {
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1 h-1 rounded-full bg-[#D91F2C]" />
-                  <span>Official Streetwear Drop & Combat Apparel Store</span>
+                  <span>Pameran Ekshibisi & Kultur Kreatif Jogja</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1 h-1 rounded-full bg-[#D91F2C]" />
