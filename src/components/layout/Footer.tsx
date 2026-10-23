@@ -1,16 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Download, ShieldCheck } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#09090B] border-t border-white/10 pt-12 sm:pt-16 pb-10 z-20 relative text-[#8F8E8B]">
+    <footer className="w-full bg-[#08080A] border-t border-white/10 pt-16 pb-12 z-20 relative text-[#8F8E8B]">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-        {/* Main Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-10 border-b border-white/10">
+        {/* Main Grid Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-white/10">
           
-          {/* Brand & Manifesto Column (7 cols on Desktop) */}
-          <div className="lg:col-span-6 space-y-4">
+          {/* Brand & Manifesto Column (5 cols) */}
+          <div className="lg:col-span-5 space-y-4">
             <Link href="/" className="inline-block group leading-none">
               <div className="relative h-11 w-24 sm:h-12 sm:w-28 transition-transform duration-200 group-hover:scale-105">
                 <Image
@@ -23,93 +23,133 @@ export default function Footer() {
               </div>
             </Link>
 
-            <div className="space-y-0.5">
-              <p className="font-technical text-xs uppercase tracking-[0.22em] text-[#D91F2C] font-bold">
+            <div className="space-y-1">
+              <p className="font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
                 #JOGJAPUNYANYALI
               </p>
-              <p className="font-display text-lg sm:text-xl uppercase tracking-wider text-[#F4F0E8]">
-                DI BALIK KALEM, KITA BERTARUNG.
-              </p>
+              <h3 className="font-display text-2xl uppercase tracking-wider text-[#F4F0E8]">
+                DI BALIK KALEM, ADA NYALI.
+              </h3>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#8F8E8B] leading-relaxed max-w-md font-sans">
-              Festival kejuaraan kickboxing profesional dan panggung pertunjukan musik Yogyakarta. 
-              Tiga hari pertarungan, musik, dan gerakan kebanggaan kota.
+            <p className="text-sm text-[#8F8E8B] leading-relaxed max-w-md font-sans">
+              Festival kejuaraan kickboxing dan perayaan panggung musik Yogyakarta. Diselenggarakan oleh 
+              Pengprov Kickboxing Indonesia (KBI) DIY bersama Noise Comm Indonesia di GOR UNY Colombo.
             </p>
 
-            <div className="pt-1 font-technical text-xs font-semibold text-[#F4F0E8] flex flex-wrap items-center gap-x-4 gap-y-1">
-              <span className="text-white">12—14 DESEMBER 2026</span>
+            <div className="pt-2 font-technical text-xs text-[#F4F0E8] flex flex-wrap items-center gap-x-3 gap-y-1.5">
+              <span className="text-white font-semibold">12–14 DESEMBER 2026</span>
               <span className="text-white/30">•</span>
               <span className="text-[#D91F2C] font-bold">GOR UNY, YOGYAKARTA</span>
             </div>
+
+            {/* Official Handbook Download Badge */}
+            <div className="pt-3">
+              <Link
+                href="/tentang#thb"
+                className="inline-flex items-center gap-2 px-3.5 py-2 bg-[#141416] hover:bg-white/5 border border-white/10 text-xs font-technical text-[#F4F0E8] transition-colors"
+              >
+                <Download className="w-3.5 h-3.5 text-[#D91F2C]" />
+                <span>UNDUH TECHNICAL HANDBOOK (PDF)</span>
+              </Link>
+            </div>
           </div>
 
-          {/* Quick Links Group (6 cols on Desktop, 2 cols on Mobile) */}
-          <div className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-2 gap-6 sm:gap-10 pt-2 lg:pt-0">
-            {/* Primary Destinations */}
+          {/* Quick Links Group (7 cols) */}
+          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
+            {/* Column 1: Kejuaraan */}
             <div className="space-y-3">
               <h4 className="font-display text-sm tracking-wider uppercase text-white">
-                FESTIVAL & LAGA
+                KEJUARAAN & LAGA
               </h4>
-              <ul className="space-y-2 text-xs font-medium font-sans">
+              <ul className="space-y-2.5 text-xs font-sans">
                 <li>
-                  <Link href="/jadwal" className="hover:text-white transition-colors">
-                    Jadwal 3 Hari
+                  <Link href="/championship" className="hover:text-white transition-colors">
+                    Kejurda DIY 2026
                   </Link>
                 </li>
                 <li>
                   <Link href="/championship" className="hover:text-white transition-colors">
-                    Redy Championship 2
+                    Redy Open Championship II
                   </Link>
                 </li>
                 <li>
-                  <Link href="/bracket" className="hover:text-white transition-colors">
-                    Bagan Turnamen
+                  <Link href="/fighters" className="hover:text-white transition-colors">
+                    Direktori 200+ Atlet
                   </Link>
                 </li>
+                <li>
+                  <Link href="/jadwal" className="hover:text-white transition-colors">
+                    Jadwal Pertandingan 3 Hari
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/tentang#regulasi" className="hover:text-white transition-colors">
+                    Regulasi & WAKO Rules
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 2: Festival */}
+            <div className="space-y-3">
+              <h4 className="font-display text-sm tracking-wider uppercase text-white">
+                FESTIVAL & KULTUR
+              </h4>
+              <ul className="space-y-2.5 text-xs font-sans">
                 <li>
                   <Link href="/lineup" className="hover:text-white transition-colors">
                     Panggung Musik
                   </Link>
                 </li>
                 <li>
+                  <Link href="/venue" className="hover:text-white transition-colors">
+                    Panduan Lokasi GOR UNY
+                  </Link>
+                </li>
+                <li>
                   <Link href="/merch" className="hover:text-white transition-colors">
-                    Official Merch
+                    Official Apparel & Merch
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/tiket" className="text-[#D91F2C] hover:underline inline-flex items-center gap-1 font-semibold">
+                    <span>Beli Tiket Masuk</span>
+                    <ArrowUpRight className="w-3 h-3" />
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Assistance & Legal */}
-            <div className="space-y-3">
+            {/* Column 3: Informasi Resmi & Legal */}
+            <div className="space-y-3 col-span-2 sm:col-span-1">
               <h4 className="font-display text-sm tracking-wider uppercase text-white">
-                PANDUAN & BANTUAN
+                INFORMASI RESMI
               </h4>
-              <ul className="space-y-2 text-xs font-medium font-sans">
+              <ul className="space-y-2.5 text-xs font-sans">
                 <li>
-                  <Link href="/tiket" className="text-[#D91F2C] hover:underline inline-flex items-center gap-1 font-semibold">
-                    <span>Info Tiket</span>
-                    <ArrowUpRight className="w-3 h-3" />
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/venue" className="hover:text-white transition-colors">
-                    Panduan Lokasi UNY
+                  <Link href="/tentang" className="hover:text-white transition-colors">
+                    Profil Pengprov KBI DIY
                   </Link>
                 </li>
                 <li>
                   <Link href="/faq" className="hover:text-white transition-colors">
-                    FAQ & Aturan
+                    FAQ & Panduan Penonton
                   </Link>
                 </li>
                 <li>
                   <Link href="/kontak" className="hover:text-white transition-colors">
-                    Hubungi Panitia
+                    Sekretariat & Panitia
                   </Link>
                 </li>
                 <li>
                   <Link href="/kebijakan-privasi" className="hover:text-white transition-colors">
                     Kebijakan Privasi
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/syarat-ketentuan" className="hover:text-white transition-colors">
+                    Syarat & Ketentuan
                   </Link>
                 </li>
               </ul>
@@ -118,12 +158,18 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom Bar — No Irrelevant Admin Link */}
-        <div className="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-[#77716D] font-technical">
-          <p>© 2026 JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2.</p>
-          <div className="flex items-center gap-4">
+        {/* Bottom Bar & Legal Disclaimer */}
+        <div className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-[#77716D] font-technical">
+          <div className="flex flex-col gap-1">
+            <p>© 2026 JOGJA KICKBOXING FESTIVAL. SELURUH HAK CIPTA DILINDUNGI.</p>
+            <p className="text-[11px] text-[#55524E]">
+              Disahkan Pengprov Kickboxing Indonesia DIY & Noise Comm Indonesia. Didukung KONI DIY.
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-[#D91F2C]" />
             <span className="text-[10px] uppercase tracking-widest text-[#8F8E8B]">
-              FIGHT NIGHT × JOGJA CULTURE
+              OFFICIAL WAKO ACCREDITED EVENT
             </span>
           </div>
         </div>

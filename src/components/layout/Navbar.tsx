@@ -7,38 +7,65 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-interface NavLink {
-  name: string;
+interface SubItem {
+  title: string;
   href: string;
+  desc?: string;
 }
 
-interface DropdownItem {
+interface NavGroup {
   name: string;
   href: string;
-  label: string;
+  items?: SubItem[];
 }
 
-const primaryNavLinks: NavLink[] = [
-  { name: "JADWAL", href: "/jadwal" },
-  { name: "PERTANDINGAN", href: "/championship" },
-  { name: "MUSIK", href: "/lineup" },
-  { name: "PETARUNG", href: "/fighters" },
-  { name: "BAGAN", href: "/bracket" },
-  { name: "MERCH", href: "/merch" },
-];
-
-const secondaryNavLinks: DropdownItem[] = [
-  { name: "PANDUAN VENUE", href: "/venue", label: "GOR UNY Colombo, Yogyakarta" },
-  { name: "CITY PRIDE", href: "/city-pride", label: "Gerakan & Kultur Yogyakarta" },
-  { name: "CREATOR HUB", href: "/creator", label: "Akreditasi Peliput & Kreator" },
-  { name: "TENTANG JKBF", href: "/tentang", label: "Manifesto Di Balik Kalem" },
-  { name: "FAQ", href: "/faq", label: "Panduan & Aturan Penonton" },
-  { name: "KONTAK", href: "/kontak", label: "Sekretariat & Hubungi Panitia" },
+const navGroups: NavGroup[] = [
+  {
+    name: "FESTIVAL",
+    href: "/lineup",
+    items: [
+      { title: "Musik & Lineup", href: "/lineup", desc: "Panggung musik 3 hari & penampil" },
+      { title: "Panduan Lokasi (Venue)", href: "/venue", desc: "GOR UNY Colombo Yogyakarta" },
+      { title: "Official Merchandise", href: "/merch", desc: "Streetwear & apparel resmi JKBF" },
+    ],
+  },
+  {
+    name: "PERTANDINGAN",
+    href: "/championship",
+    items: [
+      { title: "Kejuaraan & Hasil", href: "/championship", desc: "Kejurda DIY 2026 & Redy Open II" },
+      { title: "Kategori & Aturan WAKO", href: "/tentang#regulasi", desc: "Tatami & Ringsport regulasi resmi" },
+      { title: "Biaya & Pendaftaran", href: "/tentang#biaya", desc: "Ketentuan registrasi kontingen" },
+    ],
+  },
+  {
+    name: "PETARUNG",
+    href: "/fighters",
+  },
+  {
+    name: "JADWAL",
+    href: "/jadwal",
+    items: [
+      { title: "Hari 1: Sabtu, 12 Des", href: "/jadwal?day=1", desc: "Penyisihan & Konser Musik" },
+      { title: "Hari 2: Minggu, 13 Des", href: "/jadwal?day=2", desc: "Perempat Final & Partai Bintang" },
+      { title: "Hari 3: Senin, 14 Des", href: "/jadwal?day=3", desc: "Semifinal, Final & Closing" },
+    ],
+  },
+  {
+    name: "TENTANG JKBF",
+    href: "/tentang",
+    items: [
+      { title: "Profil & Legalitas", href: "/tentang", desc: "Pengprov KBI DIY & Noise Comm" },
+      { title: "Technical Handbook (PDF)", href: "/tentang#thb", desc: "Dokumen resmi panduan teknis" },
+      { title: "Pertanyaan Umum (FAQ)", href: "/faq", desc: "Panduan & tata tertib penonton" },
+      { title: "Sekretariat & Kontak", href: "/kontak", desc: "Hubungi panitia pelaksana" },
+    ],
+  },
 ];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -53,34 +80,34 @@ export default function Navbar() {
 
   useEffect(() => {
     setMobileMenuOpen(false);
-    setIsMoreOpen(false);
+    setActiveDropdown(null);
   }, [pathname]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(event.target as Node)) {
-        setIsMoreOpen(false);
+        setActiveDropdown(null);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const isMoreActive = secondaryNavLinks.some((item) => pathname.startsWith(item.href));
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#09090B]/95 backdrop-blur-md border-b border-white/10 py-2.5 shadow-2xl"
-          : "bg-[#09090B] border-b border-white/10 py-3.5 sm:py-4"
+          ? "bg-[#0B0B0B]/95 backdrop-blur-md border-b border-white/10 py-2.5 shadow-2xl"
+          : "bg-[#0B0B0B] border-b border-white/10 py-3.5 sm:py-4"
       }`}
     >
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 flex items-center justify-between" ref={navRef}>
-        
+      <div
+        className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 flex items-center justify-between"
+        ref={navRef}
+      >
         {/* Official Event Logo Emblem */}
         <Link href="/" className="inline-flex items-center gap-3 sm:gap-4 group z-50 select-none">
-          <div className="relative h-9 sm:h-11 w-20 sm:w-24 transition-transform duration-200 group-hover:scale-[1.03]">
+          <div className="relative h-9 sm:h-11 w-20 sm:w-24 transition-transform duration-200 group-hover:scale-[1.02]">
             <Image
               src="/JKBF Kickboxing Festival Emblem 1.png"
               alt="Jogja Kickboxing Festival Official Logo"
@@ -90,185 +117,282 @@ export default function Navbar() {
               sizes="(max-width: 640px) 90px, 120px"
             />
           </div>
-          <div className="hidden xl:flex flex-col border-l border-white/20 pl-3 leading-none justify-center">
-            <span className="font-technical text-[9px] uppercase tracking-[0.22em] text-[#D91F2C] font-bold">
-              REDY CHAMPIONSHIP 2
+          <div className="hidden xl:flex flex-col border-l border-white/15 pl-3 leading-none justify-center">
+            <span className="font-technical text-[9px] uppercase tracking-[0.2em] text-[#D91F2C] font-bold">
+              PENGPROV KBI DIY
             </span>
-            <span className="font-technical text-[9px] uppercase tracking-[0.15em] text-[#8F8E8B] mt-0.5">
+            <span className="font-technical text-[9px] uppercase tracking-[0.12em] text-[#8F8E8B] mt-0.5">
               12–14 DESEMBER 2026 • GOR UNY
             </span>
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
-          {primaryNavLinks.map((item) => {
-            const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+        {/* Desktop Navigation Links — UFC-Style Precision */}
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+          {navGroups.map((group) => {
+            const isActive =
+              pathname === group.href ||
+              (group.href !== "/" && pathname.startsWith(group.href));
+            const hasSubmenu = group.items && group.items.length > 0;
+            const isOpen = activeDropdown === group.name;
+
             return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`font-display text-[16px] xl:text-[17px] tracking-[0.06em] transition-colors py-1 relative ${
-                  isActive
-                    ? "text-white font-bold"
-                    : "text-[#9E9D99] hover:text-white"
-                }`}
+              <div
+                key={group.name}
+                className="relative"
+                onMouseEnter={() => hasSubmenu && setActiveDropdown(group.name)}
+                onMouseLeave={() => hasSubmenu && setActiveDropdown(null)}
               >
-                {item.name}
-                {isActive && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#D91F2C]" />
+                <button
+                  type="button"
+                  onClick={() => hasSubmenu && setActiveDropdown(isOpen ? null : group.name)}
+                  className={`font-display text-[15px] xl:text-[16px] tracking-[0.08em] transition-colors py-1.5 inline-flex items-center gap-1 relative ${
+                    isActive
+                      ? "text-white font-bold"
+                      : "text-[#9E9D99] hover:text-white"
+                  }`}
+                >
+                  <Link href={group.href} className="hover:text-white">
+                    {group.name}
+                  </Link>
+                  {hasSubmenu && (
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 transition-transform duration-200 text-[#77716D] ${
+                        isOpen ? "rotate-180 text-white" : ""
+                      }`}
+                    />
+                  )}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#D91F2C]" />
+                  )}
+                </button>
+
+                {/* Submenu Popover */}
+                {hasSubmenu && isOpen && (
+                  <div className="absolute top-full left-0 pt-2 z-50">
+                    <motion.div
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 6 }}
+                      transition={{ duration: 0.15 }}
+                      className="w-64 bg-[#141416] border border-white/10 rounded-none shadow-2xl p-2 divide-y divide-white/5"
+                    >
+                      {group.items?.map((sub) => (
+                        <Link
+                          key={sub.title}
+                          href={sub.href}
+                          onClick={() => setActiveDropdown(null)}
+                          className="block px-3 py-2.5 hover:bg-white/5 transition-colors group/item"
+                        >
+                          <p className="font-display text-sm tracking-wide text-[#F4F0E8] group-hover/item:text-[#D91F2C] transition-colors">
+                            {sub.title}
+                          </p>
+                          {sub.desc && (
+                            <p className="font-sans text-[11px] text-[#77716D] mt-0.5 line-clamp-1">
+                              {sub.desc}
+                            </p>
+                          )}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  </div>
                 )}
-              </Link>
+              </div>
             );
           })}
-
-          {/* Secondary Disciplined Popover 'INFO +' */}
-          <div
-            className="relative"
-            onMouseEnter={() => setIsMoreOpen(true)}
-            onMouseLeave={() => setIsMoreOpen(false)}
-          >
-            <button
-              type="button"
-              onClick={() => setIsMoreOpen(!isMoreOpen)}
-              className={`flex items-center gap-1 font-display text-[16px] xl:text-[17px] tracking-[0.06em] transition-colors py-1 cursor-pointer ${
-                isMoreActive || isMoreOpen
-                  ? "text-white"
-                  : "text-[#9E9D99] hover:text-white"
-              }`}
-              aria-expanded={isMoreOpen}
-            >
-              <span>PANDUAN</span>
-              <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                  isMoreOpen ? "rotate-180 text-[#D91F2C]" : "opacity-60"
-                }`}
-              />
-            </button>
-
-            <AnimatePresence>
-              {isMoreOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 4 }}
-                  transition={{ duration: 0.15, ease: "easeOut" }}
-                  className="!absolute top-full right-0 mt-2 w-64 bg-[#121214]/95 backdrop-blur-xl border border-white/15 shadow-2xl rounded-md p-1.5 z-50"
-                >
-                  {secondaryNavLinks.map((subItem) => {
-                    const isActive = pathname === subItem.href;
-                    return (
-                      <Link
-                        key={subItem.name}
-                        href={subItem.href}
-                        onClick={() => setIsMoreOpen(false)}
-                        className={`px-3 py-2.5 block transition-colors rounded ${
-                          isActive
-                            ? "bg-[#D91F2C]/15 border-l-2 border-[#D91F2C] text-white"
-                            : "hover:bg-white/5 text-[#8F8E8B] hover:text-white"
-                        }`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="font-display text-sm tracking-wider uppercase text-white">
-                            {subItem.name}
-                          </span>
-                          <ArrowUpRight className="w-3.5 h-3.5 text-[#D91F2C]" />
-                        </div>
-                        <p className="text-[10px] text-[#77716D] mt-0.5 font-sans">
-                          {subItem.label}
-                        </p>
-                      </Link>
-                    );
-                  })}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
         </nav>
 
-        {/* Right CTA & Mobile Toggle */}
-        <div className="flex items-center gap-3 sm:gap-4">
+        {/* Primary CTA Action — Beli Tiket */}
+        <div className="flex items-center gap-3">
           <Link
             href="/tiket"
-            className="font-display text-sm sm:text-base tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 px-5 py-2 sm:px-6 sm:py-2.5 transition-all inline-flex items-center gap-1.5 shadow-md ring-1 ring-[#D91F2C]/50"
+            className="font-display text-sm sm:text-[15px] tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 px-5 py-2 sm:px-6 sm:py-2.5 transition-all inline-flex items-center gap-1.5 shadow-md shadow-red-950/40"
           >
-            <span>INFO TIKET</span>
+            <span>BELI TIKET</span>
             <ArrowUpRight className="w-4 h-4 text-white" />
           </Link>
 
           {/* Mobile Hamburger Toggle */}
           <button
-            type="button"
-            className="p-2 text-white hover:text-[#D91F2C] lg:hidden focus:outline-none cursor-pointer"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-2 text-[#F4F0E8] hover:text-[#D91F2C] border border-white/10 bg-[#141416] transition-colors focus:outline-none"
             aria-label={mobileMenuOpen ? "Tutup Menu" : "Buka Menu"}
-            aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Art-Directed Mobile Drawer */}
+      {/* Art-Directed Mobile Drawer — Grouped UFC Style */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="lg:hidden border-b border-white/10 bg-[#0B0B0B] overflow-hidden max-h-[calc(100vh-4rem)] overflow-y-auto"
+            transition={{ duration: 0.25 }}
+            className="lg:hidden border-b border-white/10 bg-[#0B0B0B] max-h-[85vh] overflow-y-auto"
           >
-            <div className="px-6 py-6 space-y-6">
-              
-              {/* Event facts kicker */}
-              <div className="flex items-center justify-between font-technical text-[10px] uppercase tracking-[0.2em] text-[#77716D] border-b border-white/10 pb-3">
-                <span>12–14 DESEMBER 2026</span>
-                <span className="text-[#D91F2C] font-bold">GOR UNY, YOGYAKARTA</span>
+            <div className="px-5 py-6 space-y-6">
+              {/* Event Badge Header */}
+              <div className="flex items-center justify-between pb-3 border-b border-white/10 text-xs font-technical">
+                <span className="text-[#8F8E8B]">PENGPROV KBI DIY • 12–14 DES 2026</span>
+                <span className="text-[#D91F2C] font-bold">GOR UNY</span>
               </div>
 
-              {/* Primary Destinations First */}
-              <div className="space-y-1">
-                {primaryNavLinks.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-between py-2.5 font-display text-2xl tracking-wider text-[#F4F0E8] hover:text-[#D91F2C] border-b border-white/5 transition-colors"
-                  >
-                    <span>{item.name}</span>
-                    <ArrowUpRight className="w-5 h-5 text-[#D91F2C]" />
-                  </Link>
-                ))}
-              </div>
-
-              {/* Secondary Navigation Section */}
-              <div className="pt-2">
-                <p className="font-technical text-[10px] uppercase tracking-[0.25em] text-[#77716D] pb-3">
-                  PANDUAN & KULTUR FESTIVAL
+              {/* Group 1: FESTIVAL */}
+              <div className="space-y-2">
+                <p className="font-technical text-[10px] uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
+                  01 / FESTIVAL
                 </p>
-                <div className="grid grid-cols-2 gap-2">
-                  {secondaryNavLinks.map((subItem) => (
-                    <Link
-                      key={subItem.name}
-                      href={subItem.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="p-3 bg-[#141416] border border-white/5 font-display text-xs tracking-wider uppercase text-[#8F8E8B] hover:text-white transition-colors"
-                    >
-                      {subItem.name}
-                    </Link>
-                  ))}
+                <div className="grid grid-cols-1 gap-1 pl-1">
+                  <Link
+                    href="/lineup"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-between py-1.5 font-display text-lg tracking-wider text-[#F4F0E8] hover:text-[#D91F2C] border-b border-white/5"
+                  >
+                    <span>MUSIK & LINEUP</span>
+                    <ArrowUpRight className="w-4 h-4 text-[#77716D]" />
+                  </Link>
+                  <Link
+                    href="/venue"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-between py-1.5 font-display text-lg tracking-wider text-[#F4F0E8] hover:text-[#D91F2C] border-b border-white/5"
+                  >
+                    <span>VENUE & LOKASI GOR UNY</span>
+                    <ArrowUpRight className="w-4 h-4 text-[#77716D]" />
+                  </Link>
+                  <Link
+                    href="/merch"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-between py-1.5 font-display text-lg tracking-wider text-[#F4F0E8] hover:text-[#D91F2C] border-b border-white/5"
+                  >
+                    <span>OFFICIAL MERCHANDISE</span>
+                    <ArrowUpRight className="w-4 h-4 text-[#77716D]" />
+                  </Link>
                 </div>
               </div>
 
-              {/* Primary Ticket Button in Drawer */}
+              {/* Group 2: PERTANDINGAN */}
+              <div className="space-y-2">
+                <p className="font-technical text-[10px] uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
+                  02 / PERTANDINGAN
+                </p>
+                <div className="grid grid-cols-1 gap-1 pl-1">
+                  <Link
+                    href="/championship"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-between py-1.5 font-display text-lg tracking-wider text-[#F4F0E8] hover:text-[#D91F2C] border-b border-white/5"
+                  >
+                    <span>KEJURDA DIY & REDY OPEN II</span>
+                    <ArrowUpRight className="w-4 h-4 text-[#77716D]" />
+                  </Link>
+                  <Link
+                    href="/tentang#regulasi"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-between py-1.5 font-display text-lg tracking-wider text-[#F4F0E8] hover:text-[#D91F2C] border-b border-white/5"
+                  >
+                    <span>ATURAN WAKO (TATAMI & RINGSPORT)</span>
+                    <ArrowUpRight className="w-4 h-4 text-[#77716D]" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Group 3: PETARUNG */}
+              <div className="space-y-2">
+                <p className="font-technical text-[10px] uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
+                  03 / PETARUNG
+                </p>
+                <div className="grid grid-cols-1 gap-1 pl-1">
+                  <Link
+                    href="/fighters"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-between py-1.5 font-display text-lg tracking-wider text-[#F4F0E8] hover:text-[#D91F2C] border-b border-white/5"
+                  >
+                    <span>DIREKTORI 200+ ATLET</span>
+                    <ArrowUpRight className="w-4 h-4 text-[#77716D]" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Group 4: JADWAL */}
+              <div className="space-y-2">
+                <p className="font-technical text-[10px] uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
+                  04 / JADWAL 3 HARI
+                </p>
+                <div className="grid grid-cols-3 gap-2">
+                  <Link
+                    href="/jadwal?day=1"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2.5 bg-[#141416] border border-white/5 text-center block font-display text-xs tracking-wider text-[#F4F0E8] hover:border-[#D91F2C]"
+                  >
+                    <span className="block text-[#D91F2C] text-[10px] font-technical">12 DES</span>
+                    HARI 1
+                  </Link>
+                  <Link
+                    href="/jadwal?day=2"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2.5 bg-[#141416] border border-white/5 text-center block font-display text-xs tracking-wider text-[#F4F0E8] hover:border-[#D91F2C]"
+                  >
+                    <span className="block text-[#D91F2C] text-[10px] font-technical">13 DES</span>
+                    HARI 2
+                  </Link>
+                  <Link
+                    href="/jadwal?day=3"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2.5 bg-[#141416] border border-white/5 text-center block font-display text-xs tracking-wider text-[#F4F0E8] hover:border-[#D91F2C]"
+                  >
+                    <span className="block text-[#D91F2C] text-[10px] font-technical">14 DES</span>
+                    HARI 3
+                  </Link>
+                </div>
+              </div>
+
+              {/* Group 5: TENTANG & DOKUMEN RESMI */}
+              <div className="space-y-2">
+                <p className="font-technical text-[10px] uppercase tracking-[0.25em] text-[#77716D] font-bold">
+                  05 / TENTANG & DOKUMEN RESMI
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    href="/tentang"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-3 bg-[#141416] border border-white/5 font-display text-xs tracking-wider uppercase text-[#8F8E8B] hover:text-white"
+                  >
+                    TENTANG JKBF & KBI DIY
+                  </Link>
+                  <Link
+                    href="/tentang#thb"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-3 bg-[#141416] border border-white/5 font-display text-xs tracking-wider uppercase text-[#D91F2C] hover:text-white"
+                  >
+                    UNDUH THB (PDF)
+                  </Link>
+                  <Link
+                    href="/faq"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-3 bg-[#141416] border border-white/5 font-display text-xs tracking-wider uppercase text-[#8F8E8B] hover:text-white"
+                  >
+                    FAQ PENONTON
+                  </Link>
+                  <Link
+                    href="/kontak"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-3 bg-[#141416] border border-white/5 font-display text-xs tracking-wider uppercase text-[#8F8E8B] hover:text-white"
+                  >
+                    KONTAK PANITIA
+                  </Link>
+                </div>
+              </div>
+
+              {/* Fixed CTA inside Drawer */}
               <div className="pt-2">
                 <Link
                   href="/tiket"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center block py-3.5 bg-[#D91F2C] text-white font-display text-base tracking-wider uppercase transition-colors hover:bg-[#B81521] ring-1 ring-[#D91F2C]/50 shadow-lg"
+                  className="w-full text-center block py-3.5 bg-[#D91F2C] text-white font-display text-base tracking-wider uppercase transition-colors hover:bg-[#B81521] shadow-lg shadow-red-950/40 font-bold"
                 >
-                  INFO TIKET & PEMESANAN ↗
+                  BELI TIKET MASUK ↗
                 </Link>
               </div>
             </div>
