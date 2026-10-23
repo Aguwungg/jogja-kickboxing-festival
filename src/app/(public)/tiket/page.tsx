@@ -19,7 +19,7 @@ const TICKET_TIERS = [
     status: "SEGERA DIBUKA",
     popular: false,
     ctaText: "PILIH TRIBUN REGULER",
-    ctaHref: "https://wa.me/6281234567890?text=Halo%20Panitia%20JKBF%202026,%20saya%20ingin%20informasi%20pemesanan%20Tiket%20Tribun%20Reguler",
+    ctaHref: "https://wa.me/628132928327?text=Halo%20Panitia%20JKBF%202026,%20saya%20ingin%20informasi%20pemesanan%20Tiket%20Tribun%20Reguler",
   },
   {
     number: "02",
@@ -37,7 +37,7 @@ const TICKET_TIERS = [
     status: "KUOTA TERBATAS",
     popular: true,
     ctaText: "PESAN RINGSIDE VIP",
-    ctaHref: "https://wa.me/6281234567890?text=Halo%20Panitia%20JKBF%202026,%20saya%20ingin%20reservasi%20Tiket%20Ringside%20VIP",
+    ctaHref: "https://wa.me/628132928327?text=Halo%20Panitia%20JKBF%202026,%20saya%20ingin%20reservasi%20Tiket%20Ringside%20VIP",
   },
   {
     number: "03",
@@ -55,7 +55,7 @@ const TICKET_TIERS = [
     status: "PRESALE RESMI",
     popular: false,
     ctaText: "AMBIL 3-DAY PASS",
-    ctaHref: "https://wa.me/6281234567890?text=Halo%20Panitia%20JKBF%202026,%20saya%20ingin%20presale%203-Day%20Festival%20Pass",
+    ctaHref: "https://wa.me/628132928327?text=Halo%20Panitia%20JKBF%202026,%20saya%20ingin%20presale%203-Day%20Festival%20Pass",
   },
 ];
 
