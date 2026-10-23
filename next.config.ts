@@ -40,6 +40,9 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     '/**': ['./prisma/dev.db', './dev.db'],
   },
+  experimental: {
+    agentUpgrade: "security",
+  },
 };
 
 export default nextConfig;
