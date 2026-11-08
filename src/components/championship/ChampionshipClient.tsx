@@ -208,9 +208,9 @@ export default function ChampionshipClient() {
       {activeTab === "PROGRAMS" && (
         <div className="space-y-12">
           
-          {/* Category Filter Pills — Fluid, Modern & Clean Pill Dock */}
-          <div className="overflow-x-auto pb-2 scrollbar-none">
-            <div className="inline-flex items-center gap-1.5 p-1.5 bg-[#0E0E10] border border-white/[0.08] rounded-full">
+          {/* Category Filter Pills — Apple Multi-Row Auto-Wrap Pill Dock (Zero Mobile Scroll) */}
+          <div className="flex items-center justify-center">
+            <div className="flex flex-wrap items-center justify-center gap-2 p-2 bg-[#0E0E10]/90 border border-white/[0.08] rounded-2xl sm:rounded-full backdrop-blur-xl max-w-3xl">
               {[
                 { id: "ALL", label: "SEMUA", count: 7 },
                 { id: "REGIONAL", label: "KEJURDA DIY", count: 1 },
@@ -224,7 +224,7 @@ export default function ChampionshipClient() {
                     key={f.id}
                     type="button"
                     onClick={() => setActiveCategory(f.id as CategoryFilter)}
-                    className={`font-technical text-xs uppercase tracking-wider px-4 py-2 rounded-full transition-all flex items-center gap-2 whitespace-nowrap ${
+                    className={`font-technical text-[11px] sm:text-xs uppercase tracking-wider px-3.5 sm:px-4 py-2 rounded-full transition-all flex items-center gap-2 whitespace-nowrap min-h-[38px] ${
                       active
                         ? "bg-[#D91F2C] text-white font-bold shadow-md shadow-red-950/40"
                         : "text-[#8E8E98] hover:text-white hover:bg-white/[0.05]"

@@ -29,8 +29,8 @@ export default function FaqClient() {
     <div className="w-full space-y-8 max-w-5xl mx-auto">
       {/* ─── Apple Filter & Search Controls ─── */}
       <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-        {/* Apple Segmented Pill Dock */}
-        <div className="flex items-center gap-1.5 p-1.5 bg-[#121214] border border-white/10 rounded-full overflow-x-auto no-scrollbar">
+        {/* Apple Segmented Pill Dock (Responsive Auto-Wrap) */}
+        <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-[#121214] border border-white/10 rounded-2xl sm:rounded-full">
           {categories.map((cat) => {
             const isActive = selectedCategory === cat;
             return (

@@ -194,7 +194,7 @@ export default function HomeClient() {
             </h2>
           </div>
           <p className="font-sans text-sm sm:text-base text-[#8F8E8B] max-w-md leading-relaxed">
-            Pilih jalur Anda: arena kejuaraan kickboxing resmi berstandar WAKO atau gerakan panggung mahasiswa dan kreator konten.
+            Pilih jalur Anda: arena kejuaraan kickboxing resmi berstandar WAKO atau gerakan panggung mahasiswa, pelajar, dan kreator konten.
           </p>
         </div>
 
@@ -222,7 +222,7 @@ export default function HomeClient() {
             {/* Top Index Badge — Apple Pill */}
             <div className="relative z-10 flex items-center justify-between">
               <span className="font-technical text-xs uppercase tracking-[0.2em] text-[#D91F2C] font-bold bg-black/70 px-4 py-1.5 border border-white/10 backdrop-blur-md rounded-full">
-                01 / KEJUARAAN RESMI
+                01 / KEJUARAAN RESMI WAKO
               </span>
               <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:bg-[#D91F2C]">
                 <ArrowUpRight className="w-5 h-5" />
@@ -236,7 +236,7 @@ export default function HomeClient() {
                   THE FIGHTS
                 </h3>
                 <p className="font-technical text-xs sm:text-sm text-[#D91F2C] uppercase tracking-wider font-semibold mt-1">
-                  KEJURDA DIY 2026 • REDY OPEN II • KELAS BINTANG
+                  7 PROGRAM KEJUARAAN • STANDAR WAKO INDONESIA
                 </p>
               </div>
 
@@ -244,15 +244,15 @@ export default function HomeClient() {
               <ul className="space-y-2 text-xs sm:text-sm text-[#86868B] font-sans pt-3 border-t border-white/10">
                 <li className="flex items-center gap-2.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C] shrink-0" />
-                  <span className="text-[#C4C4CC]">Kejurda Kickboxing DIY 2026 (Seleksi Atlet Resmi Daerah)</span>
+                  <span className="text-[#C4C4CC]">Kejurda Kickboxing DIY 2026 (Seleksi Atlet Resmi Daerah &amp; Kontingen)</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C] shrink-0" />
-                  <span className="text-[#C4C4CC]">Redy Open Championship II (Camp, Sasana &amp; Terbuka Nasional)</span>
+                  <span className="text-[#C4C4CC]">Redy Open Championship II (Turnamen Terbuka Camp &amp; Sasana Nasional)</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C] shrink-0" />
-                  <span className="text-[#C4C4CC]">Partai Puncak Super Fights (Invitation Only Format K-1)</span>
+                  <span className="text-[#C4C4CC]">Super Fights &amp; Kelas Bintang (Partai Puncak Format K-1 Rules)</span>
                 </li>
               </ul>
 
@@ -265,7 +265,7 @@ export default function HomeClient() {
             </div>
           </Link>
 
-          {/* GATEWAY 02: UNIVERSITY OPEN & CONTENT CHALLENGE */}
+          {/* GATEWAY 02: THE MOVEMENT (UNIVERSITY OPEN, SMA OPEN & CONTENT CHALLENGE) */}
           <Link
             href="/#registration"
             className="group relative h-[520px] sm:h-[580px] lg:h-[640px] overflow-hidden border border-white/[0.08] bg-[#161617] flex flex-col justify-between p-8 sm:p-12 transition-all duration-500 hover:border-[#D91F2C]/50 hover:shadow-[0_20px_60px_rgba(217,31,44,0.12)] rounded-3xl lg:rounded-[36px]"
@@ -286,7 +286,7 @@ export default function HomeClient() {
             {/* Top Index Badge — Apple Pill */}
             <div className="relative z-10 flex items-center justify-between">
               <span className="font-technical text-xs uppercase tracking-[0.2em] text-[#D91F2C] font-bold bg-black/70 px-4 py-1.5 border border-white/10 backdrop-blur-md rounded-full">
-                02 / KAMPUS &amp; KREATIF
+                02 / GENERASI &amp; KREATIF
               </span>
               <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:bg-[#D91F2C]">
                 <ArrowUpRight className="w-5 h-5" />
@@ -297,10 +297,10 @@ export default function HomeClient() {
             <div className="relative z-10 space-y-4">
               <div>
                 <h3 className="font-display text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-[#F5F5F7] group-hover:text-white transition-colors">
-                  KAMPUS &amp; NYALI
+                  THE MOVEMENT
                 </h3>
                 <p className="font-technical text-xs sm:text-sm text-[#D91F2C] uppercase tracking-wider font-semibold mt-1">
-                  KAMPUSMU PUNYA NAMA. PUNYA NYALI JUGA?
+                  WADAH PRESTASI MAHASISWA, PELAJAR &amp; KREATOR KONTEN
                 </p>
               </div>
 
@@ -308,21 +308,21 @@ export default function HomeClient() {
               <ul className="space-y-2 text-xs sm:text-sm text-[#86868B] font-sans pt-3 border-t border-white/10">
                 <li className="flex items-center gap-2.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C] shrink-0" />
-                  <span className="text-[#C4C4CC]">University Open (Terbuka untuk Mahasiswa Aktif se-Indonesia)</span>
+                  <span className="text-[#C4C4CC]">University Open (Adu Nyali Mahasiswa Antar-Kampus se-Indonesia)</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C] shrink-0" />
-                  <span className="text-[#C4C4CC]">Kampus Belum Ada di Poster? Semua Kampus Berhak Daftar</span>
+                  <span className="text-[#C4C4CC]">SMA Open (Panggung Prestasi &amp; Jam Terbang Atlet Pelajar Berbakat)</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C] shrink-0" />
-                  <span className="text-[#C4C4CC]">JKBF Content Challenge (Video Pendek &amp; Kreator Konten)</span>
+                  <span className="text-[#C4C4CC]">Content Challenge (Kompetisi Video Kreatif &amp; Liputan Berhadiah)</span>
                 </li>
               </ul>
 
               <div className="pt-2">
                 <span className="font-display text-base sm:text-lg tracking-wider text-[#F5F5F7] group-hover:text-[#D91F2C] inline-flex items-center gap-2 transition-colors">
-                  <span>DAFTARKAN DIRIMU &amp; KAMPUSMU</span>
+                  <span>DAFTAR ATLET &amp; PROGRAM KREATIF</span>
                   <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </span>
               </div>
