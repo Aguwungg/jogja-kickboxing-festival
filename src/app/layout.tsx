@@ -23,10 +23,32 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: "JOGJA KICKBOXING FESTIVAL & REDY CHAMPIONSHIP 2",
+    default: "JOGJA KICKBOXING FESTIVAL 2026 — #JOGJAPUNYANYALI",
     template: "%s | JKBF 2026",
   },
-  description: "Official Digital Platform for Jogja Kickboxing Festival & Redy Championship 2. DI BALIK KALEM • #JOGJAPUNYANYALI.",
+  description:
+    "Website resmi Jogja Kickboxing Festival 2026. Platform informasi kejuaraan kickboxing resmi Yogyakarta — #JOGJAPUNYANYALI. RISE • FIGHT • CONQUER.",
+  keywords: [
+    "Jogja Kickboxing Festival",
+    "JKBF 2026",
+    "kickboxing Yogyakarta",
+    "Kejurda Kickboxing DIY",
+    "Redy Open Championship",
+    "WAKO kickboxing Indonesia",
+    "KBI DIY",
+  ],
+  openGraph: {
+    title: "JOGJA KICKBOXING FESTIVAL 2026",
+    description:
+      "Website resmi Jogja Kickboxing Festival 2026. Platform informasi kejuaraan kickboxing resmi Yogyakarta — #JOGJAPUNYANYALI.",
+    siteName: "JKBF 2026",
+    locale: "id_ID",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -45,4 +67,3 @@ export default function RootLayout({
     </html>
   );
 }
-

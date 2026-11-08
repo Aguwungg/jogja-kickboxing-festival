@@ -35,7 +35,7 @@ const PRIVACY_ARTICLES = [
 
 export default function KebijakanPrivasiPage() {
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#0A0A0A] text-[#FAFAFA] pt-28 lg:pt-36 pb-32">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-black text-[#F5F5F7] pt-28 lg:pt-36 pb-32">
       
       {/* ═════════════════════════════════════════════════════════════════════
           1. EDITORIAL HEADER — V10 BROADSHEET HERO

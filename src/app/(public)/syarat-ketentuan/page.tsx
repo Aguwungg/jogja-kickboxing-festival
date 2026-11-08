@@ -1,6 +1,6 @@
 export const metadata = {
   title: "Syarat & Ketentuan Resmi | JKBF 2026",
-  description: "Peraturan resmi kehadiran penonton di venue GOR UNY, ketentuan tiket, dan tata tertib Jogja Kickboxing Festival 2026.",
+  description: "Peraturan resmi kehadiran penonton, tata tertib arena, dan ketentuan umum Jogja Kickboxing Festival 2026.",
 };
 
 const ARTICLES = [
@@ -8,9 +8,9 @@ const ARTICLES = [
     number: "01",
     title: "KETENTUAN TIKET & PENUKARAN WRISTBAND",
     items: [
-      "Tiket resmi hanya diterbitkan melalui loket digital resmi mitra RAWOOH atau ticket box resmi di lokasi acara GOR UNY. Panitia tidak bertanggung jawab atas kerugian tiket dari pihak ketiga atau calo tidak resmi.",
+      "Tiket resmi hanya diterbitkan melalui saluran digital resmi yang ditunjuk atau loket resmi di lokasi acara. Panitia tidak bertanggung jawab atas kerugian tiket dari pihak ketiga atau calo tidak resmi.",
       "Tiket yang telah dibeli bersifat final dan tidak dapat diuangkan kembali (non-refundable), kecuali terjadi pembatalan total penyelenggaraan oleh komite panitia.",
-      "Setiap tiket memiliki kode unik yang hanya dapat dipindai satu kali untuk penukaran gelang tanda masuk fisik di lobi barat GOR UNY. Gelang yang rusak atau lepas tidak berlaku untuk akses kembali ke arena.",
+      "Setiap tiket memiliki kode unik yang hanya dapat dipindai satu kali untuk penukaran tanda masuk fisik resmi di lokasi acara. Tanda masuk yang rusak atau lepas tidak berlaku untuk akses kembali ke arena.",
     ],
   },
   {
@@ -28,7 +28,7 @@ const ARTICLES = [
     title: "HAK CIPTA DOKUMENTASI & MEDIA PELIPUTAN",
     items: [
       "Pengunjung diizinkan mengambil foto dan video ponsel pintar non-komersial untuk dokumentasi pribadi media sosial.",
-      "Penggunaan kamera profesional DSLR/Mirrorless dengan lensa tele atau perlengkapan siaran wajib memiliki izin Akreditasi Pers resmi dari Creator Hub JKBF 2026.",
+      "Penggunaan kamera profesional DSLR/Mirrorless dengan lensa tele atau perlengkapan siaran wajib memiliki izin Akreditasi Pers resmi dari panitia pelaksana JKBF 2026.",
       "Panitia dan mitra penyiaran berhak mendokumentasikan wajah pengunjung di dalam area venue untuk materi siaran televisi, dokumentasi, dan promosi festival resmi.",
     ],
   },
@@ -36,7 +36,7 @@ const ARTICLES = [
 
 export default function SyaratKetentuanPage() {
   return (
-    <main className="flex-1 flex flex-col w-full min-h-screen bg-[#0A0A0A] text-[#FAFAFA] pt-28 lg:pt-36 pb-32">
+    <main className="flex-1 flex flex-col w-full min-h-screen bg-black text-[#F5F5F7] pt-28 lg:pt-36 pb-32">
       
       {/* ═════════════════════════════════════════════════════════════════════
           1. EDITORIAL HEADER — V10 BROADSHEET HERO
@@ -58,7 +58,7 @@ export default function SyaratKetentuanPage() {
           </div>
           <div className="lg:col-span-4 lg:pb-3">
             <p className="text-base text-white/60 font-sans leading-relaxed">
-              Peraturan resmi yang mengikat bagi seluruh pengunjung, pemegang tiket, dan delegasi festival di kawasan arena GOR UNY Yogyakarta.
+              Peraturan resmi yang mengikat bagi seluruh pengunjung, delegasi, dan pemangku kepentingan festival di kawasan arena JKBF 2026 Yogyakarta.
             </p>
           </div>
         </div>
@@ -103,7 +103,7 @@ export default function SyaratKetentuanPage() {
       <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 pt-8 w-full border-t border-white/10">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-technical text-white/40 uppercase tracking-wider">
           <p>DIPERBARUI RESMI: OKTOBER 2026 • PANITIA PELAKSANA JKBF</p>
-          <p>#JOGJAPUNYANYALI • GOR UNY YOGYAKARTA</p>
+          <p>#JOGJAPUNYANYALI • YOGYAKARTA</p>
         </div>
       </section>
 

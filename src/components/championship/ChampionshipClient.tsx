@@ -1,399 +1,549 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Swords, Clock, MapPin, ShieldCheck, ChevronDown, ArrowUpRight, Award, Filter } from "lucide-react";
+import {
+  ArrowUpRight,
+  CheckCircle2,
+  Info,
+  Calendar,
+  MessageCircle,
+} from "lucide-react";
+import { EVENT_CONFIG, jkbfLinks, registrationConfig } from "@/lib/event-config";
 
-interface MatchItem {
-  id: string;
-  tournament: "KEJURDA" | "REDY_OPEN" | "PARTAI_BINTANG";
-  tournamentLabel: string;
-  discipline: string;
-  weightClass: string;
-  day: number;
-  timeSlot: string;
-  ring: string;
-  fighterRed: {
-    name: string;
-    origin: string;
-  };
-  fighterBlue: {
-    name: string;
-    origin: string;
-  };
-  status: "UPCOMING" | "LIVE" | "COMPLETED";
-  result?: {
-    winnerName: string;
-    winnerCorner: "RED" | "BLUE";
-    method: string;
-    round: string;
-  };
-}
-
-// Authentic THB Championship Roster & Matchups Structure
-const VERIFIED_MATCHES: MatchItem[] = [
-  {
-    id: "m-01",
-    tournament: "PARTAI_BINTANG",
-    tournamentLabel: "PARTAI MEGA BINTANG",
-    discipline: "K-1 Style Ringsport",
-    weightClass: "67.0 kg Senior",
-    day: 2,
-    timeSlot: "Minggu, 13 Des • 20:30 WIB",
-    ring: "Ring Utama Kejuaraan",
-    fighterRed: {
-      name: "Atlet Nasional (Invited Red)",
-      origin: "KBI DIY / Jogja Camp",
-    },
-    fighterBlue: {
-      name: "Atlet Penantang (Invited Blue)",
-      origin: "KBI Nasional / Jakarta",
-    },
-    status: "UPCOMING",
-  },
-  {
-    id: "m-02",
-    tournament: "PARTAI_BINTANG",
-    tournamentLabel: "PARTAI BINTANG INVITATION",
-    discipline: "Low Kick Ringsport",
-    weightClass: "63.5 kg Senior",
-    day: 2,
-    timeSlot: "Minggu, 13 Des • 19:15 WIB",
-    ring: "Ring Utama Kejuaraan",
-    fighterRed: {
-      name: "Fighter Seleksi KBI DIY",
-      origin: "Pengkab Sleman",
-    },
-    fighterBlue: {
-      name: "Fighter Invitasi Jawa Tengah",
-      origin: "Camp Solo",
-    },
-    status: "UPCOMING",
-  },
-  {
-    id: "m-03",
-    tournament: "KEJURDA",
-    tournamentLabel: "KEJURDA DIY 2026",
-    discipline: "Low Kick Ringsport",
-    weightClass: "60.0 kg Senior Putra",
-    day: 3,
-    timeSlot: "Senin, 14 Des • 15:30 WIB",
-    ring: "Ring Kejuaraan 1",
-    fighterRed: {
-      name: "Pemenang Semifinal A",
-      origin: "Pengkot Yogyakarta",
-    },
-    fighterBlue: {
-      name: "Pemenang Semifinal B",
-      origin: "Pengkab Bantul",
-    },
-    status: "UPCOMING",
-  },
-  {
-    id: "m-04",
-    tournament: "KEJURDA",
-    tournamentLabel: "KEJURDA DIY 2026",
-    discipline: "Point Fighting Tatami",
-    weightClass: "57.0 kg Junior Putra",
-    day: 1,
-    timeSlot: "Sabtu, 12 Des • 10:15 WIB",
-    ring: "Tatami Arena A",
-    fighterRed: {
-      name: "Kontingen Sleman",
-      origin: "Pengkab Sleman",
-    },
-    fighterBlue: {
-      name: "Kontingen Kulon Progo",
-      origin: "Pengkab Kulon Progo",
-    },
-    status: "UPCOMING",
-  },
-  {
-    id: "m-05",
-    tournament: "REDY_OPEN",
-    tournamentLabel: "REDY OPEN II (UNIVERSITY OPEN)",
-    discipline: "K-1 Style Ringsport",
-    weightClass: "63.5 kg Mahasiswa",
-    day: 1,
-    timeSlot: "Sabtu, 12 Des • 14:00 WIB",
-    ring: "Ring Kejuaraan 2",
-    fighterRed: {
-      name: "Kontingen Universitas A",
-      origin: "Kampus DIY",
-    },
-    fighterBlue: {
-      name: "Kontingen Universitas B",
-      origin: "Kampus Jateng",
-    },
-    status: "UPCOMING",
-  },
-  {
-    id: "m-06",
-    tournament: "REDY_OPEN",
-    tournamentLabel: "REDY OPEN II (SMA OPEN)",
-    discipline: "Kick Light Tatami",
-    weightClass: "54.0 kg Pelajar",
-    day: 1,
-    timeSlot: "Sabtu, 12 Des • 11:30 WIB",
-    ring: "Tatami Arena B",
-    fighterRed: {
-      name: "Pelajar Kontingen DIY",
-      origin: "SMA DIY",
-    },
-    fighterBlue: {
-      name: "Pelajar Kontingen Tamu",
-      origin: "SMA Jateng",
-    },
-    status: "UPCOMING",
-  },
-  {
-    id: "m-07",
-    tournament: "REDY_OPEN",
-    tournamentLabel: "REDY OPEN II (CAMP OPEN)",
-    discipline: "Full Contact Ringsport",
-    weightClass: "71.0 kg Senior",
-    day: 2,
-    timeSlot: "Minggu, 13 Des • 10:30 WIB",
-    ring: "Ring Kejuaraan 1",
-    fighterRed: {
-      name: "Fighter Camp Terdaftar A",
-      origin: "Sasana Yogyakarta",
-    },
-    fighterBlue: {
-      name: "Fighter Camp Terdaftar B",
-      origin: "Sasana Surabaya",
-    },
-    status: "UPCOMING",
-  },
-];
+type CategoryFilter = "ALL" | "REGIONAL" | "OPEN" | "STUDENT" | "INVITATION";
 
 export default function ChampionshipClient() {
-  const [activeFilter, setActiveFilter] = useState<string>("ALL");
-  const [rulesOpen, setRulesOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<CategoryFilter>("ALL");
+  const [activeTab, setActiveTab] = useState<"PROGRAMS" | "DISCIPLINES">("PROGRAMS");
 
-  const filteredMatches = VERIFIED_MATCHES.filter((m) => {
-    if (activeFilter === "ALL") return true;
-    return m.tournament === activeFilter;
+  const programs = [
+    {
+      id: "kejurda",
+      category: "REGIONAL",
+      categoryLabel: "KEJURDA DIY",
+      name: "Kejuaraan Daerah Kickboxing DIY 2026",
+      headline: "SELEKSI RESMI DAERAH ISTIMEWA YOGYAKARTA",
+      badge: "PENGPROV KBI DIY",
+      format: "Gugur Murni • Atlet Domisili DIY",
+      target: "Pengkab & Pengkot se-DIY (Yogyakarta, Sleman, Bantul, Kulon Progo, Gunungkidul)",
+      description:
+        "Kejuaraan resmi di bawah yurisdiksi Pengprov Kickboxing Indonesia DIY. Menjadi panggung seleksi utama dan barometer pembinaan atlet daerah menuju Pekan Olahraga Nasional dan kejuaraan tingkat nasional.",
+      highlights: [
+        "Jalur pembinaan atlet berjenjang Pengprov KBI DIY",
+        "Diikuti kontingen resmi 5 Pengurus Cabang Kabupaten/Kota",
+        "Standar penjurian WAKO 10-Point Must System bersertifikasi",
+        "Pemberian medali dan piagam resmi KONI & KBI DIY",
+      ],
+      disciplines: ["Point Fighting", "Kick Light", "Low Kick", "Full Contact"],
+      image: "/images/jkb/fighter-1.jpg",
+    },
+    {
+      id: "redy-open",
+      category: "OPEN",
+      categoryLabel: "REDY OPEN II",
+      name: "Redy Open Championship II",
+      headline: "TURNAMEN TERBUKA SKALA NASIONAL",
+      badge: "OPEN CHAMPIONSHIP",
+      format: "Turnamen Terbuka • Nasional",
+      target: "Sasana, Camp, Akademi & Kontingen Umum se-Indonesia",
+      description:
+        "Kelanjutan dari kesuksesan edisi perdana Redy Open. Menghadirkan kompetisi kickboxing terbuka bergengsi yang mempertemukan petarung potensial antarklub dan akademi beladiri dari seluruh penjuru tanah air.",
+      highlights: [
+        "Skala kompetisi terbuka nasional",
+        "Wadah adu kualitas teknik antar sasana terkemuka",
+        "Standar keamanan dan medis ketat sesuai standar WAKO",
+        "Perebutan gelar juara umum dan trofi bergengsi",
+      ],
+      disciplines: ["Point Fighting", "Kick Light", "Low Kick", "Full Contact", "K-1 Style"],
+      image: "/images/jkb/fighter-2.jpg",
+    },
+    {
+      id: "camp-open",
+      category: "OPEN",
+      categoryLabel: "CAMP OPEN",
+      name: "Camp Open",
+      headline: "ADU TEKNIK ANTAR AKADEMI & SASANA",
+      badge: "ACADEMY DIVISION",
+      format: "Terbuka • Sasana & Camp",
+      target: "Akademi Kickboxing, MMA Camp, Sasana Muaythai & Beladiri",
+      description:
+        "Divisi khusus antarsasana yang dirancang untuk menguji kedalaman kurikulum pelatihan dan kualitas atlet binaan masing-masing camp dalam atmosfer turnamen resmi yang kompetitif dan sportif.",
+      highlights: [
+        "Eksklusif bagi sasana dan camp berlisensi",
+        "Kategori usia mulai dari Children hingga Senior",
+        "Peluang unjuk bakat bagi calon petarung profesional masa depan",
+      ],
+      disciplines: ["Point Fighting", "Kick Light", "Low Kick", "K-1 Style"],
+      image: "/images/jkb/fighter-3.jpg",
+    },
+    {
+      id: "sma-open",
+      category: "STUDENT",
+      categoryLabel: "SMA OPEN",
+      name: "SMA Open",
+      headline: "WADAH TALENTA MUDA TINGKAT PELAJAR",
+      badge: "PELAJAR SMA / SEDERAJAT",
+      format: "Pelajar SMA / SMK / MA",
+      target: "Siswa SMA/sederajat aktif dengan rekomendasi sekolah/sasana",
+      description:
+        "Kompetisi terstruktur yang ditujukan khusus bagi atlet pelajar tingkat sekolah menengah atas. Membangun sportivitas, karakter keberanian positif, serta menyalurkan energi generasi muda ke dalam olahraga prestasi resmi.",
+      highlights: [
+        "Regulasi perlindungan keamanan atlet pelajar ketat",
+        "Peralatan keselamatan lengkap standar WAKO",
+        "Pemberian poin prestasi olahraga untuk jenjang akademik",
+      ],
+      disciplines: ["Kick Light", "Point Fighting", "K-1 Style"],
+      image: "/images/jkb/fighter-training.jpg",
+    },
+    {
+      id: "university-open",
+      category: "STUDENT",
+      categoryLabel: "UNIVERSITY OPEN",
+      name: "University Open",
+      headline: "KICKBOXING MAHASISWA PERGURUAN TINGGI",
+      badge: "MAHASISWA NASIONAL",
+      format: "Mahasiswa Aktif Perguruan Tinggi",
+      target: "Mahasiswa perguruan tinggi negeri maupun swasta se-Indonesia",
+      description:
+        "Ajang unjuk kebolehan atlet kickboxing di tingkat perguruan tinggi. Menjadi wadah integrasi antara pencapaian akademis dan keunggulan olahraga tarung dalam format pertandingan K-1 Style yang dinamis.",
+      highlights: [
+        "Nomor utama K-1 Style Ringsport",
+        "Menjaring atlet mahasiswa untuk kompetisi multievent kampus",
+        "Persaingan antarkampus terkemuka dari berbagai daerah",
+      ],
+      disciplines: ["K-1 Style Ringsport", "Low Kick"],
+      image: "/images/jkb/fighter-agung.jpg",
+    },
+    {
+      id: "kelas-bintang",
+      category: "INVITATION",
+      categoryLabel: "KELAS BINTANG",
+      name: "Kelas Bintang",
+      headline: "PARTAI PILIHAN ATLET ELIT NASIONAL",
+      badge: "INVITATION ONLY",
+      format: "Undangan Khusus • Main Ring",
+      target: "Petarung pilihan panitia, juara bertahan & figur beladiri",
+      description:
+        "Pertandingan invitasi bergengsi yang mempertemukan petarung terseleksi dengan rekam jejak impresif. Menghadirkan duel teknik tingkat tinggi yang disajikan dengan produksi panggung profesional.",
+      highlights: [
+        "Sistem seleksi ketat berbasis kurasi panitia",
+        "Panggung spotlight di ring utama festival",
+        "Bukan kategori pendaftaran umum",
+      ],
+      disciplines: ["K-1 Style Ringsport"],
+      image: "/images/jkb/fighter-5.jpg",
+    },
+    {
+      id: "kelas-mega-bintang",
+      category: "INVITATION",
+      categoryLabel: "MEGA BINTANG",
+      name: "Kelas Mega Bintang",
+      headline: "PUNCAK KEHORMATAN DI ATAS RING JKBF",
+      badge: "MAIN EVENT • INVITATION",
+      format: "Laga Puncak • Main Event",
+      target: "Petarung papan atas nasional & figur kejuaraan",
+      description:
+        "Partai pamungkas Jogja Kickboxing Festival 2026. Laga paling dinanti yang merepresentasikan semangat tertinggi #JOGJAPUNYANYALI — adu determinasi, teknik, dan ketangguhan mental atlet kelas atas.",
+      highlights: [
+        "Main Event kehormatan JKBF 2026",
+        "Partai penutup yang menjadi sorotan festival",
+        "Eksklusif undangan khusus promotor resmi",
+      ],
+      disciplines: ["K-1 Style Ringsport"],
+      image: "/images/jkb/hero-boxing.jpg",
+    },
+  ];
+
+  const filteredPrograms = programs.filter((p) => {
+    if (activeCategory === "ALL") return true;
+    return p.category === activeCategory;
   });
 
   return (
-    <div className="w-full space-y-8 font-sans">
+    <div className="w-full space-y-16 font-sans">
       
-      {/* 3 Main Championship Pillars Information Strip */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="p-5 bg-[#141416] border border-white/10 space-y-2">
-          <div className="flex items-center justify-between">
-            <span className="font-technical text-[10px] uppercase tracking-[0.2em] text-[#D91F2C] font-bold">
-              01 / PILAR DAERAH
-            </span>
-            <ShieldCheck className="w-4 h-4 text-[#D91F2C]" />
-          </div>
-          <h3 className="font-display text-2xl uppercase tracking-wider text-[#F4F0E8]">
-            KEJURDA DIY 2026
-          </h3>
-          <p className="font-sans text-xs text-[#8F8E8B] leading-relaxed">
-            Kejuaraan Daerah resmi Pengprov KBI DIY hasil seleksi atlet Kejurkab & Kejurkot se-Daerah Istimewa Yogyakarta.
-          </p>
+      {/* ─────────────────────────────────────────────────────────────────
+          NAVIGATION TOGGLE: PROGRAMS VS DISCIPLINES
+          Sleek Segmented Capsule Switcher (Clean & Uncluttered)
+         ───────────────────────────────────────────────────────────────── */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 border-b border-white/[0.08] pb-6">
+        <div className="inline-flex p-1 bg-[#121214] border border-white/10 rounded-full w-fit">
+          <button
+            type="button"
+            onClick={() => setActiveTab("PROGRAMS")}
+            className={`font-display text-sm sm:text-base uppercase tracking-wider px-5 py-2 rounded-full transition-all ${
+              activeTab === "PROGRAMS"
+                ? "bg-[#D91F2C] text-white shadow-lg shadow-red-950/40"
+                : "text-[#8E8E98] hover:text-white"
+            }`}
+          >
+            7 PROGRAM KEJUARAAN
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("DISCIPLINES")}
+            className={`font-display text-sm sm:text-base uppercase tracking-wider px-5 py-2 rounded-full transition-all ${
+              activeTab === "DISCIPLINES"
+                ? "bg-[#D91F2C] text-white shadow-lg shadow-red-950/40"
+                : "text-[#8E8E98] hover:text-white"
+            }`}
+          >
+            DISIPLIN PERTANDINGAN
+          </button>
         </div>
 
-        <div className="p-5 bg-[#141416] border border-white/10 space-y-2">
-          <div className="flex items-center justify-between">
-            <span className="font-technical text-[10px] uppercase tracking-[0.2em] text-[#D91F2C] font-bold">
-              02 / PILAR NASIONAL
-            </span>
-            <Swords className="w-4 h-4 text-[#D91F2C]" />
-          </div>
-          <h3 className="font-display text-2xl uppercase tracking-wider text-[#F4F0E8]">
-            REDY OPEN II
-          </h3>
-          <p className="font-sans text-xs text-[#8F8E8B] leading-relaxed">
-            Turnamen terbuka antarcamp nasional, nomor khusus pelajar SMA Open, dan nomor mahasiswa University Open.
-          </p>
-        </div>
-
-        <div className="p-5 bg-[#141416] border border-white/10 space-y-2">
-          <div className="flex items-center justify-between">
-            <span className="font-technical text-[10px] uppercase tracking-[0.2em] text-[#D91F2C] font-bold">
-              03 / LAGA PUNCAK
-            </span>
-            <Award className="w-4 h-4 text-[#D91F2C]" />
-          </div>
-          <h3 className="font-display text-2xl uppercase tracking-wider text-[#F4F0E8]">
-            PARTAI BINTANG
-          </h3>
-          <p className="font-sans text-xs text-[#8F8E8B] leading-relaxed">
-            Laga eksibisi dan kejuaraan bergengsi mempertemukan atlet profesional nasional dan invited stars (Minggu malam).
-          </p>
-        </div>
-      </div>
-
-      {/* Filter Chips Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-b border-white/10 pb-4">
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
-          <span className="font-technical text-xs text-[#77716D] uppercase tracking-wider flex items-center gap-1.5 pr-2">
-            <Filter className="w-3.5 h-3.5 text-[#D91F2C]" />
-            FILTER:
+        <div className="text-xs font-technical text-[#77716D] flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#D91F2C] animate-pulse" />
+          <span className="uppercase tracking-widest text-[#8F8E8B]">
+            WAKO RULES (TATAMI &amp; RINGSPORT)
           </span>
-          {[
-            { id: "ALL", label: "SEMUA PERTANDINGAN" },
-            { id: "KEJURDA", label: "KEJURDA DIY" },
-            { id: "REDY_OPEN", label: "REDY OPEN II" },
-            { id: "PARTAI_BINTANG", label: "PARTAI BINTANG" },
-          ].map((tab) => {
-            const isActive = activeFilter === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveFilter(tab.id)}
-                className={`px-3.5 py-1.5 font-display text-xs sm:text-sm tracking-wider uppercase transition-colors whitespace-nowrap ${
-                  isActive
-                    ? "bg-[#D91F2C] text-white font-bold"
-                    : "bg-[#141416] text-[#8F8E8B] hover:text-white border border-white/10"
-                }`}
-              >
-                {tab.label}
-              </button>
-            );
-          })}
         </div>
-
-        <button
-          onClick={() => setRulesOpen(!rulesOpen)}
-          className="inline-flex items-center gap-1.5 text-xs font-technical text-[#8F8E8B] hover:text-white transition-colors"
-        >
-          <span>PEDOMAN WAKO RULES (TATAMI & RINGSPORT)</span>
-          <ChevronDown className={`w-3.5 h-3.5 transition-transform ${rulesOpen ? "rotate-180" : ""}`} />
-        </button>
       </div>
 
-      {/* Collapsible WAKO Rules Drawer */}
-      {rulesOpen && (
-        <div className="p-6 bg-[#141416] border border-white/10 space-y-4">
-          <div className="flex items-center justify-between border-b border-white/10 pb-3">
-            <h4 className="font-display text-lg uppercase tracking-wider text-white">
-              RINGKASAN ATURAN WAKO RESMI
-            </h4>
-            <Link
-              href="/tentang#thb"
-              className="text-xs font-technical text-[#D91F2C] hover:underline inline-flex items-center gap-1"
-            >
-              <span>Dokumen Lengkap THB</span>
-              <ArrowUpRight className="w-3 h-3" />
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-[#8F8E8B] font-sans">
-            <div className="space-y-1.5">
-              <strong className="text-white block font-display text-sm tracking-wide">
-                DISIPLIN TATAMI (Point Fighting & Kick Light)
-              </strong>
-              <p>
-                Dipertandingkan di atas matras tatami. Menekankan kecepatan, kontrol teknik terarah (*controlled contact*), dan akurasi serangan. Peserta wajib mengenakan pelindung kepala, pelindung gigi, sarung tangan tatami, pelindung tulang kering, dan pelindung kaki resmi.
-              </p>
+      {/* ─────────────────────────────────────────────────────────────────
+          TAB 1: 7 CHAMPIONSHIP PROGRAMS
+         ───────────────────────────────────────────────────────────────── */}
+      {activeTab === "PROGRAMS" && (
+        <div className="space-y-12">
+          
+          {/* Category Filter Pills — Fluid, Modern & Clean Pill Dock */}
+          <div className="overflow-x-auto pb-2 scrollbar-none">
+            <div className="inline-flex items-center gap-1.5 p-1.5 bg-[#0E0E10] border border-white/[0.08] rounded-full">
+              {[
+                { id: "ALL", label: "SEMUA", count: 7 },
+                { id: "REGIONAL", label: "KEJURDA DIY", count: 1 },
+                { id: "OPEN", label: "TERBUKA & SASANA", count: 2 },
+                { id: "STUDENT", label: "PELAJAR & MAHASISWA", count: 2 },
+                { id: "INVITATION", label: "INVITASI KHUSUS", count: 2 },
+              ].map((f) => {
+                const active = activeCategory === f.id;
+                return (
+                  <button
+                    key={f.id}
+                    type="button"
+                    onClick={() => setActiveCategory(f.id as CategoryFilter)}
+                    className={`font-technical text-xs uppercase tracking-wider px-4 py-2 rounded-full transition-all flex items-center gap-2 whitespace-nowrap ${
+                      active
+                        ? "bg-[#D91F2C] text-white font-bold shadow-md shadow-red-950/40"
+                        : "text-[#8E8E98] hover:text-white hover:bg-white/[0.05]"
+                    }`}
+                  >
+                    <span>{f.label}</span>
+                    <span
+                      className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
+                        active ? "bg-white/20 text-white font-bold" : "bg-white/5 text-[#71717A]"
+                      }`}
+                    >
+                      {f.count}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
-            <div className="space-y-1.5">
-              <strong className="text-white block font-display text-sm tracking-wide">
-                DISIPLIN RINGSPORT (Low Kick, Full Contact, K-1 Style)
-              </strong>
-              <p>
-                Dipertandingkan di atas ring tali standar. Memperbolehkan *full power contact* pukulan dan tendangan (low kick & lutut tunggal pada nomor K-1). Penilaian menggunakan 10-Point Must System oleh dewan juri bersertifikasi KBI DIY.
-              </p>
+          </div>
+
+          {/* Editorial Program Cards Grid — Apple Bento Spec Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {filteredPrograms.map((prog) => {
+              const isInvitation = prog.category === "INVITATION";
+
+              return (
+                <article
+                  key={prog.id}
+                  className={`relative flex flex-col justify-between p-8 sm:p-10 border transition-all group overflow-hidden rounded-3xl shadow-xl ${
+                    isInvitation
+                      ? "bg-[#161617] border-[#D91F2C]/30 hover:border-[#D91F2C]/60"
+                      : "bg-[#161617] border-white/[0.08] hover:border-white/20"
+                  }`}
+                >
+                  {/* Background Image Watermark with Subtle Fade */}
+                  <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-20 transition-opacity duration-500 group-hover:opacity-30">
+                    <Image
+                      src={prog.image}
+                      alt={prog.name}
+                      fill
+                      className="object-cover object-center filter grayscale contrast-125"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#161617] via-[#161617]/85 to-[#161617]/95" />
+                  </div>
+
+                  <div className="relative z-10 space-y-6">
+                    {/* Top badges — Apple Pills */}
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <span className="font-technical text-[10px] uppercase font-bold tracking-[0.25em] text-[#D91F2C] bg-black/60 px-3.5 py-1 rounded-full border border-white/10 backdrop-blur-sm">
+                        {prog.categoryLabel}
+                      </span>
+                      <span
+                        className={`font-technical text-[10px] uppercase tracking-wider px-3 py-1 rounded-full border ${
+                          isInvitation
+                            ? "bg-[#D91F2C] text-white border-[#D91F2C] font-semibold"
+                            : "bg-white/5 text-[#86868B] border-white/10"
+                        }`}
+                      >
+                        {prog.badge}
+                      </span>
+                    </div>
+
+                    {/* Titles */}
+                    <div className="space-y-1.5">
+                      <p className="font-technical text-xs uppercase tracking-wider text-[#86868B]">
+                        {prog.headline}
+                      </p>
+                      <h3 className="font-display text-3xl sm:text-4xl uppercase tracking-tight text-[#F5F5F7] leading-tight group-hover:text-white transition-colors">
+                        {prog.name}
+                      </h3>
+                    </div>
+
+                    {/* Description */}
+                    <p className="font-sans text-sm text-[#86868B] leading-relaxed">
+                      {prog.description}
+                    </p>
+
+                    {/* Target & Format Spec — Apple Squircle Container */}
+                    <div className="p-5 bg-black/40 border border-white/[0.06] rounded-2xl space-y-3 text-xs">
+                      <div>
+                        <span className="font-technical text-[10px] text-[#86868B] uppercase block">
+                          FORMAT &amp; SASARAN PESERTA:
+                        </span>
+                        <p className="text-white font-sans font-medium mt-0.5">{prog.target}</p>
+                      </div>
+                      <div className="pt-2 border-t border-white/5 flex items-center justify-between font-technical text-[11px]">
+                        <span className="text-[#86868B]">Sistem:</span>
+                        <span className="text-[#D91F2C] font-semibold">{prog.format}</span>
+                      </div>
+                    </div>
+
+                    {/* Highlights Checklist */}
+                    <div className="space-y-2 pt-1">
+                      <span className="font-technical text-[10px] uppercase tracking-wider text-[#86868B] block">
+                        POIN UTAMA PROGRAM:
+                      </span>
+                      <ul className="space-y-1.5 text-xs text-[#86868B] font-sans">
+                        {prog.highlights.map((h, idx) => (
+                          <li key={idx} className="flex items-start gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#D91F2C] shrink-0 mt-0.5" />
+                            <span className="text-[#C4C4CC]">{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Bottom Disciplines Strip */}
+                  <div className="relative z-10 pt-6 mt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className="font-technical text-[10px] text-[#86868B] uppercase mr-1">
+                        DISIPLIN:
+                      </span>
+                      {prog.disciplines.map((d) => (
+                        <span
+                          key={d}
+                          className="font-technical text-[10px] uppercase px-2.5 py-0.5 bg-white/5 border border-white/10 text-[#F5F5F7] rounded-full"
+                        >
+                          {d}
+                        </span>
+                      ))}
+                    </div>
+
+                    {isInvitation ? (
+                      <span className="font-technical text-[11px] text-[#D91F2C] font-bold uppercase tracking-wider">
+                        KHUSUS UNDANGAN
+                      </span>
+                    ) : (
+                      <Link
+                        href="/kontak"
+                        className="font-technical text-[11px] text-[#86868B] hover:text-[#D91F2C] inline-flex items-center gap-1 uppercase tracking-wider transition-colors"
+                      >
+                        <span>KOORDINASI KONTINGEN</span>
+                        <ArrowUpRight className="w-3 h-3" />
+                      </Link>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          {/* Invitation Program Clarification Note — Apple Bento Note */}
+          <div className="p-8 bg-[#161617] border border-white/[0.08] rounded-3xl space-y-3 shadow-xl">
+            <div className="flex items-center gap-2 text-[#D91F2C]">
+              <Info className="w-4 h-4 shrink-0" />
+              <span className="font-technical text-xs uppercase font-bold tracking-wider">
+                CATATAN RESMI KATEGORI UNDANGAN (INVITATION ONLY)
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-[#86868B] font-sans leading-relaxed">
+              Program <strong>Kelas Bintang</strong> dan <strong>Kelas Mega Bintang</strong> merupakan partai invitasi eksklusif yang diatur langsung oleh promotor dan Pengprov KBI DIY. Kategori ini <strong>tidak dibuka untuk pendaftaran umum</strong>. Seluruh proses pemilihan atlet didasarkan pada kurasi prestasi dan kualifikasi teknis resmi.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* ─────────────────────────────────────────────────────────────────
+          TAB 2: 5 COMPETITION DISCIPLINES (WAKO STANDARDS)
+         ───────────────────────────────────────────────────────────────── */}
+      {activeTab === "DISCIPLINES" && (
+        <div className="space-y-12">
+          {/* Header Explanation */}
+          <div className="max-w-3xl space-y-3">
+            <h2 className="font-display text-3xl sm:text-4xl uppercase tracking-wider text-white">
+              DISIPLIN STANDAR WAKO DI JKBF 2026
+            </h2>
+            <p className="text-sm text-[#86868B] font-sans leading-relaxed">
+              Seluruh nomor perlombaan di Jogja Kickboxing Festival dijalankan mengacu pada regulasi resmi <strong>World Association of Kickboxing Organizations (WAKO)</strong> yang terbagi ke dalam dua divisi utama: <strong>Tatami</strong> (Controlled Contact) dan <strong>Ringsport</strong> (Full Contact).
+            </p>
+          </div>
+
+          {/* 5 Disciplines Cards Grid — Apple Bento Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {EVENT_CONFIG.disciplines.map((d, i) => {
+              const isRingsport = d.category === "RINGSPORT";
+
+              return (
+                <div
+                  key={d.id}
+                  className={`p-8 border flex flex-col justify-between space-y-6 rounded-3xl transition-all shadow-xl ${
+                    isRingsport
+                      ? "bg-[#161617] border-[#D91F2C]/30 hover:border-[#D91F2C]/60"
+                      : "bg-[#161617] border-white/[0.08] hover:border-white/20"
+                  }`}
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="font-technical text-[10px] uppercase font-bold tracking-[0.25em] text-[#D91F2C]">
+                        0{i + 1} / {d.category}
+                      </span>
+                      <span
+                        className={`font-technical text-[9px] uppercase px-3 py-1 rounded-full border ${
+                          isRingsport
+                            ? "bg-[#D91F2C]/10 border-[#D91F2C]/30 text-[#D91F2C] font-semibold"
+                            : "bg-white/5 border-white/10 text-[#86868B]"
+                        }`}
+                      >
+                        {isRingsport ? "RING TALI" : "MATRAS TATAMI"}
+                      </span>
+                    </div>
+
+                    <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-wide text-white">
+                      {d.name}
+                    </h3>
+
+                    <p className="font-sans text-xs sm:text-sm text-[#86868B] leading-relaxed">
+                      {d.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-white/[0.08] space-y-2">
+                    <span className="font-technical text-[10px] uppercase text-[#86868B] block">
+                      DITERAPKAN PADA PROGRAM:
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {d.applicableIn.map((app) => (
+                        <span
+                          key={app}
+                          className="font-technical text-[10px] uppercase px-2.5 py-0.5 bg-white/5 border border-white/10 text-[#F5F5F7] rounded-full"
+                        >
+                          {app}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Tatami vs Ringsport Comparison Matrix — Apple Bento Matrix */}
+          <div className="p-8 sm:p-10 bg-[#161617] border border-white/[0.08] rounded-3xl space-y-6 shadow-xl">
+            <div className="space-y-1">
+              <span className="font-technical text-xs uppercase font-bold tracking-[0.2em] text-[#D91F2C]">
+                KOMPARASI REGULASI
+              </span>
+              <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-wider text-white">
+                PERBEDAAN DIVISI TATAMI VS RINGSPORT
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-xs font-sans text-[#86868B] leading-relaxed">
+              <div className="p-6 bg-black/40 border border-white/[0.06] rounded-2xl space-y-3">
+                <span className="font-technical text-xs font-bold text-[#D91F2C] uppercase block">
+                  DIVISI TATAMI (POINT FIGHTING &amp; KICK LIGHT)
+                </span>
+                <p>
+                  Pertandingan dilakukan di atas matras tatami datar. Mengedepankan prinsip <em>controlled contact</em> — kecepatan serangan, keakuratan penempatan pukulan dan tendangan, serta pertahanan teknik tinggi. Serangan membabi buta dan kekuatan berlebihan yang tidak terkontrol dilarang dan dikenai penalti wasit.
+                </p>
+                <div className="pt-3 border-t border-white/[0.08] space-y-1 font-technical text-[11px] text-[#C4C4CC]">
+                  <p>• Area Tanding: Matras Tatami 8×8 Meter</p>
+                  <p>• Kontak: Controlled &amp; Technical Precision</p>
+                  <p>• Kategori Usia: Children (7-9), Cadets (10-15), Junior (16-18), Senior (19-40)</p>
+                </div>
+              </div>
+
+              <div className="p-6 bg-black/40 border border-white/[0.06] rounded-2xl space-y-3">
+                <span className="font-technical text-xs font-bold text-[#D91F2C] uppercase block">
+                  DIVISI RINGSPORT (LOW KICK, FULL CONTACT &amp; K-1 STYLE)
+                </span>
+                <p>
+                  Pertandingan dilangsungkan di atas ring tali kejuaraan dengan ukuran resmi. Memperbolehkan serangan berkekuatan penuh (<em>full power striking</em>). Pada disiplin Low Kick dan K-1 Style, serangan tendangan ke area paha diperbolehkan. Pada nomor K-1 Style, serangan lutut tunggal langsung ke tubuh lawan diperkenankan.
+                </p>
+                <div className="pt-3 border-t border-white/[0.08] space-y-1 font-technical text-[11px] text-[#C4C4CC]">
+                  <p>• Area Tanding: Ring Tinju Standar Tali Kejuaraan</p>
+                  <p>• Kontak: Full Power Striking (KO diperbolehkan)</p>
+                  <p>• Penilaian: 10-Point Must System oleh 3 Juri Bersertifikasi</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Compact Fight Match Matrix (GLORY/UFC Dense Rows) */}
-      <div className="border border-white/10 bg-[#121214] divide-y divide-white/5">
-        {filteredMatches.map((match) => {
-          return (
-            <div
-              key={match.id}
-              className="p-4 sm:p-5 grid grid-cols-1 lg:grid-cols-12 gap-4 items-center hover:bg-white/[0.02] transition-colors"
-            >
-              {/* Col 1: Tournament & Discipline Pill */}
-              <div className="lg:col-span-3 space-y-1">
-                <div className="flex items-center gap-2">
-                  <span className={`font-technical text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 border ${
-                    match.tournament === "PARTAI_BINTANG"
-                      ? "bg-[#D91F2C]/15 border-[#D91F2C] text-[#D91F2C]"
-                      : "bg-white/5 border-white/10 text-[#8F8E8B]"
-                  }`}>
-                    {match.tournamentLabel}
-                  </span>
-                </div>
-                <p className="font-display text-base tracking-wide text-[#F4F0E8]">
-                  {match.discipline}
-                </p>
-                <p className="font-technical text-[11px] text-[#77716D]">
-                  Kelas: {match.weightClass}
-                </p>
-              </div>
+      {/* ─────────────────────────────────────────────────────────────────
+          BOTTOM OFFICIAL REGISTRATION & COORDINATION CARD — APPLE BENTO CARD
+         ───────────────────────────────────────────────────────────────── */}
+      <div className="p-8 sm:p-12 bg-gradient-to-b from-[#1C1C1E] via-[#161617] to-[#121214] border border-white/10 rounded-3xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 relative overflow-hidden shadow-2xl">
+        <div className="space-y-4 max-w-2xl relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#D91F2C] text-white rounded-full">
+            <Calendar className="w-3.5 h-3.5" />
+            <span className="font-technical text-xs font-bold uppercase tracking-wider">
+              {registrationConfig.statusLabel} HINGGA {registrationConfig.displayDeadline}
+            </span>
+          </div>
 
-              {/* Col 2: Matchup (Red Corner vs Blue Corner) */}
-              <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-11 gap-2 items-center py-2 sm:py-0">
-                {/* Red Corner */}
-                <div className="sm:col-span-5 text-left sm:text-right border-l-2 sm:border-l-0 sm:border-r-2 border-[#D91F2C] pl-2 sm:pl-0 sm:pr-3">
-                  <span className="font-technical text-[9px] uppercase tracking-widest text-[#D91F2C] font-bold block">
-                    SUDUT MERAH
-                  </span>
-                  <span className="font-display text-lg uppercase tracking-wider text-white block">
-                    {match.fighterRed.name}
-                  </span>
-                  <span className="font-technical text-[11px] text-[#77716D] block">
-                    {match.fighterRed.origin}
-                  </span>
-                </div>
+          <h4 className="font-display text-2xl sm:text-4xl uppercase tracking-wider text-white">
+            DAFTARKAN DIRIMU KE KEJUARAAN JKBF 2026
+          </h4>
+          <p className="text-xs sm:text-sm text-[#86868B] font-sans leading-relaxed">
+            {registrationConfig.supportingText} Pengisian data atlet, pemilihan nomor pertandingan, dan unggah berkas dilakukan langsung melalui formulir pendaftaran resmi Google Form.
+          </p>
+          <p className="text-xs font-technical text-[#86868B]">
+            Butuh bantuan teknis? Hubungi admin fighter (<strong className="text-white">{registrationConfig.adminName}</strong>).
+          </p>
+        </div>
 
-                {/* VS Badge */}
-                <div className="sm:col-span-1 text-center py-1 sm:py-0">
-                  <span className="font-display text-xs text-[#77716D] bg-white/5 px-2 py-1 rounded">
-                    VS
-                  </span>
-                </div>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full lg:w-auto relative z-10">
+          <a
+            href={jkbfLinks.fighterRegistration}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-sm sm:text-base tracking-wider uppercase text-center transition-all inline-flex items-center justify-center gap-2 shadow-lg shadow-red-950/40 rounded-full"
+          >
+            <span>DAFTAR SEKARANG</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
 
-                {/* Blue Corner */}
-                <div className="sm:col-span-5 text-left border-l-2 border-blue-500 pl-2 sm:pl-3">
-                  <span className="font-technical text-[9px] uppercase tracking-widest text-blue-400 font-bold block">
-                    SUDUT BIRU
-                  </span>
-                  <span className="font-display text-lg uppercase tracking-wider text-white block">
-                    {match.fighterBlue.name}
-                  </span>
-                  <span className="font-technical text-[11px] text-[#77716D] block">
-                    {match.fighterBlue.origin}
-                  </span>
-                </div>
-              </div>
-
-              {/* Col 3: Status & Schedule Arena */}
-              <div className="lg:col-span-3 text-left lg:text-right space-y-0.5 border-t lg:border-t-0 border-white/5 pt-2 lg:pt-0">
-                <span className="font-technical text-xs font-bold text-[#F4F0E8] block">
-                  {match.timeSlot}
-                </span>
-                <span className="font-technical text-[11px] text-[#8F8E8B] block">
-                  {match.ring}
-                </span>
-                <span className="inline-block mt-1 font-technical text-[10px] text-[#D91F2C] uppercase font-semibold">
-                  JADWAL RESMI TERKONFIRMASI
-                </span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Matchmaking Official Protocol Footnote */}
-      <div className="p-4 bg-[#141416] border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-[#8F8E8B] font-sans">
-        <p>
-          Bagan dan urutan partai prelims lengkap akan dirilis pasca proses penimbangan badan & screening medis (10 Des 2026).
-        </p>
-        <Link
-          href="/fighters"
-          className="text-[#F4F0E8] hover:text-[#D91F2C] font-technical inline-flex items-center gap-1 uppercase tracking-wider text-[11px] shrink-0"
-        >
-          <span>Jelajahi Direktori Atlet (200+)</span>
-          <ArrowUpRight className="w-3.5 h-3.5" />
-        </Link>
+          <a
+            href={jkbfLinks.fighterSupportWhatsApp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-7 py-4 bg-white/10 hover:bg-white/15 border border-white/15 text-[#F5F5F7] font-display text-sm sm:text-base tracking-wider uppercase text-center transition-all inline-flex items-center justify-center gap-2 rounded-full backdrop-blur-md"
+          >
+            <MessageCircle className="w-4 h-4 text-[#D91F2C]" />
+            <span>ADMIN FIGHTER</span>
+          </a>
+        </div>
       </div>
 
     </div>

@@ -18,16 +18,28 @@
   --color-jkb-gold-hover: #F0CB8E;
 
   /* V10 Art-Directed Fight Night × Jogja Culture Tokens */
-  --color-v10-black: #0B0B0B;
-  --color-v10-charcoal: #141416;
-  --color-v10-surface: #18181B;
-  --color-v10-ivory: #F4F0E8;
+  --color-v10-black: #000000;
+  --color-v10-charcoal: #161617;
+  --color-v10-surface: #1D1D1F;
+  --color-v10-ivory: #F5F5F7;
   --color-v10-ivory-surface: #EDE8DE;
   --color-v10-red: #D91F2C;
   --color-v10-red-glow: #FF2A3B;
-  --color-v10-stone: #77716D;
-  --color-v10-border: rgba(255, 255, 255, 0.12);
-  --color-v10-border-dark: rgba(11, 11, 11, 0.12);
+  --color-v10-stone: #86868B;
+  --color-v10-border: rgba(255, 255, 255, 0.08);
+  --color-v10-border-dark: rgba(0, 0, 0, 0.12);
+
+  /* Apple UI Design System Tokens */
+  --color-apple-bg: #000000;
+  --color-apple-card: #161617;
+  --color-apple-card-hover: #1C1C1E;
+  --color-apple-elevated: #242426;
+  --color-apple-border: rgba(255, 255, 255, 0.08);
+  --color-apple-border-strong: rgba(255, 255, 255, 0.16);
+  --color-apple-text-primary: #F5F5F7;
+  --color-apple-text-secondary: #86868B;
+  --color-apple-text-tertiary: #6E6E73;
+  --color-apple-accent: #D91F2C;
 
   --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-bebas-neue), sans-serif;
@@ -35,8 +47,8 @@
 }
 
 :root {
-  --background: #0B0B0B;
-  --foreground: #F4F0E8;
+  --background: #000000;
+  --foreground: #F5F5F7;
 }
 
 * { box-sizing: border-box; }
@@ -185,13 +197,27 @@ body {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Marquee animation */
+/* Marquee animation — Ultra-Smooth & Refined Luxury Athletic Drift */
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 .animate-marquee {
-  animation: marquee 32s linear infinite;
+  animation: marquee 8s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+.animate-marquee-fast {
+  animation: marquee 16s linear infinite;
+}
+.text-stroke-white {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.7);
+  color: transparent;
+}
+.text-stroke-dark {
+  -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.6);
+  color: transparent;
 }
 
 /* Custom scrollbar */
