@@ -13,13 +13,13 @@ export default function KontakPage() {
     <main className="flex-1 flex flex-col w-full min-h-screen bg-black text-[#F5F5F7] pt-24 sm:pt-28 lg:pt-36 pb-24 sm:pb-32 font-sans">
 
       {/* ═════════════════════════════════════════════════════════════════════
-          1. APPLE KEYNOTE HERO HEADER
+          1. COMBAT SPORT HERO HEADER
       ═════════════════════════════════════════════ */}
       <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 pt-4 pb-8 sm:pb-10 w-full border-b border-white/[0.08]">
-        <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-md mb-4 sm:mb-6">
-          <span className="w-2 h-2 rounded-full bg-[#D91F2C]" />
+        <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-xs bg-black/80 border border-white/15 mb-4 sm:mb-6">
+          <span className="w-2 h-2 rounded-xs bg-[#D91F2C]" />
           <p className="text-[#D91F2C] text-[11px] sm:text-xs font-technical uppercase tracking-[0.25em] font-bold">
-            HUBUNGI KAMI • SEKRETARIAT RESMI
+            HUBUNGI KAMI // SEKRETARIAT RESMI
           </p>
         </div>
 
@@ -44,7 +44,7 @@ export default function KontakPage() {
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════
-          2. ULTRA-COMPACT DIRECT WHATSAPP HOTLINES (APPLE BENTO LIST)
+          2. DIRECT WHATSAPP HOTLINES (TACTICAL DOSSIER LIST)
           Super slim rows, zero endless scrolling. All 3 fit on 1 mobile screen!
       ═════════════════════════════════════════════ */}
       <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 py-8 sm:py-12 w-full flex-1">
@@ -58,21 +58,21 @@ export default function KontakPage() {
           </h2>
         </div>
 
-        {/* 3 Ultra-Compact Coordinator Apple Bento Rows */}
-        <div className="space-y-2.5 sm:space-y-3.5 max-w-4xl">
+        {/* 3 Ultra-Compact Coordinator Athletic Combat Rows */}
+        <div className="space-y-2.5 sm:space-y-3 max-w-4xl">
 
           {/* Coordinator 1: Fighter Registration */}
-          <div className="p-3.5 sm:p-5 bg-gradient-to-r from-[#1C1C1E] via-[#161617] to-[#121214] border border-white/[0.08] hover:border-[#D91F2C]/40 rounded-2xl sm:rounded-3xl transition-all duration-300 shadow-xl flex items-center justify-between gap-3">
+          <div className="p-3.5 sm:p-4 bg-[#111114] border border-white/10 hover:border-[#D91F2C] rounded-sm transition-all duration-300 shadow-xl flex items-center justify-between gap-3">
             <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#D91F2C]/10 border border-[#D91F2C]/30 flex items-center justify-center text-[#D91F2C] font-display text-sm sm:text-lg font-black shrink-0">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xs bg-[#D91F2C]/10 border border-[#D91F2C]/30 flex items-center justify-center text-[#D91F2C] font-display text-sm sm:text-lg font-black shrink-0">
                 PP
               </div>
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <h3 className="font-display text-base sm:text-2xl uppercase tracking-wide text-white truncate">
+                  <h3 className="font-display text-base sm:text-xl uppercase tracking-wide text-white truncate">
                     PRIYA PRATAMA
                   </h3>
-                  <span className="hidden sm:inline-flex px-2.5 py-0.5 rounded-full bg-[#D91F2C]/10 border border-[#D91F2C]/25 text-[#D91F2C] text-[10px] font-technical uppercase font-bold tracking-wider">
+                  <span className="hidden sm:inline-flex px-2 py-0.5 rounded-xs bg-[#D91F2C]/10 border border-[#D91F2C]/30 text-[#D91F2C] text-[10px] font-technical uppercase font-bold tracking-wider">
                     ADMIN REGISTRASI
                   </span>
                 </div>
@@ -86,7 +86,7 @@ export default function KontakPage() {
               href={jkbfLinks.fighterSupportWhatsApp}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[#D91F2C] to-[#EF3340] hover:scale-105 active:scale-95 text-white font-display text-[11px] sm:text-xs tracking-wider uppercase transition-all shadow-md shadow-red-950/40 inline-flex items-center justify-center gap-1.5 rounded-full shrink-0"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-[11px] sm:text-xs tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(217,31,44,0.35)] inline-flex items-center justify-center gap-1.5 rounded-xs shrink-0"
               aria-label="Chat WhatsApp Priya Pratama"
             >
               <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -97,17 +97,17 @@ export default function KontakPage() {
           </div>
 
           {/* Coordinator 2: Partnership & Sponsorship */}
-          <div className="p-3.5 sm:p-5 bg-gradient-to-r from-[#1C1C1E] via-[#161617] to-[#121214] border border-white/[0.08] hover:border-[#D91F2C]/40 rounded-2xl sm:rounded-3xl transition-all duration-300 shadow-xl flex items-center justify-between gap-3">
+          <div className="p-3.5 sm:p-4 bg-[#111114] border border-white/10 hover:border-[#D91F2C] rounded-sm transition-all duration-300 shadow-xl flex items-center justify-between gap-3">
             <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white font-display text-sm sm:text-lg font-black shrink-0">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xs bg-white/5 border border-white/10 flex items-center justify-center text-white font-display text-sm sm:text-lg font-black shrink-0">
                 AR
               </div>
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <h3 className="font-display text-base sm:text-2xl uppercase tracking-wide text-white truncate">
+                  <h3 className="font-display text-base sm:text-xl uppercase tracking-wide text-white truncate">
                     ARDI
                   </h3>
-                  <span className="hidden sm:inline-flex px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/10 text-[#F5F5F7] text-[10px] font-technical uppercase font-bold tracking-wider">
+                  <span className="hidden sm:inline-flex px-2 py-0.5 rounded-xs bg-white/[0.06] border border-white/10 text-[#F5F5F7] text-[10px] font-technical uppercase font-bold tracking-wider">
                     SPONSORSHIP
                   </span>
                 </div>
@@ -121,7 +121,7 @@ export default function KontakPage() {
               href={jkbfLinks.partnershipWhatsApp}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[#D91F2C] to-[#EF3340] hover:scale-105 active:scale-95 text-white font-display text-[11px] sm:text-xs tracking-wider uppercase transition-all shadow-md shadow-red-950/40 inline-flex items-center justify-center gap-1.5 rounded-full shrink-0"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-[11px] sm:text-xs tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(217,31,44,0.35)] inline-flex items-center justify-center gap-1.5 rounded-xs shrink-0"
               aria-label="Chat WhatsApp Ardi"
             >
               <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -132,17 +132,17 @@ export default function KontakPage() {
           </div>
 
           {/* Coordinator 3: Technical General (VALE - NOW WHATSAPP) */}
-          <div className="p-3.5 sm:p-5 bg-gradient-to-r from-[#1C1C1E] via-[#161617] to-[#121214] border border-white/[0.08] hover:border-[#D91F2C]/40 rounded-2xl sm:rounded-3xl transition-all duration-300 shadow-xl flex items-center justify-between gap-3">
+          <div className="p-3.5 sm:p-4 bg-[#111114] border border-white/10 hover:border-[#D91F2C] rounded-sm transition-all duration-300 shadow-xl flex items-center justify-between gap-3">
             <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white font-display text-sm sm:text-lg font-black shrink-0">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xs bg-white/5 border border-white/10 flex items-center justify-center text-white font-display text-sm sm:text-lg font-black shrink-0">
                 VL
               </div>
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <h3 className="font-display text-base sm:text-2xl uppercase tracking-wide text-white truncate">
+                  <h3 className="font-display text-base sm:text-xl uppercase tracking-wide text-white truncate">
                     VALE
                   </h3>
-                  <span className="hidden sm:inline-flex px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/10 text-[#F5F5F7] text-[10px] font-technical uppercase font-bold tracking-wider">
+                  <span className="hidden sm:inline-flex px-2 py-0.5 rounded-xs bg-white/[0.06] border border-white/10 text-[#F5F5F7] text-[10px] font-technical uppercase font-bold tracking-wider">
                     KOORDINATOR TEKNIS
                   </span>
                 </div>
@@ -156,7 +156,7 @@ export default function KontakPage() {
               href="https://wa.me/6285336586597?text=Halo%20Vale%20(Koordinator%20Teknis%20JKBF%202026)%2C%20saya%20ingin%20bertanya%20seputar%20teknis%20pertandingan."
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[#D91F2C] to-[#EF3340] hover:scale-105 active:scale-95 text-white font-display text-[11px] sm:text-xs tracking-wider uppercase transition-all shadow-md shadow-red-950/40 inline-flex items-center justify-center gap-1.5 rounded-full shrink-0"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-[11px] sm:text-xs tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(217,31,44,0.35)] inline-flex items-center justify-center gap-1.5 rounded-xs shrink-0"
               aria-label="Chat WhatsApp Vale"
             >
               <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -170,14 +170,14 @@ export default function KontakPage() {
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════
-          3. SECONDARY UTILITY STRIP (APPLE BENTO TILES)
+          3. SECONDARY UTILITY STRIP (TACTICAL COMBAT TILES)
       ═════════════════════════════════════════════ */}
       <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 max-w-4xl">
 
           {/* Tile 1: Response Time & Office Hours */}
-          <div className="p-4 sm:p-5 bg-[#161617] border border-white/[0.08] rounded-2xl sm:rounded-3xl flex items-start gap-3">
-            <div className="p-2 sm:p-2.5 bg-[#D91F2C]/10 border border-[#D91F2C]/25 text-[#D91F2C] rounded-xl shrink-0">
+          <div className="p-4 sm:p-5 bg-[#111114] border border-white/10 rounded-sm flex items-start gap-3">
+            <div className="p-2 sm:p-2.5 bg-[#D91F2C]/10 border border-[#D91F2C]/25 text-[#D91F2C] rounded-xs shrink-0">
               <Clock className="w-4 h-4" />
             </div>
             <div>
@@ -194,8 +194,8 @@ export default function KontakPage() {
           </div>
 
           {/* Tile 2: Instant FAQ */}
-          <div className="p-4 sm:p-5 bg-[#161617] border border-white/[0.08] rounded-2xl sm:rounded-3xl flex items-start gap-3">
-            <div className="p-2 sm:p-2.5 bg-white/5 border border-white/10 text-white rounded-xl shrink-0">
+          <div className="p-4 sm:p-5 bg-[#111114] border border-white/10 rounded-sm flex items-start gap-3">
+            <div className="p-2 sm:p-2.5 bg-white/5 border border-white/10 text-white rounded-xs shrink-0">
               <HelpCircle className="w-4 h-4 text-[#D91F2C]" />
             </div>
             <div>
@@ -216,8 +216,8 @@ export default function KontakPage() {
           </div>
 
           {/* Tile 3: Official Verification */}
-          <div className="p-4 sm:p-5 bg-[#161617] border border-white/[0.08] rounded-2xl sm:rounded-3xl flex items-start gap-3">
-            <div className="p-2 sm:p-2.5 bg-[#D91F2C]/10 border border-[#D91F2C]/25 text-[#D91F2C] rounded-xl shrink-0">
+          <div className="p-4 sm:p-5 bg-[#111114] border border-white/10 rounded-sm flex items-start gap-3">
+            <div className="p-2 sm:p-2.5 bg-[#D91F2C]/10 border border-[#D91F2C]/25 text-[#D91F2C] rounded-xs shrink-0">
               <ShieldCheck className="w-4 h-4" />
             </div>
             <div>

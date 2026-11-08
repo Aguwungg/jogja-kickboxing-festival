@@ -53,15 +53,15 @@ export default function HomeClient() {
         {/* Monumental Center Hero — Pure Cinematic Focus */}
         <div className="relative z-10 max-w-[1400px] mx-auto w-full my-auto py-6 sm:py-10 text-center flex flex-col items-center justify-center">
 
-          {/* Slogan Pill — Single Unified Apple Floating Frosted Capsule */}
+          {/* Slogan Pill — Combat Tactical Badge */}
           <div className="mb-4 sm:mb-6">
-            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/[0.08] hover:bg-white/[0.12] border border-white/15 backdrop-blur-xl shadow-2xl transition-all select-none">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-xs bg-black/80 hover:bg-black border border-white/15 backdrop-blur-xl shadow-2xl transition-all select-none">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D91F2C] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D91F2C]"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-xs bg-[#D91F2C] opacity-75"></span>
+                <span className="relative inline-flex rounded-xs h-2 w-2 bg-[#D91F2C]"></span>
               </span>
-              <span className="font-technical text-xs uppercase tracking-[0.22em] text-[#F5F5F7] font-semibold">
-                PENGPROV KBI DIY • STANDAR RESMI WAKO
+              <span className="font-technical text-xs uppercase tracking-[0.25em] text-[#F5F5F7] font-semibold">
+                PENGPROV KBI DIY // STANDAR RESMI WAKO
               </span>
             </div>
           </div>
@@ -105,13 +105,13 @@ export default function HomeClient() {
             />
           </div>
 
-          {/* Dual Action Pairing — High Voltage Apple Pill Design */}
+          {/* Dual Action Pairing — High-Octane Athletic Combat Buttons */}
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-sm sm:max-w-none mx-auto">
             <a
               href={jkbfLinks.fighterRegistration}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto text-center px-9 sm:px-11 py-3.5 sm:py-4 bg-gradient-to-r from-[#D91F2C] via-[#EF3340] to-[#D91F2C] hover:scale-105 active:scale-95 text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all shadow-[0_12px_40px_rgba(217,31,44,0.5)] inline-flex items-center justify-center gap-2 rounded-full border-t border-white/25"
+              className="w-full sm:w-auto text-center px-9 sm:px-11 py-3.5 sm:py-4 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all shadow-[0_0_30px_rgba(217,31,44,0.45)] inline-flex items-center justify-center gap-2 rounded-sm border border-[#D91F2C]"
               aria-label="Daftar Fighter Sekarang (Buka Google Form)"
             >
               <span>DAFTAR SEKARANG</span>
@@ -120,24 +120,24 @@ export default function HomeClient() {
 
             <a
               href="#gateways"
-              className="w-full sm:w-auto text-center px-9 sm:px-11 py-3.5 sm:py-4 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 text-[#F5F5F7] hover:text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all backdrop-blur-xl rounded-full hover:scale-105 active:scale-95 shadow-xl"
+              className="w-full sm:w-auto text-center px-9 sm:px-11 py-3.5 sm:py-4 bg-[#111114] hover:bg-[#16161A] border border-white/20 hover:border-white/40 text-[#F5F5F7] hover:text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all rounded-sm active:scale-95 shadow-xl"
             >
               <span>EXPLORE JKBF</span>
             </a>
           </div>
 
-          {/* 3-Pillar Authority Stat Bar — Apple Spec Highlights */}
+          {/* 3-Pillar Authority Stat Bar — Combat Spec Highlights */}
           <div className="mt-6 sm:mt-8 pt-2 sm:pt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[10px] sm:text-xs font-technical uppercase">
-            <div className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-md">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C]" />
+            <div className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1 rounded-xs bg-black/60 border border-white/10">
+              <span className="w-1.5 h-1.5 rounded-xs bg-[#D91F2C]" />
               <span className="text-[#C4C4CC] font-medium">7 Program Kejuaraan</span>
             </div>
-            <div className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-md">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C]" />
+            <div className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1 rounded-xs bg-black/60 border border-white/10">
+              <span className="w-1.5 h-1.5 rounded-xs bg-[#D91F2C]" />
               <span className="text-[#C4C4CC] font-medium">Standar WAKO Indonesia</span>
             </div>
-            <div className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-md">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C]" />
+            <div className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1 rounded-xs bg-black/60 border border-white/10">
+              <span className="w-1.5 h-1.5 rounded-xs bg-[#D91F2C]" />
               <span className="text-[#C4C4CC] font-medium">Reg. s/d 30 November</span>
             </div>
           </div>
@@ -198,13 +198,13 @@ export default function HomeClient() {
           </p>
         </div>
 
-        {/* The Two Giant Visual Gateways Grid — Apple Bento Style */}
+        {/* The Two Giant Visual Gateways Grid — Fight Card Roster Style */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           
           {/* GATEWAY 01: THE FIGHTS & CHAMPIONSHIP */}
           <Link
             href="/championship"
-            className="group relative h-[520px] sm:h-[580px] lg:h-[640px] overflow-hidden border border-white/[0.08] bg-[#161617] flex flex-col justify-between p-8 sm:p-12 transition-all duration-500 hover:border-[#D91F2C]/50 hover:shadow-[0_20px_60px_rgba(217,31,44,0.12)] rounded-3xl lg:rounded-[36px]"
+            className="group relative h-[520px] sm:h-[580px] lg:h-[640px] overflow-hidden border border-white/10 bg-[#111114] flex flex-col justify-between p-8 sm:p-12 transition-all duration-500 hover:border-[#D91F2C] hover:shadow-[0_0_50px_rgba(217,31,44,0.2)] rounded-sm"
           >
             {/* Photographic Background with Hover Scale & Color Reveal */}
             <div className="absolute inset-0 z-0 overflow-hidden">
@@ -219,12 +219,12 @@ export default function HomeClient() {
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/65 to-transparent" />
             </div>
 
-            {/* Top Index Badge — Apple Pill */}
+            {/* Top Index Badge — Tactical Ticket Stub */}
             <div className="relative z-10 flex items-center justify-between">
-              <span className="font-technical text-xs uppercase tracking-[0.2em] text-[#D91F2C] font-bold bg-black/70 px-4 py-1.5 border border-white/10 backdrop-blur-md rounded-full">
-                01 / KEJUARAAN RESMI WAKO
+              <span className="font-technical text-xs uppercase tracking-[0.2em] text-[#D91F2C] font-bold bg-black/85 px-3.5 py-1.5 border border-white/15 backdrop-blur-md rounded-xs">
+                01 // KEJUARAAN RESMI WAKO
               </span>
-              <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:bg-[#D91F2C]">
+              <div className="w-11 h-11 rounded-sm bg-white/10 border border-white/15 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:bg-[#D91F2C] group-hover:border-[#D91F2C]">
                 <ArrowUpRight className="w-5 h-5" />
               </div>
             </div>
@@ -243,15 +243,15 @@ export default function HomeClient() {
               {/* Factual Bullet Points — Single line scan */}
               <ul className="space-y-2 text-xs sm:text-sm text-[#86868B] font-sans pt-3 border-t border-white/10">
                 <li className="flex items-center gap-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C] shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-xs bg-[#D91F2C] shrink-0" />
                   <span className="text-[#C4C4CC]">Kejurda Kickboxing DIY 2026 (Seleksi Atlet Resmi Daerah &amp; Kontingen)</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C] shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-xs bg-[#D91F2C] shrink-0" />
                   <span className="text-[#C4C4CC]">Redy Open Championship II (Turnamen Terbuka Camp &amp; Sasana Nasional)</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C] shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-xs bg-[#D91F2C] shrink-0" />
                   <span className="text-[#C4C4CC]">Super Fights &amp; Kelas Bintang (Partai Puncak Format K-1 Rules)</span>
                 </li>
               </ul>
@@ -268,7 +268,7 @@ export default function HomeClient() {
           {/* GATEWAY 02: THE MOVEMENT (UNIVERSITY OPEN, SMA OPEN & CONTENT CHALLENGE) */}
           <Link
             href="/#registration"
-            className="group relative h-[520px] sm:h-[580px] lg:h-[640px] overflow-hidden border border-white/[0.08] bg-[#161617] flex flex-col justify-between p-8 sm:p-12 transition-all duration-500 hover:border-[#D91F2C]/50 hover:shadow-[0_20px_60px_rgba(217,31,44,0.12)] rounded-3xl lg:rounded-[36px]"
+            className="group relative h-[520px] sm:h-[580px] lg:h-[640px] overflow-hidden border border-white/10 bg-[#111114] flex flex-col justify-between p-8 sm:p-12 transition-all duration-500 hover:border-[#D91F2C] hover:shadow-[0_0_50px_rgba(217,31,44,0.2)] rounded-sm"
           >
             {/* Photographic Background with Hover Scale & Color Reveal */}
             <div className="absolute inset-0 z-0 overflow-hidden">
@@ -283,12 +283,12 @@ export default function HomeClient() {
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/65 to-transparent" />
             </div>
 
-            {/* Top Index Badge — Apple Pill */}
+            {/* Top Index Badge — Tactical Ticket Stub */}
             <div className="relative z-10 flex items-center justify-between">
-              <span className="font-technical text-xs uppercase tracking-[0.2em] text-[#D91F2C] font-bold bg-black/70 px-4 py-1.5 border border-white/10 backdrop-blur-md rounded-full">
-                02 / GENERASI &amp; KREATIF
+              <span className="font-technical text-xs uppercase tracking-[0.2em] text-[#D91F2C] font-bold bg-black/85 px-3.5 py-1.5 border border-white/15 backdrop-blur-md rounded-xs">
+                02 // GENERASI &amp; KREATIF
               </span>
-              <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:bg-[#D91F2C]">
+              <div className="w-11 h-11 rounded-sm bg-white/10 border border-white/15 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:bg-[#D91F2C] group-hover:border-[#D91F2C]">
                 <ArrowUpRight className="w-5 h-5" />
               </div>
             </div>
@@ -307,15 +307,15 @@ export default function HomeClient() {
               {/* Factual Bullet Points — Single line scan */}
               <ul className="space-y-2 text-xs sm:text-sm text-[#86868B] font-sans pt-3 border-t border-white/10">
                 <li className="flex items-center gap-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C] shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-xs bg-[#D91F2C] shrink-0" />
                   <span className="text-[#C4C4CC]">University Open (Adu Nyali Mahasiswa Antar-Kampus se-Indonesia)</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C] shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-xs bg-[#D91F2C] shrink-0" />
                   <span className="text-[#C4C4CC]">SMA Open (Panggung Prestasi &amp; Jam Terbang Atlet Pelajar Berbakat)</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C] shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-xs bg-[#D91F2C] shrink-0" />
                   <span className="text-[#C4C4CC]">Content Challenge (Kompetisi Video Kreatif &amp; Liputan Berhadiah)</span>
                 </li>
               </ul>
@@ -341,7 +341,7 @@ export default function HomeClient() {
         className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 max-w-[1440px] mx-auto scroll-mt-20"
         aria-labelledby="section-registration"
       >
-        <div className="relative border border-white/10 bg-gradient-to-b from-[#1C1C1E] via-[#161617] to-[#101012] p-8 sm:p-12 lg:p-16 overflow-hidden rounded-3xl lg:rounded-[36px] shadow-2xl">
+        <div className="relative border border-white/10 bg-gradient-to-b from-[#18181B] via-[#111114] to-[#0A0A0C] p-8 sm:p-12 lg:p-16 overflow-hidden rounded-sm shadow-2xl">
           
           {/* Subtle Background Texture */}
           <div className="absolute inset-0 z-0 pointer-events-none opacity-20 overflow-hidden">
@@ -352,14 +352,14 @@ export default function HomeClient() {
               className="object-cover object-right filter grayscale contrast-125"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#161617] via-[#161617]/90 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#111114] via-[#111114]/90 to-transparent" />
           </div>
 
           <div className="relative z-10 max-w-2xl space-y-6">
             
-            {/* Extended Badge — Apple Pill */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#D91F2C] text-white rounded-full">
-              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+            {/* Extended Badge — Combat Pass */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-[#D91F2C] text-white rounded-xs">
+              <span className="w-2 h-2 rounded-xs bg-white animate-pulse" />
               <span className="font-technical text-xs font-bold uppercase tracking-[0.2em]">
                 {registrationConfig.statusLabel}
               </span>
@@ -381,13 +381,13 @@ export default function HomeClient() {
               Kesempatan masih terbuka untuk mengikuti seluruh rangkaian kejuaraan JKBF 2026. Daftarkan dirimu dan timmu melalui formulir resmi yang telah disediakan.
             </p>
 
-            {/* Direct External Action Buttons — Apple Pill Dual Pairing */}
+            {/* Direct External Action Buttons — Combat Pairing */}
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <a
                 href={jkbfLinks.fighterRegistration}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 sm:px-10 py-4 bg-[#D91F2C] hover:bg-[#B81521] active:scale-[0.98] text-white font-display text-base sm:text-lg tracking-wider uppercase text-center transition-all inline-flex items-center justify-center gap-2 shadow-xl shadow-red-950/50 rounded-full"
+                className="px-8 sm:px-10 py-4 bg-[#D91F2C] hover:bg-[#B81521] active:scale-[0.98] text-white font-display text-base sm:text-lg tracking-wider uppercase text-center transition-all inline-flex items-center justify-center gap-2 shadow-xl shadow-red-950/50 rounded-sm"
                 aria-label="Daftar Fighter Sekarang (Buka Google Form)"
               >
                 <span>DAFTAR SEKARANG</span>
@@ -398,7 +398,7 @@ export default function HomeClient() {
                 href={jkbfLinks.fighterSupportWhatsApp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-7 py-4 bg-white/10 hover:bg-white/15 border border-white/15 text-[#F5F5F7] hover:text-white font-display text-base tracking-wider uppercase text-center transition-all inline-flex items-center justify-center gap-2 rounded-full backdrop-blur-md"
+                className="px-7 py-4 bg-white/10 hover:bg-white/15 border border-white/15 text-[#F5F5F7] hover:text-white font-display text-base tracking-wider uppercase text-center transition-all inline-flex items-center justify-center gap-2 rounded-sm"
                 aria-label="Hubungi Admin Fighter Priya Pratama via WhatsApp"
               >
                 <MessageCircle className="w-4 h-4 text-[#D91F2C]" />
@@ -407,7 +407,7 @@ export default function HomeClient() {
             </div>
 
             <div className="pt-3 border-t border-white/10 flex items-center gap-2 text-xs font-technical text-[#86868B]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C]" />
+              <span className="w-1.5 h-1.5 rounded-xs bg-[#D91F2C]" />
               <span>Narahubung Resmi Registrasi: <strong className="text-white">{registrationConfig.adminName}</strong></span>
             </div>
 
@@ -416,16 +416,16 @@ export default function HomeClient() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          SECTION 04: FAST UTILITY STRIP (APPLE BENTO TILES)
+          SECTION 04: FAST UTILITY STRIP (COMBAT SPORT TILES)
           3 Clean, High-contrast cards for secondary actions — zero drag!
          ═══════════════════════════════════════════════════════════════════════ */}
       <section className="py-16 sm:py-20 px-4 sm:px-8 lg:px-12 max-w-[1440px] mx-auto border-t border-white/[0.08]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           
-          {/* Card 1: Content Challenge — Apple Bento Tile */}
-          <div className="p-8 bg-[#161617] border border-white/[0.08] hover:border-white/20 transition-all flex flex-col justify-between rounded-3xl shadow-xl">
+          {/* Card 1: Content Challenge — Combat Tile */}
+          <div className="p-8 bg-[#111114] border border-white/10 hover:border-white/25 transition-all flex flex-col justify-between rounded-sm shadow-xl">
             <div className="space-y-4">
-              <div className="p-3 bg-[#D91F2C]/10 border border-[#D91F2C]/30 text-[#D91F2C] w-fit rounded-2xl">
+              <div className="p-3 bg-[#D91F2C]/10 border border-[#D91F2C]/30 text-[#D91F2C] w-fit rounded-xs">
                 <Video className="w-5 h-5" />
               </div>
               <h3 className="font-display text-2xl uppercase tracking-wider text-white">
@@ -448,10 +448,10 @@ export default function HomeClient() {
             </div>
           </div>
 
-          {/* Card 2: Partnership & Sponsorship — Apple Bento Tile */}
-          <div className="p-8 bg-[#161617] border border-white/[0.08] hover:border-white/20 transition-all flex flex-col justify-between rounded-3xl shadow-xl">
+          {/* Card 2: Partnership & Sponsorship — Combat Tile */}
+          <div className="p-8 bg-[#111114] border border-white/10 hover:border-white/25 transition-all flex flex-col justify-between rounded-sm shadow-xl">
             <div className="space-y-4">
-              <div className="p-3 bg-[#D91F2C]/10 border border-[#D91F2C]/30 text-[#D91F2C] w-fit rounded-2xl">
+              <div className="p-3 bg-[#D91F2C]/10 border border-[#D91F2C]/30 text-[#D91F2C] w-fit rounded-xs">
                 <Handshake className="w-5 h-5" />
               </div>
               <h3 className="font-display text-2xl uppercase tracking-wider text-white">
@@ -474,10 +474,10 @@ export default function HomeClient() {
             </div>
           </div>
 
-          {/* Card 3: Need to Know / FAQ — Apple Bento Tile */}
-          <div className="p-8 bg-[#161617] border border-white/[0.08] hover:border-white/20 transition-all flex flex-col justify-between rounded-3xl shadow-xl">
+          {/* Card 3: Need to Know / FAQ — Combat Tile */}
+          <div className="p-8 bg-[#111114] border border-white/10 hover:border-white/25 transition-all flex flex-col justify-between rounded-sm shadow-xl">
             <div className="space-y-4">
-              <div className="p-3 bg-white/5 border border-white/10 text-[#F5F5F7] w-fit rounded-2xl">
+              <div className="p-3 bg-white/5 border border-white/10 text-[#F5F5F7] w-fit rounded-xs">
                 <HelpCircle className="w-5 h-5 text-[#D91F2C]" />
               </div>
               <h3 className="font-display text-2xl uppercase tracking-wider text-white">

@@ -59,7 +59,7 @@ export default function TentangPage() {
             <a
               key={item.href}
               href={item.href}
-              className="px-3.5 py-1.5 rounded-full bg-[#141416] hover:bg-[#D91F2C] text-[#8F8E8B] hover:text-white border border-white/10 transition-colors whitespace-nowrap"
+              className="px-3.5 py-1.5 rounded-xs bg-[#111114] hover:bg-[#D91F2C] text-[#8F8E8B] hover:text-white border border-white/10 transition-colors whitespace-nowrap font-technical text-xs"
             >
               {item.label}
             </a>
@@ -70,12 +70,12 @@ export default function TentangPage() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 py-12 space-y-16">
 
         {/* ═══════════════════════════════════════════════════════════════════
-            SECTION 1: PROFIL & PENYELENGGARA — APPLE BENTO STYLE
+            SECTION 1: PROFIL & PENYELENGGARA — COMBAT SPORT DOSSIER
            ═══════════════════════════════════════════════════════════════════ */}
         <section id="profil" className="space-y-6 pt-4 scroll-mt-28">
           <div className="space-y-1">
             <span className="font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
-              01 / LATAR BELAKANG &amp; LEGALITAS
+              01 // LATAR BELAKANG &amp; LEGALITAS
             </span>
             <h2 className="font-display text-3xl sm:text-4xl uppercase tracking-wider text-white">
               PROFIL PENYELENGGARA &amp; TUJUAN
@@ -83,7 +83,7 @@ export default function TentangPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-sm text-[#86868B] font-sans leading-relaxed">
-            <div className="lg:col-span-8 p-8 sm:p-10 bg-[#161617] border border-white/[0.08] rounded-3xl shadow-xl space-y-5">
+            <div className="lg:col-span-8 p-8 sm:p-10 bg-[#111114] border border-white/10 rounded-sm shadow-xl space-y-5">
               <p>
                 <strong className="text-white">Jogja Kickboxing Festival (JKBF) 2026</strong> adalah kejuaraan olahraga beladiri kickboxing resmi yang diselenggarakan oleh{" "}
                 <strong className="text-white">Pengurus Provinsi Kickboxing Indonesia Daerah Istimewa Yogyakarta (Pengprov KBI DIY)</strong> bekerja sama dengan{" "}
@@ -93,7 +93,7 @@ export default function TentangPage() {
                 Event ini dirancang sebagai wadah pembinaan prestasi olahraga kickboxing berjenjang, seleksi atlet daerah menuju ajang nasional (Kejurda DIY 2026), kejuaraan antarklub/camp terbuka (Redy Open Championship II), serta laga pamer kemahiran atlet dan petarung undangan (Kelas Bintang &amp; Mega Bintang). Seluruh pertandingan dijalankan di bawah standar aturan resmi{" "}
                 <strong className="text-white">WAKO (World Association of Kickboxing Organizations)</strong>.
               </p>
-              <div className="p-5 bg-black/40 border border-white/[0.06] rounded-2xl space-y-2 text-xs">
+              <div className="p-5 bg-black/60 border border-white/10 rounded-xs space-y-2 text-xs">
                 <span className="font-technical text-[#F5F5F7] font-bold uppercase block tracking-wider">
                   DEWAN PENGURUS &amp; PANITIA RESMI
                 </span>
@@ -103,10 +103,10 @@ export default function TentangPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-4 p-8 bg-[#161617] border border-white/[0.08] rounded-3xl shadow-xl space-y-4 flex flex-col justify-between">
+            <div className="lg:col-span-4 p-8 bg-[#111114] border border-white/10 rounded-sm shadow-xl space-y-4 flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="flex items-center gap-2.5 text-[#D91F2C]">
-                  <div className="p-2.5 bg-[#D91F2C]/10 border border-[#D91F2C]/20 rounded-xl">
+                  <div className="p-2.5 bg-[#D91F2C]/10 border border-[#D91F2C]/30 rounded-xs">
                     <ShieldCheck className="w-5 h-5" />
                   </div>
                   <h3 className="font-display text-lg uppercase tracking-wider text-white">
@@ -139,12 +139,12 @@ export default function TentangPage() {
         </section>
 
         {/* ═══════════════════════════════════════════════════════════════════
-            SECTION 2: PROGRAM KEJUARAAN — APPLE BENTO GRID
+            SECTION 2: PROGRAM KEJUARAAN — COMBAT SPORT GRID
            ═══════════════════════════════════════════════════════════════════ */}
         <section id="kompetisi" className="space-y-6 pt-8 border-t border-white/[0.08] scroll-mt-28">
           <div className="space-y-1">
             <span className="font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
-              02 / SISTEM KEJUARAAN
+              02 // SISTEM KEJUARAAN
             </span>
             <h2 className="font-display text-3xl sm:text-4xl uppercase tracking-wider text-white">
               TUJUH PROGRAM KEJUARAAN
@@ -153,9 +153,9 @@ export default function TentangPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {EVENT_CONFIG.championshipPrograms.map((prog, i) => (
-              <div key={prog.id} className="p-8 bg-[#161617] border border-white/[0.08] hover:border-white/20 rounded-3xl shadow-xl transition-all space-y-4 flex flex-col justify-between">
+              <div key={prog.id} className="p-8 bg-[#111114] border border-white/10 hover:border-white/25 rounded-sm shadow-xl transition-all space-y-4 flex flex-col justify-between">
                 <div className="space-y-3">
-                  <span className="font-technical text-[10px] font-bold text-[#D91F2C] uppercase tracking-widest bg-black/40 px-3 py-1 rounded-full border border-white/10 inline-block">
+                  <span className="font-technical text-[10px] font-bold text-[#D91F2C] uppercase tracking-widest bg-black/60 px-3 py-1 rounded-xs border border-white/10 inline-block">
                     PROGRAM 0{i + 1}
                   </span>
                   <h3 className="font-display text-2xl uppercase tracking-wide text-white">
@@ -186,8 +186,8 @@ export default function TentangPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {EVENT_CONFIG.disciplines.map((d) => (
-              <div key={d.id} className="p-8 bg-[#161617] border border-white/[0.08] hover:border-white/20 rounded-3xl shadow-xl transition-all space-y-3">
-                <span className="font-technical text-[10px] font-bold text-[#D91F2C] uppercase tracking-widest bg-black/40 px-3 py-1 rounded-full border border-white/10 inline-block">
+              <div key={d.id} className="p-8 bg-[#111114] border border-white/10 hover:border-white/25 rounded-sm shadow-xl transition-all space-y-3">
+                <span className="font-technical text-[10px] font-bold text-[#D91F2C] uppercase tracking-widest bg-black/60 px-3 py-1 rounded-xs border border-white/10 inline-block">
                   {d.category}
                 </span>
                 <h3 className="font-display text-2xl uppercase tracking-wide text-white">
@@ -200,12 +200,12 @@ export default function TentangPage() {
         </section>
 
         {/* ═══════════════════════════════════════════════════════════════════
-            SECTION 4: REGULASI WAKO — APPLE BENTO GRID
+            SECTION 4: REGULASI WAKO — COMBAT SPORT SPEC
            ═══════════════════════════════════════════════════════════════════ */}
         <section id="regulasi" className="space-y-6 pt-8 border-t border-white/[0.08] scroll-mt-28">
           <div className="space-y-1">
             <span className="font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
-              04 / ATURAN RESMI
+              04 // ATURAN RESMI
             </span>
             <h2 className="font-display text-3xl sm:text-4xl uppercase tracking-wider text-white">
               REGULASI &amp; KELAS USIA
@@ -213,7 +213,7 @@ export default function TentangPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs font-sans text-[#86868B] leading-relaxed">
-            <div className="p-8 bg-[#161617] border border-white/[0.08] rounded-3xl shadow-xl space-y-4">
+            <div className="p-8 bg-[#111114] border border-white/10 rounded-sm shadow-xl space-y-4">
               <span className="font-technical text-xs font-bold text-[#D91F2C] uppercase block tracking-wider">
                 DISIPLIN TATAMI (KONTROL TEKNIK)
               </span>
@@ -232,7 +232,7 @@ export default function TentangPage() {
               </div>
             </div>
 
-            <div className="p-8 bg-[#161617] border border-white/[0.08] rounded-3xl shadow-xl space-y-4">
+            <div className="p-8 bg-[#111114] border border-white/10 rounded-sm shadow-xl space-y-4">
               <span className="font-technical text-xs font-bold text-[#D91F2C] uppercase block tracking-wider">
                 DISIPLIN RINGSPORT (FULL CONTACT)
               </span>
@@ -252,12 +252,12 @@ export default function TentangPage() {
         </section>
 
         {/* ═══════════════════════════════════════════════════════════════════
-            SECTION 5: KETENTUAN ATLET — APPLE BENTO GRID
+            SECTION 5: KETENTUAN ATLET — COMBAT PROTOCOL
            ═══════════════════════════════════════════════════════════════════ */}
         <section id="tata-tertib" className="space-y-6 pt-8 border-t border-white/[0.08] scroll-mt-28">
           <div className="space-y-1">
             <span className="font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
-              05 / PROTOKOL PERTANDINGAN
+              05 // PROTOKOL PERTANDINGAN
             </span>
             <h2 className="font-display text-3xl sm:text-4xl uppercase tracking-wider text-white">
               PERLENGKAPAN &amp; PROSEDUR ATLET
@@ -279,7 +279,7 @@ export default function TentangPage() {
                 body: "Protes terhadap keputusan juri hanya dapat diajukan oleh Official/Manajer Tim yang sah, maksimal 15 menit setelah pertarungan selesai, disertai surat keberatan tertulis dan biaya jaminan protes sesuai regulasi WAKO / KBI DIY.",
               },
             ].map(({ title, body }) => (
-              <div key={title} className="p-8 bg-[#161617] border border-white/[0.08] hover:border-white/20 rounded-3xl shadow-xl transition-all space-y-3">
+              <div key={title} className="p-8 bg-[#111114] border border-white/10 hover:border-white/25 rounded-sm shadow-xl transition-all space-y-3">
                 <h3 className="font-display text-xl uppercase tracking-wider text-white">{title}</h3>
                 <p className="leading-relaxed">{body}</p>
               </div>
@@ -293,7 +293,7 @@ export default function TentangPage() {
         <section id="administrasi" className="space-y-6 pt-8 border-t border-white/[0.08] scroll-mt-28">
           <div className="space-y-1">
             <span className="font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
-              06 / INFORMASI ADMINISTRASI
+              06 // INFORMASI ADMINISTRASI
             </span>
             <h2 className="font-display text-3xl sm:text-4xl uppercase tracking-wider text-white">
               KETENTUAN ADMINISTRASI &amp; PENDAFTARAN KONTINGEN
@@ -301,11 +301,11 @@ export default function TentangPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-xs font-sans text-[#86868B] leading-relaxed">
-            <div className="lg:col-span-7 p-8 sm:p-10 bg-[#161617] border border-white/[0.08] rounded-3xl shadow-xl space-y-5">
+            <div className="lg:col-span-7 p-8 sm:p-10 bg-[#111114] border border-white/10 rounded-sm shadow-xl space-y-5">
               <p className="text-sm">
                 Seluruh pendaftaran kontingen, validasi dokumen atlet, dan koordinasi nomor pertandingan dikoordinasikan secara terpusat melalui <strong className="text-white">Sekretariat Panitia Pelaksana Pengprov KBI DIY</strong>.
               </p>
-              <div className="p-6 bg-black/40 border border-white/[0.06] rounded-2xl space-y-3">
+              <div className="p-6 bg-black/60 border border-white/10 rounded-xs space-y-3">
                 <span className="font-technical text-xs font-bold text-[#D91F2C] uppercase block tracking-wider">
                   PERSYARATAN BERKAS WAJIB ATLET:
                 </span>
@@ -330,10 +330,10 @@ export default function TentangPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-5 p-8 bg-[#161617] border border-white/[0.08] rounded-3xl shadow-xl space-y-4 flex flex-col justify-between">
+            <div className="lg:col-span-5 p-8 bg-[#111114] border border-white/10 rounded-sm shadow-xl space-y-4 flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="flex items-center gap-2.5 text-[#D91F2C]">
-                  <div className="p-2.5 bg-[#D91F2C]/10 border border-[#D91F2C]/20 rounded-xl">
+                  <div className="p-2.5 bg-[#D91F2C]/10 border border-[#D91F2C]/30 rounded-xs">
                     <Scale className="w-5 h-5" />
                   </div>
                   <h3 className="font-display text-lg uppercase tracking-wider text-white">
@@ -345,7 +345,7 @@ export default function TentangPage() {
                 </p>
               </div>
 
-              <div className="p-5 bg-black/40 border border-white/[0.06] rounded-2xl space-y-2">
+              <div className="p-5 bg-black/60 border border-white/10 rounded-xs space-y-2">
                 <span className="font-technical text-[10px] uppercase text-[#D91F2C] font-bold block tracking-wider">
                   SEKRETARIAT PANITIA
                 </span>
@@ -366,7 +366,7 @@ export default function TentangPage() {
         <section id="sekretariat" className="space-y-6 pt-8 border-t border-white/[0.08] scroll-mt-28">
           <div className="space-y-1">
             <span className="font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
-              07 / NARAHUBUNG PANITIA
+              07 // NARAHUBUNG PANITIA
             </span>
             <h2 className="font-display text-3xl sm:text-4xl uppercase tracking-wider text-white">
               SEKRETARIAT &amp; CONTACT PERSON
@@ -375,7 +375,7 @@ export default function TentangPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs font-sans">
             {EVENT_CONFIG.contact.coordinators.map((c) => (
-              <div key={c.phone} className="p-6 bg-[#161617] border border-white/[0.08] hover:border-white/20 rounded-3xl shadow-xl transition-all space-y-2">
+              <div key={c.phone} className="p-6 bg-[#111114] border border-white/10 hover:border-[#D91F2C] rounded-sm shadow-xl transition-all space-y-2">
                 <span className="font-technical text-[10px] uppercase text-[#D91F2C] font-bold tracking-wider">{c.label}</span>
                 <p className="font-display text-xl uppercase text-white">{c.name}</p>
                 <a href={`tel:${c.phone.replace(/\s/g, "")}`} className="font-technical text-sm text-[#86868B] hover:text-white block">

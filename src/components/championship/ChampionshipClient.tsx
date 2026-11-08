@@ -166,17 +166,17 @@ export default function ChampionshipClient() {
       
       {/* ─────────────────────────────────────────────────────────────────
           NAVIGATION TOGGLE: PROGRAMS VS DISCIPLINES
-          Sleek Segmented Capsule Switcher (Clean & Uncluttered)
+          Combat Arena Segmented Switcher (Sharp Athletic Framing)
          ───────────────────────────────────────────────────────────────── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 border-b border-white/[0.08] pb-6">
-        <div className="inline-flex p-1 bg-[#121214] border border-white/10 rounded-full w-fit">
+        <div className="inline-flex p-1 bg-[#0A0A0C] border border-white/10 rounded-sm w-fit">
           <button
             type="button"
             onClick={() => setActiveTab("PROGRAMS")}
-            className={`font-display text-sm sm:text-base uppercase tracking-wider px-5 py-2 rounded-full transition-all ${
+            className={`font-display text-sm sm:text-base uppercase tracking-wider px-5 py-2 rounded-sm transition-all ${
               activeTab === "PROGRAMS"
-                ? "bg-[#D91F2C] text-white shadow-lg shadow-red-950/40"
-                : "text-[#8E8E98] hover:text-white"
+                ? "bg-[#D91F2C] text-white shadow-lg shadow-red-950/40 font-bold"
+                : "text-[#8E8E98] hover:text-white hover:bg-white/[0.04]"
             }`}
           >
             7 PROGRAM KEJUARAAN
@@ -184,10 +184,10 @@ export default function ChampionshipClient() {
           <button
             type="button"
             onClick={() => setActiveTab("DISCIPLINES")}
-            className={`font-display text-sm sm:text-base uppercase tracking-wider px-5 py-2 rounded-full transition-all ${
+            className={`font-display text-sm sm:text-base uppercase tracking-wider px-5 py-2 rounded-sm transition-all ${
               activeTab === "DISCIPLINES"
-                ? "bg-[#D91F2C] text-white shadow-lg shadow-red-950/40"
-                : "text-[#8E8E98] hover:text-white"
+                ? "bg-[#D91F2C] text-white shadow-lg shadow-red-950/40 font-bold"
+                : "text-[#8E8E98] hover:text-white hover:bg-white/[0.04]"
             }`}
           >
             DISIPLIN PERTANDINGAN
@@ -195,7 +195,7 @@ export default function ChampionshipClient() {
         </div>
 
         <div className="text-xs font-technical text-[#77716D] flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#D91F2C] animate-pulse" />
+          <span className="w-2 h-2 rounded-xs bg-[#D91F2C] animate-pulse" />
           <span className="uppercase tracking-widest text-[#8F8E8B]">
             WAKO RULES (TATAMI &amp; RINGSPORT)
           </span>
@@ -208,15 +208,15 @@ export default function ChampionshipClient() {
       {activeTab === "PROGRAMS" && (
         <div className="space-y-12">
           
-          {/* Category Filter Pills — Apple Multi-Row Auto-Wrap Pill Dock (Zero Mobile Scroll) */}
-          <div className="flex items-center justify-center">
-            <div className="flex flex-wrap items-center justify-center gap-2 p-2 bg-[#0E0E10]/90 border border-white/[0.08] rounded-2xl sm:rounded-full backdrop-blur-xl max-w-3xl">
+          {/* Category Filter — Combat Sport Tactical Segmented Bar (Zero Mobile Scroll) */}
+          <div className="w-full flex items-center justify-center">
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 bg-[#0A0A0C] border border-white/10 rounded-sm w-full max-w-4xl">
               {[
-                { id: "ALL", label: "SEMUA", count: 7 },
-                { id: "REGIONAL", label: "KEJURDA DIY", count: 1 },
-                { id: "OPEN", label: "TERBUKA & SASANA", count: 2 },
-                { id: "STUDENT", label: "PELAJAR & MAHASISWA", count: 2 },
-                { id: "INVITATION", label: "INVITASI KHUSUS", count: 2 },
+                { id: "ALL", label: "SEMUA", count: "07", isFull: true },
+                { id: "REGIONAL", label: "KEJURDA DIY", count: "01" },
+                { id: "OPEN", label: "TERBUKA & SASANA", count: "02" },
+                { id: "STUDENT", label: "PELAJAR & MHS", count: "02" },
+                { id: "INVITATION", label: "INVITASI KHUSUS", count: "02" },
               ].map((f) => {
                 const active = activeCategory === f.id;
                 return (
@@ -224,19 +224,21 @@ export default function ChampionshipClient() {
                     key={f.id}
                     type="button"
                     onClick={() => setActiveCategory(f.id as CategoryFilter)}
-                    className={`font-technical text-[11px] sm:text-xs uppercase tracking-wider px-3.5 sm:px-4 py-2 rounded-full transition-all flex items-center gap-2 whitespace-nowrap min-h-[38px] ${
+                    className={`font-technical text-[10px] sm:text-xs uppercase tracking-wider px-2.5 sm:px-4 py-2 border transition-all flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap min-h-[38px] rounded-sm ${
+                      f.isFull ? "col-span-2 sm:col-auto" : "col-span-1"
+                    } ${
                       active
-                        ? "bg-[#D91F2C] text-white font-bold shadow-md shadow-red-950/40"
-                        : "text-[#8E8E98] hover:text-white hover:bg-white/[0.05]"
+                        ? "bg-[#D91F2C] border-[#D91F2C] text-white font-bold shadow-[0_0_15px_rgba(217,31,44,0.35)]"
+                        : "bg-[#111114] border-white/10 text-[#8E8E98] hover:text-white hover:border-white/30"
                     }`}
                   >
-                    <span>{f.label}</span>
+                    <span className="font-semibold">{f.label}</span>
                     <span
-                      className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
-                        active ? "bg-white/20 text-white font-bold" : "bg-white/5 text-[#71717A]"
+                      className={`text-[9px] sm:text-[10px] font-mono px-1 py-0.2 rounded-xs ${
+                        active ? "bg-black/30 text-white font-bold" : "bg-white/5 text-[#8E8E98]"
                       }`}
                     >
-                      {f.count}
+                      // {f.count}
                     </span>
                   </button>
                 );
@@ -244,7 +246,7 @@ export default function ChampionshipClient() {
             </div>
           </div>
 
-          {/* Editorial Program Cards Grid — Apple Bento Spec Grid */}
+          {/* Editorial Program Cards Grid — Athletic Industrial Combat Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {filteredPrograms.map((prog) => {
               const isInvitation = prog.category === "INVITATION";
@@ -252,10 +254,10 @@ export default function ChampionshipClient() {
               return (
                 <article
                   key={prog.id}
-                  className={`relative flex flex-col justify-between p-8 sm:p-10 border transition-all group overflow-hidden rounded-3xl shadow-xl ${
+                  className={`relative flex flex-col justify-between p-8 sm:p-10 border transition-all group overflow-hidden rounded-sm shadow-xl ${
                     isInvitation
-                      ? "bg-[#161617] border-[#D91F2C]/30 hover:border-[#D91F2C]/60"
-                      : "bg-[#161617] border-white/[0.08] hover:border-white/20"
+                      ? "bg-[#111114] border-[#D91F2C]/40 hover:border-[#D91F2C]"
+                      : "bg-[#111114] border-white/10 hover:border-white/25"
                   }`}
                 >
                   {/* Background Image Watermark with Subtle Fade */}
@@ -267,17 +269,17 @@ export default function ChampionshipClient() {
                       className="object-cover object-center filter grayscale contrast-125"
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#161617] via-[#161617]/85 to-[#161617]/95" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#111114] via-[#111114]/85 to-[#111114]/95" />
                   </div>
 
                   <div className="relative z-10 space-y-6">
-                    {/* Top badges — Apple Pills */}
+                    {/* Top badges — Tactical Tags */}
                     <div className="flex flex-wrap items-center justify-between gap-3">
-                      <span className="font-technical text-[10px] uppercase font-bold tracking-[0.25em] text-[#D91F2C] bg-black/60 px-3.5 py-1 rounded-full border border-white/10 backdrop-blur-sm">
+                      <span className="font-technical text-[10px] uppercase font-bold tracking-[0.25em] text-[#D91F2C] bg-black/80 px-3 py-1 rounded-xs border border-white/10">
                         {prog.categoryLabel}
                       </span>
                       <span
-                        className={`font-technical text-[10px] uppercase tracking-wider px-3 py-1 rounded-full border ${
+                        className={`font-technical text-[10px] uppercase tracking-wider px-3 py-1 rounded-xs border ${
                           isInvitation
                             ? "bg-[#D91F2C] text-white border-[#D91F2C] font-semibold"
                             : "bg-white/5 text-[#86868B] border-white/10"
@@ -302,8 +304,8 @@ export default function ChampionshipClient() {
                       {prog.description}
                     </p>
 
-                    {/* Target & Format Spec — Apple Squircle Container */}
-                    <div className="p-5 bg-black/40 border border-white/[0.06] rounded-2xl space-y-3 text-xs">
+                    {/* Target & Format Spec — Machined Steel Box */}
+                    <div className="p-5 bg-black/60 border border-white/10 rounded-xs space-y-3 text-xs">
                       <div>
                         <span className="font-technical text-[10px] text-[#86868B] uppercase block">
                           FORMAT &amp; SASARAN PESERTA:
@@ -341,7 +343,7 @@ export default function ChampionshipClient() {
                       {prog.disciplines.map((d) => (
                         <span
                           key={d}
-                          className="font-technical text-[10px] uppercase px-2.5 py-0.5 bg-white/5 border border-white/10 text-[#F5F5F7] rounded-full"
+                          className="font-technical text-[10px] uppercase px-2.5 py-0.5 bg-white/5 border border-white/10 text-[#F5F5F7] rounded-xs"
                         >
                           {d}
                         </span>
@@ -367,8 +369,8 @@ export default function ChampionshipClient() {
             })}
           </div>
 
-          {/* Invitation Program Clarification Note — Apple Bento Note */}
-          <div className="p-8 bg-[#161617] border border-white/[0.08] rounded-3xl space-y-3 shadow-xl">
+          {/* Invitation Program Clarification Note — Tactical Box */}
+          <div className="p-8 bg-[#111114] border border-white/10 rounded-sm space-y-3 shadow-xl">
             <div className="flex items-center gap-2 text-[#D91F2C]">
               <Info className="w-4 h-4 shrink-0" />
               <span className="font-technical text-xs uppercase font-bold tracking-wider">
@@ -397,7 +399,7 @@ export default function ChampionshipClient() {
             </p>
           </div>
 
-          {/* 5 Disciplines Cards Grid — Apple Bento Grid */}
+          {/* 5 Disciplines Cards Grid — Combat Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {EVENT_CONFIG.disciplines.map((d, i) => {
               const isRingsport = d.category === "RINGSPORT";
@@ -405,10 +407,10 @@ export default function ChampionshipClient() {
               return (
                 <div
                   key={d.id}
-                  className={`p-8 border flex flex-col justify-between space-y-6 rounded-3xl transition-all shadow-xl ${
+                  className={`p-8 border flex flex-col justify-between space-y-6 rounded-sm transition-all shadow-xl ${
                     isRingsport
-                      ? "bg-[#161617] border-[#D91F2C]/30 hover:border-[#D91F2C]/60"
-                      : "bg-[#161617] border-white/[0.08] hover:border-white/20"
+                      ? "bg-[#111114] border-[#D91F2C]/40 hover:border-[#D91F2C]"
+                      : "bg-[#111114] border-white/10 hover:border-white/25"
                   }`}
                 >
                   <div className="space-y-4">
@@ -417,9 +419,9 @@ export default function ChampionshipClient() {
                         0{i + 1} / {d.category}
                       </span>
                       <span
-                        className={`font-technical text-[9px] uppercase px-3 py-1 rounded-full border ${
+                        className={`font-technical text-[9px] uppercase px-3 py-1 rounded-xs border ${
                           isRingsport
-                            ? "bg-[#D91F2C]/10 border-[#D91F2C]/30 text-[#D91F2C] font-semibold"
+                            ? "bg-[#D91F2C]/15 border-[#D91F2C]/40 text-[#D91F2C] font-semibold"
                             : "bg-white/5 border-white/10 text-[#86868B]"
                         }`}
                       >
@@ -444,7 +446,7 @@ export default function ChampionshipClient() {
                       {d.applicableIn.map((app) => (
                         <span
                           key={app}
-                          className="font-technical text-[10px] uppercase px-2.5 py-0.5 bg-white/5 border border-white/10 text-[#F5F5F7] rounded-full"
+                          className="font-technical text-[10px] uppercase px-2.5 py-0.5 bg-white/5 border border-white/10 text-[#F5F5F7] rounded-xs"
                         >
                           {app}
                         </span>
@@ -456,8 +458,8 @@ export default function ChampionshipClient() {
             })}
           </div>
 
-          {/* Tatami vs Ringsport Comparison Matrix — Apple Bento Matrix */}
-          <div className="p-8 sm:p-10 bg-[#161617] border border-white/[0.08] rounded-3xl space-y-6 shadow-xl">
+          {/* Tatami vs Ringsport Comparison Matrix — Combat Matrix */}
+          <div className="p-8 sm:p-10 bg-[#111114] border border-white/10 rounded-sm space-y-6 shadow-xl">
             <div className="space-y-1">
               <span className="font-technical text-xs uppercase font-bold tracking-[0.2em] text-[#D91F2C]">
                 KOMPARASI REGULASI
@@ -468,7 +470,7 @@ export default function ChampionshipClient() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-xs font-sans text-[#86868B] leading-relaxed">
-              <div className="p-6 bg-black/40 border border-white/[0.06] rounded-2xl space-y-3">
+              <div className="p-6 bg-black/60 border border-white/10 rounded-xs space-y-3">
                 <span className="font-technical text-xs font-bold text-[#D91F2C] uppercase block">
                   DIVISI TATAMI (POINT FIGHTING &amp; KICK LIGHT)
                 </span>
@@ -482,7 +484,7 @@ export default function ChampionshipClient() {
                 </div>
               </div>
 
-              <div className="p-6 bg-black/40 border border-white/[0.06] rounded-2xl space-y-3">
+              <div className="p-6 bg-black/60 border border-white/10 rounded-xs space-y-3">
                 <span className="font-technical text-xs font-bold text-[#D91F2C] uppercase block">
                   DIVISI RINGSPORT (LOW KICK, FULL CONTACT &amp; K-1 STYLE)
                 </span>
@@ -501,11 +503,11 @@ export default function ChampionshipClient() {
       )}
 
       {/* ─────────────────────────────────────────────────────────────────
-          BOTTOM OFFICIAL REGISTRATION & COORDINATION CARD — APPLE BENTO CARD
+          BOTTOM OFFICIAL REGISTRATION & COORDINATION CARD — ARENA COMBAT DOCK
          ───────────────────────────────────────────────────────────────── */}
-      <div className="p-8 sm:p-12 bg-gradient-to-b from-[#1C1C1E] via-[#161617] to-[#121214] border border-white/10 rounded-3xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 relative overflow-hidden shadow-2xl">
+      <div className="p-8 sm:p-12 bg-gradient-to-b from-[#18181B] via-[#111114] to-[#0A0A0C] border border-white/15 rounded-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 relative overflow-hidden shadow-2xl">
         <div className="space-y-4 max-w-2xl relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#D91F2C] text-white rounded-full">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#D91F2C] text-white rounded-xs">
             <Calendar className="w-3.5 h-3.5" />
             <span className="font-technical text-xs font-bold uppercase tracking-wider">
               {registrationConfig.statusLabel} HINGGA {registrationConfig.displayDeadline}
@@ -528,7 +530,7 @@ export default function ChampionshipClient() {
             href={jkbfLinks.fighterRegistration}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-4 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-sm sm:text-base tracking-wider uppercase text-center transition-all inline-flex items-center justify-center gap-2 shadow-lg shadow-red-950/40 rounded-full"
+            className="px-8 py-4 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-sm sm:text-base tracking-wider uppercase text-center transition-all inline-flex items-center justify-center gap-2 shadow-lg shadow-red-950/40 rounded-sm"
           >
             <span>DAFTAR SEKARANG</span>
             <ArrowUpRight className="w-4 h-4" />
@@ -538,7 +540,7 @@ export default function ChampionshipClient() {
             href={jkbfLinks.fighterSupportWhatsApp}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-7 py-4 bg-white/10 hover:bg-white/15 border border-white/15 text-[#F5F5F7] font-display text-sm sm:text-base tracking-wider uppercase text-center transition-all inline-flex items-center justify-center gap-2 rounded-full backdrop-blur-md"
+            className="px-7 py-4 bg-white/10 hover:bg-white/15 border border-white/15 text-[#F5F5F7] font-display text-sm sm:text-base tracking-wider uppercase text-center transition-all inline-flex items-center justify-center gap-2 rounded-sm"
           >
             <MessageCircle className="w-4 h-4 text-[#D91F2C]" />
             <span>ADMIN FIGHTER</span>

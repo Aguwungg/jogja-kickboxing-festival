@@ -125,12 +125,12 @@ export default function Navbar() {
 
         {/* Right side — Primary CTA + Mobile toggle */}
         <div className="flex items-center gap-3">
-          {/* Desktop Primary CTA — Apple Pill */}
+          {/* Desktop Primary CTA — Combat Block Button */}
           <a
             href={jkbfLinks.fighterRegistration}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden lg:inline-flex font-display text-[13px] xl:text-[14px] tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 px-5 py-2 xl:px-6 xl:py-2.5 rounded-full transition-all items-center gap-1.5 shadow-md shadow-red-950/40"
+            className="hidden lg:inline-flex font-display text-[13px] xl:text-[14px] tracking-wider text-white bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 px-5 py-2 xl:px-6 xl:py-2.5 rounded-xs transition-all items-center gap-1.5 shadow-[0_0_15px_rgba(217,31,44,0.35)] font-bold"
             aria-label="Daftar Fighter JKBF 2026 (Google Form Resmi)"
           >
             <span>DAFTAR SEKARANG</span>
@@ -140,7 +140,7 @@ export default function Navbar() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-[#F5F5F7] hover:text-[#D91F2C] border border-white/10 bg-[#161617] rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D91F2C]"
+            className="lg:hidden p-2 text-[#F5F5F7] hover:text-[#D91F2C] border border-white/10 bg-[#111114] rounded-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D91F2C]"
             aria-label={mobileMenuOpen ? "Tutup menu navigasi" : "Buka menu navigasi"}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-nav"
@@ -206,7 +206,7 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center py-3.5 bg-[#D91F2C] text-white font-display text-base tracking-wider uppercase transition-colors hover:bg-[#B81521] shadow-lg shadow-red-950/40 font-bold inline-flex items-center justify-center gap-2 rounded-full"
+                  className="w-full text-center py-3.5 bg-[#D91F2C] text-white font-display text-base tracking-wider uppercase transition-colors hover:bg-[#B81521] shadow-[0_0_20px_rgba(217,31,44,0.4)] font-bold inline-flex items-center justify-center gap-2 rounded-xs"
                 >
                   <span>DAFTAR FIGHTER (FORM RESMI)</span>
                   <ArrowUpRight className="w-4 h-4" />

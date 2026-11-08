@@ -14,13 +14,13 @@ export default function FaqPage() {
     <main className="flex-1 flex flex-col w-full min-h-screen bg-[#000000] text-[#F5F5F7] pt-28 lg:pt-36 pb-32">
       
       {/* ═════════════════════════════════════════════════════════════════════
-          1. APPLE KEYNOTE HERO HEADER
+          1. COMBAT SPORT HERO HEADER
       ═════════════════════════════════════════════ */}
       <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 pt-6 pb-16 w-full border-b border-white/[0.08]">
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-md mb-6">
-          <span className="w-2 h-2 rounded-full bg-[#D91F2C]" />
+        <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-xs bg-black/80 border border-white/15 mb-6">
+          <span className="w-2 h-2 rounded-xs bg-[#D91F2C]" />
           <p className="text-[#D91F2C] text-xs font-technical uppercase tracking-[0.25em] font-bold">
-            PUSAT INFORMASI • BANTUAN RESMI
+            PUSAT INFORMASI // BANTUAN RESMI
           </p>
         </div>
 
@@ -45,17 +45,17 @@ export default function FaqPage() {
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════
-          2. APPLE ACCORDION FAQ CLIENT (WITH SEARCH & PILL FILTERS)
+          2. TACTICAL ACCORDION FAQ CLIENT (WITH SEARCH & BLOCK FILTERS)
       ═════════════════════════════════════════════ */}
       <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 py-16 w-full flex-1">
         <FaqClient />
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════
-          3. APPLE BENTO HELPDESK CARD
+          3. COMBAT SPORT HELPDESK CARD
       ═════════════════════════════════════════════ */}
       <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 pt-8 w-full">
-        <div className="p-8 sm:p-12 lg:p-14 border border-white/[0.08] bg-gradient-to-b from-[#1C1C1E] via-[#161617] to-[#101012] rounded-3xl lg:rounded-[36px] flex flex-col md:flex-row items-start md:items-center justify-between gap-8 relative overflow-hidden shadow-2xl">
+        <div className="p-8 sm:p-12 lg:p-14 border border-white/10 bg-gradient-to-b from-[#18181B] via-[#111114] to-[#0A0A0C] rounded-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-8 relative overflow-hidden shadow-2xl">
           <div className="space-y-3 relative z-10 max-w-xl">
             <span className="text-xs font-technical uppercase tracking-widest text-[#D91F2C] font-bold flex items-center gap-2">
               <HelpCircle className="w-4 h-4" /> BUTUH BANTUAN LAIN?
@@ -73,7 +73,7 @@ export default function FaqPage() {
               href={jkbfLinks.fighterSupportWhatsApp}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gradient-to-r from-[#D91F2C] to-[#EF3340] hover:scale-105 active:scale-95 text-white font-display text-sm uppercase tracking-wider transition-all rounded-full shadow-lg shadow-red-950/50"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-sm uppercase tracking-wider transition-all rounded-sm shadow-[0_0_20px_rgba(217,31,44,0.4)]"
             >
               <MessageCircle className="w-4 h-4" />
               <span>CHAT ADMIN WHATSAPP</span>
@@ -81,7 +81,7 @@ export default function FaqPage() {
 
             <Link
               href="/kontak"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 text-[#F5F5F7] hover:text-white font-display text-sm uppercase tracking-wider rounded-full backdrop-blur-md transition-all hover:scale-105 active:scale-95"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#111114] hover:bg-[#16161A] border border-white/20 text-[#F5F5F7] hover:text-white font-display text-sm uppercase tracking-wider rounded-sm transition-all active:scale-95"
             >
               <span>HUBUNGI KAMI</span>
               <ArrowRight className="w-4 h-4" />
