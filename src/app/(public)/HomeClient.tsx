@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, MessageCircle, Video, Handshake, HelpCircle, Shield } from "lucide-react";
 import CountdownTimer from "@/components/home/CountdownTimer";
+import HomeArenaPreview from "@/components/home/HomeArenaPreview";
 import {
   EVENT_CONFIG,
   jkbfLinks,
@@ -111,7 +112,7 @@ export default function HomeClient() {
               href={jkbfLinks.fighterRegistration}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto text-center px-9 sm:px-11 py-3.5 sm:py-4 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all shadow-[0_0_30px_rgba(217,31,44,0.45)] inline-flex items-center justify-center gap-2 rounded-sm border border-[#D91F2C]"
+              className="w-full sm:w-auto text-center px-8 sm:px-10 py-3.5 sm:py-4 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all shadow-[0_0_30px_rgba(217,31,44,0.45)] inline-flex items-center justify-center gap-2 rounded-sm border border-[#D91F2C]"
               aria-label="Daftar Fighter Sekarang (Buka Google Form)"
             >
               <span>DAFTAR SEKARANG</span>
@@ -120,10 +121,21 @@ export default function HomeClient() {
 
             <a
               href="#gateways"
-              className="w-full sm:w-auto text-center px-9 sm:px-11 py-3.5 sm:py-4 bg-[#111114] hover:bg-[#16161A] border border-white/20 hover:border-white/40 text-[#F5F5F7] hover:text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all rounded-sm active:scale-95 shadow-xl"
+              className="w-full sm:w-auto text-center px-8 sm:px-10 py-3.5 sm:py-4 bg-[#111114] hover:bg-[#16161A] border border-white/20 hover:border-white/40 text-[#F5F5F7] hover:text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all rounded-sm active:scale-95 shadow-xl"
             >
               <span>EXPLORE JKBF</span>
             </a>
+
+            <Link
+              href="/arena-3d"
+              className="w-full sm:w-auto text-center px-7 sm:px-9 py-3.5 sm:py-4 bg-[#140608] hover:bg-[#200a0d] border border-[#D91F2C]/60 hover:border-[#D91F2C] text-[#ff616d] hover:text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all rounded-sm active:scale-95 shadow-[0_0_20px_rgba(217,31,44,0.25)] inline-flex items-center justify-center gap-2"
+              aria-label="Lihat Venue Arena 3D Interaktif"
+            >
+              <span>VENUE ARENA 3D</span>
+              <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded-xs bg-[#D91F2C] text-white">
+                3D
+              </span>
+            </Link>
           </div>
 
           {/* 3-Pillar Authority Stat Bar — Combat Spec Highlights */}
@@ -331,6 +343,12 @@ export default function HomeClient() {
 
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          SECTION 02.5: ARENA PERTANDINGAN 3D (INTERACTIVE VENUE SHOWCASE)
+          Interactive 3D view of the ring, stage, VIP Futura seats, and tatami.
+         ═══════════════════════════════════════════════════════════════════════ */}
+      <HomeArenaPreview />
 
       {/* ═══════════════════════════════════════════════════════════════════════
           SECTION 03: PRIORITY REGISTRATION CALLOUT (APPLE EVENT BENTO CARD)

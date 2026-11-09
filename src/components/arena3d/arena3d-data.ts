@@ -247,3 +247,4 @@ export const LEGEND_ITEMS = [
 
 export const DISCLAIMER_NOTE =
   "Angka merupakan estimasi berdasarkan rancangan layout dan bukan kapasitas operasional final. Penyelenggara berhak menyesuaikan alokasi teknis demi keselamatan dan kelancaran event.";
+
