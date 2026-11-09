@@ -76,6 +76,14 @@ export default function Footer() {
                     Regulasi Tatami &amp; Ringsport
                   </Link>
                 </li>
+                <li>
+                  <Link href="/arena-3d" className="hover:text-white transition-colors flex items-center gap-1.5">
+                    <span>Layout Arena 3D</span>
+                    <span className="text-[9px] font-mono px-1 py-0.2 rounded-xs bg-[#D91F2C] text-white font-bold">
+                      3D
+                    </span>
+                  </Link>
+                </li>
               </ul>
             </div>
 
