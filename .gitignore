@@ -52,3 +52,5 @@ next-env.d.ts
 # local scratch & private embargoed assets
 /scratch/
 /private/
+/3D/
+/research/
