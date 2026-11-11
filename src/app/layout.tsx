@@ -1,24 +1,27 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
 import AuthProvider from "@/components/providers/AuthProvider";
 import "./globals.css";
 
-const bebasNeue = Bebas_Neue({
+const bebasNeue = localFont({
+  src: "./fonts/BebasNeue-Regular.woff2",
   variable: "--font-bebas-neue",
   weight: "400",
-  subsets: ["latin"],
+  display: "swap",
 });
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const plusJakartaSans = localFont({
+  src: "./fonts/PlusJakartaSans-Variable.woff2",
   variable: "--font-plus-jakarta",
-  weight: ["400", "500", "600", "700", "800"],
-  subsets: ["latin"],
+  weight: "400 800",
+  display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const spaceGrotesk = localFont({
+  src: "./fonts/SpaceGrotesk-Variable.woff2",
   variable: "--font-space-grotesk",
-  weight: ["500", "600", "700"],
-  subsets: ["latin"],
+  weight: "500 700",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
