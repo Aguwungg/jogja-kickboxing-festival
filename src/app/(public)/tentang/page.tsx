@@ -3,6 +3,7 @@ import {
   ShieldCheck,
   Scale,
   ArrowUpRight,
+  Check,
 } from "lucide-react";
 import { EVENT_CONFIG } from "@/lib/event-config";
 
@@ -115,15 +116,15 @@ export default function TentangPage() {
                 </div>
                 <ul className="space-y-3 text-xs font-sans text-[#86868B]">
                   <li className="flex items-start gap-2">
-                    <span className="text-[#D91F2C] font-bold">✓</span>
+                    <Check className="w-3.5 h-3.5 text-[#D91F2C] shrink-0 mt-0.5" strokeWidth={2.5} />
                     <span>Surat Keputusan Pengprov KBI DIY No. 04/SK-KBI/X/2026</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-[#D91F2C] font-bold">✓</span>
+                    <Check className="w-3.5 h-3.5 text-[#D91F2C] shrink-0 mt-0.5" strokeWidth={2.5} />
                     <span>Rekomendasi KONI Daerah Istimewa Yogyakarta</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-[#D91F2C] font-bold">✓</span>
+                    <Check className="w-3.5 h-3.5 text-[#D91F2C] shrink-0 mt-0.5" strokeWidth={2.5} />
                     <span>Dewan Wasit &amp; Juri Bersertifikasi WAKO / KBI</span>
                   </li>
                 </ul>

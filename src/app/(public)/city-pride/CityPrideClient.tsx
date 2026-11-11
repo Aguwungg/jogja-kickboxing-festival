@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle2, AlertCircle, Trophy, Flame } from "lucide-react";
+import { CheckCircle2, AlertCircle, Trophy, Flame, Check, ArrowUpRight } from "lucide-react";
 
 const regions = [
   { id: "SLEMAN", name: "KAB. SLEMAN", tagline: "Sembada • Lereng Merapi" },
@@ -185,13 +185,20 @@ export default function CityPrideClient({
                     e.stopPropagation();
                     setSelectedRegion(region.id);
                   }}
-                  className={`w-full py-1.5 text-xs font-display uppercase tracking-wider rounded transition-colors ${
+                  className={`w-full py-1.5 text-xs font-display uppercase tracking-wider rounded transition-colors flex items-center justify-center gap-1.5 ${
                     isSelected
                       ? "bg-[#D91F2C] text-white font-bold"
                       : "bg-white/5 text-white/80 hover:bg-white/10"
                   }`}
                 >
-                  {isSelected ? "TERPILIH ✓" : "PILIH"}
+                  {isSelected ? (
+                    <>
+                      <span>TERPILIH</span>
+                      <Check className="w-3.5 h-3.5" strokeWidth={2.5} />
+                    </>
+                  ) : (
+                    "PILIH"
+                  )}
                 </button>
               </div>
             );
@@ -213,19 +220,27 @@ export default function CityPrideClient({
             type="button"
             disabled={!selectedRegion || voteStatus === "voting" || voteStatus === "success" || voteStatus === "duplicate"}
             onClick={handleVote}
-            className={`font-display text-sm tracking-wider uppercase px-6 py-3 rounded transition-all text-center self-stretch sm:self-auto ${
+            className={`font-display text-sm tracking-wider uppercase px-6 py-3 rounded transition-all text-center self-stretch sm:self-auto inline-flex items-center justify-center gap-1.5 ${
               !selectedRegion || voteStatus === "voting" || voteStatus === "success" || voteStatus === "duplicate"
                 ? "bg-white/5 text-white/30 cursor-not-allowed"
                 : "bg-[#D91F2C] hover:bg-[#B81521] text-white shadow-lg active:scale-95"
             }`}
           >
-            {voteStatus === "voting"
-              ? "MENGIRIMKAN..."
-              : voteStatus === "success"
-              ? "SUARA TERCATAT ✓"
-              : voteStatus === "duplicate"
-              ? "SUDAH MEMILIH"
-              : "KIRIM DUKUNGAN RESMI ↗"}
+            {voteStatus === "voting" ? (
+              "MENGIRIMKAN..."
+            ) : voteStatus === "success" ? (
+              <>
+                <span>SUARA TERCATAT</span>
+                <Check className="w-4 h-4" strokeWidth={2.5} />
+              </>
+            ) : voteStatus === "duplicate" ? (
+              "SUDAH MEMILIH"
+            ) : (
+              <>
+                <span>KIRIM DUKUNGAN RESMI</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </>
+            )}
           </button>
         </div>
 

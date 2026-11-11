@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { Calendar, Plus, Clock, MapPin, Trash2, Eye, EyeOff } from "lucide-react";
+import { Calendar, Plus, Clock, MapPin, Trash2, Eye, EyeOff, Star } from "lucide-react";
 import { requireAdminSession, verifyAdminAction } from "@/lib/auth-guard";
 
 export const dynamic = "force-dynamic";
@@ -219,7 +219,10 @@ export default async function AdminSchedulePage() {
                 <td className="p-3.5 font-medium text-white max-w-xs">
                   <div className="truncate font-bold">{item.title}</div>
                   {item.isHighlight && (
-                    <span className="text-[10px] text-amber-400 font-bold uppercase">★ Highlight</span>
+                    <span className="inline-flex items-center gap-1 text-[10px] text-amber-400 font-bold uppercase mt-0.5">
+                      <Star className="w-2.5 h-2.5 fill-amber-400" />
+                      <span>Highlight</span>
+                    </span>
                   )}
                 </td>
                 <td className="p-3.5 text-[#99999F]">{item.location}</td>

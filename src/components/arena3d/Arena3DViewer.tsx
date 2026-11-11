@@ -37,6 +37,59 @@ interface CameraState {
   tz: number;
 }
 
+type CameraPreset = "DEFAULT" | "TOP" | "RING" | "STAGE";
+
+/**
+ * Computes aspect-aware camera state so portrait mobile viewports frame the
+ * entire 35x25m arena cleanly above the floating bottom dock without clipping.
+ */
+function getPresetCameraState(preset: CameraPreset, aspect: number): CameraState {
+  const isPortrait = aspect > 0 && aspect < 1;
+  const clampedAspect = Math.max(aspect || 1, 0.52);
+
+  switch (preset) {
+    case "TOP":
+      return {
+        A: 0,
+        E: 1.48,
+        Rd: isPortrait ? Math.min(144, Math.max(88, 72 / clampedAspect)) : 68,
+        tx: 17.5,
+        ty: 0,
+        tz: 12.5,
+      };
+    case "RING":
+      return {
+        A: Math.PI / 3.8,
+        E: isPortrait ? 0.56 : 0.52,
+        Rd: isPortrait ? Math.min(54, Math.max(36, 28 / clampedAspect)) : 30,
+        tx: 23,
+        ty: isPortrait ? 0.4 : 1,
+        tz: 12.5,
+      };
+    case "STAGE":
+      return {
+        A: -Math.PI / 3.2,
+        E: isPortrait ? 0.48 : 0.45,
+        Rd: isPortrait ? Math.min(58, Math.max(40, 31 / clampedAspect)) : 35,
+        tx: 33.9,
+        ty: isPortrait ? 0.9 : 1.5,
+        tz: 12.5,
+      };
+    case "DEFAULT":
+    default: {
+      const isTallPortrait = aspect > 0 && aspect < 0.85;
+      return {
+        A: isTallPortrait ? Math.PI / 3.25 : Math.PI / 4,
+        E: isTallPortrait ? 0.66 : isPortrait ? 0.66 : 0.62,
+        Rd: isPortrait ? Math.min(128, Math.max(88, 72 / clampedAspect)) : 70,
+        tx: 17.5,
+        ty: isTallPortrait ? -5.8 : 0,
+        tz: 12.5,
+      };
+    }
+  }
+}
+
 const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
   (
     {
@@ -54,24 +107,37 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const labelsContainerRef = useRef<HTMLDivElement>(null);
 
-    // Camera animation target
-    const camState = useRef<CameraState>({
-      A: Math.PI / 4,
-      E: 0.62,
-      Rd: 70,
-      tx: 17.5,
-      ty: 0,
-      tz: 12.5,
-    });
+    // Refs synced with latest props so main Three.js WebGL context is never torn down
+    const layoutIdRef = useRef<1 | 2>(layoutId);
+    const showLabelsRef = useRef<boolean>(showLabels);
+    const activePresetRef = useRef<CameraPreset | null>(activePreset);
+    const onPresetChangeRef = useRef(onPresetChange);
+    const onSelectZoneRef = useRef(onSelectZone);
+    const onWebGLUnsupportedRef = useRef(onWebGLUnsupported);
+    const hasInitializedCameraRef = useRef<boolean>(false);
 
-    const camTarget = useRef<CameraState>({
-      A: Math.PI / 4,
-      E: 0.62,
-      Rd: 70,
-      tx: 17.5,
-      ty: 0,
-      tz: 12.5,
-    });
+    useEffect(() => {
+      layoutIdRef.current = layoutId;
+    }, [layoutId]);
+    useEffect(() => {
+      showLabelsRef.current = showLabels;
+    }, [showLabels]);
+    useEffect(() => {
+      activePresetRef.current = activePreset;
+    }, [activePreset]);
+    useEffect(() => {
+      onPresetChangeRef.current = onPresetChange;
+    }, [onPresetChange]);
+    useEffect(() => {
+      onSelectZoneRef.current = onSelectZone;
+    }, [onSelectZone]);
+    useEffect(() => {
+      onWebGLUnsupportedRef.current = onWebGLUnsupported;
+    }, [onWebGLUnsupported]);
+
+    // Camera animation target
+    const camState = useRef<CameraState>(getPresetCameraState("DEFAULT", 1.6));
+    const camTarget = useRef<CameraState>(getPresetCameraState("DEFAULT", 1.6));
 
     const isTransitioning = useRef<boolean>(false);
     const sceneRef = useRef<THREE.Scene | null>(null);
@@ -84,60 +150,37 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
       { el: HTMLDivElement; pos: THREE.Vector3; day: number; zoneId?: string }[]
     >([]);
 
+    const getCurrentAspect = () => {
+      const c = containerRef.current;
+      return c && c.clientHeight > 0 ? c.clientWidth / c.clientHeight : 1.6;
+    };
+
     // Expose imperative methods to parent
     useImperativeHandle(ref, () => ({
       zoomIn: () => {
         isTransitioning.current = false;
-        onPresetChange?.(null);
+        onPresetChangeRef.current?.(null);
         camState.current.Rd = Math.max(16, camState.current.Rd * 0.85);
       },
       zoomOut: () => {
         isTransitioning.current = false;
-        onPresetChange?.(null);
+        onPresetChangeRef.current?.(null);
         camState.current.Rd = Math.min(180, camState.current.Rd * 1.15);
       },
       resetView: () => {
-        camTarget.current = {
-          A: Math.PI / 4,
-          E: 0.62,
-          Rd: 70,
-          tx: 17.5,
-          ty: 0,
-          tz: 12.5,
-        };
+        camTarget.current = getPresetCameraState("DEFAULT", getCurrentAspect());
         isTransitioning.current = true;
       },
       topView: () => {
-        camTarget.current = {
-          A: 0,
-          E: 1.48,
-          Rd: 68,
-          tx: 17.5,
-          ty: 0,
-          tz: 12.5,
-        };
+        camTarget.current = getPresetCameraState("TOP", getCurrentAspect());
         isTransitioning.current = true;
       },
       focusRing: () => {
-        camTarget.current = {
-          A: Math.PI / 3.8,
-          E: 0.52,
-          Rd: 30,
-          tx: 23,
-          ty: 1,
-          tz: 12.5,
-        };
+        camTarget.current = getPresetCameraState("RING", getCurrentAspect());
         isTransitioning.current = true;
       },
       focusStage: () => {
-        camTarget.current = {
-          A: -Math.PI / 3.2,
-          E: 0.45,
-          Rd: 35,
-          tx: 33.9,
-          ty: 1.5,
-          tz: 12.5,
-        };
+        camTarget.current = getPresetCameraState("STAGE", getCurrentAspect());
         isTransitioning.current = true;
       },
     }));
@@ -148,58 +191,18 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
         const canvas = document.createElement("canvas");
         const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
         if (!gl) {
-          onWebGLUnsupported?.();
+          onWebGLUnsupportedRef.current?.();
         }
       } catch {
-        onWebGLUnsupported?.();
+        onWebGLUnsupportedRef.current?.();
       }
-    }, [onWebGLUnsupported]);
+    }, []);
 
     // Handle Preset Changes
     useEffect(() => {
       if (!activePreset) return;
-
-      if (activePreset === "DEFAULT") {
-        camTarget.current = {
-          A: Math.PI / 4,
-          E: 0.62,
-          Rd: 70,
-          tx: 17.5,
-          ty: 0,
-          tz: 12.5,
-        };
-        isTransitioning.current = true;
-      } else if (activePreset === "TOP") {
-        camTarget.current = {
-          A: 0,
-          E: 1.48,
-          Rd: 68,
-          tx: 17.5,
-          ty: 0,
-          tz: 12.5,
-        };
-        isTransitioning.current = true;
-      } else if (activePreset === "RING") {
-        camTarget.current = {
-          A: Math.PI / 3.8,
-          E: 0.52,
-          Rd: 30,
-          tx: 23,
-          ty: 1,
-          tz: 12.5,
-        };
-        isTransitioning.current = true;
-      } else if (activePreset === "STAGE") {
-        camTarget.current = {
-          A: -Math.PI / 3.2,
-          E: 0.45,
-          Rd: 35,
-          tx: 33.9,
-          ty: 1.5,
-          tz: 12.5,
-        };
-        isTransitioning.current = true;
-      }
+      camTarget.current = getPresetCameraState(activePreset, getCurrentAspect());
+      isTransitioning.current = true;
     }, [activePreset]);
 
     // Handle Zone selection focus
@@ -207,12 +210,17 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
       if (!selectedZoneId) return;
       const zone = ARENA_ZONES.find((z) => z.id === selectedZoneId);
       if (zone) {
+        const aspect = getCurrentAspect();
+        const isPortrait = aspect > 0 && aspect < 1;
+        const portraitScale = isPortrait
+          ? Math.min(1.5, Math.max(1, 0.88 / Math.max(aspect, 0.55)))
+          : 1;
         camTarget.current = {
           ...camTarget.current,
           tx: zone.cameraTarget[0],
-          ty: zone.cameraTarget[1],
+          ty: zone.cameraTarget[1] - (isPortrait ? 1.1 : 0),
           tz: zone.cameraTarget[2],
-          Rd: zone.cameraDistance,
+          Rd: zone.cameraDistance * portraitScale,
         };
         isTransitioning.current = true;
       }
@@ -244,7 +252,7 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
         renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
         rendererRef.current = renderer;
       } catch {
-        onWebGLUnsupported?.();
+        onWebGLUnsupportedRef.current?.();
         return;
       }
 
@@ -728,8 +736,8 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
       );
 
       // Initial Layout visibility
-      g1.visible = layoutId === 1;
-      g2.visible = layoutId === 2;
+      g1.visible = layoutIdRef.current === 1;
+      g2.visible = layoutIdRef.current === 2;
 
       // 9. Floating HTML Labels
       labelsContainer.innerHTML = "";
@@ -752,7 +760,7 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
 
       const rawLabels: RawLabelDef[] = [
         { day: 0, type: "tag", html: "STAGE", x: 34.6, y: 6.8, z: 12.5, zoneId: "stage" },
-        { day: 0, type: "tag", html: "RING", x: RX, y: 2.9, z: RZ, zoneId: "ring" },
+        { day: 0, type: "tag", html: "RING", x: RX - 0.6, y: 2.1, z: RZ + 0.6, zoneId: "ring" },
         {
           day: 0,
           type: "card",
@@ -794,27 +802,27 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
           day: 0,
           type: "red",
           html: "JALUR FIGHTER 4 m",
-          x: 29.5,
-          y: 0.2,
+          x: 30.2,
+          y: 0.15,
           z: 12.5,
           zoneId: "fighter-walkway",
         },
         {
           day: 0,
           type: "white",
-          html: "PINTU MASUK UTAMA · PENONTON",
-          x: 4.5,
+          html: "PINTU MASUK UTAMA",
+          x: 5.8,
           y: 0.2,
-          z: 4.3,
+          z: 5.0,
           zoneId: "main-entrance",
         },
         {
           day: 0,
           type: "red",
-          html: "PINTU SELATAN · PANITIA & FIGHTER",
-          x: 31,
+          html: "PINTU SELATAN · FIGHTER",
+          x: 28.0,
           y: 0.2,
-          z: 24.9,
+          z: 23.8,
           zoneId: "south-entrance",
         },
         { day: 1, type: "tag", html: "TATAMI", x: 8.5, y: 0.2, z: 12.5, zoneId: "tatami" },
@@ -887,13 +895,13 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
         const el = document.createElement("div");
         el.className = `absolute pointer-events-auto cursor-pointer transition-transform duration-100 ease-out select-none whitespace-nowrap text-xs font-semibold ${
           l.type === "tag"
-            ? "bg-[#e0222f] text-white px-2.5 py-0.5 rounded-sm font-black shadow-lg shadow-red-950/50 text-[10px] sm:text-[11px] border border-red-400/30"
+            ? "bg-[#e0222f] text-white px-2 sm:px-2.5 py-0.5 rounded-sm font-black shadow-lg shadow-red-950/50 text-[9px] sm:text-[11px] border border-red-400/30"
             : l.type === "card"
             ? "hidden sm:flex bg-[#09090b]/90 text-white px-2 py-1 rounded-sm border border-[#ff2d3d]/50 shadow-md backdrop-blur-sm hover:border-[#ff2d3d] hover:scale-105"
             : l.type === "white"
-            ? "bg-white text-black font-bold px-2 py-0.5 rounded-sm shadow-md text-[8px] sm:text-[9px] hover:scale-105"
+            ? "bg-white text-black font-bold px-1.5 sm:px-2 py-0.5 rounded-sm shadow-md text-[7.5px] sm:text-[9px] hover:scale-105"
             : l.type === "red"
-            ? "bg-[#e0222f] text-white font-bold px-2 py-0.5 rounded-sm text-[8px] sm:text-[9px] hover:scale-105"
+            ? "bg-[#e0222f] text-white font-bold px-1.5 sm:px-2 py-0.5 rounded-sm text-[7.5px] sm:text-[9px] hover:scale-105"
             : "hidden sm:block bg-black/80 text-neutral-300 px-1.5 py-0.5 rounded-sm text-[8px] border border-neutral-700"
         }`;
         el.innerHTML = l.html;
@@ -901,7 +909,7 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
           el.addEventListener("click", (e) => {
             e.stopPropagation();
             const zone = ARENA_ZONES.find((z) => z.id === l.zoneId);
-            if (zone) onSelectZone(zone);
+            if (zone) onSelectZoneRef.current(zone);
           });
         }
         labelsContainer.appendChild(el);
@@ -919,15 +927,18 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
         const width = container.clientWidth;
         const height = container.clientHeight;
         if (width === 0 || height === 0) return;
-        renderer.setSize(width, height);
+        renderer.setSize(width, height, false);
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
 
-        // Adjust camera distance for portrait mobile screens so full 35m hall is in view
-        if (camera.aspect < 1) {
-          const autoRd = Math.max(75, 55 / camera.aspect);
-          camTarget.current.Rd = Math.min(130, autoRd);
-          camState.current.Rd = Math.min(130, autoRd);
+        if (!hasInitializedCameraRef.current) {
+          hasInitializedCameraRef.current = true;
+          const initialPreset = activePresetRef.current || "DEFAULT";
+          const initialState = getPresetCameraState(initialPreset, camera.aspect);
+          camState.current = { ...initialState };
+          camTarget.current = { ...initialState };
+        } else if (activePresetRef.current) {
+          camTarget.current = getPresetCameraState(activePresetRef.current, camera.aspect);
         }
       };
 
@@ -943,7 +954,7 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
         canvas.setPointerCapture(e.pointerId);
         activePointers.set(e.pointerId, [e.clientX, e.clientY]);
         isTransitioning.current = false;
-        onPresetChange?.(null);
+        onPresetChangeRef.current?.(null);
       };
 
       const onPointerMove = (e: PointerEvent) => {
@@ -979,7 +990,7 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
       const onWheel = (e: WheelEvent) => {
         e.preventDefault();
         isTransitioning.current = false;
-        onPresetChange?.(null);
+        onPresetChangeRef.current?.(null);
         camState.current.Rd = Math.min(
           180,
           Math.max(18, camState.current.Rd * (1 + e.deltaY * 0.001))
@@ -1012,6 +1023,7 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
             Math.abs(camTarget.current.E - camState.current.E) +
             Math.abs(camTarget.current.Rd - camState.current.Rd) +
             Math.abs(camTarget.current.tx - camState.current.tx) +
+            Math.abs(camTarget.current.ty - camState.current.ty) +
             Math.abs(camTarget.current.tz - camState.current.tz);
           if (dDiff < 0.002) {
             isTransitioning.current = false;
@@ -1021,7 +1033,7 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
         const { A, E, Rd, tx, ty, tz } = camState.current;
         camera.position.set(
           tx - Rd * Math.cos(E) * Math.sin(A),
-          ty + Rd * Math.sin(E),
+          Math.max(0, ty) + Rd * Math.sin(E),
           tz + Rd * Math.cos(E) * Math.cos(A)
         );
         camera.lookAt(tx, ty, tz);
@@ -1033,8 +1045,8 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
         const height = container.clientHeight;
         if (width > 0 && height > 0) {
           labelElementsRef.current.forEach(({ el, pos, day }) => {
-            const isDayMatch = day === 0 || day === layoutId;
-            if (!isDayMatch || !showLabels) {
+            const isDayMatch = day === 0 || day === layoutIdRef.current;
+            if (!isDayMatch || !showLabelsRef.current) {
               el.style.display = "none";
               return;
             }
@@ -1045,8 +1057,12 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
               return;
             }
             el.style.display = "";
-            const screenX = (projected.x * 0.5 + 0.5) * width;
+            let screenX = (projected.x * 0.5 + 0.5) * width;
             const screenY = (-projected.y * 0.5 + 0.5) * height;
+            if (Math.abs(projected.x) <= 0.96 && el.offsetWidth > 0) {
+              const halfW = el.offsetWidth * 0.5;
+              screenX = Math.max(halfW + 8, Math.min(width - halfW - 8, screenX));
+            }
             el.style.transform = `translate(${screenX}px, ${screenY}px) translate(-50%, -50%)`;
           });
         }
@@ -1071,12 +1087,12 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
         sceneRef.current = null;
         cameraRef.current = null;
       };
-    }, [layoutId, onPresetChange, onSelectZone, onWebGLUnsupported, showLabels]);
+    }, []);
 
     return (
       <div
         ref={containerRef}
-        className="relative w-full h-full overflow-hidden select-none bg-gradient-to-b from-[#0a0507] via-[#050507] to-[#030304]"
+        className="relative flex-1 w-full h-full min-h-0 overflow-hidden select-none bg-gradient-to-b from-[#0d0507] via-[#060508] to-[#040406]"
       >
         <canvas
           ref={canvasRef}

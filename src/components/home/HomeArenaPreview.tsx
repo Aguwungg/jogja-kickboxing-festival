@@ -3,9 +3,10 @@
 import React, { useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Ruler, Armchair, Users, Info } from "lucide-react";
 import { LAYOUT_CONFIGS } from "@/components/arena3d/arena3d-data";
 import { Arena3DViewerRef } from "@/components/arena3d/Arena3DViewer";
+import { RingArenaIcon } from "@/components/arena3d/ArenaIcons";
 
 const Arena3DViewer = dynamic(
   () => import("@/components/arena3d/Arena3DViewer"),
@@ -107,25 +108,39 @@ export default function HomeArenaPreview() {
                 <p className="text-xs text-[#A1A1A6] mb-3">
                   Mode 3D interaktif memerlukan peramban dengan dukungan WebGL.
                 </p>
-                <div className="text-left text-xs space-y-1 bg-black/60 p-3 rounded-xs font-mono text-[#F5F5F7]">
-                  <div>📐 Dimensi: 35 × 25 Meter</div>
-                  <div>🥊 Ring: 6 × 6 Meter WAKO Standard</div>
-                  <div>💺 VIP Lepasan: {currentConfig.looseVipSeats} kursi</div>
-                  <div>👥 Standing: {currentConfig.standingEstimate}</div>
+                <div className="text-left text-xs space-y-1.5 bg-black/60 p-3 rounded-xs font-mono text-[#F5F5F7]">
+                  <div className="flex items-center gap-2">
+                    <Ruler className="w-3.5 h-3.5 text-[#D91F2C] shrink-0" />
+                    <span>Dimensi: 35 × 25 Meter</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <RingArenaIcon className="w-3.5 h-3.5 text-[#D91F2C] shrink-0" />
+                    <span>Ring: 6 × 6 Meter WAKO Standard</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Armchair className="w-3.5 h-3.5 text-[#D91F2C] shrink-0" />
+                    <span>VIP Lepasan: {currentConfig.looseVipSeats} kursi</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Users className="w-3.5 h-3.5 text-[#D91F2C] shrink-0" />
+                    <span>Standing: {currentConfig.standingEstimate}</span>
+                  </div>
                 </div>
               </div>
             </div>
           ) : (
-            <Arena3DViewer
-              ref={viewerRef}
-              layoutId={layoutId}
-              selectedZoneId={null}
-              onSelectZone={() => {}}
-              showLabels={true}
-              activePreset={activePreset}
-              onPresetChange={setActivePreset}
-              onWebGLUnsupported={() => setWebGLFailed(true)}
-            />
+            <div className="absolute inset-0 w-full h-full">
+              <Arena3DViewer
+                ref={viewerRef}
+                layoutId={layoutId}
+                selectedZoneId={null}
+                onSelectZone={() => {}}
+                showLabels={true}
+                activePreset={activePreset}
+                onPresetChange={setActivePreset}
+                onWebGLUnsupported={() => setWebGLFailed(true)}
+              />
+            </div>
           )}
 
           {/* Floating Camera Presets Bar */}
@@ -245,7 +260,7 @@ export default function HomeArenaPreview() {
 
       {/* ── DISCLAIMER NOTE ───────────────────────────────────────────── */}
       <div className="mt-4 flex items-start gap-2 text-[11px] text-[#86868B] leading-relaxed">
-        <span className="text-[#D91F2C] font-bold">ℹ</span>
+        <Info className="w-3.5 h-3.5 text-[#D91F2C] shrink-0 mt-0.5" />
         <p>
           <strong className="text-[#A1A1A6]">Catatan Perencanaan: </strong>
           Angka merupakan estimasi berdasarkan rancangan layout dan bukan

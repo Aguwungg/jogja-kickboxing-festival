@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart, formatRupiah } from "@/lib/cart-context";
 import { createOrderAction } from "@/app/(public)/checkout/actions";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, ShieldCheck } from "lucide-react";
 
 export default function CheckoutClient() {
   const router = useRouter();
@@ -341,8 +341,11 @@ export default function CheckoutClient() {
           </div>
 
           {/* Safety Gate Warning */}
-          <div className="p-3.5 bg-black/5 border border-black/10 text-[11px] font-technical text-[#5A5957] leading-relaxed">
-            🛡️ <strong>Sistem Simulasi Staging:</strong> Pembayaran riil saat ini dinonaktifkan demi keselamatan komersial. Pesanan akan tercatat di sistem sebagai pesanan menunggu konfirmasi pembayaran resmi.
+          <div className="p-3.5 bg-black/5 border border-black/10 text-[11px] font-technical text-[#5A5957] leading-relaxed flex items-start gap-2">
+            <ShieldCheck className="w-4 h-4 text-[#D91F2C] shrink-0 mt-0.5" />
+            <span>
+              <strong>Sistem Simulasi Staging:</strong> Pembayaran riil saat ini dinonaktifkan demi keselamatan komersial. Pesanan akan tercatat di sistem sebagai pesanan menunggu konfirmasi pembayaran resmi.
+            </span>
           </div>
 
           {/* Error Message */}
