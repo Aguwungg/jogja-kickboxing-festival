@@ -19,7 +19,6 @@ const NAV_ITEMS: NavItem[] = [
   { name: "TENTANG", href: "/tentang" },
   { name: "KEJUARAAN", href: "/championship" },
   { name: "REGISTRASI", href: "/#registration" },
-  { name: "FAQ", href: "/faq" },
   { name: "KONTAK", href: "/kontak" },
 ];
 
@@ -28,6 +27,12 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
+
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setMobileMenuOpen(false);
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,10 +41,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -214,11 +215,14 @@ export default function Navbar() {
               </div>
 
               {/* Campaign line */}
-              <div className="pt-3 border-t border-white/10 text-center">
-                <span className="font-technical text-[10px] uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
+              <div className="pt-3 border-t border-white/10 text-center space-y-1">
+                <span className="font-technical text-[10px] uppercase tracking-[0.25em] text-[#D91F2C] font-bold block">
                   #JOGJAPUNYANYALI
                 </span>
-                <p className="font-display text-xs text-[#77716D] tracking-wider mt-0.5">
+                <p className="font-technical text-[10px] uppercase tracking-wider text-[#F5F5F7]">
+                  19–20 DESEMBER 2026 • GOR PANCASILA UGM
+                </p>
+                <p className="font-display text-xs text-[#77716D] tracking-wider">
                   RISE • FIGHT • CONQUER
                 </p>
               </div>

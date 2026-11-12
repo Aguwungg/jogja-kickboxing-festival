@@ -1,0 +1,30 @@
+﻿site,slug,url,features,gated,status
+BYON Combat,byon_combat_01,https://byoncombat.com/,Home hero event dengan CTA tiket | Countdown event | Dua CTA Ticket dan PPV | Fight highlights dan hasil pemenang | Past fights / replay list | Achievement/social proof block,False,NEEDS_ONLINE_BROWSER
+BYON Combat,byon_combat_02,https://byoncombat.com/events/,Event archive,False,NEEDS_ONLINE_BROWSER
+BYON Combat,byon_combat_03,https://byoncombat.com/fighters/,Fighters area (login-gated),False,NEEDS_ONLINE_BROWSER
+BYON Combat,byon_combat_04,https://byoncombat.com/rankings/,Rankings area (login-gated),True,NEEDS_ONLINE_BROWSER
+BYON Combat,byon_combat_05,https://byoncombat.com/login/,Account/login gateway,True,NEEDS_ONLINE_BROWSER
+BYON Combat,byon_combat_06,https://byontix.com/,Byontix event ticket/fight-card entry | Byontix reserve/waiting-list/allocation explainer,False,NEEDS_ONLINE_BROWSER
+GLORY Kickboxing,glory_kickboxing_01,https://glorykickboxing.com/,Event hero dan main fight | Newsletter registration | Rules & conduct footer | Partnership nav,False,NEEDS_ONLINE_BROWSER
+GLORY Kickboxing,glory_kickboxing_02,https://glorykickboxing.com/events/glory-110,Detail event + venue | Tab Main Card/Superfight Series | Result method KO/TKO/decision | Round + time finality,False,NEEDS_ONLINE_BROWSER
+GLORY Kickboxing,glory_kickboxing_03,https://glorykickboxing.com/fighters,Fighters per weight division | Fighter click to details,False,NEEDS_ONLINE_BROWSER
+GLORY Kickboxing,glory_kickboxing_04,https://glorykickboxing.com/news,News/category filters,False,NEEDS_ONLINE_BROWSER
+GLORY Kickboxing,glory_kickboxing_05,https://glorykickboxing.com/watch,Watch hub country options,False,NEEDS_ONLINE_BROWSER
+UFC,ufc_01,https://www.ufc.com/events,Events searchable listing | Event time segmented by prelims/main | Venue/event card listing | How to Watch action | Ticket availability and onsale timing | Filter upcoming events,False,NEEDS_ONLINE_BROWSER
+ONE Championship,one_championship_01,https://www.onefc.com/,"Next event hero | News, commentary, content categories",False,NEEDS_ONLINE_BROWSER
+ONE Championship,one_championship_02,https://www.onefc.com/events/,Upcoming vs past event listing | Event watch/buy ticket CTA,False,NEEDS_ONLINE_BROWSER
+ONE Championship,one_championship_03,https://www.onefc.com/events/one-friday-fights-126/,Fight card discipline/weight | Outcome badge WIN KO/TKO/UD | Highlights per bout,False,NEEDS_ONLINE_BROWSER
+ONE Championship,one_championship_04,https://www.onefc.com/rankings/,Athlete ranking nav,False,NEEDS_ONLINE_BROWSER
+ONE Championship,one_championship_05,https://onechampionship.zendesk.com/hc/en-us/articles/35998314091671-Purchasing-a-Ticket,How-to-purchase docs,False,NEEDS_ONLINE_BROWSER
+ONE Championship,one_championship_06,https://calendar.onefc.com/,Add to calendar,False,NEEDS_ONLINE_BROWSER
+ONE Championship,one_championship_07,https://www.onefc.com/id/,Local language navigation,False,NEEDS_ONLINE_BROWSER
+Sónar,s_nar_01,https://sonar.es/en/programme/line-up,Lineup per day tabs | Full artist roster browse,False,NEEDS_ONLINE_BROWSER
+Sónar,s_nar_02,https://live.sonar.es/en/programme/schedule,Timetable by day tabs | Timetable filter stage/category,False,NEEDS_ONLINE_BROWSER
+Sónar,s_nar_03,https://sonar.es/en/tickets,Ticket variants day/VIP/weekend | Sold-out state,False,NEEDS_ONLINE_BROWSER
+Sónar,s_nar_04,https://sonar.es/en/practical-info/mapa-2026,Digital venue map,False,NEEDS_ONLINE_BROWSER
+Sónar,s_nar_05,https://live.sonar.es/en/practical-info/how-to-get-there-sonard-2026,How to get there,False,NEEDS_ONLINE_BROWSER
+Sónar,s_nar_06,https://live.sonar.es/en/faqs-sonar-2026-novedades,FAQ operational multi-day,False,NEEDS_ONLINE_BROWSER
+Sónar,s_nar_07,https://sonar.es/en/practical-info/sonarapp,"Mobile app by day/stage/time/artist | Save shows, reminders, offline schedules",False,NEEDS_ONLINE_BROWSER
+Sónar,s_nar_08,https://sonar.es/en/,Gallery & post-event archive,False,NEEDS_ONLINE_BROWSER
+Gymshark,gymshark_01,https://www.gymshark.com/,Category mega-menu | Shop by activity / collection | Help/accessibility visibility | Newsletter and branded guides | Region/language selector,False,NEEDS_ONLINE_BROWSER
+Gymshark,gymshark_02,https://www.gymshark.com/collections/all-products/womens,Collection product grid | Filter size/type | Filter feature/activity | Sort by price/newness | Size guide entry,False,NEEDS_ONLINE_BROWSER

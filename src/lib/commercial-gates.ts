@@ -84,7 +84,7 @@ export const INTERNAL_DEMO_ACCESS_CODES = [
 
 export function isInternalDemoCode(code: string): boolean {
   const normalized = code.trim().toUpperCase();
-  return INTERNAL_DEMO_ACCESS_CODES.includes(normalized as any);
+  return (INTERNAL_DEMO_ACCESS_CODES as readonly string[]).includes(normalized);
 }
 
 /**
@@ -127,7 +127,7 @@ export function resolveProtectedStreamUrl(rawStreamUrl: string | null | undefine
     return {
       streamUrl: "",
       isStagingMock: false,
-      notice: "STANDBY_FEED: Siaran langsung resmi JKB 2026 akan aktif pada 12–14 Desember 2026.",
+      notice: "STANDBY_FEED: Siaran langsung resmi JKBF 2026 akan aktif pada 19–20 Desember 2026.",
     };
   }
 

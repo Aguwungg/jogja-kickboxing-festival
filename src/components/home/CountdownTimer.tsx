@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { EVENT_CONFIG } from "@/lib/event-config";
 
 interface TimeLeft {
@@ -17,38 +17,45 @@ interface CountdownTimerProps {
   className?: string;
 }
 
+function computeTimeLeft(targetDate: number): TimeLeft {
+  const now = Date.now();
+  const difference = targetDate - now;
+
+  if (difference <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true };
+  }
+
+  return {
+    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+    minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+    seconds: Math.floor((difference % (1000 * 60)) / 1000),
+    isExpired: false,
+  };
+}
+
+const emptySubscribe = () => () => {};
+
 export default function CountdownTimer({
   targetIso,
-  label = "COUNTDOWN MENUJU HARI H • 18 DESEMBER 2026",
+  label = "MENUJU HARI H • 19–20 DESEMBER 2026",
   className = "",
 }: CountdownTimerProps) {
   const targetDateStr = targetIso || EVENT_CONFIG.dates.startIso;
   const targetDate = new Date(targetDateStr).getTime();
 
-  const calculateTimeLeft = (): TimeLeft => {
-    const now = new Date().getTime();
-    const difference = targetDate - now;
-
-    if (difference <= 0) {
-      return { days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true };
-    }
-
-    return {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-      minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-      seconds: Math.floor((difference % (1000 * 60)) / 1000),
-      isExpired: false,
-    };
-  };
-
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
-  const [isMounted, setIsMounted] = useState(false);
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() =>
+    computeTimeLeft(targetDate)
+  );
+  const isMounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
 
   useEffect(() => {
-    setIsMounted(true);
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+      setTimeLeft(computeTimeLeft(targetDate));
     }, 1000);
 
     return () => clearInterval(timer);

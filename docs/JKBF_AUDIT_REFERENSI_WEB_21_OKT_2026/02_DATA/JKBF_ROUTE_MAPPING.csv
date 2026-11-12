@@ -1,0 +1,24 @@
+﻿Rute,Halaman,Referensi,Kebutuhan_Desain,Prioritas,Guardrails
+/,Homepage,BYON Combat; GLORY Kickboxing; ONE Championship,"Hero combat premium, countdown configurabel 12 Des, primary CTA menuju tiket/registrasi aktif, program snapshot, route to 3-day festival",P0,"Tidak mengubah endpoint API, tanggal/jam configurable"
+/championship,Championship,GLORY Kickboxing; ONE Championship,"Division tabs, per-bout matchup, confirmed status, results after approval, fight card per day",P0,Tidak menayangkan fighter fiktif
+/fighters,Fighter Directory,GLORY Kickboxing; ONE Championship,Filter kategori/kelas/gym; searchable card; verified public data,P1,"Akses profil publik tanpa login, consent"
+/fighters/[slug],Fighter Detail,GLORY Kickboxing; ONE Championship,"Hero portrait, nama gym, weightclass, riwayat publik yang sah, related matchup",P1,Tidak memakai rekam jejak tanpa data
+/bracket,Bracket,GLORY Kickboxing; ONE Championship,"Bracket legible mobile by round, result display after certified, controlled empty state",P1,Data source official admin
+/lineup,Lineup Festival,Sónar,"Tabs 12/13/14 Dec, act cards, stage, performer details, pending states",P0,Jangan mengarang performer
+/jadwal,Schedule,Sónar; UFC; ONE Championship,"Tabs day, filter event type/stage/time, timetable readable, add-to-calendar",P0,Fallback bila jam belum diumumkan
+/venue,Venue Guide,Sónar,"GOR UNY official venue address, directions, zones, practical visitor FAQ",P0,Gunakan peta/aset terverifikasi
+/tiket,Tickets,Sónar; UFC; BYON Combat,"Compare price tiers, benefits, availability, refund/payment notices, primary CTA",P0,Payment safety critical; preserve current flow
+/checkout,Checkout,ONE Championship; Gymshark,"Minimal checkout, clear order summary, validation, fees, step completion",P0,Jangan refactor pembayaran/sesuaikan security gates
+/konfirmasi,Order Confirmation,ONE Championship,"Verified paid/pending state, next steps, no fake success",P0,Status harus dari backend
+/ppv,PPV Pricing,BYON Combat; GLORY Kickboxing; ONE Championship,"Watch explainer, package options, access rights, device info, availability",P1,Jangan nyalakan bila streaming belum siap
+/ppv/watch,PPV Watch,ONE Championship; GLORY Kickboxing,"Video player, access state, stream time, issues support",P1,Paywall/authz server-side
+/merch,Merch Catalogue,Gymshark,"Editorial item grid, filters stock and sizing, pricing, no fake inventory",P1,Data harus dari product API
+/merch/[slug],Merch Product Detail,Gymshark,"Large gallery, sizes, chart, material, checkout CTA, cross-sell restrained",P1,Maintain cart + stock validation
+/creator,Creator Program,Sónar; Gymshark,"Programme explanation, eligibility, benefits, transparent application CTA",P2,Rules and rewards need approval
+/creator/dashboard,Creator Dashboard,Gymshark,"Editorial yet functional stats, assignments, submissions, approval state",P2,Auth RBAC untouched
+/city-pride,City Pride,Sónar,"Authentic Jogja storytelling, short map/partner modules, CTA to culture activities",P2,Avoid fake city features
+/tentang,About JKBF,BYON Combat; GLORY Kickboxing; Sónar,"Mission, organizer, verified partners, press releases, genuine proof",P1,No invented metrics
+/faq,FAQ,Sónar; Gymshark,"Topic filters with collapsible answer, clear ticket/registration rules",P0,Approved legal/operations copy
+/kontak,Contact,GLORY Kickboxing; Gymshark,"Separate Fighter vs Partnership contacts, business hours and response expectations",P0,Verify Ardi number; Priya number approved
+/syarat-ketentuan,Terms,GLORY Kickboxing; ONE Championship,"Readable clauses, subheading navigation, date effective",P0,Legal review
+/kebijakan-privasi,Privacy,Gymshark; GLORY Kickboxing,"Contact, data purpose, user rights, privacy clarity",P0,Real data processing practices

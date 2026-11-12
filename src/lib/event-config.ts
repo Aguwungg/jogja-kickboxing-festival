@@ -2,21 +2,16 @@
  * OFFICIAL JKBF 2026 — PUBLIC CONTENT CONFIGURATION
  *
  * Single Source of Truth for all APPROVED, PUBLIC-SAFE event facts.
+ * Updated per Master Website Update (Final Information & Production Update).
  *
- * INFORMATION EMBARGO POLICY:
- *   - Event dates: EMBARGOED — do not add.
- *   - Venue details: EMBARGOED — do not add.
- *   - Music lineup: EMBARGOED — do not add.
- *   - Technical Handbook PDF: EMBARGOED — do not link.
- *
- * Only update this file with information explicitly approved
- * for public release by the event organizer.
- *
- * Official identity references:
- *   - Event: JOGJA KICKBOXING FESTIVAL 2026
- *   - Short: JKBF 2026
- *   - Campaign: #JOGJAPUNYANYALI
- *   - Organizer: Kickboxing Indonesia DIY & Noise Comm Indonesia
+ * CONFIRMED PUBLIC DATA:
+ *   - Event: JOGJA KICKBOXING FESTIVAL 2026 (JKBF 2026)
+ *   - Dates: 19–20 DESEMBER 2026 (19–20 DECEMBER 2026)
+ *   - Venue: GOR PANCASILA UGM, YOGYAKARTA
+ *   - Campaign: #JOGJAPUNYANYALI | RISE • FIGHT • CONQUER
+ *   - Production Policy: NO LED screens, video walls, LED stage backdrops, or decorative RGB LED strips.
+ *   - Music Lineup: STILL NOT APPROVED FOR PUBLICATION — keep unpublished.
+ *   - Legacy 3D Venue Model: Based on previous venue & outdated production specs — keep unpublished until GOR Pancasila layout is verified.
  */
 
 export const EVENT_CONFIG = {
@@ -26,12 +21,28 @@ export const EVENT_CONFIG = {
   campaign: "#JOGJAPUNYANYALI",
   tagline: "RISE • FIGHT • CONQUER",
   brandStatement: "Di balik kalem, ada nyali.",
-  region: "Yogyakarta", // city identity — venue not disclosed
+  heroSupportingCopy:
+    "Kompetisi, keberanian, dan sportivitas dalam satu panggung kickboxing di Yogyakarta.",
+  region: "Yogyakarta",
   year: "2026",
   dates: {
-    startIso: "2026-12-18T09:00:00+07:00",
-    display: "18 DESEMBER 2026",
-    label: "HARI H EVENT",
+    startDateSchema: "2026-12-19",
+    endDateSchema: "2026-12-20",
+    startIso: "2026-12-19T00:00:00+07:00",
+    display: "19–20 DESEMBER 2026",
+    displayEn: "19–20 DECEMBER 2026",
+    compact: "19–20.12.2026",
+    label: "TANGGAL RESMI FESTIVAL",
+  },
+  venue: {
+    heading: "THE ARENA AWAITS.",
+    name: "GOR PANCASILA UGM",
+    city: "YOGYAKARTA",
+    fullDisplay: "GOR PANCASILA UGM, YOGYAKARTA",
+    summary:
+      "Gelanggang Olahraga Pancasila Universitas Gadjah Mada menjadi rumah resmi perhelatan dua hari Jogja Kickboxing Festival 2026 di Yogyakarta.",
+    mapsUrl:
+      "https://www.google.com/maps/search/?api=1&query=GOR+Pancasila+UGM+Yogyakarta",
   },
 
   // ─── Approved Championship Programs ─────────────────────────────────────────
@@ -41,7 +52,7 @@ export const EVENT_CONFIG = {
       name: "Kejuaraan Daerah Kickboxing DIY 2026",
       shortName: "KEJURDA DIY 2026",
       description:
-        "Kejuaraan Daerah antar Pengurus Cabang Kabupaten/Kota se-DIY. Jalur pembinaan atlet resmi menuju Kejuaraan Nasional. Diikuti kontingen dari Yogyakarta, Sleman, Bantul, Kulon Progo, dan Gunungkidul.",
+        "Kejuaraan Daerah antar Pengurus Cabang Kabupaten/Kota se-DIY. Jalur pembinaan atlet resmi menuju Kejuaraan Nasional untuk kontingen Kota Yogyakarta, Sleman, Bantul, Kulon Progo, dan Gunungkidul.",
       format: "Gugur Murni • Atlet Domisili DIY",
       type: "regional" as const,
     },
@@ -95,7 +106,7 @@ export const EVENT_CONFIG = {
       name: "Kelas Mega Bintang",
       shortName: "KELAS MEGA BINTANG",
       description:
-        "Puncak kompetisi JKBF 2026. Partai invitation-only eksklusif yang menampilkan petarung kelas atas dalam format pertandingan pamungkas.",
+        "Puncak sorotan JKBF 2026. Program invitation-only eksklusif yang menghadirkan figur dan bintang pilihan dalam suasana pertandingan pamungkas.",
       format: "Invitation Only • Partai Utama",
       type: "invitation" as const,
     },
@@ -158,137 +169,178 @@ export const EVENT_CONFIG = {
       id: "noise-comm",
       name: "Noise Comm Indonesia",
       fullName: "Noise Comm Indonesia",
-      shortName: "Noise Comm",
-      role: "Mitra Penyelenggara & Produksi Event",
+      shortName: "Noise Comm Indonesia",
+      role: "Mitra Penyelenggara & Produksi Festival",
     },
   ],
 
-  // ─── Approved Announcements (empty until organizer approves content) ─────────
-  announcements: [] as Array<{
-    id: string;
-    title: string;
-    date: string;
-    description: string;
-    isPublished: boolean;
-  }>,
-
-  // ─── Approved FAQ Items ───────────────────────────────────────────────────────
-  // (Used by FaqClient — answers must be embargo-compliant)
-
-  // ─── Approved Contact Channels ────────────────────────────────────────────────
-  // Note: Only include VERIFIED channels. Remove any placeholder/unverified data.
-  contact: {
-    // Coordinator contacts from Technical Handbook (approved for public use)
-    coordinators: [
-      { label: "Koordinator Teknis", name: "Ardi", phone: "+62 813-2928-327" },
-      { label: "Koordinator Teknis", name: "Priya", phone: "+62 838-7260-3935" },
-      { label: "Koordinator Teknis", name: "Vale", phone: "+62 853-3658-6597" },
-    ],
-    // Social media: add verified handles only
-    instagram: "", // Update with verified handle when confirmed
-    tiktok: "",    // Update with verified handle when confirmed
-    // Email: update with verified address when confirmed
-    email: "",     // Update with verified email when confirmed
+  // ─── Official Social Media (ONLY Instagram & TikTok) ────────────────────────
+  social: {
+    instagram: {
+      platform: "Instagram",
+      handle: "@jogjakickboxingfestival",
+      url: "https://www.instagram.com/jogjakickboxingfestival/",
+    },
+    tiktok: {
+      platform: "TikTok",
+      handle: "@jogjakickboxingfestival",
+      url: "https://www.tiktok.com/@jogjakickboxingfestival",
+    },
   },
 
-  // ─── Approved FAQ (Exact 8 Approved Questions) ──────────────────────────────
+  // ─── Verified Operational Contacts (ONLY Ardi & Priya Pratama via WhatsApp) ─
+  contact: {
+    coordinators: [
+      {
+        id: "priya",
+        badge: "BANTUAN PENDAFTARAN FIGHTER",
+        role: "Admin Registrasi Fighter",
+        name: "Priya Pratama",
+        ctaLabel: "HUBUNGI ADMIN FIGHTER",
+        whatsappUrl:
+          "https://api.whatsapp.com/send/?phone=6283872603935&text&type=phone_number&app_absent=0",
+        description:
+          "Konsultasi formulir pendaftaran fighter, berkas persyaratan, dan konfirmasi kelas tanding.",
+      },
+      {
+        id: "ardi",
+        badge: "KEMITRAAN & SPONSORSHIP",
+        role: "Kemitraan & Sponsor",
+        name: "Ardi",
+        ctaLabel: "JADI PARTNER JKBF",
+        whatsappUrl:
+          "https://api.whatsapp.com/send/?phone=628132928327&text&type=phone_number&app_absent=0",
+        description:
+          "Pelayanan peluang sponsorship, kolaborasi brand, dan dukungan komersial resmi JKBF 2026.",
+      },
+    ],
+  },
+
+  // ─── Official Approved FAQ Items ────────────────────────────────────────────
   faq: [
     {
       category: "UMUM",
       q: "Apa itu JKBF 2026?",
-      a: "Jogja Kickboxing Festival (JKBF) 2026 adalah kejuaraan olahraga beladiri kickboxing resmi yang diselenggarakan oleh Pengurus Provinsi Kickboxing Indonesia DIY (Pengprov KBI DIY) bekerja sama dengan Noise Comm Indonesia. Event ini hadir sebagai wadah kompetisi berstandar WAKO, pembinaan atlet, dan panggung sportivitas di Yogyakarta.",
+      a: "Jogja Kickboxing Festival (JKBF) 2026 adalah kejuaraan olahraga beladiri kickboxing resmi dan festival sportainment yang diselenggarakan oleh Pengurus Provinsi Kickboxing Indonesia DIY (Pengprov KBI DIY) bersama Noise Comm Indonesia. Event ini mengusung semangat #JOGJAPUNYANYALI — RISE • FIGHT • CONQUER.",
+    },
+    {
+      category: "JADWAL & LOKASI",
+      q: "Kapan dan di mana JKBF 2026 diselenggarakan?",
+      a: "Jogja Kickboxing Festival 2026 diselenggarakan pada tanggal 19–20 Desember 2026 di GOR Pancasila UGM, Yogyakarta.",
     },
     {
       category: "KEJUARAAN",
-      q: "Apa saja kategori kompetisinya?",
-      a: "JKBF 2026 menyelenggarakan 7 program kompetisi: Kejurda Kickboxing DIY 2026 (khusus domisili DIY), Redy Open Championship II (terbuka nasional), Camp Open (antar-sasana), SMA Open (pelajar), University Open (mahasiswa perguruan tinggi), serta Kelas Bintang dan Kelas Mega Bintang (partai undangan khusus / invitation only).",
+      q: "Apa saja program kompetisinya?",
+      a: "JKBF 2026 menghadirkan 7 program kejuaraan: Kejurda Kickboxing DIY 2026 (atlet domisili DIY), Redy Open Championship II (terbuka nasional), Camp Open (antar-sasana), SMA Open (pelajar SMA/sederajat), University Open (mahasiswa perguruan tinggi), serta Kelas Bintang dan Kelas Mega Bintang (kategori undangan khusus).",
     },
     {
       category: "REGISTRASI",
-      q: "Bagaimana cara mendaftar?",
-      a: "Pendaftaran fighter dilakukan secara online melalui formulir Google Form resmi yang telah disediakan panitia. Tidak diperlukan pembuatan akun internal di website. Pilih nomor pertandingan dan isi biodata serta unggah berkas persyaratan yang diminta.",
+      q: "Bagaimana cara mendaftar sebagai fighter?",
+      a: "Pendaftaran fighter dilakukan secara online melalui formulir Google Form resmi yang tersedia di website ini. Tidak perlu membuat akun website internal. Lengkapi biodata dan persyaratan atlet sebelum batas waktu pendaftaran.",
     },
     {
       category: "REGISTRASI",
-      q: "Sampai kapan pendaftaran diperpanjang?",
-      a: "Pendaftaran resmi telah diperpanjang hingga 30 November 2026. Segera lengkapi berkas dan formulir pendaftaran sebelum batas waktu tersebut berakhir.",
+      q: "Sampai kapan pendaftaran fighter dibuka?",
+      a: "Pendaftaran fighter resmi diperpanjang hingga 30 November 2026. Pastikan seluruh berkas dan pengisian Google Form telah diselesaikan sebelum tenggat waktu tersebut.",
     },
     {
-      category: "UNIVERSITY OPEN",
-      q: "Apakah mahasiswa dari kampus lain bisa ikut University Open?",
-      a: "Bisa. Program University Open terbuka untuk mahasiswa aktif dari seluruh perguruan tinggi di Indonesia. Mahasiswa yang kampusnya belum tercantum pada materi promosi tetap memiliki hak dan kesempatan yang sama untuk mendaftar dan bertanding.",
+      category: "KAMPUS & SEKOLAH",
+      q: "Apakah siswa SMA atau mahasiswa dari kampus mana pun bisa ikut?",
+      a: "Ya. Program SMA Open terbuka bagi pelajar SMA/sederajat dan University Open terbuka bagi mahasiswa aktif perguruan tinggi se-Indonesia. Meskipun sekolah atau kampus Anda belum tercantum di materi poster, Anda tetap dapat mengikuti pendaftaran melalui jalur resmi.",
     },
     {
       category: "CONTENT CHALLENGE",
-      q: "Bagaimana mengikuti Content Challenge?",
-      a: "Anda dapat mendaftar melalui formulir resmi Content Challenge yang tersedia di website ini. Tunjukkan perspektif kreatif Anda dalam format video seputar olahraga combat dan semangat #JOGJAPUNYANYALI.",
+      q: "Bagaimana cara mengikuti JKBF Content Challenge?",
+      a: "Anda dapat mendaftarkan karya video Anda melalui formulir resmi Content Challenge yang tertaut langsung di website ini dan menampilkan semangat #JOGJAPUNYANYALI.",
     },
     {
       category: "KONTAK",
-      q: "Bagaimana menghubungi admin registrasi?",
-      a: "Pertanyaan seputar pendaftaran fighter, kelas pertandingan, dan administrasi dapat dikonsultasikan langsung melalui WhatsApp resmi Admin Registrasi: Priya Pratama (+62 838-7260-3935).",
-    },
-    {
-      category: "KEMITRAAN",
-      q: "Bagaimana mengajukan kerja sama atau sponsorship?",
-      a: "Peluang kemitraan, kolaborasi brand, dan sponsorship dapat diajukan langsung melalui WhatsApp resmi Koordinator Kemitraan: Ardi (+62 813-2928-327).",
+      q: "Siapa yang harus dihubungi untuk pendaftaran fighter atau sponsorship?",
+      a: "Untuk bantuan pendaftaran fighter, hubungi admin registrasi Priya Pratama via WhatsApp resmi di tombol HUBUNGI ADMIN FIGHTER. Untuk peluang kemitraan dan sponsorship, hubungi Ardi melalui tombol JADI PARTNER JKBF.",
     },
   ],
 } as const;
 
-// ─── Publication Policy Configuration (Master Directive) ──────────────────────
+// ─── Publication Policy Configuration ─────────────────────────────────────────
 export const publicationConfig = {
-  eventDate: false,
-  venue: false,
+  eventDate: true,
+  venue: true,
+  megaBintangFaisalGiru: true,
   musicLineup: false,
   originalHandbook: false,
+  legacy3dVenue: false,
+  usesLedProduction: false,
   fighterRegistration: true,
   contentChallenge: true,
   partnership: true,
+  smaOpen: true,
   universityOpen: true,
 } as const;
 
-// ─── University Open Special Campaign Configuration ───────────────────────────
-export const universityOpenConfig = {
-  headline: "KAMPUSMU PUNYA NAMA. PUNYA NYALI JUGA?",
-  subHeadline: "SPECIAL CAMPAIGN • UNIVERSITY OPEN",
+// ─── Mega Bintang Featured Config (Confirmed Owner Data) ──────────────────────
+export const megaBintangConfig = {
+  heading: "MEGA BINTANG JKBF 2026",
+  featuredName: "FAISAL GIRU",
   supportingText:
-    "Saatnya bawa nama kampusmu ke atas ring dan tunjukkan semangat kompetisi serta sportivitasmu di JKBF 2026.",
+    "Faisal Giru hadir sebagai salah satu Mega Bintang dalam rangkaian JKBF 2026.",
+  secondaryNote:
+    "Informasi detail mengenai konsep penampilan atau partai akan diumumkan panitia setelah konfirmasi final.",
+  // Exact Instagram post permalink must be verified before activating button CTA
+  verifiedInstagramPostUrl: "",
+  postVerified: false,
+  image: "/images/v9/05_FOTO_FIGHT_MOBILE_TANPA_TEKST.png",
+  imageAlt: "Atmosfer ring kickboxing Mega Bintang JKBF 2026 — Faisal Giru",
+} as const;
+
+// ─── SMA Open Campaign Config ─────────────────────────────────────────────────
+export const smaOpenConfig = {
+  badge: "PROGRAM PELAJAR • SMA OPEN",
+  headline: "SEKOLAHMU PUNYA NAMA. PUNYA NYALI JUGA?",
+  supportingText:
+    "Tunjukkan semangat kompetisi dan sportivitasmu melalui SMA Open JKBF 2026.",
+  ctaLabel: "DAFTAR SMA OPEN",
+} as const;
+
+// ─── University Open Special Campaign Config ──────────────────────────────────
+export const universityOpenConfig = {
+  badge: "PROGRAM MAHASISWA • UNIVERSITY OPEN",
+  headline: "KAMPUSMU PUNYA NAMA. PUNYA NYALI JUGA?",
+  supportingText:
+    "Saatnya tunjukkan semangat dan keberanian membawa nama kampusmu di atas ring.",
   inclusiveHeadline: "KAMPUSMU BELUM ADA DI POSTER?",
   inclusiveText:
-    "Mahasiswa dari kampus lain juga punya kesempatan untuk ikut. Cari tahu persyaratan dan daftarkan dirimu melalui formulir resmi.",
+    "Mahasiswa dari kampus lain juga dapat mencari informasi persyaratan dan mengikuti pendaftaran melalui jalur resmi yang tersedia.",
   ctaLabel: "DAFTAR UNIVERSITY OPEN",
 } as const;
 
-// ─── Verified External Action Links (Single Source of Truth) ───────────────────
+// ─── Verified External Action Links (Single Source of Truth) ──────────────────
 export const jkbfLinks = {
   fighterRegistration:
-    "https://docs.google.com/forms/d/e/1FAIpQLSeXrhAXqaCvaWUgcjXI1Ye19WMQ8KYfHEfVKaA0WR20k7TQCA/viewform?usp=send_form",
+    "https://docs.google.com/forms/d/e/1FAIpQLSeXrhAXqaCvaWUgcjXI1Ye19WMQ8KYfHEfVKaA0WR20k7TQCA/viewform",
   contentChallenge:
     "https://docs.google.com/forms/d/e/1FAIpQLScQSXAwAr1qdaJFIdyPrOtJdygRMdUch9VeLrsVss0_r5J79g/viewform",
   partnershipWhatsApp:
     "https://api.whatsapp.com/send/?phone=628132928327&text&type=phone_number&app_absent=0",
-  partnership:
-    "https://api.whatsapp.com/send/?phone=628132928327&text&type=phone_number&app_absent=0",
   fighterSupportWhatsApp:
     "https://api.whatsapp.com/send/?phone=6283872603935&text&type=phone_number&app_absent=0",
-  fighterSupport:
-    "https://api.whatsapp.com/send/?phone=6283872603935&text&type=phone_number&app_absent=0",
+  instagram: "https://www.instagram.com/jogjakickboxingfestival/",
+  tiktok: "https://www.tiktok.com/@jogjakickboxingfestival",
+  venueMaps:
+    "https://www.google.com/maps/search/?api=1&query=GOR+Pancasila+UGM+Yogyakarta",
 } as const;
 
-// ─── Fighter Registration Status & Deadlines ─────────────────────────────────
+// ─── Fighter Registration Status & Deadlines ──────────────────────────────────
 export const registrationConfig = {
   extended: true,
   deadline: "2026-11-30",
   deadlineIso: "2026-11-30T23:59:59+07:00",
-  displayDeadline: "30 November 2026",
+  displayDeadline: "30 NOVEMBER 2026",
   statusLabel: "PENDAFTARAN DIPERPANJANG!",
   headline: "YOUR FIGHT STARTS HERE.",
   supportingText:
-    "Kesempatan masih terbuka untuk mengikuti rangkaian kejuaraan JKBF 2026. Daftarkan dirimu melalui formulir resmi yang telah disediakan.",
+    "Kesempatan masih terbuka untuk mengikuti rangkaian kejuaraan JKBF 2026 di GOR Pancasila UGM. Daftarkan dirimu melalui formulir resmi yang telah disediakan.",
   adminName: "Priya Pratama",
-  adminPhone: "+62 838-7260-3935",
-  adminSupportLabel: "Pertanyaan seputar pendaftaran fighter? Hubungi admin registrasi.",
+  adminCtaLabel: "HUBUNGI ADMIN FIGHTER",
   timezone: "Asia/Jakarta",
 } as const;
 
@@ -297,8 +349,18 @@ export const contentChallengeConfig = {
   headline: "SHOW YOUR CREATIVITY.",
   subHeadline: "JKBF CONTENT CHALLENGE",
   supportingText:
-    "Punya ide konten kreatif? Temukan informasi dan ikuti Content Challenge JKBF melalui formulir yang telah disediakan.",
+    "Tunjukkan perspektif kreatifmu melalui karya konten bertema olahraga combat dan semangat #JOGJAPUNYANYALI melalui formulir resmi panitia.",
   ctaLabel: "IKUT CONTENT CHALLENGE",
+} as const;
+
+// ─── Sportainment & Entertainment Section (No Lineup / No LED Promises) ───────
+export const sportainmentConfig = {
+  eyebrow: "SPORTAINMENT EXPERIENCE",
+  headline: "MORE THAN A FIGHT.",
+  supportingText:
+    "JKBF mempertemukan semangat kompetisi dan hiburan dalam satu pengalaman sportainment.",
+  secondaryNote:
+    "Susunan pengisi acara hiburan dan akses informasi penonton resmi akan diumumkan melalui kanal resmi panitia.",
 } as const;
 
 // ─── Partnership & Commercial Sponsorship Configuration ───────────────────────
@@ -306,10 +368,8 @@ export const partnershipConfig = {
   headline: "BE PART OF THE MOVEMENT.",
   subHeadline: "PARTNERSHIP & SPONSORSHIP",
   supportingText:
-    "Jadilah bagian dari JKBF 2026 dan bangun peluang kolaborasi melalui kemitraan serta sponsorship bersama penyelenggara.",
+    "Jadilah bagian dari JKBF 2026 melalui peluang kolaborasi dan kemitraan bersama penyelenggara.",
   contactPerson: "Ardi",
-  contactPhone: "+62 813-2928-327",
   ctaLabel: "JADI PARTNER JKBF",
-  supportLabel: "Hubungi Ardi untuk informasi kerja sama dan sponsorship.",
+  supportLabel: "Hubungi Ardi via WhatsApp untuk kerja sama brand dan sponsorship.",
 } as const;
-

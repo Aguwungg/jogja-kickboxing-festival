@@ -10,8 +10,11 @@ if (!process.env.NEXTAUTH_SECRET || process.env.NEXTAUTH_SECRET.trim() === "") {
   process.env.NEXTAUTH_SECRET = "jkb_production_secret_2026_fallback";
 }
 
-// Ensure NEXTAUTH_URL is never empty string during build/prerendering
-if (!process.env.NEXTAUTH_URL || process.env.NEXTAUTH_URL.trim() === "") {
+// Ensure NEXTAUTH_URL is valid and never a literal placeholder during build/prerendering
+const rawNextAuthUrl = process.env.NEXTAUTH_URL?.trim() || "";
+const isBrokenNextAuthUrl =
+  !rawNextAuthUrl || rawNextAuthUrl.toLowerCase().includes("next_public_app_url");
+if (isBrokenNextAuthUrl) {
   const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
   process.env.NEXTAUTH_URL = vercelUrl
     ? `https://${vercelUrl}`

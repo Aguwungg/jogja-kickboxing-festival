@@ -303,7 +303,7 @@ function Arena3DContent() {
               setActivePreset("STAGE");
               viewerRef.current?.focusStage();
             }}
-            title="Fokus pandangan ke Stage & LED Backdrop"
+            title="Fokus pandangan ke Panggung Utama"
             className={`px-2.5 py-1.5 text-[10px] font-bold rounded-sm border transition-all text-left flex items-center justify-between gap-2 ${
               activePreset === "STAGE"
                 ? "bg-[#ff2d3d] border-[#ff2d3d] text-white"
@@ -835,7 +835,7 @@ function Arena3DContent() {
                         <span className="text-xs font-bold text-white">FOCUS STAGE</span>
                         <StageLedIcon className="w-4 h-4 text-[#ff2d3d]" />
                       </div>
-                      <div className="text-[10px] text-neutral-400 font-mono">Panggung &amp; LED</div>
+                      <div className="text-[10px] text-neutral-400 font-mono">Panggung Utama</div>
                     </button>
                   </div>
 

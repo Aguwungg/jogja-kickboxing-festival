@@ -1,34 +1,36 @@
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+
 export const metadata = {
   title: "Kebijakan Privasi & Perlindungan Data | JKBF 2026",
-  description: "Kebijakan privasi resmi dan perlindungan data pribadi platform digital Jogja Kickboxing Festival 2026 sesuai UU No. 27 Tahun 2022.",
+  description:
+    "Kebijakan privasi resmi platform informasi Jogja Kickboxing Festival 2026 sesuai Undang-Undang Perlindungan Data Pribadi (UU No. 27 Tahun 2022).",
 };
 
 const PRIVACY_ARTICLES = [
   {
     number: "01",
-    title: "LANDASAN HUKUM & PENGENDALI DATA",
+    title: "LANDASAN HUKUM & PENGELOLA PLATFORM",
     items: [
-      "Kebijakan Privasi ini disusun berdasarkan ketentuan Undang-Undang Republik Indonesia Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP).",
-      "Panitia Pelaksana Jogja Kickboxing Festival & Redy Championship 2 bertindak sebagai Pengendali Data Pribadi atas setiap informasi yang Anda berikan melalui situs web resmi ini.",
+      "Kebijakan Privasi ini disusun mengacu pada Undang-Undang Republik Indonesia Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP).",
+      "Panitia Pelaksana Jogja Kickboxing Festival 2026 (Pengprov KBI DIY & Noise Comm Indonesia) mengelola situs informasi resmi ini sebagai pusat pengumuman, informasi kejuaraan, dan tautan pendaftaran peserta.",
     ],
   },
   {
     number: "02",
-    title: "DATA PRIBADI YANG DIKUMPULKAN",
+    title: "PENGUMPULAN DATA & FORMULIR EKSTERNAL",
     items: [
-      "Pendaftaran Akun & Autentikasi: Nama lengkap, alamat email, dan kata sandi yang dilindungi dengan algoritma password hashing searah standar industri (bcrypt).",
-      "Partisipasi Voting City Pride: Identitas akun guna menjamin integritas asas satu pemilih satu suara (one-account-one-vote).",
-      "Transaksi Merchandise: Nama pemesan, nomor WhatsApp, email, dan alamat tujuan pengiriman ekspedisi.",
-      "Formulir Kontak & Kemitraan: Nama, nomor telepon, email, serta rincian pesan inquiry sponsorship/media.",
+      "Situs web publik JKBF 2026 tidak mewajibkan pembuatan akun pengguna untuk membaca informasi kejuaraan, lokasi, maupun pengumuman resmi.",
+      "Pendaftaran fighter dan partisipasi JKBF Content Challenge diarahkan melalui formulir resmi Google Forms yang disediakan panitia sesuai kebutuhan verifikasi peserta.",
+      "Koordinasi langsung terkait administrasi pendaftaran atau kemitraan dilakukan melalui saluran WhatsApp resmi narahubung panitia yang tercantum di halaman Kontak.",
     ],
   },
   {
     number: "03",
-    title: "KEAMANAN DAN HAK SUBJEK DATA",
+    title: "KEAMANAN, TRANSPARANSI & HAK SUBJEK DATA",
     items: [
-      "Kami menerapkan enkripsi transmisi standar industri (TLS/HTTPS), pengamanan hash kata sandi (bcrypt), dan kontrol akses berbasis peran (RBAC) untuk melindungi seluruh data dari akses tidak sah.",
-      "Data pengunjung tidak akan diperjualbelikan kepada pihak ketiga mana pun untuk kepentingan komersial pihak luar.",
-      "Anda berhak meminta peninjauan, koreksi, atau penghapusan data pribadi Anda dengan menghubungi panitia melalui info@jogjakickboxing.id.",
+      "Seluruh akses menuju situs resmi dilindungi enkripsi transmisi standar industri (HTTPS/TLS) dan tidak memperjualbelikan data pengunjung kepada pihak ketiga.",
+      "Untuk permintaan koreksi, klarifikasi, atau penghapusan informasi peserta yang dikirim melalui formulir resmi panitia, silakan hubungi admin resmi melalui halaman Kontak.",
     ],
   },
 ];
@@ -36,10 +38,7 @@ const PRIVACY_ARTICLES = [
 export default function KebijakanPrivasiPage() {
   return (
     <main className="flex-1 flex flex-col w-full min-h-screen bg-black text-[#F5F5F7] pt-28 lg:pt-36 pb-32">
-      
-      {/* ═════════════════════════════════════════════════════════════════════
-          1. EDITORIAL HEADER — V10 BROADSHEET HERO
-      ═════════════════════════════════════════════ */}
+      {/* Header */}
       <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 pt-6 pb-16 w-full border-b border-white/10">
         <div className="flex items-center gap-3 mb-6">
           <span className="w-2.5 h-2.5 bg-[#D91F2C]" />
@@ -51,21 +50,20 @@ export default function KebijakanPrivasiPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-8">
             <h1 className="text-6xl sm:text-8xl lg:text-9xl font-display font-black uppercase tracking-tight leading-[0.85] text-white">
-              KEBIJAKAN<br />
+              KEBIJAKAN
+              <br />
               <span className="text-[#D91F2C]">PRIVASI.</span>
             </h1>
           </div>
           <div className="lg:col-span-4 lg:pb-3">
             <p className="text-base text-white/60 font-sans leading-relaxed">
-              Tata kelola privasi digital, kepatuhan Undang-Undang No. 27 Tahun 2022 tentang Perlindungan Data Pribadi (UU PDP), dan jaminan kerahasiaan pengunjung.
+              Tata kelola privasi digital dan keterbukaan pengelolaan informasi platform resmi Jogja Kickboxing Festival 2026.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ═════════════════════════════════════════════════════════════════════
-          2. ARTICLES IN SPACIOUS EDITORIAL ROWS
-      ═════════════════════════════════════════════ */}
+      {/* Articles */}
       <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 py-16 w-full flex-1">
         <div className="border-t border-white/10 divide-y divide-white/10">
           {PRIVACY_ARTICLES.map((article) => (
@@ -79,9 +77,9 @@ export default function KebijakanPrivasiPage() {
                 </span>
               </div>
               <div className="lg:col-span-4">
-                <h3 className="text-2xl sm:text-3xl font-display uppercase tracking-wide text-white leading-snug">
+                <h2 className="text-2xl sm:text-3xl font-display uppercase tracking-wide text-white leading-snug">
                   {article.title}
-                </h3>
+                </h2>
               </div>
               <div className="lg:col-span-7 space-y-4 text-sm sm:text-base text-white/70 font-sans leading-relaxed">
                 {article.items.map((item, idx) => (
@@ -96,16 +94,19 @@ export default function KebijakanPrivasiPage() {
         </div>
       </section>
 
-      {/* ═════════════════════════════════════════════════════════════════════
-          3. COMPLIANCE FOOTNOTE
-      ═════════════════════════════════════════════ */}
+      {/* Compliance Footnote */}
       <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 pt-8 w-full border-t border-white/10">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-technical text-white/40 uppercase tracking-wider">
-          <p>STANDAR KEPATUHAN: UU PDP NO. 27/2022 • ENKRIPSI TLS/HTTPS STANDAR INDUSTRI</p>
-          <p>info@jogjakickboxing.id</p>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-technical text-white/50 uppercase tracking-wider">
+          <p>STANDAR KEPATUHAN: UU PDP NO. 27/2022 • 19–20 DESEMBER 2026 • GOR PANCASILA UGM</p>
+          <Link
+            href="/kontak"
+            className="text-[#D91F2C] hover:underline inline-flex items-center gap-1 font-bold"
+          >
+            <span>HUBUNGI PANITIA RESMI</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
       </section>
-
     </main>
   );
 }

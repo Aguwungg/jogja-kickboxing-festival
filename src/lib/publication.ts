@@ -1,158 +1,88 @@
 /**
  * JKBF 2026 — PUBLICATION CONTROL CONFIGURATION
  *
- * Centralized "publish-by-default-DENIED" policy for all embargoed information.
- *
- * HOW TO USE:
- *   Import this in any component/page and check the flag before rendering sensitive content.
- *   False = embargoed / not approved for public release.
- *   True = approved for public release.
- *
- * IMPORTANT:
- *   These flags control SERVER-SIDE rendering decisions. Do NOT use CSS display:none
- *   as the sole mechanism to hide embargoed content — omit it entirely from the HTML.
- *
- * CHANGE PROCESS:
- *   Only update a flag to `true` after explicit organizer approval.
- *   Update this file, commit, and deploy in a deliberate release.
+ * Centralized policy for public vs restricted event information.
+ * Updated per Master Website Update:
+ *   - Event Date (19–20 Desember 2026): APPROVED
+ *   - Venue (GOR Pancasila UGM, Yogyakarta): APPROVED
+ *   - Faisal Giru Mega Bintang: APPROVED
+ *   - Legacy 3D Venue Model (previous venue / LED setup): UNPUBLISHED (false)
+ *   - Music Artist Lineup: NOT APPROVED FOR PUBLICATION (false)
+ *   - Ticketing / PPV / Merch / Fighter Directory / Bracket / Schedule / Creator Hub: FALSE
  */
 
 export const publication = {
-  /**
-   * Event date announcement.
-   * Embargo active: specific event dates are confidential.
-   * The year "2026" in brand identity may remain visible.
-   */
-  showEventDate: false,
+  /** Official event dates (19–20 Desember 2026) — APPROVED */
+  showEventDate: true,
 
-  /**
-   * Event venue details (name, address, map, directions).
-   * Embargo active: specific venue is confidential.
-   * "Yogyakarta" as a city identity may remain visible.
-   */
-  showVenue: false,
+  /** Official venue details (GOR Pancasila UGM, Yogyakarta) — APPROVED */
+  showVenue: true,
 
-  /**
-   * Music artist lineup (names, photos, schedule).
-   * Embargo active: lineup not approved for public release.
-   */
+  /** Countdown timer to 19 Desember 2026 — APPROVED */
+  showCountdown: true,
+
+  /** Faisal Giru Mega Bintang promotional feature — APPROVED */
+  showMegaBintangFaisalGiru: true,
+
+  /** Music artist lineup (names, portraits, schedule) — UNPUBLISHED */
   showMusicLineup: false,
 
-  /**
-   * Technical Handbook PDF download.
-   * Embargo active: original handbook contains embargoed dates & venue.
-   * Only enable when a redacted/approved public version is supplied.
-   */
+  /** Legacy 3D arena layout (based on previous venue & LED setup) — UNPUBLISHED */
+  showLegacy3dArena: false,
+
+  /** Technical Handbook PDF download — UNPUBLISHED */
   showTechnicalHandbookDownload: false,
 
-  /**
-   * Ticket purchasing and pricing.
-   * Removed from public site scope.
-   */
+  /** Ticket purchasing and pricing — UNPUBLISHED */
   showTicketing: false,
 
-  /**
-   * Fighter/athlete directory and profiles.
-   * Removed from public site scope.
-   */
+  /** Fighter/athlete directory and profiles — REMOVED */
   showFighterDirectory: false,
 
-  /**
-   * Content competition / Creator Hub.
-   * Removed from public site scope.
-   */
+  /** Content competition / Creator Hub backend — REMOVED */
   showContentCompetition: false,
 
-  /**
-   * Pay-per-view streaming.
-   * Removed from public site scope.
-   */
+  /** Pay-per-view streaming — REMOVED */
   showPpv: false,
 
-  /**
-   * Merchandise storefront.
-   * Removed from public site scope.
-   */
+  /** Merchandise storefront — REMOVED */
   showMerchandise: false,
 
-  /**
-   * Live tournament bracket.
-   * Removed from public site scope.
-   */
+  /** Live tournament bracket — REMOVED */
   showBracket: false,
 
-  /**
-   * Day-by-day schedule (reveals dates).
-   * Removed from public site scope.
-   */
+  /** Day-by-day rundown schedule — UNPUBLISHED until verified rundown is confirmed */
   showSchedule: false,
 
-  /**
-   * City pride / voting feature.
-   * Removed from public site scope.
-   */
+  /** City pride / voting feature — REMOVED */
   showCityPrideVoting: false,
 
-  /**
-   * Countdown timer (reveals event date indirectly).
-   * Embargo active.
-   */
-  showCountdown: false,
-
-  /**
-   * Fighter registration promotional section & external CTA.
-   * Approved: registration deadline 30 November 2026.
-   */
+  /** Fighter registration promotion & Google Form CTA — APPROVED */
   showFighterRegistrationPromotion: true,
 
-  /**
-   * Content Challenge promotional section & external Google Form CTA.
-   * Approved: external link only (no internal creator system).
-   */
+  /** Content Challenge promotion & Google Form CTA — APPROVED */
   showContentChallengePromotion: true,
 
-  /**
-   * Partnership & Sponsorship WhatsApp CTA section.
-   * Approved: direct contact to Ardi.
-   */
+  /** Partnership & Sponsorship WhatsApp CTA — APPROVED */
   showPartnershipPromotion: true,
 
-  /**
-   * Official announcements section.
-   * Enabled — but content must be individually reviewed before publishing.
-   */
+  /** Curated Official Announcements / Latest Updates — APPROVED */
   showAnnouncements: true,
 
-  /**
-   * Championship programs information.
-   * Approved — general program descriptions are public.
-   */
+  /** Championship programs & WAKO disciplines — APPROVED */
   showChampionshipPrograms: true,
 
-  /**
-   * Competition disciplines (Point Fighting, Kick Light, etc.)
-   * Approved — discipline descriptions are public.
-   */
+  /** Disciplines showcase — APPROVED */
   showDisciplines: true,
 
-  /**
-   * Organizer and official partner logos.
-   * Approved — confirmed organizer identities may be shown.
-   */
+  /** Organizers section — APPROVED */
   showOrganizers: true,
 
-  /**
-   * FAQ section.
-   * Approved — with vetted, embargo-compliant answers only.
-   */
+  /** FAQ section — APPROVED */
   showFaq: true,
 
-  /**
-   * Contact and social media channels.
-   * Approved — verified official channels only.
-   */
+  /** Contact & Official Social Media (Instagram + TikTok) — APPROVED */
   showContact: true,
 } as const;
 
 export type PublicationKey = keyof typeof publication;
-

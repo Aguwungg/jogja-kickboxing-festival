@@ -90,11 +90,11 @@ export const ARENA_ZONES: ZoneDetail[] = [
   },
   {
     id: "stage",
-    name: "PANGGUNG & LED BACKDROP",
+    name: "PANGGUNG & BACKDROP UTAMA",
     category: "STAGE",
     color: "#d71f2c",
     capacityText: "Panggung Utama 13 × 2.2 m",
-    specText: "Ketinggian panggung 1.0 m, LED backdrop raksasa 12 × 4.6 m resolusi tinggi",
+    specText: "Ketinggian panggung 1.0 m dengan backdrop panggung utama 12 × 4.6 m",
     description:
       "Panggung seremonial, pembukaan resmi, pemutaran video promosi, dan penyerahan medali kejuaraan JKBF 2026 di sisi timur hall.",
     cameraTarget: [33.9, 1.5, 12.5],

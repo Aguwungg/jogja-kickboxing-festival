@@ -4,13 +4,16 @@ import {
   Scale,
   ArrowUpRight,
   Check,
+  MessageCircle,
+  Calendar,
+  MapPin,
 } from "lucide-react";
 import { EVENT_CONFIG } from "@/lib/event-config";
 
 export const metadata = {
   title: "Tentang JKBF 2026 | Jogja Kickboxing Festival",
   description:
-    "Pusat informasi resmi Jogja Kickboxing Festival 2026. Profil penyelenggara, program kejuaraan, disiplin pertandingan, dan regulasi resmi WAKO.",
+    "Pusat informasi resmi Jogja Kickboxing Festival 2026 — 19–20 Desember 2026 di GOR Pancasila UGM, Yogyakarta. Profil penyelenggara, program kejuaraan, dan regulasi WAKO.",
 };
 
 export default function TentangPage() {
@@ -101,6 +104,30 @@ export default function TentangPage() {
                 <p>• Ketua Umum Pengprov KBI DIY: <strong className="text-white">Redy Apriyanta</strong></p>
                 <p>• Ketua Panitia Pelaksana: <strong className="text-white">Guguh Felani Ardie</strong></p>
                 <p>• Sekretaris Panitia: <strong className="text-white">RR. Fransisca Kusumoningrum S.Par</strong></p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div className="p-4 bg-black/60 border border-white/10 rounded-xs flex items-start gap-3">
+                  <Calendar className="w-4 h-4 text-[#D91F2C] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-technical text-[10px] uppercase tracking-wider text-[#86868B] block">
+                      TANGGAL PENYELENGGARAAN
+                    </span>
+                    <strong className="font-display text-lg uppercase text-white tracking-wide">
+                      {EVENT_CONFIG.dates.display}
+                    </strong>
+                  </div>
+                </div>
+                <div className="p-4 bg-black/60 border border-white/10 rounded-xs flex items-start gap-3">
+                  <MapPin className="w-4 h-4 text-[#D91F2C] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-technical text-[10px] uppercase tracking-wider text-[#86868B] block">
+                      VENUE ARENA RESMI
+                    </span>
+                    <strong className="font-display text-lg uppercase text-white tracking-wide">
+                      {EVENT_CONFIG.venue.fullDisplay}
+                    </strong>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -370,17 +397,32 @@ export default function TentangPage() {
               07 // NARAHUBUNG PANITIA
             </span>
             <h2 className="font-display text-3xl sm:text-4xl uppercase tracking-wider text-white">
-              SEKRETARIAT &amp; CONTACT PERSON
+              KONTAK OPERASIONAL RESMI
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs font-sans">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs font-sans">
             {EVENT_CONFIG.contact.coordinators.map((c) => (
-              <div key={c.phone} className="p-6 bg-[#111114] border border-white/10 hover:border-[#D91F2C] rounded-sm shadow-xl transition-all space-y-2">
-                <span className="font-technical text-[10px] uppercase text-[#D91F2C] font-bold tracking-wider">{c.label}</span>
-                <p className="font-display text-xl uppercase text-white">{c.name}</p>
-                <a href={`tel:${c.phone.replace(/\s/g, "")}`} className="font-technical text-sm text-[#86868B] hover:text-white block">
-                  {c.phone}
+              <div
+                key={c.id}
+                className="p-6 bg-[#111114] border border-white/10 hover:border-[#D91F2C] rounded-sm shadow-xl transition-all flex flex-col justify-between gap-4"
+              >
+                <div className="space-y-2">
+                  <span className="font-technical text-[10px] uppercase text-[#D91F2C] font-bold tracking-wider">
+                    {c.badge}
+                  </span>
+                  <p className="font-display text-2xl uppercase text-white">{c.name}</p>
+                  <p className="text-[#86868B] leading-relaxed">{c.description}</p>
+                </div>
+                <a
+                  href={c.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-sm uppercase tracking-wider rounded-xs transition-all w-fit"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>{c.ctaLabel}</span>
+                  <ArrowUpRight className="w-4 h-4" />
                 </a>
               </div>
             ))}
@@ -391,7 +433,7 @@ export default function TentangPage() {
               href="/kontak"
               className="inline-flex items-center gap-2 font-display text-sm uppercase tracking-wider text-[#D91F2C] hover:text-white transition-colors"
             >
-              KIRIM PESAN KE PANITIA <ArrowUpRight className="w-4 h-4" />
+              HALAMAN KONTAK &amp; MEDIA SOSIAL RESMI <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>
         </section>

@@ -70,7 +70,7 @@ export default function CheckoutClient() {
         shippingPostalCode: deliveryMethod === "EXPEDITION" ? shippingPostalCode : undefined,
         courier:
           deliveryMethod === "PICKUP_VENUE"
-            ? "Pickup Booth GOR UNY"
+            ? "Pickup Booth GOR Pancasila UGM"
             : `${courierName} (${shippingRegion === "DIY_JATENG" ? "DIY/Jateng" : shippingRegion === "JAWA" ? "Pulau Jawa" : "Luar Jawa"})`,
         shippingCost,
         notes,
@@ -198,12 +198,12 @@ export default function CheckoutClient() {
               >
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="font-display text-xl uppercase tracking-wider text-[#0B0B0B]">
-                    PICK-UP GOR UNY
+                    PICK-UP GOR PANCASILA UGM
                   </h4>
                   <span className="font-technical text-xs font-bold text-emerald-700">GRATIS</span>
                 </div>
                 <p className="text-xs text-[#5A5957] font-sans leading-relaxed">
-                  Ambil langsung di Official Merchandise Booth GOR UNY Yogyakarta saat hari festival (12–14 Des 2026).
+                  Ambil langsung di Official Merchandise Booth GOR Pancasila UGM Yogyakarta saat hari festival (19–20 Des 2026).
                 </p>
               </div>
 

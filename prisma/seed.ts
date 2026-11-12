@@ -1,5 +1,6 @@
 import prisma from "../src/lib/prisma";
 import bcrypt from "bcryptjs";
+import { CURATED_WHATS_NEW_ITEMS } from "../src/lib/whats-new";
 
 async function seed() {
   if (process.env.NODE_ENV === "production") {
@@ -695,7 +696,43 @@ async function seed() {
     });
   }
 
-  console.log("✅ Development seed complete with Schedule, Lineup, Brackets, Creators, Merch, and PPV Products.");
+  // Seed curated WHAT'S NEW Instagram registry records safely
+  for (const wn of CURATED_WHATS_NEW_ITEMS) {
+    await prisma.whatsNewPost.upsert({
+      where: { id: wn.id },
+      update: {
+        title: wn.title,
+        summary: wn.summary,
+        category: wn.category,
+        contentType: wn.contentType,
+        instagramUrl: wn.instagramUrl,
+        coverImage: wn.coverImage,
+        previewVideo: wn.previewVideo,
+        publishedAt: wn.publishedAt,
+        priority: wn.priority,
+        featured: wn.featured,
+        approved: wn.approved,
+        status: wn.status,
+      },
+      create: {
+        id: wn.id,
+        title: wn.title,
+        summary: wn.summary,
+        category: wn.category,
+        contentType: wn.contentType,
+        instagramUrl: wn.instagramUrl,
+        coverImage: wn.coverImage,
+        previewVideo: wn.previewVideo,
+        publishedAt: wn.publishedAt,
+        priority: wn.priority,
+        featured: wn.featured,
+        approved: wn.approved,
+        status: wn.status,
+      },
+    });
+  }
+
+  console.log("✅ Development seed complete with Schedule, Lineup, Brackets, Creators, Merch, PPV Products, and What's New.");
 }
 
 seed()

@@ -1,0 +1,234 @@
+[
+  {
+    "site": "BYON Combat",
+    "slug": "byon_combat_01",
+    "url": "https://byoncombat.com/",
+    "features": "Home hero event dengan CTA tiket | Countdown event | Dua CTA Ticket dan PPV | Fight highlights dan hasil pemenang | Past fights / replay list | Achievement/social proof block",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "BYON Combat",
+    "slug": "byon_combat_02",
+    "url": "https://byoncombat.com/events/",
+    "features": "Event archive",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "BYON Combat",
+    "slug": "byon_combat_03",
+    "url": "https://byoncombat.com/fighters/",
+    "features": "Fighters area (login-gated)",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "BYON Combat",
+    "slug": "byon_combat_04",
+    "url": "https://byoncombat.com/rankings/",
+    "features": "Rankings area (login-gated)",
+    "gated": true,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "BYON Combat",
+    "slug": "byon_combat_05",
+    "url": "https://byoncombat.com/login/",
+    "features": "Account/login gateway",
+    "gated": true,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "BYON Combat",
+    "slug": "byon_combat_06",
+    "url": "https://byontix.com/",
+    "features": "Byontix event ticket/fight-card entry | Byontix reserve/waiting-list/allocation explainer",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "GLORY Kickboxing",
+    "slug": "glory_kickboxing_01",
+    "url": "https://glorykickboxing.com/",
+    "features": "Event hero dan main fight | Newsletter registration | Rules & conduct footer | Partnership nav",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "GLORY Kickboxing",
+    "slug": "glory_kickboxing_02",
+    "url": "https://glorykickboxing.com/events/glory-110",
+    "features": "Detail event + venue | Tab Main Card/Superfight Series | Result method KO/TKO/decision | Round + time finality",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "GLORY Kickboxing",
+    "slug": "glory_kickboxing_03",
+    "url": "https://glorykickboxing.com/fighters",
+    "features": "Fighters per weight division | Fighter click to details",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "GLORY Kickboxing",
+    "slug": "glory_kickboxing_04",
+    "url": "https://glorykickboxing.com/news",
+    "features": "News/category filters",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "GLORY Kickboxing",
+    "slug": "glory_kickboxing_05",
+    "url": "https://glorykickboxing.com/watch",
+    "features": "Watch hub country options",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "UFC",
+    "slug": "ufc_01",
+    "url": "https://www.ufc.com/events",
+    "features": "Events searchable listing | Event time segmented by prelims/main | Venue/event card listing | How to Watch action | Ticket availability and onsale timing | Filter upcoming events",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "ONE Championship",
+    "slug": "one_championship_01",
+    "url": "https://www.onefc.com/",
+    "features": "Next event hero | News, commentary, content categories",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "ONE Championship",
+    "slug": "one_championship_02",
+    "url": "https://www.onefc.com/events/",
+    "features": "Upcoming vs past event listing | Event watch/buy ticket CTA",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "ONE Championship",
+    "slug": "one_championship_03",
+    "url": "https://www.onefc.com/events/one-friday-fights-126/",
+    "features": "Fight card discipline/weight | Outcome badge WIN KO/TKO/UD | Highlights per bout",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "ONE Championship",
+    "slug": "one_championship_04",
+    "url": "https://www.onefc.com/rankings/",
+    "features": "Athlete ranking nav",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "ONE Championship",
+    "slug": "one_championship_05",
+    "url": "https://onechampionship.zendesk.com/hc/en-us/articles/35998314091671-Purchasing-a-Ticket",
+    "features": "How-to-purchase docs",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "ONE Championship",
+    "slug": "one_championship_06",
+    "url": "https://calendar.onefc.com/",
+    "features": "Add to calendar",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "ONE Championship",
+    "slug": "one_championship_07",
+    "url": "https://www.onefc.com/id/",
+    "features": "Local language navigation",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "Sónar",
+    "slug": "s_nar_01",
+    "url": "https://sonar.es/en/programme/line-up",
+    "features": "Lineup per day tabs | Full artist roster browse",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "Sónar",
+    "slug": "s_nar_02",
+    "url": "https://live.sonar.es/en/programme/schedule",
+    "features": "Timetable by day tabs | Timetable filter stage/category",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "Sónar",
+    "slug": "s_nar_03",
+    "url": "https://sonar.es/en/tickets",
+    "features": "Ticket variants day/VIP/weekend | Sold-out state",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "Sónar",
+    "slug": "s_nar_04",
+    "url": "https://sonar.es/en/practical-info/mapa-2026",
+    "features": "Digital venue map",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "Sónar",
+    "slug": "s_nar_05",
+    "url": "https://live.sonar.es/en/practical-info/how-to-get-there-sonard-2026",
+    "features": "How to get there",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "Sónar",
+    "slug": "s_nar_06",
+    "url": "https://live.sonar.es/en/faqs-sonar-2026-novedades",
+    "features": "FAQ operational multi-day",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "Sónar",
+    "slug": "s_nar_07",
+    "url": "https://sonar.es/en/practical-info/sonarapp",
+    "features": "Mobile app by day/stage/time/artist | Save shows, reminders, offline schedules",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "Sónar",
+    "slug": "s_nar_08",
+    "url": "https://sonar.es/en/",
+    "features": "Gallery & post-event archive",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "Gymshark",
+    "slug": "gymshark_01",
+    "url": "https://www.gymshark.com/",
+    "features": "Category mega-menu | Shop by activity / collection | Help/accessibility visibility | Newsletter and branded guides | Region/language selector",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  },
+  {
+    "site": "Gymshark",
+    "slug": "gymshark_02",
+    "url": "https://www.gymshark.com/collections/all-products/womens",
+    "features": "Collection product grid | Filter size/type | Filter feature/activity | Sort by price/newness | Size guide entry",
+    "gated": false,
+    "status": "NEEDS_ONLINE_BROWSER"
+  }
+]

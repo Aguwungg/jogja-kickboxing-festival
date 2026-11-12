@@ -146,7 +146,7 @@ export default async function AdminMatchesPage() {
                   <div className="flex items-center gap-3">
                     <div className="relative w-12 h-12 rounded-sm bg-black overflow-hidden shrink-0 border border-red-500/30">
                       <Image
-                        src={m.athlete1?.image || "/images/jkb/fighter-1.jpg"}
+                        src={m.athlete1?.image || "/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"}
                         alt={m.athlete1?.name || "Red Corner"}
                         fill
                         className="object-cover"
@@ -181,7 +181,7 @@ export default async function AdminMatchesPage() {
                   <div className="flex items-center gap-3">
                     <div className="relative w-12 h-12 rounded-sm bg-black overflow-hidden shrink-0 border border-blue-500/30">
                       <Image
-                        src={m.athlete2?.image || "/images/jkb/fighter-2.jpg"}
+                        src={m.athlete2?.image || "/images/v9/05_FOTO_FIGHT_MOBILE_TANPA_TEKST.png"}
                         alt={m.athlete2?.name || "Blue Corner"}
                         fill
                         className="object-cover"

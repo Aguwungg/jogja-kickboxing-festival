@@ -58,7 +58,7 @@ export default async function AdminMerchPage() {
             OFFICIAL MERCH STORE & ORDERS
           </h1>
           <p className="text-xs text-[#99999F] mt-1">
-            Kelola transaksi masuk, status pembayaran, pick-up di venue GOR UNY, dan stok inventaris.
+            Kelola transaksi masuk, status pembayaran, pick-up di venue GOR Pancasila UGM, dan stok inventaris.
           </p>
         </div>
 

@@ -52,9 +52,9 @@ export default function HomeArenaPreview() {
             ARENA PERTANDINGAN<span className="text-[#D91F2C]">.</span>
           </h2>
           <p className="text-xs sm:text-sm text-[#86868B] font-sans max-w-xl mt-2 leading-relaxed">
-            Simulasi 3D berskala hall 35 × 25 m resmi JKBF 2026. Putar sudut
+            Simulasi 3D berskala hall 35 × 25 m arsip perencanaan. Putar sudut
             pandang secara langsung untuk melihat layout ring pertandingan,
-            tatami, panggung LED, dan barisan kursi VIP.
+            tatami, panggung utama, dan barisan kursi VIP.
           </p>
         </div>
 
@@ -87,10 +87,10 @@ export default function HomeArenaPreview() {
           </div>
 
           <Link
-            href="/arena-3d"
+            href="/venue"
             className="hidden lg:inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-xs tracking-wider uppercase transition-all rounded-xs shadow-[0_0_20px_rgba(217,31,44,0.35)]"
           >
-            <span>BUKA 3D LENGKAP</span>
+            <span>DETAIL VENUE RESMI</span>
             <ArrowUpRight className="w-4 h-4 text-white" />
           </Link>
         </div>
@@ -197,10 +197,10 @@ export default function HomeArenaPreview() {
           {/* Direct CTA overlay on bottom right */}
           <div className="absolute bottom-3 right-3 z-10">
             <Link
-              href="/arena-3d"
+              href="/venue"
               className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-[11px] sm:text-xs tracking-wider uppercase transition-all rounded-xs shadow-lg active:scale-95"
             >
-              <span>JELAJAHI ARENA 3D LENGKAP</span>
+              <span>DETAIL VENUE RESMI</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-white" />
             </Link>
           </div>

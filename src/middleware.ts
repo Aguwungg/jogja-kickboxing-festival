@@ -13,10 +13,20 @@ export async function middleware(req: NextRequest) {
       return NextResponse.next();
     }
 
-    const token = await getToken({
-      req,
-      secret: process.env.NEXTAUTH_SECRET || "fallback-secret-for-development-only",
-    });
+    const secret =
+      process.env.NEXTAUTH_SECRET || "fallback-secret-for-development-only";
+    const token =
+      (await getToken({
+        req,
+        secret,
+        cookieName: "__Secure-next-auth.session-token",
+      })) ??
+      (await getToken({
+        req,
+        secret,
+        cookieName: "next-auth.session-token",
+      })) ??
+      (await getToken({ req, secret }));
 
     if (!token) {
       const loginUrl = new URL("/admin/login", req.url);

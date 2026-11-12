@@ -373,3 +373,25 @@ model ContactMessage {
   createdAt DateTime @default(now())
 }
 
+// ---------------------------------------------------------
+// Curated Instagram Feed ("WHAT'S NEW.")
+// ---------------------------------------------------------
+
+model WhatsNewPost {
+  id           String   @id @default(cuid())
+  title        String
+  summary      String
+  category     String   @default("OFFICIAL ANNOUNCEMENT")
+  contentType  String   @default("image") // "reel" | "image" | "carousel"
+  instagramUrl String   @default("")
+  coverImage   String
+  previewVideo String   @default("")
+  publishedAt  String   @default("") // ISO YYYY-MM-DD of Instagram publication
+  priority     Int      @default(10)
+  featured     Boolean  @default(false)
+  approved     Boolean  @default(false)
+  status       String   @default("pending") // "draft" | "pending" | "published" | "archived"
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+

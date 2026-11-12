@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { Clock, ArrowUpRight, MessageCircle, HelpCircle, ShieldCheck } from "lucide-react";
-import { jkbfLinks } from "@/lib/event-config";
+import { ArrowUpRight, MessageCircle, HelpCircle, ShieldCheck, Calendar, MapPin } from "lucide-react";
+import { EVENT_CONFIG } from "@/lib/event-config";
+import { InstagramIcon, TikTokIcon } from "@/components/layout/SocialIcons";
 
 export const metadata = {
-  title: "Kontak & Sekretariat Panitia | JKBF 2026",
+  title: "Kontak & Media Sosial Resmi | JKBF 2026",
   description:
-    "Hubungi panitia resmi Jogja Kickboxing Festival 2026 langsung via WhatsApp untuk kemitraan sponsor, pendaftaran fighter, dan informasi event.",
+    "Hubungi panitia resmi Jogja Kickboxing Festival 2026 langsung via WhatsApp untuk bantuan pendaftaran fighter dan kemitraan sponsor, serta ikuti kanal media sosial resmi.",
 };
 
 export default function KontakPage() {
@@ -19,7 +20,7 @@ export default function KontakPage() {
         <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-xs bg-black/80 border border-white/15 mb-4 sm:mb-6">
           <span className="w-2 h-2 rounded-xs bg-[#D91F2C]" />
           <p className="text-[#D91F2C] text-[11px] sm:text-xs font-technical uppercase tracking-[0.25em] font-bold">
-            HUBUNGI KAMI // SEKRETARIAT RESMI
+            HUBUNGI KAMI // KONTAK RESMI PANITIA
           </p>
         </div>
 
@@ -37,165 +38,162 @@ export default function KontakPage() {
           </div>
           <div className="lg:col-span-4 lg:pb-2">
             <p className="text-xs sm:text-sm md:text-base text-[#86868B] font-sans leading-relaxed">
-              Hubungi langsung koordinator resmi festival via WhatsApp untuk pendaftaran atlet, sponsorship brand, atau perwasitan WAKO.
+              Hubungi langsung koordinator resmi festival melalui WhatsApp untuk bantuan pendaftaran fighter atau kemitraan brand &amp; sponsorship.
             </p>
           </div>
         </div>
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════
-          2. DIRECT WHATSAPP HOTLINES (TACTICAL DOSSIER LIST)
-          Super slim rows, zero endless scrolling. All 3 fit on 1 mobile screen!
+          2. CONFIRMED OPERATIONAL WHATSAPP CONTACTS (PRYIA & ARDI ONLY)
       ═════════════════════════════════════════════ */}
-      <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 py-8 sm:py-12 w-full flex-1">
-        
-        <div className="mb-4 sm:mb-6">
+      <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 py-8 sm:py-12 w-full">
+        <div className="mb-5 sm:mb-6">
           <p className="font-technical text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#D91F2C] font-bold mb-0.5">
             KOMUNIKASI LANGSUNG
           </p>
-          <h2 className="font-display text-xl sm:text-3xl uppercase tracking-tight text-white">
-            NARAHUBUNG RESMI PANITIA
+          <h2 className="font-display text-2xl sm:text-3xl uppercase tracking-tight text-white">
+            KONTAK OPERASIONAL RESMI WHATSAPP
           </h2>
         </div>
 
-        {/* 3 Ultra-Compact Coordinator Athletic Combat Rows */}
-        <div className="space-y-2.5 sm:space-y-3 max-w-4xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl">
+          {EVENT_CONFIG.contact.coordinators.map((coord, idx) => (
+            <div
+              key={coord.id}
+              className="p-6 sm:p-8 bg-[#111114] border border-white/10 hover:border-[#D91F2C] rounded-sm transition-all duration-300 shadow-xl flex flex-col justify-between gap-6"
+            >
+              <div className="space-y-3">
+                <span
+                  className={`inline-flex px-2.5 py-1 rounded-xs text-[10px] font-technical uppercase font-bold tracking-wider border ${
+                    idx === 0
+                      ? "bg-[#D91F2C]/15 border-[#D91F2C]/40 text-[#D91F2C]"
+                      : "bg-white/[0.06] border-white/15 text-[#F5F5F7]"
+                  }`}
+                >
+                  {coord.badge}
+                </span>
 
-          {/* Coordinator 1: Fighter Registration */}
-          <div className="p-3.5 sm:p-4 bg-[#111114] border border-white/10 hover:border-[#D91F2C] rounded-sm transition-all duration-300 shadow-xl flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xs bg-[#D91F2C]/10 border border-[#D91F2C]/30 flex items-center justify-center text-[#D91F2C] font-display text-sm sm:text-lg font-black shrink-0">
-                PP
-              </div>
-              <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <h3 className="font-display text-base sm:text-xl uppercase tracking-wide text-white truncate">
-                    PRIYA PRATAMA
+                <div>
+                  <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-wide text-white">
+                    {coord.name}
                   </h3>
-                  <span className="hidden sm:inline-flex px-2 py-0.5 rounded-xs bg-[#D91F2C]/10 border border-[#D91F2C]/30 text-[#D91F2C] text-[10px] font-technical uppercase font-bold tracking-wider">
-                    ADMIN REGISTRASI
-                  </span>
+                  <p className="font-technical text-xs uppercase text-[#86868B] tracking-wider mt-0.5">
+                    {coord.role}
+                  </p>
                 </div>
-                <p className="font-technical text-[10px] sm:text-xs text-[#D91F2C] sm:text-[#86868B] uppercase font-semibold tracking-wider truncate mt-0.5">
-                  Registrasi Fighter • Berkas &amp; Kelas Tanding
+
+                <p className="text-xs sm:text-sm text-[#A1A1A6] font-sans leading-relaxed">
+                  {coord.description}
                 </p>
               </div>
+
+              <a
+                href={coord.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3.5 px-5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-[0.98] text-white font-display text-sm sm:text-base tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(217,31,44,0.35)] inline-flex items-center justify-center gap-2 rounded-xs"
+                aria-label={`${coord.ctaLabel} (${coord.name} via WhatsApp)`}
+              >
+                <MessageCircle className="w-4 h-4 shrink-0" />
+                <span>{coord.ctaLabel}</span>
+                <ArrowUpRight className="w-4 h-4 shrink-0" />
+              </a>
             </div>
-
-            <a
-              href={jkbfLinks.fighterSupportWhatsApp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 sm:px-5 py-2 sm:py-2.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-[11px] sm:text-xs tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(217,31,44,0.35)] inline-flex items-center justify-center gap-1.5 rounded-xs shrink-0"
-              aria-label="Chat WhatsApp Priya Pratama"
-            >
-              <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span className="hidden sm:inline">CHAT </span>
-              <span>WHATSAPP</span>
-              <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            </a>
-          </div>
-
-          {/* Coordinator 2: Partnership & Sponsorship */}
-          <div className="p-3.5 sm:p-4 bg-[#111114] border border-white/10 hover:border-[#D91F2C] rounded-sm transition-all duration-300 shadow-xl flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xs bg-white/5 border border-white/10 flex items-center justify-center text-white font-display text-sm sm:text-lg font-black shrink-0">
-                AR
-              </div>
-              <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <h3 className="font-display text-base sm:text-xl uppercase tracking-wide text-white truncate">
-                    ARDI
-                  </h3>
-                  <span className="hidden sm:inline-flex px-2 py-0.5 rounded-xs bg-white/[0.06] border border-white/10 text-[#F5F5F7] text-[10px] font-technical uppercase font-bold tracking-wider">
-                    SPONSORSHIP
-                  </span>
-                </div>
-                <p className="font-technical text-[10px] sm:text-xs text-[#D91F2C] sm:text-[#86868B] uppercase font-semibold tracking-wider truncate mt-0.5">
-                  Kemitraan • Sponsorship &amp; Brand Partnership
-                </p>
-              </div>
-            </div>
-
-            <a
-              href={jkbfLinks.partnershipWhatsApp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 sm:px-5 py-2 sm:py-2.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-[11px] sm:text-xs tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(217,31,44,0.35)] inline-flex items-center justify-center gap-1.5 rounded-xs shrink-0"
-              aria-label="Chat WhatsApp Ardi"
-            >
-              <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span className="hidden sm:inline">CHAT </span>
-              <span>WHATSAPP</span>
-              <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            </a>
-          </div>
-
-          {/* Coordinator 3: Technical General (VALE - NOW WHATSAPP) */}
-          <div className="p-3.5 sm:p-4 bg-[#111114] border border-white/10 hover:border-[#D91F2C] rounded-sm transition-all duration-300 shadow-xl flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xs bg-white/5 border border-white/10 flex items-center justify-center text-white font-display text-sm sm:text-lg font-black shrink-0">
-                VL
-              </div>
-              <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <h3 className="font-display text-base sm:text-xl uppercase tracking-wide text-white truncate">
-                    VALE
-                  </h3>
-                  <span className="hidden sm:inline-flex px-2 py-0.5 rounded-xs bg-white/[0.06] border border-white/10 text-[#F5F5F7] text-[10px] font-technical uppercase font-bold tracking-wider">
-                    KOORDINATOR TEKNIS
-                  </span>
-                </div>
-                <p className="font-technical text-[10px] sm:text-xs text-[#86868B] uppercase font-semibold tracking-wider truncate mt-0.5">
-                  Operasional Lapangan &amp; Perwasitan WAKO
-                </p>
-              </div>
-            </div>
-
-            <a
-              href="https://wa.me/6285336586597?text=Halo%20Vale%20(Koordinator%20Teknis%20JKBF%202026)%2C%20saya%20ingin%20bertanya%20seputar%20teknis%20pertandingan."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 sm:px-5 py-2 sm:py-2.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-[11px] sm:text-xs tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(217,31,44,0.35)] inline-flex items-center justify-center gap-1.5 rounded-xs shrink-0"
-              aria-label="Chat WhatsApp Vale"
-            >
-              <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span className="hidden sm:inline">CHAT </span>
-              <span>WHATSAPP</span>
-              <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            </a>
-          </div>
-
+          ))}
         </div>
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════
-          3. SECONDARY UTILITY STRIP (TACTICAL COMBAT TILES)
+          3. STAY CONNECTED — OFFICIAL SOCIAL MEDIA (INSTAGRAM & TIKTOK ONLY)
+      ═════════════════════════════════════════════ */}
+      <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 pb-10 sm:pb-14 w-full">
+        <div className="mb-5 sm:mb-6 pt-8 border-t border-white/[0.08]">
+          <p className="font-technical text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#D91F2C] font-bold mb-0.5">
+            STAY CONNECTED
+          </p>
+          <h2 className="font-display text-2xl sm:text-3xl uppercase tracking-tight text-white">
+            KANAL MEDIA SOSIAL RESMI
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl">
+          <a
+            href={EVENT_CONFIG.social.instagram.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Ikuti Instagram Resmi JKBF (@jogjakickboxingfestival)"
+            className="group p-6 bg-[#111114] border border-white/10 hover:border-[#D91F2C] rounded-sm transition-all flex items-center justify-between gap-4 shadow-xl"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xs bg-[#D91F2C]/15 border border-[#D91F2C]/40 flex items-center justify-center text-[#D91F2C] group-hover:bg-[#D91F2C] group-hover:text-white transition-colors shrink-0">
+                <InstagramIcon className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="font-technical text-[10px] uppercase tracking-widest text-[#86868B] block">
+                  INSTAGRAM RESMI
+                </span>
+                <p className="font-display text-xl sm:text-2xl uppercase tracking-wide text-white mt-0.5">
+                  {EVENT_CONFIG.social.instagram.handle}
+                </p>
+              </div>
+            </div>
+            <ArrowUpRight className="w-5 h-5 text-[#86868B] group-hover:text-[#D91F2C] transition-colors shrink-0" />
+          </a>
+
+          <a
+            href={EVENT_CONFIG.social.tiktok.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Ikuti TikTok Resmi JKBF (@jogjakickboxingfestival)"
+            className="group p-6 bg-[#111114] border border-white/10 hover:border-[#D91F2C] rounded-sm transition-all flex items-center justify-between gap-4 shadow-xl"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xs bg-white/5 border border-white/15 flex items-center justify-center text-white group-hover:bg-[#D91F2C] group-hover:border-[#D91F2C] transition-colors shrink-0">
+                <TikTokIcon className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="font-technical text-[10px] uppercase tracking-widest text-[#86868B] block">
+                  TIKTOK RESMI
+                </span>
+                <p className="font-display text-xl sm:text-2xl uppercase tracking-wide text-white mt-0.5">
+                  {EVENT_CONFIG.social.tiktok.handle}
+                </p>
+              </div>
+            </div>
+            <ArrowUpRight className="w-5 h-5 text-[#86868B] group-hover:text-[#D91F2C] transition-colors shrink-0" />
+          </a>
+        </div>
+      </section>
+
+      {/* ═════════════════════════════════════════════════════════════════════
+          4. EVENT SNAPSHOT & QUICK LINKS
       ═════════════════════════════════════════════ */}
       <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 max-w-4xl">
-
-          {/* Tile 1: Response Time & Office Hours */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 max-w-5xl">
           <div className="p-4 sm:p-5 bg-[#111114] border border-white/10 rounded-sm flex items-start gap-3">
-            <div className="p-2 sm:p-2.5 bg-[#D91F2C]/10 border border-[#D91F2C]/25 text-[#D91F2C] rounded-xs shrink-0">
-              <Clock className="w-4 h-4" />
+            <div className="p-2 bg-[#D91F2C]/10 border border-[#D91F2C]/25 text-[#D91F2C] rounded-xs shrink-0">
+              <Calendar className="w-4 h-4" />
             </div>
             <div>
               <span className="font-technical text-[10px] uppercase font-bold tracking-wider text-[#86868B]">
-                JAM LAYANAN SEKRETARIAT
+                JADWAL &amp; VENUE RESMI
               </span>
               <p className="font-display text-sm sm:text-base uppercase tracking-wide text-white mt-0.5">
-                Senin – Sabtu, 09:00 – 18:00 WIB
+                {EVENT_CONFIG.dates.display}
               </p>
-              <p className="text-[10px] sm:text-[11px] text-[#86868B] mt-0.5">
-                Target respon WhatsApp maksimal 1 × 24 jam kerja.
-              </p>
+              <Link
+                href="/venue"
+                className="text-[10px] sm:text-[11px] text-[#D91F2C] hover:underline font-technical uppercase font-bold inline-flex items-center gap-1 mt-0.5"
+              >
+                <MapPin className="w-3 h-3" />
+                <span>{EVENT_CONFIG.venue.fullDisplay}</span>
+              </Link>
             </div>
           </div>
 
-          {/* Tile 2: Instant FAQ */}
           <div className="p-4 sm:p-5 bg-[#111114] border border-white/10 rounded-sm flex items-start gap-3">
-            <div className="p-2 sm:p-2.5 bg-white/5 border border-white/10 text-white rounded-xs shrink-0">
+            <div className="p-2 bg-white/5 border border-white/10 text-white rounded-xs shrink-0">
               <HelpCircle className="w-4 h-4 text-[#D91F2C]" />
             </div>
             <div>
@@ -209,20 +207,19 @@ export default function KontakPage() {
                 href="/faq"
                 className="text-[10px] sm:text-[11px] text-[#D91F2C] hover:underline font-technical uppercase font-bold inline-flex items-center gap-1 mt-0.5"
               >
-                <span>LIHAT 8 JAWABAN RESMI</span>
+                <span>LIHAT FAQ RESMI</span>
                 <ArrowUpRight className="w-3 h-3" />
               </Link>
             </div>
           </div>
 
-          {/* Tile 3: Official Verification */}
           <div className="p-4 sm:p-5 bg-[#111114] border border-white/10 rounded-sm flex items-start gap-3">
-            <div className="p-2 sm:p-2.5 bg-[#D91F2C]/10 border border-[#D91F2C]/25 text-[#D91F2C] rounded-xs shrink-0">
+            <div className="p-2 bg-[#D91F2C]/10 border border-[#D91F2C]/25 text-[#D91F2C] rounded-xs shrink-0">
               <ShieldCheck className="w-4 h-4" />
             </div>
             <div>
               <span className="font-technical text-[10px] uppercase font-bold tracking-wider text-[#86868B]">
-                OTORITAS RESMI
+                PENYELENGGARA RESMI
               </span>
               <p className="font-display text-sm sm:text-base uppercase tracking-wide text-white mt-0.5">
                 Pengprov KBI DIY
@@ -232,10 +229,8 @@ export default function KontakPage() {
               </p>
             </div>
           </div>
-
         </div>
       </section>
-
     </main>
   );
 }

@@ -1,25 +1,33 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Shield, Lock, Mail, ArrowRight, AlertCircle, Loader2 } from "lucide-react";
+import {
+  Shield,
+  Lock,
+  Mail,
+  ArrowRight,
+  AlertCircle,
+  Loader2,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 
 function LoginForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    const errorParam = searchParams.get("error");
-    if (errorParam === "AccessDenied") {
-      setError("Akses ditolak: Akun Anda tidak memiliki otorisasi peran administrator.");
-    }
-  }, [searchParams]);
+  const accessDeniedError =
+    searchParams.get("error") === "AccessDenied"
+      ? "Akses ditolak: Akun Anda tidak memiliki otorisasi peran administrator."
+      : "";
+  const displayError = error || accessDeniedError;
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,33 +35,49 @@ function LoginForm() {
     setError("");
 
     try {
-      const callbackUrl = searchParams.get("callbackUrl") || "/admin";
-      const res = await signIn("credentials", {
-        redirect: false,
-        email: email.trim(),
-        password,
-      });
+      const rawCallback = searchParams.get("callbackUrl") || "/admin";
+      const callbackUrl =
+        rawCallback.startsWith("/") && !rawCallback.startsWith("//")
+          ? rawCallback
+          : "/admin";
 
-      if (!res || res.error) {
-        setError("Email atau kata sandi tidak valid. Periksa kembali kredensial Anda.");
+      const res = await Promise.race([
+        signIn("credentials", {
+          redirect: false,
+          email: email.trim(),
+          password,
+        }),
+        new Promise<null>((_, reject) =>
+          setTimeout(() => reject(new Error("LOGIN_TIMEOUT")), 15000)
+        ),
+      ]);
+
+      if (!res || res.error || !res.ok) {
+        setError(
+          "Email atau kata sandi tidak valid. Periksa kembali kredensial Anda."
+        );
         setLoading(false);
         return;
       }
 
-      router.push(callbackUrl);
-      router.refresh();
-    } catch {
-      setError("Terjadi kesalahan sistem saat mencoba masuk. Silakan coba lagi.");
+      window.location.assign(callbackUrl);
+    } catch (err) {
+      const isTimeout = err instanceof Error && err.message === "LOGIN_TIMEOUT";
+      setError(
+        isTimeout
+          ? "Koneksi verifikasi melebihi batas waktu. Silakan muat ulang dan coba lagi."
+          : "Terjadi kesalahan sistem saat mencoba masuk. Silakan coba lagi."
+      );
       setLoading(false);
     }
   };
 
   return (
     <div className="bg-[#171719] border border-white/10 p-8 rounded-sm shadow-2xl">
-      {error && (
+      {displayError && (
         <div className="mb-6 p-4 rounded-sm bg-[#D91F2C]/10 border border-[#D91F2C]/30 text-[#EF3340] text-xs font-sans flex items-start gap-2.5">
           <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-          <span>{error}</span>
+          <span>{displayError}</span>
         </div>
       )}
 
@@ -82,13 +106,25 @@ function LoginForm() {
           <div className="relative">
             <Lock className="w-4 h-4 text-white/30 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••••••"
-              className="w-full bg-[#09090b] border border-white/10 rounded-sm pl-10 pr-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#D91F2C] transition-colors font-sans"
+              className="w-full bg-[#09090b] border border-white/10 rounded-sm pl-10 pr-10 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#D91F2C] transition-colors font-sans"
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              aria-label={showPassword ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+            >
+              {showPassword ? (
+                <EyeOff className="w-4 h-4" />
+              ) : (
+                <Eye className="w-4 h-4" />
+              )}
+            </button>
           </div>
         </div>
 

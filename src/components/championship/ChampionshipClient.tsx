@@ -37,7 +37,7 @@ export default function ChampionshipClient() {
         "Pemberian medali dan piagam resmi KONI & KBI DIY",
       ],
       disciplines: ["Point Fighting", "Kick Light", "Low Kick", "Full Contact"],
-      image: "/images/jkb/fighter-1.jpg",
+      image: "/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png",
     },
     {
       id: "redy-open",
@@ -57,7 +57,7 @@ export default function ChampionshipClient() {
         "Perebutan gelar juara umum dan trofi bergengsi",
       ],
       disciplines: ["Point Fighting", "Kick Light", "Low Kick", "Full Contact", "K-1 Style"],
-      image: "/images/jkb/fighter-2.jpg",
+      image: "/images/jkb/boxing-ring.jpg",
     },
     {
       id: "camp-open",
@@ -76,7 +76,7 @@ export default function ChampionshipClient() {
         "Peluang unjuk bakat bagi calon petarung profesional masa depan",
       ],
       disciplines: ["Point Fighting", "Kick Light", "Low Kick", "K-1 Style"],
-      image: "/images/jkb/fighter-3.jpg",
+      image: "/images/event/boxing-gloves.jpg",
     },
     {
       id: "sma-open",
@@ -95,7 +95,7 @@ export default function ChampionshipClient() {
         "Pemberian poin prestasi olahraga untuk jenjang akademik",
       ],
       disciplines: ["Kick Light", "Point Fighting", "K-1 Style"],
-      image: "/images/jkb/fighter-training.jpg",
+      image: "/images/jkb/hero-concert.jpg",
     },
     {
       id: "university-open",
@@ -114,7 +114,7 @@ export default function ChampionshipClient() {
         "Persaingan antarkampus terkemuka dari berbagai daerah",
       ],
       disciplines: ["K-1 Style Ringsport", "Low Kick"],
-      image: "/images/jkb/fighter-agung.jpg",
+      image: "/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png",
     },
     {
       id: "kelas-bintang",
@@ -133,7 +133,7 @@ export default function ChampionshipClient() {
         "Bukan kategori pendaftaran umum",
       ],
       disciplines: ["K-1 Style Ringsport"],
-      image: "/images/jkb/fighter-5.jpg",
+      image: "/images/championship/belt-hero.jpg",
     },
     {
       id: "kelas-mega-bintang",
@@ -152,7 +152,7 @@ export default function ChampionshipClient() {
         "Eksklusif undangan khusus promotor resmi",
       ],
       disciplines: ["K-1 Style Ringsport"],
-      image: "/images/jkb/hero-boxing.jpg",
+      image: "/images/v9/05_FOTO_FIGHT_MOBILE_TANPA_TEKST.png",
     },
   ];
 
@@ -238,7 +238,7 @@ export default function ChampionshipClient() {
                         active ? "bg-black/30 text-white font-bold" : "bg-white/5 text-[#8E8E98]"
                       }`}
                     >
-                      // {f.count}
+                      {"//"} {f.count}
                     </span>
                   </button>
                 );

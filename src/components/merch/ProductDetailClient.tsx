@@ -250,7 +250,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
 
             {/* Logistics & Delivery note */}
             <div className="pt-6 border-t border-white/10 space-y-2 text-xs font-technical text-white/50">
-              <p>• Opsi Ambil di Tempat (Pick-up Lobi Barat GOR UNY Yogyakarta saat hari festival 12–14 Des 2026).</p>
+              <p>• Opsi Ambil di Tempat (Pick-up Lobi Booth GOR Pancasila UGM Yogyakarta saat hari festival 19–20 Des 2026).</p>
               <p>• Opsi Pengiriman Ekspedisi (JNE / J&T) dengan nomor resi resmi ke seluruh Indonesia.</p>
             </div>
           </div>

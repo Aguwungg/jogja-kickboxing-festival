@@ -61,7 +61,7 @@ export default function PpvWatchClient({ initialCode }: Props) {
           <span>KEMBALI KE PPV STREAM</span>
         </Link>
         <span className="text-xs font-technical text-[#D91F2C] uppercase font-bold">
-          • LIVE FEED STANDBY (GOR UNY ARENA)
+          • LIVE FEED STANDBY (GOR PANCASILA UGM ARENA)
         </span>
       </div>
 
@@ -131,7 +131,7 @@ export default function PpvWatchClient({ initialCode }: Props) {
                 SIARAN AKAN DIMULAI PADA HARI PERTANDINGAN
               </h3>
               <p className="text-xs text-[#8F8E8B] font-technical max-w-md mx-auto">
-                GOR UNY Colombo, Yogyakarta • 12–14 Desember 2026
+                GOR Pancasila UGM, Yogyakarta • 19–20 Desember 2026
               </p>
             </div>
 

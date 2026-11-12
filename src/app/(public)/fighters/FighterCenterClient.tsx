@@ -120,7 +120,7 @@ export default function FighterCenterClient({ initialFighters }: FighterCenterCl
         </p>
         <p className="flex items-center gap-1.5 text-[#8F8E8B]">
           <ShieldCheck className="w-3.5 h-3.5 text-[#D91F2C]" />
-          <span>VERIFIKASI TIMBANG BADAN: 10 DESEMBER 2026 (GOR UNY)</span>
+          <span>VERIFIKASI RESMI: GOR PANCASILA UGM, YOGYAKARTA (19–20 DESEMBER 2026)</span>
         </p>
       </div>
 

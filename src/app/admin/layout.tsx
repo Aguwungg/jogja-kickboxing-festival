@@ -8,18 +8,14 @@ import {
   LayoutDashboard,
   Users,
   Calendar,
-  Music,
   Inbox,
-  Vote,
   LogOut,
   ArrowLeft,
   Shield,
   Swords,
-  Video,
-  Package,
-  Tv,
   Menu,
   X,
+  Sparkles,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -35,11 +31,12 @@ export default function AdminLayout({
   const pathname = usePathname();
   const { data: session, status } = useSession();
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const [prevPathname, setPrevPathname] = useState(pathname);
 
-  // Close mobile drawer on route change
-  useEffect(() => {
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setMobileDrawerOpen(false);
-  }, [pathname]);
+  }
 
   // Handle client-side redirect if unauthenticated
   useEffect(() => {
@@ -66,7 +63,7 @@ export default function AdminLayout({
   }
 
   // Unauthenticated or Non-Admin state
-  const role = (session?.user as any)?.role;
+  const role = (session?.user as { role?: string } | undefined)?.role;
   const isAuthorized = status === "authenticated" && hasAdminAccess(role);
 
   if (!isAuthorized) {
@@ -93,15 +90,11 @@ export default function AdminLayout({
 
   const menu = [
     { name: "Command Center", href: "/admin", icon: LayoutDashboard },
+    { name: "What's New (IG)", href: "/admin/whats-new", icon: Sparkles },
     { name: "Manajemen Fighter", href: "/admin/fighters", icon: Users },
-    { name: "Partai & Bracket", href: "/admin/matches", icon: Swords },
-    { name: "Creator & Media", href: "/admin/creators", icon: Video },
-    { name: "Official Merch", href: "/admin/merch", icon: Package },
-    { name: "PPV & Streaming", href: "/admin/ppv", icon: Tv },
-    { name: "Jadwal & Rundown", href: "/admin/schedule", icon: Calendar },
-    { name: "Lineup Musik", href: "/admin/lineup", icon: Music },
+    { name: "Hasil Pertandingan", href: "/admin/matches", icon: Swords },
+    { name: "Jadwal & Info", href: "/admin/schedule", icon: Calendar },
     { name: "Pesan Masuk (Inbox)", href: "/admin/messages", icon: Inbox },
-    { name: "Voting City Pride", href: "/admin/voting", icon: Vote },
   ];
 
   const userRole = role || "PETUGAS";

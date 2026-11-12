@@ -12,8 +12,8 @@ import {
   ArrowRight,
   PlusCircle,
   Eye,
-  AlertTriangle,
   Tv,
+  Sparkles,
 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -31,6 +31,8 @@ export default async function AdminDashboardPage() {
     totalProducts,
     totalOrders,
     totalPpvTickets,
+    publishedWhatsNew,
+    totalWhatsNew,
   ] = await Promise.all([
     prisma.athlete.count(),
     prisma.athlete.count({ where: { isPublished: true } }),
@@ -41,9 +43,19 @@ export default async function AdminDashboardPage() {
     prisma.product.count(),
     prisma.order.count(),
     prisma.entitlement.count(),
+    prisma.whatsNewPost.count({ where: { approved: true, status: "published" } }),
+    prisma.whatsNewPost.count(),
   ]);
 
   const cards = [
+    {
+      title: "WHAT'S NEW (INSTAGRAM)",
+      value: publishedWhatsNew,
+      subtext: `${totalWhatsNew} total kurasi • ${publishedWhatsNew} tayang publik`,
+      icon: Sparkles,
+      href: "/admin/whats-new",
+      color: "border-[#EF3340]/40 text-[#EF3340]",
+    },
     {
       title: "ATLET KICKBOXING",
       value: totalAthletes,

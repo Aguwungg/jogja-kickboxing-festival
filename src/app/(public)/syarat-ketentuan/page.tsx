@@ -1,35 +1,35 @@
 export const metadata = {
   title: "Syarat & Ketentuan Resmi | JKBF 2026",
-  description: "Peraturan resmi kehadiran penonton, tata tertib arena, dan ketentuan umum Jogja Kickboxing Festival 2026.",
+  description:
+    "Peraturan resmi kehadiran, tata tertib arena, dan ketentuan umum penyelenggaraan Jogja Kickboxing Festival 2026 di GOR Pancasila UGM, Yogyakarta.",
 };
 
 const ARTICLES = [
   {
     number: "01",
-    title: "KETENTUAN TIKET & PENUKARAN WRISTBAND",
+    title: "KETENTUAN PENYELENGGARAAN & INFORMASI RESMI",
     items: [
-      "Tiket resmi hanya diterbitkan melalui saluran digital resmi yang ditunjuk atau loket resmi di lokasi acara. Panitia tidak bertanggung jawab atas kerugian tiket dari pihak ketiga atau calo tidak resmi.",
-      "Tiket yang telah dibeli bersifat final dan tidak dapat diuangkan kembali (non-refundable), kecuali terjadi pembatalan total penyelenggaraan oleh komite panitia.",
-      "Setiap tiket memiliki kode unik yang hanya dapat dipindai satu kali untuk penukaran tanda masuk fisik resmi di lokasi acara. Tanda masuk yang rusak atau lepas tidak berlaku untuk akses kembali ke arena.",
+      "Jogja Kickboxing Festival (JKBF) 2026 diselenggarakan pada tanggal 19–20 Desember 2026 di GOR Pancasila UGM, Yogyakarta.",
+      "Seluruh informasi resmi mengenai pendaftaran fighter, regulasi kompetisi WAKO, program pendukung, dan pengumuman terkini hanya disebarkan melalui situs resmi ini serta akun Instagram dan TikTok resmi @jogjakickboxingfestival.",
+      "Panitia berhak melakukan penyesuaian jadwal atau ketentuan teknis demi keselamatan atlet, ofisial, dan ketertiban pelaksanaan kejuaraan.",
     ],
   },
   {
     number: "02",
-    title: "TATA TERTIB ARENA & PEMERIKSAAN KEAMANAN",
+    title: "TATA TERTIB ARENA & KEAMANAN DI GOR PANCASILA UGM",
     items: [
-      "Demi keselamatan seluruh penonton, ofisial, dan atlet di atas ring, petugas keamanan berhak melakukan pemeriksaan fisik (body search) dan tas bawaan di seluruh pintu masuk (Gate).",
-      "Dilarang keras membawa senjata tajam, senjata api, flare, kembang api, laser pointer, atau proyektil dalam bentuk apa pun.",
-      "Dilarang membawa minuman keras beralkohol, zat psikotropika, dan obat-obatan terlarang ke dalam area venue.",
-      "Dilarang membawa botol kaca, kaleng, megafon, atau benda tumpul keras yang berpotensi membahayakan penonton lain.",
+      "Demi keselamatan seluruh pengunjung, ofisial, dan atlet di atas ring maupun tatami, petugas keamanan berhak melakukan pemeriksaan barang bawaan di area masuk.",
+      "Dilarang keras membawa senjata tajam, senjata api, flare, kembang api, laser pointer, atau benda berbahaya dalam bentuk apa pun ke dalam kawasan arena.",
+      "Dilarang membawa minuman keras beralkohol, zat psikotropika, obat-obatan terlarang, botol kaca, maupun benda keras yang berpotensi mengganggu jalannya pertandingan.",
     ],
   },
   {
     number: "03",
-    title: "HAK CIPTA DOKUMENTASI & MEDIA PELIPUTAN",
+    title: "ATURAN ATLET, OFISIAL & DOKUMENTASI",
     items: [
-      "Pengunjung diizinkan mengambil foto dan video ponsel pintar non-komersial untuk dokumentasi pribadi media sosial.",
-      "Penggunaan kamera profesional DSLR/Mirrorless dengan lensa tele atau perlengkapan siaran wajib memiliki izin Akreditasi Pers resmi dari panitia pelaksana JKBF 2026.",
-      "Panitia dan mitra penyiaran berhak mendokumentasikan wajah pengunjung di dalam area venue untuk materi siaran televisi, dokumentasi, dan promosi festival resmi.",
+      "Seluruh kontingen, pelatih, dan peserta kejuaraan wajib mematuhi ketentuan Technical Handbook serta keputusan Dewan Wasit dan Juri bersertifikasi WAKO / KBI.",
+      "Pengunjung diperbolehkan mengambil foto maupun video non-komersial menggunakan ponsel selama tidak mengganggu area kerja ofisial dan sudut ring.",
+      "Peliputan media profesional atau komersial di kawasan arena wajib berkoordinasi dan mendapatkan persetujuan panitia pelaksana JKBF 2026.",
     ],
   },
 ];
@@ -37,36 +37,32 @@ const ARTICLES = [
 export default function SyaratKetentuanPage() {
   return (
     <main className="flex-1 flex flex-col w-full min-h-screen bg-black text-[#F5F5F7] pt-28 lg:pt-36 pb-32">
-      
-      {/* ═════════════════════════════════════════════════════════════════════
-          1. EDITORIAL HEADER — V10 BROADSHEET HERO
-      ═════════════════════════════════════════════ */}
+      {/* Header */}
       <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 pt-6 pb-16 w-full border-b border-white/10">
         <div className="flex items-center gap-3 mb-6">
           <span className="w-2.5 h-2.5 bg-[#D91F2C]" />
           <p className="text-[#D91F2C] text-xs font-technical uppercase tracking-[0.25em]">
-            INFORMASI HUKUM • REGULASI RESMI PENONTON
+            INFORMASI HUKUM • REGULASI RESMI ARENA
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-8">
             <h1 className="text-6xl sm:text-8xl lg:text-9xl font-display font-black uppercase tracking-tight leading-[0.85] text-white">
-              SYARAT &<br />
+              SYARAT &amp;
+              <br />
               <span className="text-[#D91F2C]">KETENTUAN.</span>
             </h1>
           </div>
           <div className="lg:col-span-4 lg:pb-3">
             <p className="text-base text-white/60 font-sans leading-relaxed">
-              Peraturan resmi yang mengikat bagi seluruh pengunjung, delegasi, dan pemangku kepentingan festival di kawasan arena JKBF 2026 Yogyakarta.
+              Peraturan resmi yang berlaku bagi seluruh peserta, delegasi kontingen, dan pengunjung di kawasan GOR Pancasila UGM, Yogyakarta.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ═════════════════════════════════════════════════════════════════════
-          2. ARTICLES IN SPACIOUS EDITORIAL ROWS
-      ═════════════════════════════════════════════ */}
+      {/* Articles */}
       <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 py-16 w-full flex-1">
         <div className="border-t border-white/10 divide-y divide-white/10">
           {ARTICLES.map((article) => (
@@ -80,9 +76,9 @@ export default function SyaratKetentuanPage() {
                 </span>
               </div>
               <div className="lg:col-span-4">
-                <h3 className="text-2xl sm:text-3xl font-display uppercase tracking-wide text-white leading-snug">
+                <h2 className="text-2xl sm:text-3xl font-display uppercase tracking-wide text-white leading-snug">
                   {article.title}
-                </h3>
+                </h2>
               </div>
               <div className="lg:col-span-7 space-y-4 text-sm sm:text-base text-white/70 font-sans leading-relaxed">
                 {article.items.map((item, idx) => (
@@ -97,16 +93,13 @@ export default function SyaratKetentuanPage() {
         </div>
       </section>
 
-      {/* ═════════════════════════════════════════════════════════════════════
-          3. COMPLIANCE FOOTNOTE
-      ═════════════════════════════════════════════ */}
+      {/* Footnote */}
       <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 pt-8 w-full border-t border-white/10">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-technical text-white/40 uppercase tracking-wider">
-          <p>DIPERBARUI RESMI: OKTOBER 2026 • PANITIA PELAKSANA JKBF</p>
+          <p>JKBF 2026 • 19–20 DESEMBER 2026 • GOR PANCASILA UGM</p>
           <p>#JOGJAPUNYANYALI • YOGYAKARTA</p>
         </div>
       </section>
-
     </main>
   );
 }

@@ -203,7 +203,7 @@ export default function CartDrawer() {
                   <div className="flex items-center gap-2 text-[11px] text-[#90929A] bg-white/5 p-2.5 rounded-sm border border-white/5">
                     <MapPin className="w-4 h-4 text-[#D21F2B] shrink-0" />
                     <span>
-                      Tersedia <strong>Pick Up Gratis</strong> di Booth GOR UNY atau Ekspedisi Reguler.
+                      Tersedia <strong>Pick Up Gratis</strong> di Booth GOR Pancasila UGM atau Ekspedisi Reguler.
                     </span>
                   </div>
 
