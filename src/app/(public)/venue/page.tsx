@@ -41,10 +41,11 @@ export default function VenuePage() {
           {/* Editorial Combat Arena Photo (No LED) */}
           <div className="lg:col-span-7 relative min-h-[280px] sm:min-h-[380px] lg:min-h-[460px] bg-black overflow-hidden">
             <Image
-              src="/images/jkb/boxing-ring.jpg"
+              src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
               alt="Ring pertandingan Jogja Kickboxing Festival di GOR Pancasila UGM Yogyakarta"
               fill
               priority
+              fetchPriority="high"
               className="object-cover object-center filter contrast-115 brightness-90"
               sizes="(max-width: 1024px) 100vw, 58vw"
             />
@@ -79,7 +80,7 @@ export default function VenuePage() {
                   {EVENT_CONFIG.dates.display}
                 </p>
                 <p className="text-xs text-[#86868B] font-sans leading-relaxed">
-                  Dua hari rangkaian kejuaraan kickboxing resmi standar WAKO dan sajian sportainment di Yogyakarta.
+                  Dua hari penuh kejuaraan kickboxing resmi standar WAKO di Yogyakarta.
                 </p>
               </div>
 

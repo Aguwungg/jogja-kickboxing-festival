@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     template: "%s | JKBF 2026",
   },
   description:
-    "Website resmi Jogja Kickboxing Festival 2026 — 19–20 Desember 2026 di GOR Pancasila UGM, Yogyakarta. Kejuaraan kickboxing resmi standar WAKO & sportainment. #JOGJAPUNYANYALI.",
+    "Website resmi Jogja Kickboxing Festival 2026 — 19–20 Desember 2026 di GOR Pancasila UGM, Yogyakarta. Kejuaraan kickboxing resmi standar WAKO. #JOGJAPUNYANYALI.",
   alternates: {
     canonical: "/",
   },

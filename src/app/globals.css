@@ -248,3 +248,38 @@ body {
   }
 }
 
+/* Raw Fight Poster Grain Overlay */
+.combat-grain {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 0);
+  background-size: 16px 16px;
+}
+
+/* Native Accordion Disclosure (Fight Card Expand) */
+.fight-card-details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+.fight-card-details > summary::-webkit-details-marker {
+  display: none;
+}
+.fight-card-details > summary .fight-card-chevron {
+  transition: transform 0.2s ease;
+}
+.fight-card-details[open] > summary .fight-card-chevron {
+  transform: rotate(180deg);
+}
+.fight-card-details::details-content {
+  interpolate-size: allow-keywords;
+  overflow: clip;
+  contain: layout;
+}
+.fight-card-details:not([open])::details-content {
+  block-size: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .fight-card-details::details-content {
+    transition: block-size 0.28s ease-in-out, content-visibility 0.28s ease-in-out, display 0.28s ease-in-out;
+    transition-behavior: allow-discrete;
+  }
+}
+
