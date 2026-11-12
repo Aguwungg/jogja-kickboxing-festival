@@ -44,17 +44,15 @@ export default function HomeArenaPreview() {
               JKBF 2026 • 3D ARENA EXPERIENCE
             </span>
             <span className="text-[9px] bg-white/[0.06] text-[#A1A1A6] px-2 py-0.5 rounded-xs border border-white/10 font-technical">
-              DRAFT PERENCANAAN
+              GOR PANCASILA UGM
             </span>
           </div>
 
           <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-[#F5F5F7] leading-[0.92]">
-            ARENA PERTANDINGAN<span className="text-[#D91F2C]">.</span>
+            ARENA 3D INTERAKTIF<span className="text-[#D91F2C]">.</span>
           </h2>
           <p className="text-xs sm:text-sm text-[#86868B] font-sans max-w-xl mt-2 leading-relaxed">
-            Simulasi 3D berskala hall 35 × 25 m arsip perencanaan. Putar sudut
-            pandang secara langsung untuk melihat layout ring pertandingan,
-            tatami, panggung utama, dan barisan kursi VIP.
+            Putar dan zoom layout ring pertandingan, tatami, panggung utama, serta area VIP.
           </p>
         </div>
 
@@ -87,10 +85,10 @@ export default function HomeArenaPreview() {
           </div>
 
           <Link
-            href="/venue"
+            href="/arena-3d"
             className="hidden lg:inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-xs tracking-wider uppercase transition-all rounded-xs shadow-[0_0_20px_rgba(217,31,44,0.35)]"
           >
-            <span>DETAIL VENUE RESMI</span>
+            <span>BUKA LAYAR PENUH 3D</span>
             <ArrowUpRight className="w-4 h-4 text-white" />
           </Link>
         </div>
@@ -197,10 +195,10 @@ export default function HomeArenaPreview() {
           {/* Direct CTA overlay on bottom right */}
           <div className="absolute bottom-3 right-3 z-10">
             <Link
-              href="/venue"
+              href="/arena-3d"
               className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-[11px] sm:text-xs tracking-wider uppercase transition-all rounded-xs shadow-lg active:scale-95"
             >
-              <span>DETAIL VENUE RESMI</span>
+              <span>BUKA 3D FULLSCREEN</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-white" />
             </Link>
           </div>

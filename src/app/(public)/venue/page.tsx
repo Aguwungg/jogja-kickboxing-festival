@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Calendar, ArrowUpRight, ShieldCheck } from "lucide-react";
 import { EVENT_CONFIG, jkbfLinks } from "@/lib/event-config";
+import HomeArenaPreview from "@/components/home/HomeArenaPreview";
 
 export const metadata = {
   title: "Venue Resmi: GOR Pancasila UGM, Yogyakarta | JKBF 2026",
@@ -115,6 +116,9 @@ export default function VenuePage() {
           </div>
         </div>
       </section>
+
+      {/* Interactive 3D Arena Layout */}
+      <HomeArenaPreview />
     </main>
   );
 }

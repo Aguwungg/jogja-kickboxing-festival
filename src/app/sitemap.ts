@@ -9,9 +9,9 @@ const baseUrl =
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     { path: "", priority: 1.0, changeFrequency: "daily" as const },
-    { path: "/whats-new", priority: 0.9, changeFrequency: "daily" as const },
     { path: "/championship", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/venue", priority: 0.9, changeFrequency: "weekly" as const },
+    { path: "/arena-3d", priority: 0.85, changeFrequency: "weekly" as const },
     { path: "/tentang", priority: 0.8, changeFrequency: "weekly" as const },
     { path: "/faq", priority: 0.8, changeFrequency: "weekly" as const },
     { path: "/kontak", priority: 0.7, changeFrequency: "monthly" as const },

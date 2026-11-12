@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { Calendar, Plus, Clock, MapPin, Trash2, Eye, EyeOff, Star } from "lucide-react";
+import { Plus, Trash2, Eye, EyeOff, Star } from "lucide-react";
 import { requireAdminSession, verifyAdminAction } from "@/lib/auth-guard";
 
 export const dynamic = "force-dynamic";
@@ -74,8 +74,8 @@ export default async function AdminSchedulePage() {
           >
             MANAJEMEN JADWAL & RUNDOWN FESTIVAL
           </h1>
-          <p className="text-xs text-[#99999F] mt-1">
-            Atur dan publikasikan agenda turnamen kickboxing serta panggung festival 3 hari.
+            <p className="text-xs text-[#99999F] mt-1">
+            Atur dan publikasikan agenda pertandingan serta informasi resmi JKBF 2026 (19–20 Desember 2026).
           </p>
         </div>
 
@@ -116,9 +116,8 @@ export default async function AdminSchedulePage() {
               name="day"
               className="w-full bg-[#09090b] border border-white/10 rounded-sm px-3 py-2 text-xs text-white focus:outline-none focus:border-[#D91F2C]"
             >
-              <option value="1">Hari 1 (Jumat, 14 Ags)</option>
-              <option value="2">Hari 2 (Sabtu, 15 Ags)</option>
-              <option value="3">Hari 3 (Minggu, 16 Ags)</option>
+              <option value="1">Hari 1 (Sabtu, 19 Des 2026)</option>
+              <option value="2">Hari 2 (Minggu, 20 Des 2026)</option>
             </select>
           </div>
 
@@ -130,10 +129,9 @@ export default async function AdminSchedulePage() {
               name="category"
               className="w-full bg-[#09090b] border border-white/10 rounded-sm px-3 py-2 text-xs text-white focus:outline-none focus:border-[#D91F2C]"
             >
-              <option value="COMBAT">COMBAT (Ring Tarung)</option>
-              <option value="STAGE">STAGE (Panggung Musik)</option>
-              <option value="CEREMONY">CEREMONY (Upacara / Timbang)</option>
-              <option value="COMMUNITY">COMMUNITY (Komunitas / Clinic)</option>
+              <option value="COMBAT">PERTANDINGAN (Ring / Tatami)</option>
+              <option value="CEREMONY">SEREMONI (Timbang Badan / Pembukaan)</option>
+              <option value="COMMUNITY">INFO UMUM</option>
             </select>
           </div>
 

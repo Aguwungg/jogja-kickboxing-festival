@@ -1,10 +1,11 @@
-import { redirect } from "next/navigation";
+import Arena3DClient from "@/components/arena3d/Arena3DClient";
 
-/**
- * Legacy 3D arena preview unpublished per Requirement 14:
- * Previous 3D geometry represented an earlier venue configuration & outdated production setup.
- * Source files remain safely preserved in src/components/arena3d/ and 3D/.
- */
+export const metadata = {
+  title: "Arena 3D Interaktif — GOR Pancasila UGM | JKBF 2026",
+  description:
+    "Simulasi 3D interaktif tata letak ring pertandingan, tatami, panggung utama, dan area VIP Jogja Kickboxing Festival 2026 di GOR Pancasila UGM, Yogyakarta.",
+};
+
 export default function Arena3DPage() {
-  redirect("/venue");
+  return <Arena3DClient />;
 }

@@ -4,16 +4,12 @@ import { requireAdminSession } from "@/lib/auth-guard";
 import {
   Users,
   Calendar,
-  Music,
-  Vote,
   Inbox,
-  ShoppingBag,
   ShieldCheck,
   ArrowRight,
-  PlusCircle,
+  Swords,
   Eye,
-  Tv,
-  Sparkles,
+  PlusCircle,
 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -22,74 +18,48 @@ export default async function AdminDashboardPage() {
   await requireAdminSession();
 
   const [
+    totalMatches,
+    completedMatches,
     totalAthletes,
     publishedAthletes,
     totalSchedule,
-    totalPerformers,
-    totalVotes,
     unreadMessages,
-    totalProducts,
-    totalOrders,
-    totalPpvTickets,
-    publishedWhatsNew,
-    totalWhatsNew,
   ] = await Promise.all([
+    prisma.match.count(),
+    prisma.match.count({ where: { status: "COMPLETED" } }),
     prisma.athlete.count(),
     prisma.athlete.count({ where: { isPublished: true } }),
     prisma.scheduleItem.count(),
-    prisma.performer.count(),
-    prisma.vote.count(),
     prisma.contactMessage.count({ where: { status: "UNREAD" } }),
-    prisma.product.count(),
-    prisma.order.count(),
-    prisma.entitlement.count(),
-    prisma.whatsNewPost.count({ where: { approved: true, status: "published" } }),
-    prisma.whatsNewPost.count(),
   ]);
 
   const cards = [
     {
-      title: "WHAT'S NEW (INSTAGRAM)",
-      value: publishedWhatsNew,
-      subtext: `${totalWhatsNew} total kurasi • ${publishedWhatsNew} tayang publik`,
-      icon: Sparkles,
-      href: "/admin/whats-new",
-      color: "border-[#EF3340]/40 text-[#EF3340]",
+      title: "ATUR MENANG / KALAH",
+      value: `${completedMatches}/${totalMatches}`,
+      subtext: `${totalMatches - completedMatches} partai menunggu hasil`,
+      icon: Swords,
+      href: "/admin/matches",
+      color: "border-[#D91F2C]/50 text-[#EF3340]",
     },
     {
-      title: "ATLET KICKBOXING",
+      title: "DAFTAR FIGHTER",
       value: totalAthletes,
-      subtext: `${publishedAthletes} terpublikasi • ${totalAthletes - publishedAthletes} draft`,
+      subtext: `${publishedAthletes} tampil publik • ${totalAthletes - publishedAthletes} draft`,
       icon: Users,
       href: "/admin/fighters",
-      color: "border-[#EF3340]/40 text-[#EF3340]",
+      color: "border-white/15 text-white",
     },
     {
-      title: "SESI JADWAL 3 HARI",
+      title: "JADWAL & INFORMASI",
       value: totalSchedule,
-      subtext: "Rundown turnamen & festival",
+      subtext: "Agenda 19–20 Desember 2026",
       icon: Calendar,
       href: "/admin/schedule",
       color: "border-blue-500/40 text-blue-400",
     },
     {
-      title: "LINEUP MUSISI",
-      value: totalPerformers,
-      subtext: "Penampil panggung festival",
-      icon: Music,
-      href: "/admin/lineup",
-      color: "border-amber-500/40 text-amber-400",
-    },
-    {
-      title: "SUARA CITY PRIDE",
-      value: totalVotes,
-      subtext: "Total suara masuk terverifikasi",
-      icon: Vote,
-      href: "/admin/voting",
-      color: "border-purple-500/40 text-purple-400",
-    },
-    {
-      title: "PESAN INBOX MASUK",
+      title: "PESAN MASUK (INBOX)",
       value: unreadMessages,
       subtext: "Pesan belum dibaca panitia",
       icon: Inbox,
@@ -97,47 +67,38 @@ export default async function AdminDashboardPage() {
       color: "border-emerald-500/40 text-emerald-400",
       alert: unreadMessages > 0,
     },
-    {
-      title: "OFFICIAL MERCH & ORDERS",
-      value: totalProducts,
-      subtext: `${totalOrders} pesanan masuk • ${totalProducts} produk aktif`,
-      icon: ShoppingBag,
-      href: "/admin/merch",
-      color: "border-[#EF3340]/40 text-amber-400",
-    },
-    {
-      title: "PPV & LIVE STREAMING",
-      value: totalPpvTickets,
-      subtext: `${totalPpvTickets} tiket digital aktif • 1080p 60FPS Live`,
-      icon: Tv,
-      href: "/admin/ppv",
-      color: "border-red-500/40 text-red-400",
-    },
   ];
 
   return (
-    <div className="max-w-7xl mx-auto space-y-8 font-sans">
-      {/* Title */}
+    <div className="max-w-6xl mx-auto space-y-8 font-sans">
+      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
         <div>
           <h1
             className="text-3xl sm:text-4xl font-black uppercase text-white tracking-tight"
             style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
           >
-            COMMAND CENTER OVERVIEW
+            PANEL PANITIA JKBF 2026
           </h1>
           <p className="text-xs text-[#99999F] mt-1">
-            Pantau dan kelola seluruh entitas operasional JOGJA KICKBOXING FESTIVAL 2026 secara terpusat.
+            Kelola hasil menang/kalah pertandingan, daftar fighter, dan informasi jadwal dengan cepat.
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Link
-            href="/admin/fighters/new"
+            href="/admin/matches"
             className="inline-flex items-center gap-1.5 bg-[#D91F2C] hover:bg-[#EF3340] text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-sm transition-all"
           >
+            <Swords className="w-4 h-4" />
+            <span>Atur Menang / Kalah</span>
+          </Link>
+          <Link
+            href="/admin/schedule"
+            className="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/15 text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-sm transition-all"
+          >
             <PlusCircle className="w-4 h-4" />
-            <span>Tambah Fighter</span>
+            <span>Tambah Info / Jadwal</span>
           </Link>
           <Link
             href="/"
@@ -150,59 +111,52 @@ export default async function AdminDashboardPage() {
         </div>
       </div>
 
-      {/* Metrics Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {cards.map((c, i) => {
+      {/* 4 Core Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {cards.map((c) => {
           const Icon = c.icon;
           return (
             <Link
-              key={i}
+              key={c.href}
               href={c.href}
-              className="bg-[#171719] border border-white/10 p-6 rounded-sm hover:border-white/30 transition-all flex flex-col justify-between group"
+              className={`group p-6 bg-[#171719] border rounded-sm transition-all hover:bg-white/[0.04] flex flex-col justify-between ${c.color}`}
             >
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#99999F]">
-                  {c.title}
-                </span>
-                <div className={`p-2 rounded-sm border bg-black/40 ${c.color}`}>
-                  <Icon className="w-4 h-4" />
+              <div className="flex items-start justify-between">
+                <div>
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-[#99999F] block mb-1">
+                    {c.title}
+                  </span>
+                  <div className="text-4xl font-black text-white">{c.value}</div>
+                </div>
+                <div className="p-2.5 rounded-sm bg-black/40 border border-white/5">
+                  <Icon className="w-5 h-5" />
                 </div>
               </div>
 
-              <div>
-                <div
-                  className="text-4xl font-black text-white tracking-tight"
-                  style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-                >
-                  {c.value}
-                </div>
-                <div className="flex items-center justify-between text-xs text-[#99999F] mt-1">
-                  <span>{c.subtext}</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-white/40 group-hover:text-white group-hover:translate-x-0.5 transition-all" />
-                </div>
+              <div className="mt-5 pt-4 border-t border-white/5 flex items-center justify-between text-xs">
+                <span className={c.alert ? "text-emerald-400 font-bold" : "text-[#99999F]"}>
+                  {c.subtext}
+                </span>
+                <ArrowRight className="w-3.5 h-3.5 text-white/40 group-hover:text-white group-hover:translate-x-1 transition-all" />
               </div>
             </Link>
           );
         })}
       </div>
 
-      {/* Security & Data Policy Banner */}
-      <div className="bg-[#171719] border border-white/10 p-6 rounded-sm">
-        <div className="flex items-start gap-4">
-          <ShieldCheck className="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" />
-          <div className="space-y-1">
-            <h3
-              className="text-lg font-bold text-white uppercase tracking-wider"
-              style={{ fontFamily: "var(--font-barlow-condensed), sans-serif" }}
-            >
-              DATA ENVIRONMENT POLICY AKTIF
-            </h3>
-            <p className="text-xs text-[#99999F] leading-relaxed">
-              Anda saat ini beroperasi di lingkungan <span className="text-white font-mono font-bold">STAGING / LOCAL (development)</span>.
-              Seluruh data atlet bertanda dummy dilindungi oleh filter publikasi server-side.
-              Setiap catatan baru berstatus <span className="text-amber-400 font-mono">isPublished: false</span> tidak akan bocor ke API publik sebelum diizinkan oleh Administrator.
-            </p>
-          </div>
+      {/* Simple Guide */}
+      <div className="bg-[#171719] border border-white/10 p-6 rounded-sm flex items-start gap-4">
+        <div className="p-2.5 rounded-sm bg-[#D91F2C]/20 border border-[#D91F2C]/40 text-[#EF3340] shrink-0">
+          <ShieldCheck className="w-5 h-5" />
+        </div>
+        <div className="space-y-1">
+          <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+            PANDUAN SINGKAT PANITIA
+          </h3>
+          <p className="text-xs text-[#99999F] leading-relaxed">
+            1. Buka <strong className="text-white">Atur Menang / Kalah</strong> untuk menentukan pemenang setiap partai laga (cukup pilih sudut pemenang dan klik Simpan).{" "}
+            2. Buka <strong className="text-white">Jadwal &amp; Info</strong> jika perlu menambah atau menyembunyikan pengumuman/rundown 19–20 Desember 2026.
+          </p>
         </div>
       </div>
     </div>

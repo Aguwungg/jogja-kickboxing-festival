@@ -28,7 +28,7 @@ import {
   ZoneDetail,
 } from "./arena3d-data";
 import { Arena3DViewerRef } from "./Arena3DViewer";
-import { RingArenaIcon, StageLedIcon } from "./ArenaIcons";
+import { RingArenaIcon, StageBackdropIcon } from "./ArenaIcons";
 
 const Arena3DViewer = dynamic(() => import("./Arena3DViewer"), {
   ssr: false,
@@ -106,7 +106,7 @@ function Arena3DContent() {
                 JKBF 2026 — 3D ARENA
               </span>
               <span className="text-[9px] bg-neutral-800 text-neutral-300 px-2 py-0.5 rounded-sm border border-neutral-700 font-mono">
-                DRAFT PERENCANAAN
+                GOR PANCASILA UGM
               </span>
             </div>
             <h1 className="text-xl sm:text-3xl font-black uppercase tracking-tight text-white">
@@ -311,7 +311,7 @@ function Arena3DContent() {
             }`}
           >
             <span>FOCUS STAGE</span>
-            <StageLedIcon className="w-3.5 h-3.5 opacity-85 shrink-0" />
+            <StageBackdropIcon className="w-3.5 h-3.5 opacity-85 shrink-0" />
           </button>
 
           <div className="h-px bg-neutral-800 my-0.5" />
@@ -833,7 +833,7 @@ function Arena3DContent() {
                     >
                       <div className="flex items-center justify-between gap-2 mb-1">
                         <span className="text-xs font-bold text-white">FOCUS STAGE</span>
-                        <StageLedIcon className="w-4 h-4 text-[#ff2d3d]" />
+                        <StageBackdropIcon className="w-4 h-4 text-[#ff2d3d]" />
                       </div>
                       <div className="text-[10px] text-neutral-400 font-mono">Panggung Utama</div>
                     </button>

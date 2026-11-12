@@ -167,7 +167,7 @@ const PROGRAMS: ProgramItem[] = [
     format: "Laga Puncak • Main Event",
     target: "Petarung papan atas nasional & figur kejuaraan",
     summary:
-      "Main Event JKBF 2026 — menghadirkan Faisal Giru serta laga puncak paling dinanti di GOR Pancasila UGM.",
+      "Laga puncak invitation-only JKBF 2026 di ring utama GOR Pancasila UGM.",
     description:
       "Partai pamungkas Jogja Kickboxing Festival 2026. Laga paling dinanti yang merepresentasikan semangat tertinggi #JOGJAPUNYANYALI — adu determinasi, teknik, dan ketangguhan mental atlet kelas atas.",
     highlights: [

@@ -96,7 +96,7 @@ export const ARENA_ZONES: ZoneDetail[] = [
     capacityText: "Panggung Utama 13 × 2.2 m",
     specText: "Ketinggian panggung 1.0 m dengan backdrop panggung utama 12 × 4.6 m",
     description:
-      "Panggung seremonial, pembukaan resmi, pemutaran video promosi, dan penyerahan medali kejuaraan JKBF 2026 di sisi timur hall.",
+      "Panggung seremonial, pembukaan resmi, dan penyerahan medali kejuaraan JKBF 2026 di sisi timur hall.",
     cameraTarget: [33.9, 1.5, 12.5],
     cameraDistance: 36,
   },

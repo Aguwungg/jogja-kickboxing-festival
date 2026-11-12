@@ -50,7 +50,6 @@ export const metadata: Metadata = {
     "Redy Open Championship II",
     "WAKO kickboxing Indonesia",
     "Pengprov KBI DIY",
-    "Faisal Giru",
     "#JOGJAPUNYANYALI",
   ],
   openGraph: {

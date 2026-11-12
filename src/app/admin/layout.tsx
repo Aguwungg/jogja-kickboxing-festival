@@ -15,7 +15,6 @@ import {
   Swords,
   Menu,
   X,
-  Sparkles,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -89,12 +88,11 @@ export default function AdminLayout({
   }
 
   const menu = [
-    { name: "Command Center", href: "/admin", icon: LayoutDashboard },
-    { name: "What's New (IG)", href: "/admin/whats-new", icon: Sparkles },
-    { name: "Manajemen Fighter", href: "/admin/fighters", icon: Users },
-    { name: "Hasil Pertandingan", href: "/admin/matches", icon: Swords },
+    { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
+    { name: "Atur Menang / Kalah", href: "/admin/matches", icon: Swords },
+    { name: "Daftar Fighter", href: "/admin/fighters", icon: Users },
     { name: "Jadwal & Info", href: "/admin/schedule", icon: Calendar },
-    { name: "Pesan Masuk (Inbox)", href: "/admin/messages", icon: Inbox },
+    { name: "Pesan Masuk", href: "/admin/messages", icon: Inbox },
   ];
 
   const userRole = role || "PETUGAS";

@@ -616,10 +616,10 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
       createRectOutline(32.8, 6, 35, 19, 1.0, 0xff8a5a, 0.1);
       createBox(0.3, 5, 12.4, 34.85, 1, 12.5, M(0x120406));
 
-      const stageLedTexture = makeCanvasTexture(512, 200, (g, w, h) => {
+      const stageBackdropTexture = makeCanvasTexture(512, 200, (g, w, h) => {
         const q = g.createLinearGradient(0, 0, w, h);
-        q.addColorStop(0, "#ff2d3d");
-        q.addColorStop(1, "#6a0810");
+        q.addColorStop(0, "#b81824");
+        q.addColorStop(1, "#3b0509");
         g.fillStyle = q;
         g.fillRect(0, 0, w, h);
         g.fillStyle = "#fff";
@@ -632,7 +632,7 @@ const Arena3DViewer = forwardRef<Arena3DViewerRef, Arena3DViewerProps>(
 
       const backdropMesh = new THREE.Mesh(
         new THREE.PlaneGeometry(12, 4.6),
-        new THREE.MeshBasicMaterial({ map: stageLedTexture })
+        new THREE.MeshBasicMaterial({ map: stageBackdropTexture })
       );
       backdropMesh.rotation.y = -PI / 2;
       backdropMesh.position.set(34.65, 3.4, 12.5);
