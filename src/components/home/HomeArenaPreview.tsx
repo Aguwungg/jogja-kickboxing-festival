@@ -86,10 +86,10 @@ export default function HomeArenaPreview() {
 
           <Link
             href="/arena-3d"
-            className="hidden lg:inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-xs tracking-wider uppercase transition-all rounded-xs shadow-[0_0_20px_rgba(217,31,44,0.35)]"
+            className="hidden sm:inline-flex items-center gap-1.5 font-technical text-xs font-bold uppercase tracking-wider text-[#C4C4CC] hover:text-white py-1 transition-colors group"
           >
-            <span>BUKA LAYAR PENUH 3D</span>
-            <ArrowUpRight className="w-4 h-4 text-white" />
+            <span>Buka Layar Penuh 3D</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-[#D91F2C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
         </div>
       </div>
@@ -196,10 +196,10 @@ export default function HomeArenaPreview() {
           <div className="absolute bottom-3 right-3 z-10">
             <Link
               href="/arena-3d"
-              className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-[11px] sm:text-xs tracking-wider uppercase transition-all rounded-xs shadow-lg active:scale-95"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-black/80 hover:bg-[#D91F2C] border border-white/20 hover:border-[#D91F2C] text-[#F5F5F7] hover:text-white font-technical text-[10px] tracking-widest uppercase transition-all rounded-xs backdrop-blur-md shadow-lg"
             >
-              <span>BUKA 3D FULLSCREEN</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-white" />
+              <span>FULLSCREEN 3D</span>
+              <ArrowUpRight className="w-3 h-3" />
             </Link>
           </div>
         </div>

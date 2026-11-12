@@ -33,7 +33,7 @@ const TICKER_ITEMS = [
 export default function HomeClient() {
   return (
     <div className="w-full overflow-x-hidden bg-[#000000] text-[#F5F5F7]">
-      {/* ─── 1. HERO SECTION (FIGHT POSTER — MINIMAL TEXT) ───────────────────── */}
+      {/* ─── 1. HERO SECTION (FIGHT POSTER — 1 PRIMARY ACTION + 1 TEXT LINK) ── */}
       <section className="relative min-h-[88dvh] flex items-center pt-24 sm:pt-28 pb-14 sm:pb-20 overflow-hidden border-b border-white/10">
         <div className="absolute inset-0">
           <Image
@@ -53,7 +53,7 @@ export default function HomeClient() {
 
         <div className="editorial-container relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
-            {/* Hero Headline & CTAs */}
+            {/* Hero Headline & Actions */}
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex flex-wrap items-center gap-2.5 px-3.5 py-1.5 bg-black/75 border-l-2 border-[#D91F2C] border-y border-r border-white/15 rounded-xs">
                 <span className="w-2 h-2 rounded-full bg-[#D91F2C] animate-pulse shrink-0" />
@@ -76,40 +76,37 @@ export default function HomeClient() {
 
               {/* Confirmed Dates & Venue Strip */}
               <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 pt-1">
-                <div className="inline-flex items-center gap-2.5 px-4 py-2.5 bg-[#0D0D10]/95 border border-white/15 rounded-xs">
+                <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-[#0D0D10]/95 border border-white/15 rounded-xs text-xs font-technical uppercase tracking-wider text-white">
                   <Calendar className="w-4 h-4 text-[#D91F2C] shrink-0" />
-                  <span className="font-technical text-xs sm:text-sm font-bold uppercase tracking-wider text-white">
-                    {EVENT_CONFIG.dates.display}
-                  </span>
+                  <span>{EVENT_CONFIG.dates.display}</span>
                 </div>
                 <Link
                   href="/venue"
-                  className="inline-flex items-center gap-2.5 px-4 py-2.5 bg-[#0D0D10]/95 hover:bg-[#19191F] border border-white/15 hover:border-[#D91F2C]/60 rounded-xs transition-colors"
+                  className="inline-flex items-center gap-2.5 px-4 py-2 bg-[#0D0D10]/95 hover:bg-[#19191F] border border-white/15 hover:border-[#D91F2C]/60 rounded-xs text-xs font-technical uppercase tracking-wider text-[#C4C4CC] hover:text-white transition-colors"
                 >
                   <MapPin className="w-4 h-4 text-[#D91F2C] shrink-0" />
-                  <span className="font-technical text-xs sm:text-sm font-bold uppercase tracking-wider text-white">
-                    {EVENT_CONFIG.venue.fullDisplay}
-                  </span>
+                  <span>{EVENT_CONFIG.venue.fullDisplay}</span>
                 </Link>
               </div>
 
-              {/* Hero CTAs */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
+              {/* Hero Action: 1 Primary Ticket Button + 1 Editorial Text Link */}
+              <div className="flex flex-col sm:flex-row sm:items-center gap-5 pt-2">
                 <a
                   href={jkbfLinks.fighterRegistration}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2.5 px-7 sm:px-9 py-4 bg-[#D91F2C] hover:bg-[#B81521] active:scale-[0.98] text-white font-display text-lg sm:text-xl tracking-wider uppercase rounded-xs transition-all shadow-[0_0_32px_rgba(217,31,44,0.5)]"
+                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#D91F2C] hover:bg-[#B81521] active:scale-[0.98] text-white font-display text-lg sm:text-xl tracking-wider uppercase rounded-xs transition-all shadow-[0_0_32px_rgba(217,31,44,0.5)]"
                 >
                   DAFTAR SEBAGAI FIGHTER
                   <ArrowUpRight className="w-5 h-5" />
                 </a>
+
                 <Link
                   href="/championship"
-                  className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-4 bg-white/[0.06] hover:bg-white/[0.12] border border-white/25 text-[#F5F5F7] font-display text-lg sm:text-xl tracking-wider uppercase rounded-xs transition-all"
+                  className="inline-flex items-center gap-2 font-technical text-xs sm:text-sm font-bold uppercase tracking-[0.18em] text-[#C4C4CC] hover:text-white transition-colors group py-1"
                 >
-                  LIHAT PROGRAM
-                  <ChevronRight className="w-5 h-5 text-[#EF3340]" />
+                  <span>LIHAT 7 PROGRAM KEJUARAAN</span>
+                  <ChevronRight className="w-4 h-4 text-[#D91F2C] transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
             </div>
@@ -174,7 +171,7 @@ export default function HomeClient() {
       {/* ─── 3. 3D ARENA INTERAKTIF (GOR PANCASILA UGM) ──────────────────────── */}
       <HomeArenaPreview />
 
-      {/* ─── 4. FIGHTER REGISTRATION BANNER ──────────────────────────────────── */}
+      {/* ─── 4. FIGHTER REGISTRATION BANNER (PRIMARY ACTION HERO TICKET) ─────── */}
       <section
         id="registration"
         className="relative py-16 sm:py-24 bg-[#000000] border-y border-white/10 overflow-hidden"
@@ -209,93 +206,104 @@ export default function HomeClient() {
               </h2>
 
               <p className="font-technical text-xs uppercase tracking-wider text-[#86868B]">
-                Admin Fighter:{" "}
-                <strong className="text-white">
-                  {registrationConfig.adminName}
-                </strong>
+                Penyelenggara:{" "}
+                <strong className="text-white">Pengprov KBI DIY</strong> • Formulir Resmi Google Form
               </p>
             </div>
 
-            <div className="lg:col-span-5 flex flex-col gap-3.5">
+            {/* 1 Big Ticket Button + 1 Understated Text Link (No Duplicate Box) */}
+            <div className="lg:col-span-5 flex flex-col items-stretch lg:items-end gap-3.5">
               <a
                 href={jkbfLinks.fighterRegistration}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-5 px-6 bg-[#D91F2C] hover:bg-[#B81521] active:scale-[0.98] text-white font-display text-xl tracking-wider uppercase rounded-xs transition-all inline-flex items-center justify-center gap-2.5 shadow-[0_0_35px_rgba(217,31,44,0.55)]"
+                className="w-full py-5 px-6 bg-[#D91F2C] hover:bg-[#B81521] active:scale-[0.98] text-white font-display text-2xl tracking-wider uppercase rounded-xs transition-all inline-flex items-center justify-center gap-2.5 shadow-[0_0_35px_rgba(217,31,44,0.55)]"
               >
-                DAFTAR SEKARANG
-                <ArrowUpRight className="w-5 h-5" />
+                <span>DAFTAR SEKARANG</span>
+                <ArrowUpRight className="w-6 h-6" />
               </a>
+
               <a
                 href={jkbfLinks.fighterSupportWhatsApp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 px-6 bg-white/[0.06] hover:bg-white/[0.12] border border-white/20 text-[#F5F5F7] font-display text-lg tracking-wider uppercase rounded-xs transition-all inline-flex items-center justify-center gap-2.5"
+                className="inline-flex items-center gap-2 text-xs font-technical uppercase tracking-wider text-[#A1A1AA] hover:text-white transition-colors group pt-1"
               >
-                <MessageCircle className="w-5 h-5 text-emerald-400" />
-                {registrationConfig.adminCtaLabel}
+                <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Bantuan Pendaftaran: Chat Priya (WhatsApp)</span>
+                <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── 5. SMA OPEN & UNIVERSITY OPEN (RINGKAS) ─────────────────────────── */}
+      {/* ─── 5. SMA OPEN & UNIVERSITY OPEN (CLICKABLE COMBAT TICKET CARDS) ───── */}
       <section
         id="student-open"
         className="py-14 sm:py-20 bg-[#09090B] border-b border-white/10"
       >
         <div className="editorial-container grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* SMA Open */}
-          <div className="bg-[#111114] border border-white/15 border-t-4 border-t-[#D91F2C] p-6 sm:p-8 rounded-xs flex flex-col justify-between gap-6">
-            <div className="space-y-3">
-              <span className="inline-block px-3 py-1 bg-[#D91F2C] font-technical text-[10px] font-bold uppercase tracking-[0.2em] text-white rounded-xs">
-                {smaOpenConfig.badge}
-              </span>
-              <h3 className="font-display text-3xl sm:text-5xl uppercase tracking-tight leading-[0.88] text-white">
-                {smaOpenConfig.headline}
-              </h3>
-            </div>
+          {/* SMA Open — Entire Card is Clickable */}
+          <a
+            href={jkbfLinks.fighterRegistration}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block rounded-xs focus-visible:outline-2 focus-visible:outline-[#D91F2C]"
+          >
+            <article className="h-full bg-[#111114] group-hover:bg-[#161619] border border-white/15 border-t-4 border-t-[#D91F2C] group-hover:border-[#D91F2C] p-6 sm:p-8 rounded-xs flex flex-col justify-between gap-6 transition-all shadow-lg group-hover:shadow-[0_0_25px_rgba(217,31,44,0.25)]">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="px-3 py-1 bg-[#D91F2C] font-technical text-[10px] font-bold uppercase tracking-[0.2em] text-white rounded-xs">
+                    {smaOpenConfig.badge}
+                  </span>
+                  <ArrowUpRight className="w-5 h-5 text-[#86868B] group-hover:text-[#D91F2C] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                </div>
+                <h3 className="font-display text-3xl sm:text-5xl uppercase tracking-tight leading-[0.88] text-white">
+                  {smaOpenConfig.headline}
+                </h3>
+              </div>
 
-            <a
-              href={jkbfLinks.fighterRegistration}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto self-start px-7 py-3.5 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-lg tracking-wider uppercase rounded-xs transition-colors"
-            >
-              {smaOpenConfig.ctaLabel}
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
-          </div>
+              <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-technical uppercase tracking-widest text-[#A1A1AA] group-hover:text-white transition-colors">
+                <span>DAFTAR JALUR SMA</span>
+                <span className="text-[#D91F2C] font-bold">KONSULTASI &amp; FORM →</span>
+              </div>
+            </article>
+          </a>
 
-          {/* University Open */}
-          <div className="bg-[#111114] border border-white/15 border-t-4 border-t-[#E2BA75] p-6 sm:p-8 rounded-xs flex flex-col justify-between gap-6">
-            <div className="space-y-3">
-              <span className="inline-block px-3 py-1 bg-[#E2BA75]/20 border border-[#E2BA75]/50 font-technical text-[10px] font-bold uppercase tracking-[0.2em] text-[#E2BA75] rounded-xs">
-                {universityOpenConfig.badge}
-              </span>
-              <h3 className="font-display text-3xl sm:text-5xl uppercase tracking-tight leading-[0.88] text-white">
-                {universityOpenConfig.headline}
-              </h3>
-            </div>
+          {/* University Open — Entire Card is Clickable */}
+          <a
+            href={jkbfLinks.fighterRegistration}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block rounded-xs focus-visible:outline-2 focus-visible:outline-[#E2BA75]"
+          >
+            <article className="h-full bg-[#111114] group-hover:bg-[#161619] border border-white/15 border-t-4 border-t-[#E2BA75] group-hover:border-[#E2BA75] p-6 sm:p-8 rounded-xs flex flex-col justify-between gap-6 transition-all shadow-lg group-hover:shadow-[0_0_25px_rgba(226,186,117,0.2)]">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="px-3 py-1 bg-[#E2BA75]/20 border border-[#E2BA75]/50 font-technical text-[10px] font-bold uppercase tracking-[0.2em] text-[#E2BA75] rounded-xs">
+                    {universityOpenConfig.badge}
+                  </span>
+                  <ArrowUpRight className="w-5 h-5 text-[#86868B] group-hover:text-[#E2BA75] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                </div>
+                <h3 className="font-display text-3xl sm:text-5xl uppercase tracking-tight leading-[0.88] text-white">
+                  {universityOpenConfig.headline}
+                </h3>
+              </div>
 
-            <a
-              href={jkbfLinks.fighterRegistration}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto self-start px-7 py-3.5 bg-white/[0.07] hover:bg-[#D91F2C] border border-white/20 hover:border-[#D91F2C] text-white font-display text-lg tracking-wider uppercase rounded-xs transition-all"
-            >
-              {universityOpenConfig.ctaLabel}
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
-          </div>
+              <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-technical uppercase tracking-widest text-[#A1A1AA] group-hover:text-white transition-colors">
+                <span>DAFTAR MAHASISWA</span>
+                <span className="text-[#E2BA75] font-bold">KONSULTASI &amp; FORM →</span>
+              </div>
+            </article>
+          </a>
         </div>
       </section>
 
-      {/* ─── 6. VENUE STRIP, PARTNERSHIP & BATTLE CRY ────────────────────────── */}
+      {/* ─── 6. VENUE STRIP, PARTNERSHIP & BATTLE CRY (CLEAN EDITORIAL LINKS) ── */}
       <section id="venue" className="py-14 sm:py-20 bg-[#000000]">
         <div className="editorial-container space-y-6">
-          {/* Venue Slim Strip */}
+          {/* Venue Slim Strip — Link Bar */}
           <div className="bg-[#111114] border border-white/15 border-l-4 border-l-[#D91F2C] p-6 sm:p-8 rounded-xs flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-1.5">
               <span className="font-technical text-xs font-bold uppercase tracking-[0.2em] text-[#D91F2C] inline-flex items-center gap-1.5">
@@ -306,27 +314,28 @@ export default function HomeClient() {
               </h2>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+            <div className="flex flex-wrap items-center gap-5 text-xs font-technical uppercase tracking-wider">
               <a
                 href={jkbfLinks.venueMaps}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#D91F2C] hover:bg-[#B81521] text-white font-display text-base tracking-wider uppercase rounded-xs transition-colors"
+                className="inline-flex items-center gap-1.5 text-white hover:text-[#D91F2C] border-b border-[#D91F2C] pb-0.5 transition-colors group"
               >
-                BUKA GOOGLE MAPS
-                <ArrowUpRight className="w-4 h-4" />
+                <span>Buka Google Maps</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#D91F2C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
+
               <Link
                 href="/venue"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 text-white font-display text-base tracking-wider uppercase rounded-xs transition-colors"
+                className="inline-flex items-center gap-1.5 text-[#C4C4CC] hover:text-white transition-colors group"
               >
-                DETAIL VENUE
-                <ChevronRight className="w-4 h-4" />
+                <span>Detail Fasilitas Venue</span>
+                <ChevronRight className="w-3.5 h-3.5 text-[#D91F2C] group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </div>
           </div>
 
-          {/* Partnership Strip */}
+          {/* Partnership Strip — Contact Pill */}
           <div className="bg-[#111114] border border-white/15 p-6 sm:p-8 rounded-xs flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-1.5">
               <div className="inline-flex items-center gap-2 text-[#E2BA75]">
@@ -344,10 +353,11 @@ export default function HomeClient() {
               href={jkbfLinks.partnershipWhatsApp}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 px-7 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-display text-lg tracking-wider uppercase rounded-xs transition-colors shrink-0"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xs border border-emerald-500/40 hover:border-emerald-500 bg-emerald-950/30 hover:bg-emerald-950/60 text-emerald-300 hover:text-white font-technical text-xs font-bold tracking-wider uppercase transition-all shrink-0 w-fit"
             >
-              <MessageCircle className="w-5 h-5" />
-              {partnershipConfig.ctaLabel}
+              <MessageCircle className="w-4 h-4 text-emerald-400" />
+              <span>Hubungi Ardi (WhatsApp)</span>
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-70" />
             </a>
           </div>
 
