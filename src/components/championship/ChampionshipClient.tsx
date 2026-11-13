@@ -205,22 +205,23 @@ export default function ChampionshipClient() {
             <details
               key={prog.id}
               id={prog.id}
+              name="jkbf-program-accordion"
               className="fight-card-details group bg-[#060608] open:bg-[#0D0D11] transition-colors"
             >
-              <summary className="px-4 sm:px-6 py-5 sm:py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 select-none focus-visible:outline-2 focus-visible:outline-[#D91F2C]">
-                <div className="flex items-start sm:items-center gap-4 sm:gap-7 min-w-0">
+              <summary className="px-3.5 sm:px-6 py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 select-none focus-visible:outline-2 focus-visible:outline-[#D91F2C]">
+                <div className="flex items-start sm:items-center gap-3.5 sm:gap-7 min-w-0">
                   <span
-                    className={`font-display text-4xl sm:text-5xl leading-none shrink-0 ${
+                    className={`font-display text-3xl sm:text-5xl leading-none shrink-0 ${
                       prog.isInvitation ? "text-[#D91F2C]" : "text-white/40 group-open:text-[#D91F2C]"
                     } transition-colors`}
                   >
                     {prog.number}
                   </span>
 
-                  <div className="space-y-1.5 min-w-0">
+                  <div className="space-y-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <span
-                        className={`font-technical text-[10px] font-bold uppercase tracking-[0.2em] px-2.5 py-0.5 rounded-xs ${
+                        className={`font-technical text-[10px] font-bold uppercase tracking-[0.2em] px-2 py-0.5 rounded-xs ${
                           prog.isInvitation
                             ? "bg-[#D91F2C] text-white"
                             : "bg-white/[0.06] text-[#EF3340] border border-white/15"
@@ -233,17 +234,17 @@ export default function ChampionshipClient() {
                       </span>
                     </div>
 
-                    <span className="font-display text-2xl sm:text-4xl uppercase tracking-tight text-white block leading-none">
+                    <span className="font-display text-xl sm:text-3xl uppercase tracking-tight text-white block leading-snug">
                       {prog.name}
                     </span>
 
-                    <span className="text-xs sm:text-sm text-[#A1A1AA] block leading-snug max-w-2xl">
+                    <span className="text-xs sm:text-sm text-[#A1A1AA] block leading-snug max-w-2xl line-clamp-2 sm:line-clamp-none">
                       {prog.summary}
                     </span>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2.5 self-end sm:self-center shrink-0 font-technical text-[11px] font-bold uppercase tracking-widest text-[#C4C4CC] group-hover:text-white">
+                <div className="flex items-center gap-2 self-end sm:self-center shrink-0 font-technical text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-[#C4C4CC] group-hover:text-white">
                   <span className="group-open:hidden">DETAIL</span>
                   <span className="hidden group-open:inline text-[#EF3340]">TUTUP</span>
                   <ChevronDown className="w-4 h-4 fight-card-chevron text-[#D91F2C]" />
@@ -251,8 +252,8 @@ export default function ChampionshipClient() {
               </summary>
 
               {/* Expanded Fight Card Spec */}
-              <div className="px-4 sm:px-6 pb-7 pt-2 border-t border-white/[0.08]">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-4 items-start">
+              <div className="px-3.5 sm:px-6 pb-6 pt-2 border-t border-white/[0.08]">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 pt-3 items-start">
                   {/* Real JKBF Fight Photo */}
                   <div className="lg:col-span-4">
                     <div className="relative aspect-[16/10] overflow-hidden rounded-xs border border-white/15 bg-black">
@@ -262,37 +263,37 @@ export default function ChampionshipClient() {
                         fill
                         loading="lazy"
                         sizes="(max-width: 1024px) 100vw, 33vw"
-                        className="object-cover object-center grayscale contrast-125"
+                        className="object-cover object-center contrast-110 brightness-95"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                      <span className="absolute bottom-3 left-3 font-technical text-[10px] font-bold uppercase tracking-[0.2em] text-white bg-black/80 px-2.5 py-1 border border-white/15 rounded-xs">
+                      <span className="absolute bottom-2.5 left-2.5 font-technical text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-white bg-black/80 px-2 py-0.5 border border-white/15 rounded-xs">
                         {prog.format}
                       </span>
                     </div>
                   </div>
 
                   {/* Specs & Highlights */}
-                  <div className="lg:col-span-8 space-y-5">
-                    <p className="text-sm text-[#D4D4D8] leading-relaxed">
+                  <div className="lg:col-span-8 space-y-4">
+                    <p className="text-xs sm:text-sm text-[#D4D4D8] leading-relaxed">
                       {prog.description}
                     </p>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-black/70 border border-white/10 rounded-xs text-xs">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 sm:p-4 bg-black/70 border border-white/10 rounded-xs text-xs">
                       <div>
-                        <span className="font-technical text-[10px] uppercase tracking-wider text-[#86868B] block">
+                        <span className="font-technical text-[9px] sm:text-[10px] uppercase tracking-wider text-[#86868B] block">
                           SASARAN PESERTA
                         </span>
-                        <p className="text-white font-medium mt-1">{prog.target}</p>
+                        <p className="text-white font-medium mt-0.5 text-xs sm:text-sm">{prog.target}</p>
                       </div>
                       <div>
-                        <span className="font-technical text-[10px] uppercase tracking-wider text-[#86868B] block">
+                        <span className="font-technical text-[9px] sm:text-[10px] uppercase tracking-wider text-[#86868B] block">
                           DISIPLIN PERTANDINGAN
                         </span>
-                        <div className="flex flex-wrap gap-1.5 mt-1.5">
+                        <div className="flex flex-wrap gap-1.5 mt-1">
                           {prog.disciplines.map((d) => (
                             <span
                               key={d}
-                              className="font-technical text-[10px] uppercase px-2 py-0.5 bg-white/[0.06] border border-white/10 text-white rounded-xs"
+                              className="font-technical text-[9px] sm:text-[10px] uppercase px-2 py-0.5 bg-white/[0.06] border border-white/10 text-white rounded-xs"
                             >
                               {d}
                             </span>

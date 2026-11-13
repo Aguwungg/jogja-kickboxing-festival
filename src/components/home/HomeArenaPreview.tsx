@@ -43,6 +43,9 @@ export default function HomeArenaPreview() {
             <span className="font-technical text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
               JKBF 2026 • 3D ARENA EXPERIENCE
             </span>
+            <span className="text-[10px] bg-amber-500/10 text-amber-400 px-2.5 py-0.5 rounded-xs border border-amber-500/30 font-technical uppercase font-bold tracking-wider">
+              VISUALISASI KONSEP 3D // BUKAN DENAH RESMI VENUE
+            </span>
             <span className="text-[9px] bg-white/[0.06] text-[#A1A1A6] px-2 py-0.5 rounded-xs border border-white/10 font-technical">
               GOR PANCASILA UGM
             </span>
@@ -256,14 +259,12 @@ export default function HomeArenaPreview() {
         </div>
       </div>
 
-      {/* ── DISCLAIMER NOTE ───────────────────────────────────────────── */}
-      <div className="mt-4 flex items-start gap-2 text-[11px] text-[#86868B] leading-relaxed">
-        <Info className="w-3.5 h-3.5 text-[#D91F2C] shrink-0 mt-0.5" />
+      {/* ── DISCLAIMER NOTE (OFFICIAL CLARIFICATION) ──────────────────── */}
+      <div className="mt-4 p-3.5 sm:p-4 bg-black/60 border border-white/10 rounded-xs flex items-start gap-3 text-xs text-[#A1A1A6] leading-relaxed">
+        <Info className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
         <p>
-          <strong className="text-[#A1A1A6]">Catatan Perencanaan: </strong>
-          Angka merupakan estimasi berdasarkan rancangan layout dan bukan
-          kapasitas operasional final. Penyelenggara berhak menyesuaikan alokasi
-          teknis demi keselamatan dan kelancaran kejuaraan.
+          <strong className="text-white">Pemberitahuan Resmi: </strong>
+          Model 3D interaktif di atas adalah <span className="text-amber-400 font-semibold">visualisasi konsep tata panggung &amp; ring pertandingan</span>, bukan gambar kerja teknis atau layout venue operasional resmi GOR Pancasila UGM. Kapasitas, denah akses gerbang, dan zonasi penonton final akan dipublikasikan secara terpisah oleh Pengprov KBI DIY dan panitia pelaksana.
         </p>
       </div>
     </section>

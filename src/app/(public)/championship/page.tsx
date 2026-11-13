@@ -24,10 +24,10 @@ export default function ChampionshipPage() {
               alt="Atmosfer ring kejuaraan Jogja Kickboxing Festival 2026"
               fetchPriority="high"
               decoding="async"
-              className="w-full h-full object-cover object-center opacity-35 grayscale contrast-125"
+              className="w-full h-full object-cover object-center opacity-55 contrast-110 brightness-95"
             />
           </picture>
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/75 to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/75" />
           <div className="absolute inset-0 combat-grain pointer-events-none" />
         </div>
 

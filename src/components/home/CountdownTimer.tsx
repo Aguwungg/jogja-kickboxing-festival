@@ -82,45 +82,51 @@ export default function CountdownTimer({
         </div>
       )}
 
-      {/* ─── Byon Signature 4-Box Combat Countdown (White Cards + Red Numbers) ─── */}
-      <div className="flex items-center justify-center gap-2 sm:gap-3.5 md:gap-4 max-w-sm sm:max-w-md md:max-w-lg mx-auto">
+      {/* ─── Compact Fight Festival Countdown (Refined Obsidian-Glass & Crimson Accents) ─── */}
+      <div className="flex items-center justify-center gap-1.5 sm:gap-2.5 md:gap-3 max-w-xs sm:max-w-sm md:max-w-md mx-auto">
         {/* Days */}
-        <div className="bg-white rounded-xs sm:rounded-sm py-2.5 sm:py-3.5 px-2 sm:px-3 shadow-[0_12px_36px_rgba(0,0,0,0.9)] flex flex-col items-center justify-center flex-1 min-w-[68px] sm:min-w-[90px] md:min-w-[105px] min-h-[90px] sm:min-h-[115px] border border-white/50 select-none transition-transform hover:scale-105">
-          <span className="font-sans text-[11px] sm:text-xs font-semibold text-[#D91F2C] tracking-wide mb-1">
-            Days
-          </span>
-          <span className="font-display text-4xl sm:text-6xl font-black text-[#D91F2C] leading-none tabular-nums">
+        <div className="bg-black/80 backdrop-blur-md rounded-xs py-2 sm:py-2.5 px-2 sm:px-3 shadow-[0_8px_24px_rgba(0,0,0,0.85)] flex flex-col items-center justify-center flex-1 min-w-[54px] sm:min-w-[72px] md:min-w-[80px] border border-white/15 hover:border-[#D91F2C]/50 transition-colors select-none">
+          <span className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-white leading-none tabular-nums drop-shadow-[0_2px_8px_rgba(217,31,44,0.35)]">
             {isMounted ? fmt(timeLeft.days) : "--"}
           </span>
+          <span className="font-technical text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-[#EF3340] mt-0.5">
+            Hari
+          </span>
         </div>
+
+        <span className="font-display text-xl sm:text-2xl text-white/30 select-none pb-2">:</span>
 
         {/* Hours */}
-        <div className="bg-white rounded-xs sm:rounded-sm py-2.5 sm:py-3.5 px-2 sm:px-3 shadow-[0_12px_36px_rgba(0,0,0,0.9)] flex flex-col items-center justify-center flex-1 min-w-[68px] sm:min-w-[90px] md:min-w-[105px] min-h-[90px] sm:min-h-[115px] border border-white/50 select-none transition-transform hover:scale-105">
-          <span className="font-sans text-[11px] sm:text-xs font-semibold text-[#D91F2C] tracking-wide mb-1">
-            Hours
-          </span>
-          <span className="font-display text-4xl sm:text-6xl font-black text-[#D91F2C] leading-none tabular-nums">
+        <div className="bg-black/80 backdrop-blur-md rounded-xs py-2 sm:py-2.5 px-2 sm:px-3 shadow-[0_8px_24px_rgba(0,0,0,0.85)] flex flex-col items-center justify-center flex-1 min-w-[54px] sm:min-w-[72px] md:min-w-[80px] border border-white/15 hover:border-[#D91F2C]/50 transition-colors select-none">
+          <span className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-white leading-none tabular-nums drop-shadow-[0_2px_8px_rgba(217,31,44,0.35)]">
             {isMounted ? fmt(timeLeft.hours) : "--"}
           </span>
+          <span className="font-technical text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-[#EF3340] mt-0.5">
+            Jam
+          </span>
         </div>
+
+        <span className="font-display text-xl sm:text-2xl text-white/30 select-none pb-2">:</span>
 
         {/* Minutes */}
-        <div className="bg-white rounded-xs sm:rounded-sm py-2.5 sm:py-3.5 px-2 sm:px-3 shadow-[0_12px_36px_rgba(0,0,0,0.9)] flex flex-col items-center justify-center flex-1 min-w-[68px] sm:min-w-[90px] md:min-w-[105px] min-h-[90px] sm:min-h-[115px] border border-white/50 select-none transition-transform hover:scale-105">
-          <span className="font-sans text-[11px] sm:text-xs font-semibold text-[#D91F2C] tracking-wide mb-1">
-            Minutes
-          </span>
-          <span className="font-display text-4xl sm:text-6xl font-black text-[#D91F2C] leading-none tabular-nums">
+        <div className="bg-black/80 backdrop-blur-md rounded-xs py-2 sm:py-2.5 px-2 sm:px-3 shadow-[0_8px_24px_rgba(0,0,0,0.85)] flex flex-col items-center justify-center flex-1 min-w-[54px] sm:min-w-[72px] md:min-w-[80px] border border-white/15 hover:border-[#D91F2C]/50 transition-colors select-none">
+          <span className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-white leading-none tabular-nums drop-shadow-[0_2px_8px_rgba(217,31,44,0.35)]">
             {isMounted ? fmt(timeLeft.minutes) : "--"}
+          </span>
+          <span className="font-technical text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-[#EF3340] mt-0.5">
+            Menit
           </span>
         </div>
 
+        <span className="font-display text-xl sm:text-2xl text-white/30 select-none pb-2">:</span>
+
         {/* Seconds */}
-        <div className="bg-white rounded-xs sm:rounded-sm py-2.5 sm:py-3.5 px-2 sm:px-3 shadow-[0_12px_36px_rgba(0,0,0,0.9)] flex flex-col items-center justify-center flex-1 min-w-[68px] sm:min-w-[90px] md:min-w-[105px] min-h-[90px] sm:min-h-[115px] border border-white/50 select-none transition-transform hover:scale-105">
-          <span className="font-sans text-[11px] sm:text-xs font-semibold text-[#D91F2C] tracking-wide mb-1">
-            Seconds
-          </span>
-          <span className="font-display text-4xl sm:text-6xl font-black text-[#D91F2C] leading-none tabular-nums">
+        <div className="bg-black/80 backdrop-blur-md rounded-xs py-2 sm:py-2.5 px-2 sm:px-3 shadow-[0_8px_24px_rgba(0,0,0,0.85)] flex flex-col items-center justify-center flex-1 min-w-[54px] sm:min-w-[72px] md:min-w-[80px] border border-white/15 hover:border-[#D91F2C]/50 transition-colors select-none">
+          <span className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-[#EF3340] leading-none tabular-nums drop-shadow-[0_2px_8px_rgba(217,31,44,0.4)]">
             {isMounted ? fmt(timeLeft.seconds) : "--"}
+          </span>
+          <span className="font-technical text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-[#EF3340] mt-0.5">
+            Detik
           </span>
         </div>
       </div>
