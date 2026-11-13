@@ -49,7 +49,13 @@ export default function HomeClient() {
         </div>
 
         <div className="editorial-container relative z-10 w-full text-center flex flex-col items-center">
-          <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8 flex flex-col items-center">
+          <div className="max-w-4xl mx-auto space-y-6 sm:space-y-7 flex flex-col items-center">
+            {/* ─── Byon Signature Countdown: Tepat Diatas, Diawal Home Langsung Terlihat ─── */}
+            <CountdownTimer
+              targetIso={EVENT_CONFIG.dates.startIso}
+              label="COUNTDOWN MENUJU HARI H • 19 DESEMBER 2026"
+            />
+
             {/* Sanction Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-black/85 border-l-4 border-l-[#D91F2C] border-y border-r border-white/15 rounded-xs shadow-xl">
               <span className="w-2 h-2 rounded-full bg-[#D91F2C] animate-pulse shrink-0" />
@@ -59,8 +65,8 @@ export default function HomeClient() {
             </div>
 
             {/* Massive Main Headline */}
-            <div className="space-y-3">
-              <h1 className="font-display text-[clamp(3.5rem,1.5rem+8vw,7.5rem)] font-black uppercase leading-[0.84] tracking-tight text-white drop-shadow-2xl">
+            <div className="space-y-2.5">
+              <h1 className="font-display text-[clamp(3.2rem,1.2rem+7.5vw,7rem)] font-black uppercase leading-[0.84] tracking-tight text-white drop-shadow-2xl">
                 JOGJA KICKBOXING{" "}
                 <span className="text-[#D91F2C] block">
                   FESTIVAL 2026
@@ -72,27 +78,27 @@ export default function HomeClient() {
             </div>
 
             {/* Confirmed Dates & Venue Pill Bar */}
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-[#0D0D10]/95 border border-white/15 rounded-xs text-xs font-technical uppercase tracking-wider text-white">
-                <Calendar className="w-4 h-4 text-[#D91F2C] shrink-0" />
+            <div className="flex flex-wrap items-center justify-center gap-2.5">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#0D0D10]/95 border border-white/15 rounded-xs text-xs font-technical uppercase tracking-wider text-white">
+                <Calendar className="w-3.5 h-3.5 text-[#D91F2C] shrink-0" />
                 <span>{EVENT_CONFIG.dates.display}</span>
               </div>
               <Link
                 href="/venue"
-                className="inline-flex items-center gap-2.5 px-4 py-2 bg-[#0D0D10]/95 hover:bg-[#19191F] border border-white/15 hover:border-[#D91F2C]/60 rounded-xs text-xs font-technical uppercase tracking-wider text-[#C4C4CC] hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#0D0D10]/95 hover:bg-[#19191F] border border-white/15 hover:border-[#D91F2C]/60 rounded-xs text-xs font-technical uppercase tracking-wider text-[#C4C4CC] hover:text-white transition-colors"
               >
-                <MapPin className="w-4 h-4 text-[#D91F2C] shrink-0" />
+                <MapPin className="w-3.5 h-3.5 text-[#D91F2C] shrink-0" />
                 <span>{EVENT_CONFIG.venue.fullDisplay}</span>
               </Link>
             </div>
 
             {/* Hero Action: 1 Primary Fighter Button + 1 Editorial Link */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 pt-2 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 pt-1 w-full sm:w-auto">
               <a
                 href={jkbfLinks.fighterRegistration}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-4 sm:py-5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-[0.98] text-white font-display text-lg sm:text-xl tracking-wider uppercase rounded-xs transition-all shadow-[0_0_35px_rgba(217,31,44,0.55)]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 bg-[#D91F2C] hover:bg-[#B81521] active:scale-[0.98] text-white font-display text-lg sm:text-xl tracking-wider uppercase rounded-xs transition-all shadow-[0_0_35px_rgba(217,31,44,0.55)]"
               >
                 DAFTAR SEBAGAI FIGHTER
                 <ArrowUpRight className="w-5 h-5" />
@@ -110,13 +116,7 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* ─── 2. COMBAT ROUND TIMER STRIP (HARI H COUNTDOWN) ────────────────── */}
-      <CountdownTimer
-        targetIso={EVENT_CONFIG.dates.startIso}
-        label="COUNTDOWN MENUJU HARI H • 19 DESEMBER 2026"
-      />
-
-      {/* ─── 3. OFFICIAL MARQUEE TICKER ──────────────────────────────────────── */}
+      {/* ─── 2. OFFICIAL MARQUEE TICKER ──────────────────────────────────────── */}
       <div className="bg-[#D91F2C] text-white py-3 border-b border-black/20 overflow-hidden">
         <div className="flex w-max animate-marquee items-center">
           {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, idx) => (
