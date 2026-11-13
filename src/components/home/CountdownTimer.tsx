@@ -38,7 +38,7 @@ const emptySubscribe = () => () => {};
 
 export default function CountdownTimer({
   targetIso,
-  label = "COUNTDOWN MENUJU HARI H • 19 DESEMBER 2026",
+  label = "",
   className = "",
 }: CountdownTimerProps) {
   const targetDateStr = targetIso || EVENT_CONFIG.dates.startIso;
@@ -69,16 +69,18 @@ export default function CountdownTimer({
       aria-label="Countdown Hari H Pertandingan"
       className={`w-full text-center select-none ${className}`}
     >
-      {/* ─── Byon Status Header: Pulsing Live Red Dot + Fight Day Label ─── */}
-      <div className="inline-flex items-center justify-center gap-2.5 px-3.5 py-1 mb-3.5 bg-black/80 backdrop-blur-md border border-[#D91F2C]/50 rounded-xs shadow-lg">
-        <span className="relative flex h-2 w-2 shrink-0">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#EF3340] opacity-75" />
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D91F2C]" />
-        </span>
-        <span className="font-technical text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em] text-[#EF3340]">
-          {label}
-        </span>
-      </div>
+      {/* ─── Byon Status Header (Optional) ─── */}
+      {label && (
+        <div className="inline-flex items-center justify-center gap-2.5 px-3.5 py-1 mb-3.5 bg-black/80 backdrop-blur-md border border-[#D91F2C]/50 rounded-xs shadow-lg">
+          <span className="relative flex h-2 w-2 shrink-0">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#EF3340] opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D91F2C]" />
+          </span>
+          <span className="font-technical text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em] text-[#EF3340]">
+            {label}
+          </span>
+        </div>
+      )}
 
       {/* ─── Byon Signature 4-Box Combat Countdown (White Cards + Red Numbers) ─── */}
       <div className="flex items-center justify-center gap-2 sm:gap-3.5 md:gap-4 max-w-sm sm:max-w-md md:max-w-lg mx-auto">
