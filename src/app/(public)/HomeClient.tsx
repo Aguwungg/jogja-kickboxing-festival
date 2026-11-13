@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowUpRight,
@@ -28,125 +29,205 @@ export default function HomeClient() {
           combat countdown, dominant headline, and razor-sharp CTA hierarchy.
          ═══════════════════════════════════════════════════════════════════════ */}
       <section
-        className="relative min-h-[90vh] flex flex-col justify-center items-center pt-22 sm:pt-28 pb-10 sm:pb-14 px-4 sm:px-8 lg:px-12 overflow-hidden"
+        className="relative w-full pt-20 sm:pt-24 lg:pt-28 pb-6 sm:pb-8 lg:pb-10 overflow-hidden border-b border-white/[0.08]"
         aria-label="Hero — Jogja Kickboxing Festival 2026"
       >
-        {/* Full-bleed authentic combat photo background — vibrant & cinematic */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
-          <picture className="absolute inset-0 w-full h-full">
-            <source
-              media="(max-width: 767px)"
-              srcSet="/images/jkbf-photo/crimson_strong_mobile/jkbf-fighter-closeup-mobile-1080x1350.webp"
-              type="image/webp"
-            />
-            <img
-              src="/images/jkbf-photo/crimson_strong_desktop/jkbf-hero-fight-desktop-1920x1080.webp"
-              alt="Dokumentasi pertarungan kickboxing resmi Jogja Kickboxing Festival"
-              fetchPriority="high"
-              decoding="async"
-              className="w-full h-full object-cover object-center opacity-85 sm:opacity-90 brightness-95 contrast-115 transition-transform duration-1000 ease-out"
-            />
-          </picture>
-          {/* Smart directional vignette & text safety gradients — photo stays alive */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-[#0A0A0C]/50 to-black/60" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.2)_0%,rgba(0,0,0,0.5)_65%,#0A0A0C_100%)]" />
+        {/* Subtle atmospheric ambient glow */}
+        <div className="absolute top-1/4 right-1/4 w-[500px] h-[350px] bg-[radial-gradient(ellipse_at_center,rgba(217,31,44,0.1)_0%,transparent_70%)] pointer-events-none blur-3xl -z-1" />
 
-          {/* Luminous Arena Spotlight Halo — Pure Crimson Stage Lighting */}
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[900px] h-[320px] sm:h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(217,31,44,0.28)_0%,rgba(217,31,44,0.08)_50%,transparent_75%)] pointer-events-none blur-3xl -z-1" />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] sm:w-[1100px] h-[200px] sm:h-[300px] bg-[radial-gradient(ellipse_at_bottom,rgba(217,31,44,0.18)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+        {/* ─────────────────────────────────────────────────────────────
+            A. MOBILE HERO (PHOTO-FIRST EDITORIAL — INTENTIONAL COMPOSITION)
+            Fighter photograph is clearly visible with natural eye focus.
+            Dedicated text & CTA zone placed cleanly underneath.
+           ───────────────────────────────────────────────────────────── */}
+        <div className="lg:hidden w-full flex flex-col">
+          {/* 1. Visible Authentic Fighter Photo Container */}
+          <div className="relative w-full h-[40vh] min-h-[300px] max-h-[390px] overflow-hidden bg-black select-none">
+            <Image
+              src="/images/jkbf-photo/mobile/jkbf-fighter-closeup-mobile-1080x1350.webp"
+              alt="Fighter Jogja Kickboxing Festival di sudut ring"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-[center_18%] filter grayscale contrast-125 brightness-95"
+            />
+            {/* Subtle bottom fade into content background */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-transparent to-transparent" />
+            <div className="absolute top-0 inset-x-0 h-14 bg-gradient-to-b from-black/70 to-transparent" />
+
+            {/* Live indicator badge on top right */}
+            <div className="absolute top-3 right-3 z-10 px-2.5 py-1 rounded-xs bg-black/85 backdrop-blur-md border border-white/15">
+              <span className="font-technical text-[9px] uppercase tracking-[0.2em] text-[#EF3340] font-bold flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C] animate-pulse" />
+                STANDAR WAKO
+              </span>
+            </div>
+          </div>
+
+          {/* 2. Dedicated Content Area Below Photograph */}
+          <div className="px-5 pt-3 pb-6 flex flex-col items-center text-center space-y-4">
+            {/* Eyebrow */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xs bg-white/[0.04] border border-white/10">
+              <span className="w-1.5 h-1.5 rounded-xs bg-[#D91F2C]" />
+              <span className="font-technical text-[10px] uppercase tracking-[0.22em] text-[#C4C4CC] font-semibold">
+                PENGPROV KBI DIY // JKBF 2026
+              </span>
+            </div>
+
+            {/* Monumental Condensed Headline */}
+            <h1 className="font-display text-5xl sm:text-6xl uppercase tracking-tight leading-[0.88] text-white">
+              <span>JOGJA PUNYA </span>
+              <span className="text-[#D91F2C]">NYALI.</span>
+            </h1>
+
+            {/* Battle Cry */}
+            <p className="font-technical text-[11px] sm:text-xs uppercase tracking-[0.3em] text-[#86868B] font-semibold">
+              {EVENT_CONFIG.tagline}
+            </p>
+
+            {/* Venue & Date Stadium Lockup */}
+            <div className="pt-1 pb-1">
+              <p className="font-display text-2xl uppercase tracking-wider text-white font-black leading-none">
+                {EVENT_CONFIG.venue.name}
+              </p>
+              <p className="font-technical text-sm uppercase tracking-[0.2em] text-[#EF3340] font-bold mt-1">
+                {EVENT_CONFIG.dates.display}
+              </p>
+            </div>
+
+            {/* Primary & Secondary Action CTAs */}
+            <div className="w-full max-w-xs space-y-2.5 pt-1">
+              <a
+                href={jkbfLinks.fighterRegistration}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3.5 px-6 bg-[#D91F2C] hover:bg-[#B81521] active:scale-[0.98] text-white font-display text-base tracking-wider uppercase transition-all rounded-xs shadow-[0_0_25px_rgba(217,31,44,0.4)] flex items-center justify-center gap-2 font-bold"
+              >
+                <span>DAFTAR SEKARANG</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+
+              <Link
+                href="/championship"
+                className="w-full py-2.5 px-6 bg-white/[0.04] hover:bg-white/[0.08] border border-white/15 text-[#C4C4CC] hover:text-white font-display text-sm tracking-wider uppercase transition-colors rounded-xs flex items-center justify-center gap-1.5"
+              >
+                <span>EXPLORE JKBF</span>
+              </Link>
+            </div>
+
+            {/* Compact Countdown Strip */}
+            <div className="w-full pt-3 max-w-sm">
+              <CountdownTimer targetIso={EVENT_CONFIG.dates.startIso} />
+            </div>
+
+            {/* 3 Authority Badges */}
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-2 text-[9px] font-technical uppercase">
+              <span className="px-2.5 py-1 bg-white/[0.03] border border-white/10 text-[#86868B] rounded-xs">
+                7 Program Kejuaraan
+              </span>
+              <span className="px-2.5 py-1 bg-white/[0.03] border border-white/10 text-[#86868B] rounded-xs">
+                Standar WAKO
+              </span>
+              <span className="px-2.5 py-1 bg-white/[0.03] border border-white/10 text-[#86868B] rounded-xs">
+                Reg. s/d {registrationConfig.displayDeadline}
+              </span>
+            </div>
+          </div>
         </div>
 
-        {/* Monumental Center Hero — Pure Cinematic Focus */}
-        <div className="relative z-10 max-w-[1400px] mx-auto w-full my-auto py-4 sm:py-8 text-center flex flex-col items-center justify-center">
-          {/* Slogan Pill — Combat Tactical Badge */}
-          <div className="mb-3 sm:mb-5">
-            <div className="inline-flex items-center gap-2.5 px-3.5 sm:px-4 py-1.5 rounded-xs bg-black/85 hover:bg-black border border-white/15 backdrop-blur-xl shadow-2xl transition-all select-none">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-xs bg-[#D91F2C] opacity-75" />
-                <span className="relative inline-flex rounded-xs h-2 w-2 bg-[#D91F2C]" />
-              </span>
-              <span className="font-technical text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#F5F5F7] font-semibold">
+        {/* ─────────────────────────────────────────────────────────────
+            B. DESKTOP HERO (CINEMATIC EDITORIAL SPLIT)
+            Left: Typography, Event Lockup & CTAs (~45%).
+            Right: Large High-Contrast Monochrome Fight Photography (~55%).
+           ───────────────────────────────────────────────────────────── */}
+        <div className="hidden lg:grid lg:grid-cols-12 gap-8 xl:gap-14 items-center min-h-[78vh] max-w-[1440px] mx-auto px-8 lg:px-12 py-4 xl:py-8">
+          {/* LEFT COLUMN: Editorial Content (5 cols) */}
+          <div className="lg:col-span-5 space-y-6 z-10">
+            {/* Eyebrow */}
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-xs bg-black/80 border border-white/15 backdrop-blur-md select-none">
+              <span className="w-2 h-2 rounded-xs bg-[#D91F2C]" />
+              <span className="font-technical text-xs uppercase tracking-[0.25em] text-[#F5F5F7] font-semibold">
                 PENGPROV KBI DIY // STANDAR RESMI WAKO
               </span>
             </div>
-          </div>
 
-          {/* Monumental Display Headline — Titanium & Red Glow */}
-          <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-[6.4rem] xl:text-[7.6rem] uppercase tracking-tight leading-[0.88] max-w-5xl mx-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.95)]">
-            <span className="bg-gradient-to-b from-white via-[#F5F5F7] to-[#B0B0B8] bg-clip-text text-transparent">
-              JOGJA PUNYA
-            </span>
-            <br className="sm:hidden" />{" "}
-            <span className="bg-gradient-to-r from-[#FF3B30] via-[#EF3340] to-[#D91F2C] bg-clip-text text-transparent drop-shadow-[0_0_50px_rgba(217,31,44,0.7)]">
-              NYALI.
-            </span>
-          </h1>
-
-          {/* Punchy 3-Word Official Battle Cry */}
-          <p className="mt-2 sm:mt-3 font-technical text-xs sm:text-sm uppercase tracking-[0.32em] text-[#A1A1A6] font-semibold select-none">
-            {EVENT_CONFIG.tagline}
-          </p>
-
-          {/* Arena Location & Date Lockup (Monumental Stadium Typography) */}
-          <div className="mt-3.5 sm:mt-5 text-center select-none">
-            <p className="font-display text-xl sm:text-3xl md:text-4xl uppercase tracking-wider text-white font-black leading-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)]">
-              {EVENT_CONFIG.venue.name}
-            </p>
-            <p className="font-technical text-base sm:text-xl md:text-2xl uppercase tracking-[0.22em] text-[#EF3340] font-black mt-1 drop-shadow-[0_0_20px_rgba(217,31,44,0.6)]">
-              {EVENT_CONFIG.dates.display}
-            </p>
-          </div>
-
-          {/* Compact Combat Countdown (Refined Obsidian-Glass) */}
-          <div className="mt-4 sm:mt-6 w-full">
-            <CountdownTimer targetIso={EVENT_CONFIG.dates.startIso} />
-          </div>
-
-          {/* Focused Action Pairing — Primary Registration & Secondary Explore */}
-          <div className="mt-5 sm:mt-7 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none mx-auto">
-            <a
-              href={jkbfLinks.fighterRegistration}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto text-center px-8 sm:px-10 py-3 sm:py-3.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all shadow-[0_0_30px_rgba(217,31,44,0.45)] inline-flex items-center justify-center gap-2 rounded-sm border border-[#D91F2C]"
-            >
-              <span>DAFTAR SEKARANG</span>
-              <ArrowUpRight className="w-5 h-5 text-white" />
-            </a>
-
-            <Link
-              href="/championship"
-              className="w-full sm:w-auto text-center px-8 sm:px-10 py-3 sm:py-3.5 bg-[#111114]/90 hover:bg-[#16161A] border border-white/20 hover:border-white/40 text-[#F5F5F7] hover:text-white font-display text-base sm:text-lg tracking-wider uppercase transition-all rounded-sm active:scale-95 shadow-xl"
-            >
-              <span>EXPLORE JKBF</span>
-            </Link>
-          </div>
-
-          {/* Subtle Conceptual Arena 3D Link (Doesn't Clutter Hero) */}
-          <div className="mt-3.5">
-            <Link
-              href="#arena-3d"
-              className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-technical uppercase tracking-wider text-[#A1A1A6] hover:text-[#EF3340] transition-colors py-1 group select-none"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#D91F2C]" />
-              <span>Lihat Visualisasi Konsep Arena 3D</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-[#D91F2C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </Link>
-          </div>
-
-          {/* 3-Pillar Authority Stat Bar */}
-          <div className="mt-4 sm:mt-6 pt-1 sm:pt-2 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[10px] sm:text-xs font-technical uppercase">
-            <div className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1 rounded-xs bg-black/60 border border-white/10">
-              <span className="w-1.5 h-1.5 rounded-xs bg-[#D91F2C]" />
-              <span className="text-[#C4C4CC] font-medium">7 Program Kejuaraan</span>
+            {/* Headline */}
+            <div className="space-y-2">
+              <h1 className="font-display text-6xl xl:text-7xl 2xl:text-8xl font-black uppercase tracking-tight leading-[0.88] text-white">
+                <span>JOGJA PUNYA </span>
+                <span className="text-[#D91F2C] block">NYALI.</span>
+              </h1>
+              <p className="font-technical text-xs uppercase tracking-[0.32em] text-[#86868B] font-semibold">
+                {EVENT_CONFIG.tagline}
+              </p>
             </div>
-            <div className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1 rounded-xs bg-black/60 border border-white/10">
-              <span className="w-1.5 h-1.5 rounded-xs bg-[#D91F2C]" />
-              <span className="text-[#C4C4CC] font-medium">Standar WAKO Indonesia</span>
+
+            {/* Venue & Date Stadium Typography */}
+            <div className="border-l-2 border-[#D91F2C] pl-4 py-0.5 space-y-1 select-none">
+              <p className="font-display text-2xl xl:text-3xl uppercase tracking-wider text-white font-bold leading-none">
+                {EVENT_CONFIG.venue.name}
+              </p>
+              <p className="font-technical text-base xl:text-lg uppercase tracking-[0.2em] text-[#EF3340] font-bold">
+                {EVENT_CONFIG.dates.display}
+              </p>
             </div>
-            <div className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1 rounded-xs bg-black/60 border border-white/10">
-              <span className="w-1.5 h-1.5 rounded-xs bg-[#D91F2C]" />
-              <span className="text-[#C4C4CC] font-medium">Reg. s/d {registrationConfig.displayDeadline}</span>
+
+            {/* Action Buttons */}
+            <div className="flex items-center gap-4 pt-1">
+              <a
+                href={jkbfLinks.fighterRegistration}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-95 text-white font-display text-base tracking-wider uppercase transition-all rounded-xs shadow-[0_0_30px_rgba(217,31,44,0.4)] inline-flex items-center gap-2 font-bold"
+              >
+                <span>DAFTAR SEKARANG</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+
+              <Link
+                href="/championship"
+                className="px-7 py-3.5 bg-white/[0.04] hover:bg-white/[0.08] border border-white/20 hover:border-white/40 text-[#F5F5F7] hover:text-white font-display text-base tracking-wider uppercase transition-all rounded-xs active:scale-95"
+              >
+                <span>EXPLORE JKBF</span>
+              </Link>
+            </div>
+
+            {/* Integrated Compact Countdown */}
+            <div className="pt-2 max-w-sm">
+              <CountdownTimer targetIso={EVENT_CONFIG.dates.startIso} />
+            </div>
+
+            {/* 3 Authority Badges */}
+            <div className="pt-1 flex flex-wrap items-center gap-2 text-xs font-technical uppercase">
+              <span className="px-3 py-1 bg-black/60 border border-white/10 text-[#C4C4CC] rounded-xs">
+                7 Program Kejuaraan
+              </span>
+              <span className="px-3 py-1 bg-black/60 border border-white/10 text-[#C4C4CC] rounded-xs">
+                Standar WAKO
+              </span>
+              <span className="px-3 py-1 bg-black/60 border border-white/10 text-[#C4C4CC] rounded-xs">
+                Reg. s/d {registrationConfig.displayDeadline}
+              </span>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: Authentic Fight Photography (7 cols) */}
+          <div className="lg:col-span-7 relative h-[560px] xl:h-[640px] 2xl:h-[700px] w-full rounded-sm overflow-hidden select-none border border-white/10 bg-black shadow-2xl">
+            <Image
+              src="/images/jkbf-photo/desktop/jkbf-fight-intensity-desktop-1920x1080.webp"
+              alt="Aksi pertarungan sengit di ring Jogja Kickboxing Festival"
+              fill
+              priority
+              sizes="(max-width: 1440px) 58vw, 800px"
+              className="object-cover object-center filter grayscale contrast-125 brightness-95"
+            />
+            {/* Soft edge blend into the dark canvas on the left */}
+            <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-[#0A0A0C] via-[#0A0A0C]/40 to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0A0A0C]/80 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute top-4 right-4 z-10 px-3 py-1 bg-black/80 backdrop-blur-md border border-white/15 rounded-xs">
+              <span className="font-technical text-[10px] uppercase tracking-[0.2em] text-[#EF3340] font-bold">
+                WAKO RINGSPORT // HIGH INTENSITY
+              </span>
             </div>
           </div>
         </div>
@@ -221,7 +302,7 @@ export default function HomeClient() {
                   alt="Pertandingan kickboxing intensitas tinggi WAKO Rules"
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover object-center contrast-115 brightness-95 transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover object-center filter grayscale contrast-125 brightness-95 transition-transform duration-700 group-hover:scale-105"
                 />
               </picture>
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-black/35 to-black/20 group-hover:via-black/25 transition-colors" />
@@ -289,7 +370,7 @@ export default function HomeClient() {
                   alt="Wadah prestasi atlet kickboxing muda pelajar dan mahasiswa"
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover object-center contrast-110 brightness-95 transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover object-center filter grayscale contrast-110 brightness-95 transition-transform duration-700 group-hover:scale-105"
                 />
               </picture>
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-black/35 to-black/20 group-hover:via-black/25 transition-colors" />
@@ -365,7 +446,7 @@ export default function HomeClient() {
                 alt="Persiapan fighter kickboxing dan pelatih"
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover object-right contrast-115 brightness-95"
+                className="w-full h-full object-cover object-right filter grayscale contrast-120 brightness-95"
               />
             </picture>
             <div className="absolute inset-0 bg-gradient-to-r from-[#111114] via-[#111114]/85 to-transparent" />

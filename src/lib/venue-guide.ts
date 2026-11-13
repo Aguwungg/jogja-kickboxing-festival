@@ -232,3 +232,4 @@ export const PENDING_ORGANIZER_LOGISTICS: PendingOrganizerLogistics[] = [
       "Ketentuan akses penonton dan mekanisme gelang/tiket akan diumumkan resmi oleh panitia pelaksana melalui kanal Instagram @jogjakickboxingfestival.",
   },
 ];
+

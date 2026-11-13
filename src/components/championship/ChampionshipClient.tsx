@@ -263,7 +263,7 @@ export default function ChampionshipClient() {
                         fill
                         loading="lazy"
                         sizes="(max-width: 1024px) 100vw, 33vw"
-                        className="object-cover object-center contrast-110 brightness-95"
+                        className="object-cover object-center filter grayscale contrast-115 brightness-95"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                       <span className="absolute bottom-2.5 left-2.5 font-technical text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-white bg-black/80 px-2 py-0.5 border border-white/15 rounded-xs">
