@@ -211,13 +211,13 @@ export default function HomeArenaPreview() {
         <div className="grid grid-cols-2 md:grid-cols-4 border-t border-white/10 divide-x divide-white/10 bg-[#0d0d12]">
           <div className="p-3 sm:p-4">
             <div className="text-[10px] font-technical uppercase text-[#86868B]">
-              DIMENSI HALL
+              DISIPLIN PERTANDINGAN
             </div>
             <div className="text-sm sm:text-base font-bold text-[#F5F5F7] mt-0.5">
-              35 × 25 Meter
+              Tatami &amp; Ringsport
             </div>
             <div className="text-[10px] text-[#A1A1A6] mt-0.5">
-              Lorong sirkulasi 1.5 m
+              Standar Regulasi WAKO
             </div>
           </div>
 
@@ -229,42 +229,44 @@ export default function HomeArenaPreview() {
               6 × 6 Meter
             </div>
             <div className="text-[10px] text-[#A1A1A6] mt-0.5">
-              Standar Resmi WAKO
+              Ring Tali Kompetisi Resmi
             </div>
           </div>
 
           <div className="p-3 sm:p-4">
             <div className="text-[10px] font-technical uppercase text-[#86868B]">
-              TOTAL VIP KURSI
+              SIMULASI TATA PANGGUNG
             </div>
             <div className="text-sm sm:text-base font-bold text-[#F5F5F7] mt-0.5">
-              {currentConfig.looseVipSeats} Lepas + 36 Meja
+              Stage &amp; Walkway
             </div>
             <div className="text-[10px] text-[#A1A1A6] mt-0.5">
-              Kursi Futura &amp; 9 Meja Bundar
+              Jalur Masuk Fighter Utama
             </div>
           </div>
 
           <div className="p-3 sm:p-4">
             <div className="text-[10px] font-technical uppercase text-[#86868B]">
-              ESTIMASI STANDING
+              KONTROL PERSPEKTIF
             </div>
             <div className="text-sm sm:text-base font-bold text-[#F5F5F7] mt-0.5">
-              {currentConfig.standingEstimate}
+              360° Rotasi &amp; Zoom
             </div>
             <div className="text-[10px] text-[#A1A1A6] mt-0.5">
-              {currentConfig.standingDensity}
+              Interaksi Kamera Bebas
             </div>
           </div>
         </div>
       </div>
 
       {/* ── DISCLAIMER NOTE (OFFICIAL CLARIFICATION) ──────────────────── */}
-      <div className="mt-4 p-3.5 sm:p-4 bg-black/60 border border-white/10 rounded-xs flex items-start gap-3 text-xs text-[#A1A1A6] leading-relaxed">
+      <div className="mt-4 p-4 bg-black/75 border border-amber-500/25 rounded-xs flex items-start gap-3.5 text-xs text-[#A1A1A6] leading-relaxed">
         <Info className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
         <p>
-          <strong className="text-white">Pemberitahuan Resmi: </strong>
-          Model 3D interaktif di atas adalah <span className="text-amber-400 font-semibold">visualisasi konsep tata panggung &amp; ring pertandingan</span>, bukan gambar kerja teknis atau layout venue operasional resmi GOR Pancasila UGM. Kapasitas, denah akses gerbang, dan zonasi penonton final akan dipublikasikan secara terpisah oleh Pengprov KBI DIY dan panitia pelaksana.
+          <strong className="text-white uppercase font-technical tracking-wider">
+            VISUALISASI KONSEP 3D:{" "}
+          </strong>
+          Model ini merupakan ilustrasi konsep dan bukan denah, tata letak, atau konfigurasi resmi GOR untuk JKBF 2026. Denah gerbang masuk, alur tiket, dan kapasitas operasional resmi akan diumumkan secara terpisah oleh Pengprov KBI DIY dan panitia pelaksana.
         </p>
       </div>
     </section>

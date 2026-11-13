@@ -37,10 +37,17 @@ export const EVENT_CONFIG = {
   venue: {
     heading: "THE ARENA AWAITS.",
     name: "GOR PANCASILA UGM",
+    officialFacilityName: "GOR NUSANTARA UGM",
+    renamingDate: "9 Januari 2026",
+    renamingReference:
+      "https://ugm.ac.id/id/berita/cerminkan-nilai-kemajemukan-dan-sportivitas-ugm-resmikan-nama-gor-nusantara/",
+    renamingClarification:
+      "Jogja Kickboxing Festival 2026 diselenggarakan di GOR Pancasila UGM, yang kini resmi bernama GOR Nusantara UGM setelah peresmian nama baru oleh Universitas Gadjah Mada pada 9 Januari 2026. Kedua nama merujuk pada satu fasilitas gelanggang olahraga yang sama di kawasan Lembah UGM / Bulaksumur, Yogyakarta.",
+    area: "Kawasan Lembah UGM / Bulaksumur, Sleman, D.I. Yogyakarta",
     city: "YOGYAKARTA",
-    fullDisplay: "GOR PANCASILA UGM, YOGYAKARTA",
+    fullDisplay: "GOR PANCASILA UGM (GOR NUSANTARA UGM), YOGYAKARTA",
     summary:
-      "Gelanggang Olahraga Pancasila Universitas Gadjah Mada menjadi rumah resmi perhelatan dua hari Jogja Kickboxing Festival 2026 di Yogyakarta.",
+      "Gelanggang Olahraga Pancasila Universitas Gadjah Mada — yang kini resmi bernama GOR Nusantara UGM — menjadi rumah resmi perhelatan dua hari Jogja Kickboxing Festival 2026 di Yogyakarta.",
     mapsUrl:
       "https://www.google.com/maps/search/?api=1&query=GOR+Pancasila+UGM+Yogyakarta",
   },

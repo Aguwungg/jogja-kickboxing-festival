@@ -100,7 +100,17 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link href="/venue" className="hover:text-white transition-colors">
-                    Venue: GOR Pancasila UGM
+                    Venue: GOR Pancasila (Nusantara UGM)
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/event-guide" className="hover:text-white transition-colors">
+                    Event Guide (Panduan Hari-H)
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/whats-new" className="hover:text-white transition-colors">
+                    What&apos;s New &amp; Pengumuman
                   </Link>
                 </li>
                 <li>

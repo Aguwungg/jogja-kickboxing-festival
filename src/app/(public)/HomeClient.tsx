@@ -4,7 +4,9 @@ import React from "react";
 import Link from "next/link";
 import {
   ArrowUpRight,
+  Compass,
   HelpCircle,
+  MapPin,
   MessageCircle,
   Shield,
   Trophy,
@@ -423,7 +425,89 @@ export default function HomeClient() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          SECTION 05: FAST COMBAT SPORT TILES (UTILITY STRIP)
+          SECTION 05: VENUE & EVENT DAY GUIDE TEASER (OFFICIAL EVENT HUB)
+         ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-16 sm:py-24 px-4 sm:px-8 lg:px-12 max-w-[1440px] mx-auto border-t border-white/[0.08]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div>
+            <div className="inline-flex items-center gap-2 mb-2">
+              <span className="w-2 h-2 rounded-xs bg-[#D91F2C]" />
+              <span className="font-technical text-xs font-bold uppercase tracking-[0.25em] text-[#D91F2C]">
+                OFFICIAL EVENT HUB // PANDUAN PENGUNJUNG
+              </span>
+            </div>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-white leading-none">
+              SIAPKAN DIRI MENUJU ARENA<span className="text-[#D91F2C]">.</span>
+            </h2>
+          </div>
+          <p className="text-xs sm:text-sm text-[#A1A1A6] font-sans max-w-md leading-relaxed">
+            Akses cepat panduan rute transportasi luar kota, tata tertib hari tanding, dan pembaruan resmi festival.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          {/* Card 1: Venue Guide */}
+          <div className="p-8 bg-[#111114] border border-white/10 hover:border-white/30 rounded-xs transition-all flex flex-col justify-between space-y-6 group shadow-2xl">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="p-3 bg-[#D91F2C]/10 border border-[#D91F2C]/30 text-[#D91F2C] rounded-xs">
+                  <MapPin className="w-6 h-6" />
+                </div>
+                <span className="font-technical text-[10px] uppercase tracking-[0.2em] text-[#86868B]">
+                  BULAKSUMUR UGM
+                </span>
+              </div>
+              <h3 className="font-display text-3xl uppercase tracking-wide text-white group-hover:text-[#EF3340] transition-colors">
+                VENUE &amp; TRANSPORT GUIDE
+              </h3>
+              <p className="text-xs sm:text-sm text-[#C4C4CC] leading-relaxed font-sans">
+                Lokasi resmi kejuaraan di GOR Pancasila UGM (kini GOR Nusantara UGM). Dilengkapi pemilih rute navigasi instan dari stasiun, bandara, terminal, dan fasilitas sekitar arena.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-white/[0.08]">
+              <Link
+                href="/venue"
+                className="inline-flex items-center gap-2 font-display text-base tracking-wider uppercase text-white hover:text-[#EF3340] transition-colors"
+              >
+                <span>BUKA PANDUAN VENUE &amp; RUTE</span>
+                <ArrowUpRight className="w-4 h-4 text-[#D91F2C]" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Card 2: Event Day Guide */}
+          <div className="p-8 bg-[#111114] border border-white/10 hover:border-white/30 rounded-xs transition-all flex flex-col justify-between space-y-6 group shadow-2xl">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="p-3 bg-white/5 border border-white/15 text-white rounded-xs">
+                  <Compass className="w-6 h-6 text-[#D91F2C]" />
+                </div>
+                <span className="font-technical text-[10px] uppercase tracking-[0.2em] text-[#86868B]">
+                  19–20 DES 2026
+                </span>
+              </div>
+              <h3 className="font-display text-3xl uppercase tracking-wide text-white group-hover:text-[#EF3340] transition-colors">
+                YOUR FIGHT DAY GUIDE
+              </h3>
+              <p className="text-xs sm:text-sm text-[#C4C4CC] leading-relaxed font-sans">
+                Pedoman praktis hari H untuk atlet, pelatih, kontingen, dan penonton tribun. Regulasi WAKO, prosedur timbang badan, serta pemisahan kontak operasional resmi.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-white/[0.08]">
+              <Link
+                href="/event-guide"
+                className="inline-flex items-center gap-2 font-display text-base tracking-wider uppercase text-white hover:text-[#EF3340] transition-colors"
+              >
+                <span>BUKA FIGHT DAY GUIDE</span>
+                <ArrowUpRight className="w-4 h-4 text-[#D91F2C]" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          SECTION 06: FAST COMBAT SPORT TILES (UTILITY STRIP)
           3 Clean, High-contrast cards for secondary actions — zero drag!
          ═══════════════════════════════════════════════════════════════════════ */}
       <section className="py-16 sm:py-20 px-4 sm:px-8 lg:px-12 max-w-[1440px] mx-auto border-t border-white/[0.08]">

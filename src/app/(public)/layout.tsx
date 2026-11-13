@@ -1,5 +1,6 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import EventQuickAccessBar from "@/components/layout/EventQuickAccessBar";
 
 export default function PublicLayout({
   children,
@@ -9,8 +10,9 @@ export default function PublicLayout({
   return (
     <>
       <Navbar />
-      {children}
+      <div className="pb-14 lg:pb-0">{children}</div>
       <Footer />
+      <EventQuickAccessBar />
     </>
   );
 }

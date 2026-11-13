@@ -18,6 +18,7 @@ export type WhatsNewContentType = "reel" | "image" | "carousel";
 export type WhatsNewStatus = "draft" | "pending" | "published" | "archived";
 
 export type WhatsNewCategory =
+  | "IMPORTANT UPDATE"
   | "MEGA BINTANG"
   | "FIGHTER REGISTRATION"
   | "SMA OPEN"
@@ -29,6 +30,7 @@ export type WhatsNewCategory =
   | "OFFICIAL ANNOUNCEMENT";
 
 export const WHATS_NEW_CATEGORIES: readonly WhatsNewCategory[] = [
+  "IMPORTANT UPDATE",
   "MEGA BINTANG",
   "FIGHTER REGISTRATION",
   "SMA OPEN",

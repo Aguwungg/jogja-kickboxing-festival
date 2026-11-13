@@ -16,9 +16,11 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { name: "HOME", href: "/" },
-  { name: "TENTANG", href: "/tentang" },
   { name: "KEJUARAAN", href: "/championship" },
-  { name: "REGISTRASI", href: "/#registration" },
+  { name: "VENUE", href: "/venue" },
+  { name: "EVENT GUIDE", href: "/event-guide" },
+  { name: "WHAT'S NEW", href: "/whats-new" },
+  { name: "TENTANG", href: "/tentang" },
   { name: "KONTAK", href: "/kontak" },
 ];
 
