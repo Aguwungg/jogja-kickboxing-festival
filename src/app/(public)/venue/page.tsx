@@ -91,27 +91,51 @@ export default function VenuePage() {
          ───────────────────────────────────────────────────────────────── */}
       <section className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 py-12 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border border-white/10 bg-[#111114] rounded-sm overflow-hidden shadow-2xl">
-          {/* Authentic Combat Action Arena Photo */}
-          <div className="lg:col-span-7 relative min-h-[300px] sm:min-h-[400px] lg:min-h-[480px] bg-black overflow-hidden">
-            <picture className="absolute inset-0 w-full h-full">
-              <source
-                media="(max-width: 767px)"
-                srcSet="/images/jkbf-photo/crimson_strong_mobile/jkbf-ring-action-mobile-1080x1350.webp"
-                type="image/webp"
+          {/* Verified Venue Map & Technical Architecture Card */}
+          <div className="lg:col-span-7 relative min-h-[340px] sm:min-h-[420px] lg:min-h-[480px] bg-[#0A0A0C] overflow-hidden flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10">
+            {/* Interactive Dark Map Embed */}
+            <div className="relative w-full h-[260px] sm:h-[300px] lg:h-[340px] bg-black">
+              <iframe
+                title="Peta Lokasi Resmi GOR Pancasila UGM (GOR Nusantara)"
+                src="https://maps.google.com/maps?q=-7.771239,110.377651&hl=id&z=16&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) contrast(110%)" }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-full opacity-80"
               />
-              <img
-                src="/images/jkbf-photo/crimson_strong_desktop/jkbf-ring-action-desktop-1920x1080.webp"
-                alt="Atmosfer pertandingan kickboxing resmi di dalam arena ring"
-                fetchPriority="high"
-                decoding="async"
-                className="w-full h-full object-cover object-center filter contrast-115 brightness-95"
-              />
-            </picture>
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-black/25 lg:to-[#111114]" />
-            <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-10 px-3.5 py-1.5 bg-black/85 border border-white/15 backdrop-blur-md rounded-xs">
-              <span className="font-technical text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#F5F5F7] font-bold">
-                {EVENT_CONFIG.venue.fullDisplay}
-              </span>
+              <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-black/90 border border-white/20 backdrop-blur-md rounded-xs flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#D91F2C] animate-pulse" />
+                <span className="font-technical text-[10px] uppercase tracking-[0.2em] text-white font-bold">
+                  PETA LOKASI TERVERIFIKASI
+                </span>
+              </div>
+              <div className="absolute bottom-3 right-3 z-10 px-2.5 py-1 bg-black/90 border border-white/15 backdrop-blur-md rounded-xs">
+                <span className="font-technical text-[9px] uppercase tracking-wider text-[#A1A1A6]">
+                  7°46&apos;16.5&quot;S 110°22&apos;39.5&quot;E
+                </span>
+              </div>
+            </div>
+
+            {/* Verified Venue Facility Highlights */}
+            <div className="p-4 sm:p-6 bg-[#111114] grid grid-cols-2 gap-3 sm:gap-4 border-t border-white/10">
+              <div className="p-3 bg-black/60 border border-white/10 rounded-xs">
+                <span className="font-technical text-[9px] text-[#86868B] uppercase tracking-wider block">FASILITAS LAPANGAN</span>
+                <span className="font-display text-sm sm:text-base uppercase text-white font-bold">2 TATAMI + 1 RING</span>
+              </div>
+              <div className="p-3 bg-black/60 border border-white/10 rounded-xs">
+                <span className="font-technical text-[9px] text-[#86868B] uppercase tracking-wider block">TRIBUN SPECTATOR</span>
+                <span className="font-display text-sm sm:text-base uppercase text-white font-bold">TRIBUN RESMI GOR</span>
+              </div>
+              <div className="p-3 bg-black/60 border border-white/10 rounded-xs">
+                <span className="font-technical text-[9px] text-[#86868B] uppercase tracking-wider block">AKSES KAMPUS</span>
+                <span className="font-display text-sm sm:text-base uppercase text-white font-bold">KOMPLEKS UGM YOGYAKARTA</span>
+              </div>
+              <div className="p-3 bg-black/60 border border-white/10 rounded-xs">
+                <span className="font-technical text-[9px] text-[#86868B] uppercase tracking-wider block">FASILITAS PENDUKUNG</span>
+                <span className="font-display text-sm sm:text-base uppercase text-white font-bold">PARKIR &amp; RUANG MEDIS</span>
+              </div>
             </div>
           </div>
 

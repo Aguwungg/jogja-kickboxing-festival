@@ -1,5 +1,6 @@
 import ChampionshipClient from "@/components/championship/ChampionshipClient";
 import { EVENT_CONFIG } from "@/lib/event-config";
+import { PHOTO_REGISTRY } from "@/lib/photo-registry";
 
 export const metadata = {
   title: "7 Program Kejuaraan | JKBF 2026",
@@ -16,18 +17,18 @@ export default function ChampionshipPage() {
           <picture className="absolute inset-0 w-full h-full">
             <source
               media="(max-width: 767px)"
-              srcSet="/images/jkbf-photo/crimson_strong_mobile/jkbf-ring-action-mobile-1080x1350.webp"
+              srcSet={PHOTO_REGISTRY["championship-ring"].mobilePath}
               type="image/webp"
             />
             <img
-              src="/images/jkbf-photo/crimson_strong_desktop/jkbf-ring-action-desktop-1920x1080.webp"
-              alt="Atmosfer ring kejuaraan Jogja Kickboxing Festival 2026"
+              src={PHOTO_REGISTRY["championship-ring"].desktopPath}
+              alt={PHOTO_REGISTRY["championship-ring"].alt}
               fetchPriority="high"
               decoding="async"
-              className="w-full h-full object-cover object-center opacity-55 contrast-110 brightness-95"
+              className="w-full h-full object-cover object-center opacity-65 filter grayscale contrast-120 brightness-95"
             />
           </picture>
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/75" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/65" />
           <div className="absolute inset-0 combat-grain pointer-events-none" />
         </div>
 

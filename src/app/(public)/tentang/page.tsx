@@ -9,6 +9,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { EVENT_CONFIG } from "@/lib/event-config";
+import { PHOTO_REGISTRY } from "@/lib/photo-registry";
 
 export const metadata = {
   title: "Tentang JKBF 2026 | Jogja Kickboxing Festival",
@@ -132,26 +133,26 @@ export default function TentangPage() {
             </div>
 
             <div className="lg:col-span-4 flex flex-col gap-6">
-              {/* Authentic Documentary Photo */}
+              {/* Authentic Documentary Photo — Natural Color */}
               <div className="relative aspect-[16/10] overflow-hidden rounded-sm border border-white/10 bg-[#111114] shadow-xl group">
                 <picture className="absolute inset-0 w-full h-full">
                   <source
                     media="(max-width: 767px)"
-                    srcSet="/images/jkbf-photo/mobile/jkbf-audience-community-mobile-1080x1350.webp"
+                    srcSet={PHOTO_REGISTRY["audience-atmosphere"].mobilePath}
                     type="image/webp"
                   />
                   <img
-                    src="/images/jkbf-photo/desktop/jkbf-audience-community-desktop-1920x1080.webp"
-                    alt="Atmosfer komunitas dan penonton kejuaraan kickboxing"
+                    src={PHOTO_REGISTRY["audience-atmosphere"].desktopPath}
+                    alt={PHOTO_REGISTRY["audience-atmosphere"].alt}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover object-center filter contrast-110 brightness-90 group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover object-center contrast-105 brightness-95 group-hover:scale-105 transition-transform duration-700"
                   />
                 </picture>
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent" />
                 <div className="absolute bottom-3 left-3 right-3 z-10 px-2.5 py-1 bg-black/85 border border-white/15 backdrop-blur-md rounded-xs">
                   <span className="font-technical text-[10px] uppercase tracking-[0.2em] text-[#F5F5F7] font-semibold block">
-                    ATMOSFER KOMUNITAS &amp; SUPORTER
+                    ATMOSFER TRIBUN &amp; KOMUNITAS (WARNA ALAMI)
                   </span>
                 </div>
               </div>
@@ -338,6 +339,89 @@ export default function TentangPage() {
                 <p className="leading-relaxed">{body}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════════════
+            EDITORIAL PHOTOGRAPHY: SPORTMANSHIP & HUMAN STORY
+           ═══════════════════════════════════════════════════════════════════ */}
+        <section className="space-y-6 pt-8 border-t border-white/[0.08]">
+          <div className="space-y-1">
+            <span className="font-technical text-xs uppercase tracking-[0.25em] text-[#D91F2C] font-bold">
+              GALERI EDITORIAL // SPORTMANSHIP &amp; HUMAN STORY
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl uppercase tracking-wider text-white">
+              NILAI SPORTIVITAS &amp; DEDIKASI
+            </h2>
+            <p className="text-xs sm:text-sm text-[#86868B] max-w-2xl leading-relaxed">
+              Dokumentasi arsip kejuaraan terdahulu yang merefleksikan etika pertandingan bela diri: sportivitas di atas ring dan bimbingan pelatih di sudut arena.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            {/* 1. Sportmanship */}
+            <div className="p-6 bg-[#111114] border border-white/10 rounded-sm shadow-xl space-y-4">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-xs border border-white/10 bg-black">
+                <picture className="absolute inset-0 w-full h-full">
+                  <source
+                    media="(max-width: 767px)"
+                    srcSet={PHOTO_REGISTRY["sportmanship-ring"].mobilePath}
+                    type="image/webp"
+                  />
+                  <img
+                    src={PHOTO_REGISTRY["sportmanship-ring"].desktopPath}
+                    alt={PHOTO_REGISTRY["sportmanship-ring"].alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover object-center filter grayscale contrast-115 brightness-95"
+                  />
+                </picture>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <span className="absolute bottom-2.5 left-2.5 font-technical text-[9px] uppercase tracking-[0.2em] text-white bg-black/80 px-2 py-0.5 border border-white/15 rounded-xs">
+                  RESPECT &amp; HONOR
+                </span>
+              </div>
+              <div className="space-y-1">
+                <h3 className="font-display text-xl uppercase tracking-wider text-white">
+                  SPORTIVITAS DI ATAS RING
+                </h3>
+                <p className="text-xs text-[#86868B] leading-relaxed">
+                  Semangat saling menghormati antar petarung setelah bel akhir berbunyi — fondasi utama karakter seorang kickboxer sejati.
+                </p>
+              </div>
+            </div>
+
+            {/* 2. Coach & Human Story */}
+            <div className="p-6 bg-[#111114] border border-white/10 rounded-sm shadow-xl space-y-4">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-xs border border-white/10 bg-black">
+                <picture className="absolute inset-0 w-full h-full">
+                  <source
+                    media="(max-width: 767px)"
+                    srcSet={PHOTO_REGISTRY["coach-human-story"].mobilePath}
+                    type="image/webp"
+                  />
+                  <img
+                    src={PHOTO_REGISTRY["coach-human-story"].desktopPath}
+                    alt={PHOTO_REGISTRY["coach-human-story"].alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover object-[center_30%] contrast-105 brightness-95"
+                  />
+                </picture>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <span className="absolute bottom-2.5 left-2.5 font-technical text-[9px] uppercase tracking-[0.2em] text-white bg-black/80 px-2 py-0.5 border border-white/15 rounded-xs">
+                  WARNA ALAMI • SUDUT RING
+                </span>
+              </div>
+              <div className="space-y-1">
+                <h3 className="font-display text-xl uppercase tracking-wider text-white">
+                  DEDIKASI PELATIH &amp; SUDUT RING
+                </h3>
+                <p className="text-xs text-[#86868B] leading-relaxed">
+                  Arahan taktis dan ketenangan pelatih mendampingi perjalanan atlet dari masa latihan intensif hingga saat berlaga.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 

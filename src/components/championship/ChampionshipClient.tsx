@@ -48,7 +48,7 @@ const PROGRAMS: ProgramItem[] = [
       "Pemberian medali dan piagam resmi KONI & KBI DIY",
     ],
     disciplines: ["Point Fighting", "Kick Light", "Low Kick", "Full Contact"],
-    image: "/images/jkbf-photo/crimson_strong_desktop/jkbf-ring-action-desktop-1920x1080.webp",
+    image: "/images/jkbf-editorial/secondary/desktop/jkbf-ring-action-desktop-1920x1080.webp",
   },
   {
     id: "redy-open",
@@ -70,7 +70,7 @@ const PROGRAMS: ProgramItem[] = [
       "Perebutan gelar juara umum dan trofi bergengsi",
     ],
     disciplines: ["Point Fighting", "Kick Light", "Low Kick", "Full Contact", "K-1 Style"],
-    image: "/images/jkbf-photo/crimson_strong_desktop/jkbf-fight-intensity-desktop-1920x1080.webp",
+    image: "/images/jkbf-editorial/secondary/desktop/jkbf-fight-intensity-desktop-1920x1080.webp",
   },
   {
     id: "camp-open",
@@ -91,7 +91,7 @@ const PROGRAMS: ProgramItem[] = [
       "Peluang unjuk bakat bagi calon petarung profesional masa depan",
     ],
     disciplines: ["Point Fighting", "Kick Light", "Low Kick", "K-1 Style"],
-    image: "/images/jkbf-photo/desktop/jkbf-match-decision-desktop-1200x1500.webp",
+    image: "/images/jkbf-editorial/secondary/desktop/jkbf-fighter-preparation-desktop-1600x1200.webp",
   },
   {
     id: "sma-open",
@@ -112,7 +112,7 @@ const PROGRAMS: ProgramItem[] = [
       "Pemberian poin prestasi olahraga untuk jenjang akademik",
     ],
     disciplines: ["Kick Light", "Point Fighting", "K-1 Style"],
-    image: "/images/jkbf-photo/desktop/jkbf-women-fight-desktop-1920x1080.webp",
+    image: "/images/jkbf-editorial/secondary/desktop/jkbf-women-fight-desktop-1920x1080.webp",
   },
   {
     id: "university-open",
@@ -133,7 +133,7 @@ const PROGRAMS: ProgramItem[] = [
       "Persaingan antarkampus terkemuka dari berbagai daerah",
     ],
     disciplines: ["K-1 Style Ringsport", "Low Kick"],
-    image: "/images/jkbf-photo/desktop/jkbf-female-fighter-prep-desktop-1200x1500.webp",
+    image: "/images/jkbf-editorial/secondary/desktop/jkbf-female-fighter-prep-desktop-1200x1500.webp",
   },
   {
     id: "kelas-bintang",
@@ -154,7 +154,7 @@ const PROGRAMS: ProgramItem[] = [
       "Bukan kategori pendaftaran umum",
     ],
     disciplines: ["K-1 Style Ringsport"],
-    image: "/images/jkbf-photo/desktop/jkbf-fighter-preparation-desktop-1600x1200.webp",
+    image: "/images/jkbf-editorial/secondary/desktop/jkbf-match-decision-desktop-1200x1500.webp",
     isInvitation: true,
   },
   {
@@ -176,7 +176,7 @@ const PROGRAMS: ProgramItem[] = [
       "Eksklusif undangan khusus promotor resmi",
     ],
     disciplines: ["K-1 Style Ringsport"],
-    image: "/images/jkbf-photo/crimson_strong_desktop/jkbf-hero-fight-desktop-1920x1080.webp",
+    image: "/images/jkbf-editorial/secondary/desktop/jkbf-hero-fight-desktop-1920x1080.webp",
     isInvitation: true,
   },
 ];
@@ -270,6 +270,9 @@ export default function ChampionshipClient() {
                         {prog.format}
                       </span>
                     </div>
+                    <p className="font-technical text-[9px] uppercase tracking-wider text-[#86868B] mt-1.5 leading-tight">
+                      * Dokumentasi arsip kejuaraan terdahulu; materi foto ilustratif.
+                    </p>
                   </div>
 
                   {/* Specs & Highlights */}

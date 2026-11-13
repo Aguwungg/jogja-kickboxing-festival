@@ -19,6 +19,7 @@ import {
   jkbfLinks,
   registrationConfig,
 } from "@/lib/event-config";
+import { PHOTO_REGISTRY } from "@/lib/photo-registry";
 
 export default function HomeClient() {
   return (
@@ -44,12 +45,12 @@ export default function HomeClient() {
           {/* 1. Visible Authentic Fighter Photo Container */}
           <div className="relative w-full h-[40vh] min-h-[300px] max-h-[390px] overflow-hidden bg-black select-none">
             <Image
-              src="/images/jkbf-photo/mobile/jkbf-fighter-closeup-mobile-1080x1350.webp"
-              alt="Fighter Jogja Kickboxing Festival di sudut ring"
+              src={PHOTO_REGISTRY["hero-fight-mobile"].mobilePath}
+              alt={PHOTO_REGISTRY["hero-fight-mobile"].alt}
               fill
               priority
               sizes="100vw"
-              className="object-cover object-[center_18%] filter grayscale contrast-125 brightness-95"
+              className="object-cover object-[center_30%] filter grayscale contrast-125 brightness-95"
             />
             {/* Subtle bottom fade into content background */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-transparent to-transparent" />
@@ -214,12 +215,12 @@ export default function HomeClient() {
           {/* RIGHT COLUMN: Authentic Fight Photography (7 cols) */}
           <div className="lg:col-span-7 relative h-[560px] xl:h-[640px] 2xl:h-[700px] w-full rounded-sm overflow-hidden select-none border border-white/10 bg-black shadow-2xl">
             <Image
-              src="/images/jkbf-photo/desktop/jkbf-fight-intensity-desktop-1920x1080.webp"
-              alt="Aksi pertarungan sengit di ring Jogja Kickboxing Festival"
+              src={PHOTO_REGISTRY["hero-fight-impact"].desktopPath}
+              alt={PHOTO_REGISTRY["hero-fight-impact"].alt}
               fill
               priority
               sizes="(max-width: 1440px) 58vw, 800px"
-              className="object-cover object-center filter grayscale contrast-125 brightness-95"
+              className="object-cover object-[center_35%] filter grayscale contrast-125 brightness-95"
             />
             {/* Soft edge blend into the dark canvas on the left */}
             <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-[#0A0A0C] via-[#0A0A0C]/40 to-transparent pointer-events-none" />
@@ -294,12 +295,12 @@ export default function HomeClient() {
               <picture className="absolute inset-0 w-full h-full">
                 <source
                   media="(max-width: 767px)"
-                  srcSet="/images/jkbf-photo/crimson_strong_mobile/jkbf-fight-intensity-mobile-1080x1350.webp"
+                  srcSet={PHOTO_REGISTRY["the-fights-intensity"].mobilePath}
                   type="image/webp"
                 />
                 <img
-                  src="/images/jkbf-photo/crimson_strong_desktop/jkbf-fight-intensity-desktop-1920x1080.webp"
-                  alt="Pertandingan kickboxing intensitas tinggi WAKO Rules"
+                  src={PHOTO_REGISTRY["the-fights-intensity"].desktopPath}
+                  alt={PHOTO_REGISTRY["the-fights-intensity"].alt}
                   loading="lazy"
                   decoding="async"
                   className="w-full h-full object-cover object-center filter grayscale contrast-125 brightness-95 transition-transform duration-700 group-hover:scale-105"
@@ -362,12 +363,12 @@ export default function HomeClient() {
               <picture className="absolute inset-0 w-full h-full">
                 <source
                   media="(max-width: 767px)"
-                  srcSet="/images/jkbf-photo/mobile/jkbf-women-fight-mobile-1080x1350.webp"
+                  srcSet={PHOTO_REGISTRY["movement-team-spirit"].mobilePath}
                   type="image/webp"
                 />
                 <img
-                  src="/images/jkbf-photo/desktop/jkbf-women-fight-desktop-1920x1080.webp"
-                  alt="Wadah prestasi atlet kickboxing muda pelajar dan mahasiswa"
+                  src={PHOTO_REGISTRY["movement-team-spirit"].desktopPath}
+                  alt={PHOTO_REGISTRY["movement-team-spirit"].alt}
                   loading="lazy"
                   decoding="async"
                   className="w-full h-full object-cover object-center filter grayscale contrast-110 brightness-95 transition-transform duration-700 group-hover:scale-105"
@@ -438,12 +439,12 @@ export default function HomeClient() {
             <picture className="absolute inset-0 w-full h-full">
               <source
                 media="(max-width: 767px)"
-                srcSet="/images/jkbf-photo/mobile/jkbf-fighter-preparation-mobile-1080x1350.webp"
+                srcSet={PHOTO_REGISTRY["fighter-backstage"].mobilePath}
                 type="image/webp"
               />
               <img
-                src="/images/jkbf-photo/desktop/jkbf-fighter-preparation-desktop-1600x1200.webp"
-                alt="Persiapan fighter kickboxing dan pelatih"
+                src={PHOTO_REGISTRY["fighter-backstage"].desktopPath}
+                alt={PHOTO_REGISTRY["fighter-backstage"].alt}
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover object-right filter grayscale contrast-120 brightness-95"
