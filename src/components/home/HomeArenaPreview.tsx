@@ -68,7 +68,7 @@ export default function HomeArenaPreview() {
               }`}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-white opacity-80" />
-              <span>LAYOUT 01: TATAMI + RING</span>
+              <span>DAY 1: TATAMI + RING (19 DES)</span>
             </button>
 
             <button
@@ -80,7 +80,7 @@ export default function HomeArenaPreview() {
               }`}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-white opacity-80" />
-              <span>LAYOUT 02: RING + STANDING</span>
+              <span>DAY 2: RING + STANDING (20 DES)</span>
             </button>
           </div>
 

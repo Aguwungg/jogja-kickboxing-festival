@@ -38,7 +38,7 @@ const emptySubscribe = () => () => {};
 
 export default function CountdownTimer({
   targetIso,
-  label = "MENUJU HARI H • 19–20 DESEMBER 2026",
+  label = "COUNTDOWN MENUJU HARI H • 19 DESEMBER 2026",
   className = "",
 }: CountdownTimerProps) {
   const targetDateStr = targetIso || EVENT_CONFIG.dates.startIso;
@@ -64,66 +64,80 @@ export default function CountdownTimer({
   const fmt = (n: number) => n.toString().padStart(2, "0");
 
   return (
-    <div className={`w-full max-w-sm sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto ${className}`}>
-      {/* ─── Combat Status Pill Label ─── */}
-      {label && (
-        <div className="text-center mb-3 sm:mb-5">
-          <span className="font-technical text-[10px] sm:text-xs md:text-sm text-[#EF3340] tracking-[0.2em] uppercase font-bold bg-black/90 px-4 sm:px-6 py-1.5 sm:py-2 border border-white/15 rounded-xs inline-flex items-center gap-2 shadow-2xl max-w-full">
-            <span className="relative flex h-2 w-2 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-xs bg-[#EF3340] opacity-75"></span>
-              <span className="relative inline-flex rounded-xs h-2 w-2 bg-[#EF3340]"></span>
+    <div
+      role="region"
+      aria-label="Countdown Hari H Pertandingan"
+      className={`w-full bg-[#08080B] border-y border-[#D91F2C]/35 py-4 sm:py-5 px-4 sm:px-8 relative overflow-hidden ${className}`}
+    >
+      {/* Subtle combat texture/gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-[#140608]/70 to-black pointer-events-none" />
+      <div className="absolute inset-0 combat-grain pointer-events-none opacity-40" />
+
+      <div className="max-w-[1400px] mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+        {/* Left: Official Fight Night Status Badge */}
+        <div className="flex items-center gap-3 text-center md:text-left">
+          <span className="relative flex h-3 w-3 shrink-0">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#EF3340] opacity-75" />
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-[#D91F2C]" />
+          </span>
+          <div className="space-y-0.5">
+            <div className="font-technical text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em] text-[#EF3340]">
+              {label}
+            </div>
+            <div className="font-display text-base sm:text-xl uppercase tracking-wider text-white">
+              GOR PANCASILA UGM • YOGYAKARTA
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Industrial Combat Round Timer (Dark High-Contrast Digits) */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Days */}
+          <div className="bg-[#111116] border border-white/15 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xs flex flex-col items-center min-w-[64px] sm:min-w-[80px] shadow-lg">
+            <span className="font-display text-2xl sm:text-4xl font-black text-white leading-none tabular-nums tracking-tight">
+              {isMounted ? fmt(timeLeft.days) : "--"}
             </span>
-            <span className="truncate">{label}</span>
-          </span>
-        </div>
-      )}
+            <span className="font-technical text-[9px] sm:text-[10px] font-bold text-[#D91F2C] uppercase tracking-widest mt-1">
+              HARI
+            </span>
+          </div>
 
-      {/* ═════════════════════════════════════════════════════════════════════
-          BYON SIGNATURE COMBAT COUNTDOWN (4 TALL WHITE PORTRAIT CARDS)
-          Pure stark white cards, vibrant red condensed numbers, instant visual pop!
-         ═════════════════════════════════════════════════════════════════════ */}
-      <div className="grid grid-cols-4 gap-2.5 sm:gap-4 md:gap-5 max-w-sm sm:max-w-lg md:max-w-xl mx-auto">
-        
-        {/* Days */}
-        <div className="bg-white rounded-sm sm:rounded-md p-3 sm:p-5 md:p-6 shadow-[0_18px_50px_rgba(0,0,0,0.95)] flex flex-col items-center justify-center transition-transform hover:scale-105 select-none min-h-[105px] sm:min-h-[140px] md:min-h-[160px] border border-white/40">
-          <span className="font-sans text-[11px] sm:text-xs md:text-sm font-bold text-[#D91F2C] tracking-wide mb-1 sm:mb-2">
-            Hari
-          </span>
-          <span className="font-display text-4xl sm:text-6xl md:text-7xl font-black text-[#D91F2C] leading-none tabular-nums">
-            {isMounted ? fmt(timeLeft.days) : "--"}
-          </span>
-        </div>
+          <span className="font-display text-xl sm:text-2xl text-white/40 font-bold">:</span>
 
-        {/* Hours */}
-        <div className="bg-white rounded-sm sm:rounded-md p-3 sm:p-5 md:p-6 shadow-[0_18px_50px_rgba(0,0,0,0.95)] flex flex-col items-center justify-center transition-transform hover:scale-105 select-none min-h-[105px] sm:min-h-[140px] md:min-h-[160px] border border-white/40">
-          <span className="font-sans text-[11px] sm:text-xs md:text-sm font-bold text-[#D91F2C] tracking-wide mb-1 sm:mb-2">
-            Jam
-          </span>
-          <span className="font-display text-4xl sm:text-6xl md:text-7xl font-black text-[#D91F2C] leading-none tabular-nums">
-            {isMounted ? fmt(timeLeft.hours) : "--"}
-          </span>
-        </div>
+          {/* Hours */}
+          <div className="bg-[#111116] border border-white/15 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xs flex flex-col items-center min-w-[64px] sm:min-w-[80px] shadow-lg">
+            <span className="font-display text-2xl sm:text-4xl font-black text-white leading-none tabular-nums tracking-tight">
+              {isMounted ? fmt(timeLeft.hours) : "--"}
+            </span>
+            <span className="font-technical text-[9px] sm:text-[10px] font-bold text-[#D91F2C] uppercase tracking-widest mt-1">
+              JAM
+            </span>
+          </div>
 
-        {/* Minutes */}
-        <div className="bg-white rounded-sm sm:rounded-md p-3 sm:p-5 md:p-6 shadow-[0_18px_50px_rgba(0,0,0,0.95)] flex flex-col items-center justify-center transition-transform hover:scale-105 select-none min-h-[105px] sm:min-h-[140px] md:min-h-[160px] border border-white/40">
-          <span className="font-sans text-[11px] sm:text-xs md:text-sm font-bold text-[#D91F2C] tracking-wide mb-1 sm:mb-2">
-            Menit
-          </span>
-          <span className="font-display text-4xl sm:text-6xl md:text-7xl font-black text-[#D91F2C] leading-none tabular-nums">
-            {isMounted ? fmt(timeLeft.minutes) : "--"}
-          </span>
-        </div>
+          <span className="font-display text-xl sm:text-2xl text-white/40 font-bold">:</span>
 
-        {/* Seconds */}
-        <div className="bg-white rounded-sm sm:rounded-md p-3 sm:p-5 md:p-6 shadow-[0_18px_50px_rgba(0,0,0,0.95)] flex flex-col items-center justify-center transition-transform hover:scale-105 select-none min-h-[105px] sm:min-h-[140px] md:min-h-[160px] border border-white/40">
-          <span className="font-sans text-[11px] sm:text-xs md:text-sm font-bold text-[#D91F2C] tracking-wide mb-1 sm:mb-2">
-            Detik
-          </span>
-          <span className="font-display text-4xl sm:text-6xl md:text-7xl font-black text-[#D91F2C] leading-none tabular-nums">
-            {isMounted ? fmt(timeLeft.seconds) : "--"}
-          </span>
-        </div>
+          {/* Minutes */}
+          <div className="bg-[#111116] border border-white/15 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xs flex flex-col items-center min-w-[64px] sm:min-w-[80px] shadow-lg">
+            <span className="font-display text-2xl sm:text-4xl font-black text-white leading-none tabular-nums tracking-tight">
+              {isMounted ? fmt(timeLeft.minutes) : "--"}
+            </span>
+            <span className="font-technical text-[9px] sm:text-[10px] font-bold text-[#D91F2C] uppercase tracking-widest mt-1">
+              MENIT
+            </span>
+          </div>
 
+          <span className="font-display text-xl sm:text-2xl text-white/40 font-bold">:</span>
+
+          {/* Seconds */}
+          <div className="bg-[#111116] border border-white/15 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xs flex flex-col items-center min-w-[64px] sm:min-w-[80px] shadow-lg">
+            <span className="font-display text-2xl sm:text-4xl font-black text-[#EF3340] leading-none tabular-nums tracking-tight">
+              {isMounted ? fmt(timeLeft.seconds) : "--"}
+            </span>
+            <span className="font-technical text-[9px] sm:text-[10px] font-bold text-[#A1A1AA] uppercase tracking-widest mt-1">
+              DETIK
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );

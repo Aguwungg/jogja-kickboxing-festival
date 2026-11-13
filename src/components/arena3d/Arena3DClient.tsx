@@ -134,7 +134,7 @@ function Arena3DContent() {
               <div className="flex items-center justify-center gap-1.5 w-full min-w-0 sm:w-auto">
                 <span className="w-1.5 h-1.5 rounded-full bg-white opacity-80 flex-shrink-0" />
                 <span className="font-bold text-[11px] sm:text-xs truncate sm:overflow-visible sm:whitespace-nowrap">
-                  LAYOUT 01
+                  DAY 1 (19 DES)
                 </span>
               </div>
               <span className="text-[9px] sm:text-xs opacity-85 font-mono sm:font-bold truncate sm:overflow-visible sm:whitespace-nowrap">
@@ -156,7 +156,7 @@ function Arena3DContent() {
               <div className="flex items-center justify-center gap-1.5 w-full min-w-0 sm:w-auto">
                 <span className="w-1.5 h-1.5 rounded-full bg-white opacity-80 flex-shrink-0" />
                 <span className="font-bold text-[11px] sm:text-xs truncate sm:overflow-visible sm:whitespace-nowrap">
-                  LAYOUT 02
+                  DAY 2 (20 DES)
                 </span>
               </div>
               <span className="text-[9px] sm:text-xs opacity-85 font-mono sm:font-bold truncate sm:overflow-visible sm:whitespace-nowrap">

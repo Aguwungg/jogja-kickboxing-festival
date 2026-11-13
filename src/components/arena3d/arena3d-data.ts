@@ -30,8 +30,8 @@ export interface LayoutConfig {
 export const LAYOUT_CONFIGS: Record<1 | 2, LayoutConfig> = {
   1: {
     id: 1,
-    name: "LAYOUT 01 — TATAMI + RING",
-    badge: "KONFIGURASI HARI 1",
+    name: "DAY 1 — TATAMI + RING",
+    badge: "HARI 1 (SABTU, 19 DES 2026)",
     subtitle: "Ring Utama & Tatami Area Aktif",
     description:
       "Stage di sisi timur, jalur fighter 4 m ke ring diapit VIP. Kursi VIP mengotak keliling ring; tatami dikelilingi 2 baris VIP; area standing di sisi barat.",
@@ -46,8 +46,8 @@ export const LAYOUT_CONFIGS: Record<1 | 2, LayoutConfig> = {
   },
   2: {
     id: 2,
-    name: "LAYOUT 02 — RING + STANDING",
-    badge: "KONFIGURASI HARI 2",
+    name: "DAY 2 — RING + STANDING",
+    badge: "HARI 2 (MINGGU, 20 DES 2026)",
     subtitle: "Ring Utama & Area Standing Barat Diperluas",
     description:
       "Tatami dibongkar. Stage di sisi timur, jalur fighter 4 m ke ring diapit VIP. Kursi VIP mengotak keliling ring; 4 baris VIP di depan standing barat yang diperluas.",
