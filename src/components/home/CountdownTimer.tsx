@@ -80,51 +80,45 @@ export default function CountdownTimer({
         </span>
       </div>
 
-      {/* ─── Byon Signature 4-Box Combat Countdown (Centered, High Impact) ─── */}
-      <div className="flex items-center justify-center gap-2 sm:gap-3.5 max-w-full mx-auto">
+      {/* ─── Byon Signature 4-Box Combat Countdown (White Cards + Red Numbers) ─── */}
+      <div className="flex items-center justify-center gap-2 sm:gap-3.5 md:gap-4 max-w-sm sm:max-w-md md:max-w-lg mx-auto">
         {/* Days */}
-        <div className="bg-[#0A0A0E]/95 backdrop-blur-md border border-white/20 border-t-2 border-t-[#D91F2C] hover:border-[#D91F2C] px-3 sm:px-5 py-2.5 sm:py-3.5 rounded-xs shadow-2xl flex flex-col items-center justify-center min-w-[66px] sm:min-w-[88px] transition-all">
-          <span className="font-display text-3xl sm:text-5xl font-black text-white leading-none tabular-nums tracking-tight">
+        <div className="bg-white rounded-xs sm:rounded-sm py-2.5 sm:py-3.5 px-2 sm:px-3 shadow-[0_12px_36px_rgba(0,0,0,0.9)] flex flex-col items-center justify-center flex-1 min-w-[68px] sm:min-w-[90px] md:min-w-[105px] min-h-[90px] sm:min-h-[115px] border border-white/50 select-none transition-transform hover:scale-105">
+          <span className="font-sans text-[11px] sm:text-xs font-semibold text-[#D91F2C] tracking-wide mb-1">
+            Days
+          </span>
+          <span className="font-display text-4xl sm:text-6xl font-black text-[#D91F2C] leading-none tabular-nums">
             {isMounted ? fmt(timeLeft.days) : "--"}
           </span>
-          <span className="font-technical text-[9px] sm:text-[11px] font-bold text-[#D91F2C] uppercase tracking-widest mt-1.5">
-            HARI
-          </span>
         </div>
-
-        <span className="font-display text-xl sm:text-3xl text-[#D91F2C] font-bold select-none">:</span>
 
         {/* Hours */}
-        <div className="bg-[#0A0A0E]/95 backdrop-blur-md border border-white/20 border-t-2 border-t-[#D91F2C] hover:border-[#D91F2C] px-3 sm:px-5 py-2.5 sm:py-3.5 rounded-xs shadow-2xl flex flex-col items-center justify-center min-w-[66px] sm:min-w-[88px] transition-all">
-          <span className="font-display text-3xl sm:text-5xl font-black text-white leading-none tabular-nums tracking-tight">
+        <div className="bg-white rounded-xs sm:rounded-sm py-2.5 sm:py-3.5 px-2 sm:px-3 shadow-[0_12px_36px_rgba(0,0,0,0.9)] flex flex-col items-center justify-center flex-1 min-w-[68px] sm:min-w-[90px] md:min-w-[105px] min-h-[90px] sm:min-h-[115px] border border-white/50 select-none transition-transform hover:scale-105">
+          <span className="font-sans text-[11px] sm:text-xs font-semibold text-[#D91F2C] tracking-wide mb-1">
+            Hours
+          </span>
+          <span className="font-display text-4xl sm:text-6xl font-black text-[#D91F2C] leading-none tabular-nums">
             {isMounted ? fmt(timeLeft.hours) : "--"}
           </span>
-          <span className="font-technical text-[9px] sm:text-[11px] font-bold text-[#D91F2C] uppercase tracking-widest mt-1.5">
-            JAM
-          </span>
         </div>
-
-        <span className="font-display text-xl sm:text-3xl text-[#D91F2C] font-bold select-none">:</span>
 
         {/* Minutes */}
-        <div className="bg-[#0A0A0E]/95 backdrop-blur-md border border-white/20 border-t-2 border-t-[#D91F2C] hover:border-[#D91F2C] px-3 sm:px-5 py-2.5 sm:py-3.5 rounded-xs shadow-2xl flex flex-col items-center justify-center min-w-[66px] sm:min-w-[88px] transition-all">
-          <span className="font-display text-3xl sm:text-5xl font-black text-white leading-none tabular-nums tracking-tight">
-            {isMounted ? fmt(timeLeft.minutes) : "--"}
+        <div className="bg-white rounded-xs sm:rounded-sm py-2.5 sm:py-3.5 px-2 sm:px-3 shadow-[0_12px_36px_rgba(0,0,0,0.9)] flex flex-col items-center justify-center flex-1 min-w-[68px] sm:min-w-[90px] md:min-w-[105px] min-h-[90px] sm:min-h-[115px] border border-white/50 select-none transition-transform hover:scale-105">
+          <span className="font-sans text-[11px] sm:text-xs font-semibold text-[#D91F2C] tracking-wide mb-1">
+            Minutes
           </span>
-          <span className="font-technical text-[9px] sm:text-[11px] font-bold text-[#D91F2C] uppercase tracking-widest mt-1.5">
-            MENIT
+          <span className="font-display text-4xl sm:text-6xl font-black text-[#D91F2C] leading-none tabular-nums">
+            {isMounted ? fmt(timeLeft.minutes) : "--"}
           </span>
         </div>
 
-        <span className="font-display text-xl sm:text-3xl text-[#D91F2C] font-bold select-none">:</span>
-
         {/* Seconds */}
-        <div className="bg-[#0A0A0E]/95 backdrop-blur-md border border-white/20 border-t-2 border-t-[#EF3340] hover:border-[#EF3340] px-3 sm:px-5 py-2.5 sm:py-3.5 rounded-xs shadow-2xl flex flex-col items-center justify-center min-w-[66px] sm:min-w-[88px] transition-all">
-          <span className="font-display text-3xl sm:text-5xl font-black text-[#EF3340] leading-none tabular-nums tracking-tight">
-            {isMounted ? fmt(timeLeft.seconds) : "--"}
+        <div className="bg-white rounded-xs sm:rounded-sm py-2.5 sm:py-3.5 px-2 sm:px-3 shadow-[0_12px_36px_rgba(0,0,0,0.9)] flex flex-col items-center justify-center flex-1 min-w-[68px] sm:min-w-[90px] md:min-w-[105px] min-h-[90px] sm:min-h-[115px] border border-white/50 select-none transition-transform hover:scale-105">
+          <span className="font-sans text-[11px] sm:text-xs font-semibold text-[#D91F2C] tracking-wide mb-1">
+            Seconds
           </span>
-          <span className="font-technical text-[9px] sm:text-[11px] font-bold text-[#A1A1AA] uppercase tracking-widest mt-1.5">
-            DETIK
+          <span className="font-display text-4xl sm:text-6xl font-black text-[#D91F2C] leading-none tabular-nums">
+            {isMounted ? fmt(timeLeft.seconds) : "--"}
           </span>
         </div>
       </div>

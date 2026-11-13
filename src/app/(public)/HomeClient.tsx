@@ -31,8 +31,8 @@ const TICKER_ITEMS = [
 export default function HomeClient() {
   return (
     <div className="w-full overflow-x-hidden bg-[#000000] text-[#F5F5F7]">
-      {/* ─── 1. HERO SECTION (CENTER FIGHT POSTER — PURE COMBAT SPORT) ───────── */}
-      <section className="relative min-h-[82dvh] flex items-center justify-center pt-24 sm:pt-32 pb-16 sm:pb-24 overflow-hidden border-b border-white/10">
+      {/* ─── 1. HERO FIGHT BANNER (ALUR BYON: BANNER UTAMA DI ATAS) ─────────── */}
+      <section className="relative min-h-[46dvh] sm:min-h-[52dvh] flex items-center justify-center pt-24 sm:pt-28 pb-10 sm:pb-14 overflow-hidden border-b border-white/10">
         <div className="absolute inset-0">
           <Image
             src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
@@ -45,78 +45,81 @@ export default function HomeClient() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/60 to-[#000000]/80" />
           <div className="absolute inset-0 combat-grain pointer-events-none" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,31,44,0.22),transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,31,44,0.25),transparent_70%)]" />
         </div>
 
         <div className="editorial-container relative z-10 w-full text-center flex flex-col items-center">
-          <div className="max-w-4xl mx-auto space-y-6 sm:space-y-7 flex flex-col items-center">
-            {/* ─── Byon Signature Countdown: Tepat Diatas, Diawal Home Langsung Terlihat ─── */}
-            <CountdownTimer
-              targetIso={EVENT_CONFIG.dates.startIso}
-              label="COUNTDOWN MENUJU HARI H • 19 DESEMBER 2026"
-            />
-
+          <div className="max-w-4xl mx-auto space-y-4 sm:space-y-5 flex flex-col items-center">
             {/* Sanction Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-black/85 border-l-4 border-l-[#D91F2C] border-y border-r border-white/15 rounded-xs shadow-xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/85 border-l-4 border-l-[#D91F2C] border-y border-r border-white/15 rounded-xs shadow-xl">
               <span className="w-2 h-2 rounded-full bg-[#D91F2C] animate-pulse shrink-0" />
-              <span className="font-technical text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em] text-[#F5F5F7]">
+              <span className="font-technical text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#F5F5F7]">
                 PENGPROV KBI DIY MEMPERSEMBAHKAN • WAKO RULES
               </span>
             </div>
 
             {/* Massive Main Headline */}
-            <div className="space-y-2.5">
-              <h1 className="font-display text-[clamp(3.2rem,1.2rem+7.5vw,7rem)] font-black uppercase leading-[0.84] tracking-tight text-white drop-shadow-2xl">
+            <div className="space-y-1.5">
+              <h1 className="font-display text-[clamp(2.8rem,1rem+7vw,6.5rem)] font-black uppercase leading-[0.84] tracking-tight text-white drop-shadow-2xl">
                 JOGJA KICKBOXING{" "}
-                <span className="text-[#D91F2C] block">
+                <span className="text-[#D91F2C] block sm:inline">
                   FESTIVAL 2026
                 </span>
               </h1>
-              <p className="font-technical text-xs sm:text-sm md:text-base font-bold uppercase tracking-[0.28em] text-[#E2BA75]">
+              <p className="font-technical text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-[#E2BA75]">
                 {EVENT_CONFIG.campaign} • {EVENT_CONFIG.tagline}
               </p>
             </div>
 
-            {/* Confirmed Dates & Venue Pill Bar */}
-            <div className="flex flex-wrap items-center justify-center gap-2.5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#0D0D10]/95 border border-white/15 rounded-xs text-xs font-technical uppercase tracking-wider text-white">
-                <Calendar className="w-3.5 h-3.5 text-[#D91F2C] shrink-0" />
+            {/* Prominent Venue & Date Stamp (Like "INDONESIA ARENA 12.12.2026" on Byon) */}
+            <div className="pt-1 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 font-display text-lg sm:text-2xl uppercase tracking-wider text-white">
+              <div className="flex items-center gap-2 text-[#EF3340]">
+                <MapPin className="w-5 h-5 shrink-0" />
+                <span>{EVENT_CONFIG.venue.name}</span>
+              </div>
+              <span className="hidden sm:inline text-white/40">•</span>
+              <div className="flex items-center gap-2 text-white">
+                <Calendar className="w-5 h-5 text-[#D91F2C] shrink-0" />
                 <span>{EVENT_CONFIG.dates.display}</span>
               </div>
-              <Link
-                href="/venue"
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#0D0D10]/95 hover:bg-[#19191F] border border-white/15 hover:border-[#D91F2C]/60 rounded-xs text-xs font-technical uppercase tracking-wider text-[#C4C4CC] hover:text-white transition-colors"
-              >
-                <MapPin className="w-3.5 h-3.5 text-[#D91F2C] shrink-0" />
-                <span>{EVENT_CONFIG.venue.fullDisplay}</span>
-              </Link>
-            </div>
-
-            {/* Hero Action: 1 Primary Fighter Button + 1 Editorial Link */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 pt-1 w-full sm:w-auto">
-              <a
-                href={jkbfLinks.fighterRegistration}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 bg-[#D91F2C] hover:bg-[#B81521] active:scale-[0.98] text-white font-display text-lg sm:text-xl tracking-wider uppercase rounded-xs transition-all shadow-[0_0_35px_rgba(217,31,44,0.55)]"
-              >
-                DAFTAR SEBAGAI FIGHTER
-                <ArrowUpRight className="w-5 h-5" />
-              </a>
-
-              <Link
-                href="/championship"
-                className="inline-flex items-center gap-2 font-technical text-xs sm:text-sm font-bold uppercase tracking-[0.18em] text-[#C4C4CC] hover:text-white transition-colors group py-1"
-              >
-                <span>LIHAT 7 PROGRAM KEJUARAAN</span>
-                <ChevronRight className="w-4 h-4 text-[#D91F2C] transition-transform group-hover:translate-x-1" />
-              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── 2. OFFICIAL MARQUEE TICKER ──────────────────────────────────────── */}
+      {/* ─── 2. BYON COUNTDOWN & BUY TICKET CTA (DIRECTLY BELOW BANNER) ──────── */}
+      <section className="bg-[#000000] py-8 sm:py-12 border-b border-white/10 relative overflow-hidden">
+        <div className="editorial-container relative z-10 flex flex-col items-center justify-center space-y-6 sm:space-y-8 text-center">
+          {/* 4 White Cards ala Byon */}
+          <CountdownTimer
+            targetIso={EVENT_CONFIG.dates.startIso}
+            label="COUNTDOWN MENUJU HARI H"
+          />
+
+          {/* Action CTA: Exactly under Countdown like "BUY TICKET →" on Byon */}
+          <div className="flex flex-col items-center justify-center gap-3 w-full sm:w-auto">
+            <a
+              href={jkbfLinks.fighterRegistration}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-10 sm:px-14 py-4 sm:py-4.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-[0.98] text-white font-display text-xl sm:text-2xl tracking-wider uppercase rounded-xs transition-all shadow-[0_0_35px_rgba(217,31,44,0.55)]"
+            >
+              DAFTAR SEBAGAI FIGHTER
+              <ArrowUpRight className="w-6 h-6" />
+            </a>
+
+            <Link
+              href="/championship"
+              className="inline-flex items-center gap-1.5 font-technical text-xs font-bold uppercase tracking-[0.18em] text-[#A1A1AA] hover:text-white transition-colors group pt-1"
+            >
+              <span>LIHAT 7 PROGRAM KEJUARAAN</span>
+              <ChevronRight className="w-4 h-4 text-[#D91F2C] transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 3. OFFICIAL MARQUEE TICKER ──────────────────────────────────────── */}
       <div className="bg-[#D91F2C] text-white py-3 border-b border-black/20 overflow-hidden">
         <div className="flex w-max animate-marquee items-center">
           {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, idx) => (
