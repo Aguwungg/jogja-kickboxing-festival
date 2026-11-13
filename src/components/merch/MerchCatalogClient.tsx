@@ -63,7 +63,7 @@ export default function MerchCatalogClient({ initialProducts }: Props) {
       productId: product.id,
       name: product.name,
       slug: product.slug,
-      imageUrl: product.imageUrl || "/images/v9/08_REFERENSI_FOTO_DAN_TEKSTUR.png",
+      imageUrl: product.imageUrl || "/images/jkbf-brand-poster.png",
       size: v.size,
       color: v.color,
       price: product.price,
@@ -146,7 +146,7 @@ export default function MerchCatalogClient({ initialProducts }: Props) {
                 {/* 1:1 Aspect Square Product Image with Grayscale Contrast */}
                 <div className="relative aspect-square w-full bg-[#1c1c1f] overflow-hidden">
                   <Image
-                    src={p.imageUrl || "/images/v9/08_REFERENSI_FOTO_DAN_TEKSTUR.png"}
+                    src={p.imageUrl || "/images/jkbf-brand-poster.png"}
                     alt={p.name}
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"

@@ -62,10 +62,16 @@ export const metadata: Metadata = {
     url: "/",
     images: [
       {
+        url: "/images/jkbf-photo/preview/jkbf-og-image-1200x630.webp",
+        width: 1200,
+        height: 630,
+        alt: "Jogja Kickboxing Festival 2026 — 19–20 Desember 2026 — GOR Pancasila UGM",
+      },
+      {
         url: "/images/jkbf-brand-poster.png",
         width: 1024,
         height: 1024,
-        alt: "Jogja Kickboxing Festival 2026 — 19–20 Desember 2026 — GOR Pancasila UGM",
+        alt: "Jogja Kickboxing Festival 2026 Official Brand Poster",
       },
     ],
   },
@@ -74,7 +80,7 @@ export const metadata: Metadata = {
     title: "JOGJA KICKBOXING FESTIVAL 2026 — 19–20 Desember 2026",
     description:
       "GOR Pancasila UGM, Yogyakarta. #JOGJAPUNYANYALI — RISE • FIGHT • CONQUER.",
-    images: ["/images/jkbf-brand-poster.png"],
+    images: ["/images/jkbf-photo/preview/jkbf-og-image-1200x630.webp"],
   },
   robots: {
     index: true,

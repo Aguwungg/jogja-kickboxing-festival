@@ -1,0 +1,214 @@
+{
+  "project": "JKBF 2026",
+  "theme": "Crimson/Black/Charcoal",
+  "method": "pixel-only photographic color grading; no scene regeneration",
+  "files": [
+    {
+      "name": "jkbf-hero-fight",
+      "original": "IMG_9037.jpg",
+      "usage": "Hero desktop; hero mobile alternatif",
+      "description": "Dua fighter bertukar serangan; aksi utama",
+      "master": "masters_hd/jkbf-hero-fight-master-hd.jpg",
+      "desktop": "desktop/jkbf-hero-fight-desktop-1920x1080.webp",
+      "mobile": "mobile/jkbf-hero-fight-mobile-1080x1350.webp",
+      "desktop_size": [
+        1920,
+        1080
+      ],
+      "mobile_size": [
+        1080,
+        1350
+      ],
+      "source_pixels": [
+        2048,
+        1365
+      ],
+      "crimson_strong_desktop": "crimson_strong_desktop/jkbf-hero-fight-desktop-1920x1080.webp",
+      "crimson_strong_mobile": "crimson_strong_mobile/jkbf-hero-fight-mobile-1080x1350.webp"
+    },
+    {
+      "name": "jkbf-fighter-closeup",
+      "original": "IMG_9075.jpg",
+      "usage": "Hero mobile utama / CTA daftar fighter",
+      "description": "Fighter di sudut ring, perspektif close-up",
+      "master": "masters_hd/jkbf-fighter-closeup-master-hd.jpg",
+      "desktop": "desktop/jkbf-fighter-closeup-desktop-1920x1080.webp",
+      "mobile": "mobile/jkbf-fighter-closeup-mobile-1080x1350.webp",
+      "desktop_size": [
+        1920,
+        1080
+      ],
+      "mobile_size": [
+        1080,
+        1350
+      ],
+      "source_pixels": [
+        2048,
+        1365
+      ],
+      "crimson_strong_desktop": "crimson_strong_desktop/jkbf-fighter-closeup-desktop-1920x1080.webp",
+      "crimson_strong_mobile": "crimson_strong_mobile/jkbf-fighter-closeup-mobile-1080x1350.webp"
+    },
+    {
+      "name": "jkbf-fight-intensity",
+      "original": "IMG_8410.jpg",
+      "usage": "THE FIGHTS / Championship highlights",
+      "description": "Pertarungan dekat, glove merah-biru",
+      "master": "masters_hd/jkbf-fight-intensity-master-hd.jpg",
+      "desktop": "desktop/jkbf-fight-intensity-desktop-1920x1080.webp",
+      "mobile": "mobile/jkbf-fight-intensity-mobile-1080x1350.webp",
+      "desktop_size": [
+        1920,
+        1080
+      ],
+      "mobile_size": [
+        1080,
+        1350
+      ],
+      "source_pixels": [
+        2048,
+        1365
+      ],
+      "crimson_strong_desktop": "crimson_strong_desktop/jkbf-fight-intensity-desktop-1920x1080.webp",
+      "crimson_strong_mobile": "crimson_strong_mobile/jkbf-fight-intensity-mobile-1080x1350.webp"
+    },
+    {
+      "name": "jkbf-ring-action",
+      "original": "IMG_8312.jpg",
+      "usage": "Championship programs / Editorial divider",
+      "description": "Aksi ring dengan wasit dan dua fighter",
+      "master": "masters_hd/jkbf-ring-action-master-hd.jpg",
+      "desktop": "desktop/jkbf-ring-action-desktop-1920x1080.webp",
+      "mobile": "mobile/jkbf-ring-action-mobile-1080x1350.webp",
+      "desktop_size": [
+        1920,
+        1080
+      ],
+      "mobile_size": [
+        1080,
+        1350
+      ],
+      "source_pixels": [
+        2048,
+        1365
+      ],
+      "crimson_strong_desktop": "crimson_strong_desktop/jkbf-ring-action-desktop-1920x1080.webp",
+      "crimson_strong_mobile": "crimson_strong_mobile/jkbf-ring-action-mobile-1080x1350.webp"
+    },
+    {
+      "name": "jkbf-women-fight",
+      "original": "IMG_8577.jpg",
+      "usage": "SMA Open visual pendukung / Female fighters",
+      "description": "Dua fighter perempuan dan wasit di ring",
+      "master": "masters_hd/jkbf-women-fight-master-hd.jpg",
+      "desktop": "desktop/jkbf-women-fight-desktop-1920x1080.webp",
+      "mobile": "mobile/jkbf-women-fight-mobile-1080x1350.webp",
+      "desktop_size": [
+        1920,
+        1080
+      ],
+      "mobile_size": [
+        1080,
+        1350
+      ],
+      "source_pixels": [
+        2048,
+        1365
+      ],
+      "crimson_strong_desktop": "crimson_strong_desktop/jkbf-women-fight-desktop-1920x1080.webp",
+      "crimson_strong_mobile": "crimson_strong_mobile/jkbf-women-fight-mobile-1080x1350.webp"
+    },
+    {
+      "name": "jkbf-match-decision",
+      "original": "IMG_9243.jpg",
+      "usage": "Fight moment / Highlight editorial card",
+      "description": "Momen hitungan wasit, fighter berlutut",
+      "master": "masters_hd/jkbf-match-decision-master-hd.jpg",
+      "desktop": "desktop/jkbf-match-decision-desktop-1200x1500.webp",
+      "mobile": "mobile/jkbf-match-decision-mobile-1080x1350.webp",
+      "desktop_size": [
+        1200,
+        1500
+      ],
+      "mobile_size": [
+        1080,
+        1350
+      ],
+      "source_pixels": [
+        1638,
+        2048
+      ],
+      "crimson_strong_desktop": "crimson_strong_desktop/jkbf-match-decision-desktop-1200x1500.webp",
+      "crimson_strong_mobile": "crimson_strong_mobile/jkbf-match-decision-mobile-1080x1350.webp"
+    },
+    {
+      "name": "jkbf-fighter-preparation",
+      "original": "IMG_8703.jpg",
+      "usage": "Your Fight Starts Here / Behind the fight",
+      "description": "Persiapan fighter dengan pelatih",
+      "master": "masters_hd/jkbf-fighter-preparation-master-hd.jpg",
+      "desktop": "desktop/jkbf-fighter-preparation-desktop-1600x1200.webp",
+      "mobile": "mobile/jkbf-fighter-preparation-mobile-1080x1350.webp",
+      "desktop_size": [
+        1600,
+        1200
+      ],
+      "mobile_size": [
+        1080,
+        1350
+      ],
+      "source_pixels": [
+        2048,
+        2048
+      ],
+      "crimson_strong_desktop": "crimson_strong_desktop/jkbf-fighter-preparation-desktop-1600x1200.webp",
+      "crimson_strong_mobile": "crimson_strong_mobile/jkbf-fighter-preparation-mobile-1080x1350.webp"
+    },
+    {
+      "name": "jkbf-female-fighter-prep",
+      "original": "IMG_8920.jpg",
+      "usage": "Fighter registration / Women in kickboxing",
+      "description": "Fighter perempuan bersiap mengenakan pelindung",
+      "master": "masters_hd/jkbf-female-fighter-prep-master-hd.jpg",
+      "desktop": "desktop/jkbf-female-fighter-prep-desktop-1200x1500.webp",
+      "mobile": "mobile/jkbf-female-fighter-prep-mobile-1080x1350.webp",
+      "desktop_size": [
+        1200,
+        1500
+      ],
+      "mobile_size": [
+        1080,
+        1350
+      ],
+      "source_pixels": [
+        1638,
+        2048
+      ],
+      "crimson_strong_desktop": "crimson_strong_desktop/jkbf-female-fighter-prep-desktop-1200x1500.webp",
+      "crimson_strong_mobile": "crimson_strong_mobile/jkbf-female-fighter-prep-mobile-1080x1350.webp"
+    },
+    {
+      "name": "jkbf-audience-community",
+      "original": "IMG_8980.jpg",
+      "usage": "About / The Movement / Community",
+      "description": "Penonton dan panitia event terdahulu",
+      "master": "masters_hd/jkbf-audience-community-master-hd.jpg",
+      "desktop": "desktop/jkbf-audience-community-desktop-1920x1080.webp",
+      "mobile": "mobile/jkbf-audience-community-mobile-1080x1350.webp",
+      "desktop_size": [
+        1920,
+        1080
+      ],
+      "mobile_size": [
+        1080,
+        1350
+      ],
+      "source_pixels": [
+        2048,
+        1365
+      ],
+      "crimson_strong_desktop": "crimson_strong_desktop/jkbf-audience-community-desktop-1920x1080.webp",
+      "crimson_strong_mobile": "crimson_strong_mobile/jkbf-audience-community-mobile-1080x1350.webp"
+    }
+  ]
+}

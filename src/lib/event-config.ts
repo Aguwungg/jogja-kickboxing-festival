@@ -288,8 +288,8 @@ export const megaBintangConfig = {
   // Exact Instagram post permalink must be verified before activating button CTA
   verifiedInstagramPostUrl: "",
   postVerified: false,
-  image: "/images/v9/05_FOTO_FIGHT_MOBILE_TANPA_TEKST.png",
-  imageAlt: "Atmosfer ring kickboxing Mega Bintang JKBF 2026 — Faisal Giru",
+  image: "/images/jkbf-photo/crimson_strong_desktop/jkbf-hero-fight-desktop-1920x1080.webp",
+  imageAlt: "Atmosfer pertarungan ring kickboxing Mega Bintang JKBF 2026",
 } as const;
 
 // ─── SMA Open Campaign Config ─────────────────────────────────────────────────

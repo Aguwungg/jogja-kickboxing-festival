@@ -486,7 +486,7 @@ export default function AdminMerchClient({ initialOrders, initialProducts }: Pro
                       <td className="py-3 px-4 flex items-center gap-3">
                         <div className="relative w-12 h-12 bg-black rounded-xs overflow-hidden shrink-0 border border-white/10">
                           <Image
-                            src={product.imageUrl || "/images/jkb/merch-tee-black.jpg"}
+                            src={product.imageUrl || "/images/jkbf-brand-poster.png"}
                             alt={product.name}
                             fill
                             className="object-cover"
@@ -634,7 +634,7 @@ export default function AdminMerchClient({ initialOrders, initialProducts }: Pro
                     <div className="flex items-center gap-3">
                       <div className="relative w-10 h-10 bg-black rounded-xs overflow-hidden shrink-0">
                         <Image
-                          src={item.variant.product.imageUrl || "/images/jkb/merch-tee-black.jpg"}
+                          src={item.variant.product.imageUrl || "/images/jkbf-brand-poster.png"}
                           alt={item.variant.product.name}
                           fill
                           className="object-cover"

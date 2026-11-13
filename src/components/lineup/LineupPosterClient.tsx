@@ -31,7 +31,7 @@ const STAGES = [
     location: "Main Arena • GOR UNY",
     genre: "Rock • Alternative • Anthemic",
     time: "19:00 – 23:00 WIB",
-    img: "/images/lineup/ring-stage.jpg",
+    img: "/images/jkbf-photo/crimson_strong_desktop/jkbf-ring-action-desktop-1920x1080.webp",
     desc: "Panggung megah berlatar ring utama kickboxing dengan pencahayaan konser stadium dan sound system 60.000 watt.",
   },
   {
@@ -41,7 +41,7 @@ const STAGES = [
     location: "Cultural Hall GOR UNY",
     genre: "Hip-Hop • Folk • Indie • Neo-Tradisi",
     time: "16:30 – 21:00 WIB",
-    img: "/images/lineup/heritage-stage.jpg",
+    img: "/images/jkbf-photo/desktop/jkbf-audience-community-desktop-1920x1080.webp",
     desc: "Ruang intim pertunjukan musik independen dan rima jalanan bertaraf kurasi nasional dengan resonansi akustik premium.",
   },
   {
@@ -51,7 +51,7 @@ const STAGES = [
     location: "Outdoor Sound Plaza",
     genre: "Electronic • Bass • Dub • Sound System",
     time: "15:00 – 22:30 WIB",
-    img: "/images/lineup/underground-beat.jpg",
+    img: "/images/jkbf-photo/desktop/jkbf-fighter-preparation-desktop-1600x1200.webp",
     desc: "Zona audio visual terbuka di pelataran barat GOR UNY untuk eksplorasi synthesizer, beats, dan atmosfer selebrasi festival.",
   },
 ];
@@ -62,7 +62,7 @@ const DEFAULT_LINEUP: PerformerItem[] = [
     name: "THE SOUND OF NYALI",
     slug: "the-sound-of-nyali",
     description: "Kolektif rock & alternative festival yang membakar atmosfer laga dengan aransemen orkestrasi distorsi berenergi tinggi.",
-    image: "/images/jkb/hero-concert.jpg",
+    image: "/images/jkbf-photo/crimson_strong_desktop/jkbf-hero-fight-desktop-1920x1080.webp",
     stage: "THE RING STAGE",
     day: "MINGGU, 14 DESEMBER 2026",
     time: "21:30 WIB",
@@ -74,7 +74,7 @@ const DEFAULT_LINEUP: PerformerItem[] = [
     name: "SPECIAL GUEST HEADLINER",
     slug: "special-guest-headliner",
     description: "Bintang tamu nasional papan atas fase 1. Pengumuman nama dan kolaborasi eksklusif disiarkan jelang kick-off festival.",
-    image: "/images/jkb/festival-lights.jpg",
+    image: "/images/jkbf-photo/crimson_strong_desktop/jkbf-fight-intensity-desktop-1920x1080.webp",
     stage: "THE RING STAGE",
     day: "SABTU, 13 DESEMBER 2026",
     time: "21:00 WIB",
@@ -86,7 +86,7 @@ const DEFAULT_LINEUP: PerformerItem[] = [
     name: "JOGJA HIP-HOP CYPHERS",
     slug: "jogja-hiphop-cyphers",
     description: "Barisan MC legendaris dan beatmaker urban Yogyakarta menyuarakan rima sportivitas, mental petarung, dan denyut kota.",
-    image: "/images/jkb/concert-crowd.jpg",
+    image: "/images/jkbf-photo/desktop/jkbf-audience-community-desktop-1920x1080.webp",
     stage: "HERITAGE STAGE",
     day: "JUMAT, 12 DESEMBER 2026",
     time: "19:45 WIB",
@@ -98,7 +98,7 @@ const DEFAULT_LINEUP: PerformerItem[] = [
     name: "STRIKE & SOUNDS ELECTRONIC",
     slug: "strike-and-sounds",
     description: "Eksplorasi synth modular dan bass frekuensi rendah yang mengiringi walkout atlet finalis dan selebrasi juara sabuk emas.",
-    image: "/images/lineup/underground-beat.jpg",
+    image: "/images/jkbf-photo/desktop/jkbf-fighter-closeup-desktop-1920x1080.webp",
     stage: "UNDERGROUND BEAT",
     day: "SABTU, 13 DESEMBER 2026",
     time: "20:15 WIB",
@@ -110,7 +110,7 @@ const DEFAULT_LINEUP: PerformerItem[] = [
     name: "MATARAM HEAVY ROOTS",
     slug: "mataram-heavy-roots",
     description: "Eksplorasi instrumen gamelan kontemporer dipadukan dengan drum & bass berkecepatan tinggi sebagai musik pembuka resmi kejuaraan.",
-    image: "/images/lineup/heritage-stage.jpg",
+    image: "/images/jkbf-photo/desktop/jkbf-women-fight-desktop-1920x1080.webp",
     stage: "HERITAGE STAGE",
     day: "JUMAT, 12 DESEMBER 2026",
     time: "17:15 WIB",
@@ -122,7 +122,7 @@ const DEFAULT_LINEUP: PerformerItem[] = [
     name: "CYBER COMBAT AUDIO LAB",
     slug: "cyber-combat-audio",
     description: "Live DJ set audio interaktif mengiringi pengumuman hasil partai kickboxing dan drawing turnamen.",
-    image: "/images/lineup/ring-stage.jpg",
+    image: "/images/jkbf-photo/desktop/jkbf-ring-action-desktop-1920x1080.webp",
     stage: "UNDERGROUND BEAT",
     day: "MINGGU, 14 DESEMBER 2026",
     time: "18:00 WIB",
@@ -410,7 +410,7 @@ export default function LineupPosterClient({ initialPerformers = [] }: Props) {
               {/* Stage Photo */}
               <div className="relative aspect-[16/10] w-full bg-[#1c1c1f] overflow-hidden">
                 <Image
-                  src={st.img || "/images/lineup/ring-stage.jpg"}
+                  src={st.img || "/images/jkbf-photo/crimson_strong_desktop/jkbf-ring-action-desktop-1920x1080.webp"}
                   alt={st.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"

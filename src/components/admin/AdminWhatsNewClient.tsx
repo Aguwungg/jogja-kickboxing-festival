@@ -26,31 +26,39 @@ import {
 
 const APPROVED_COVER_PRESETS = [
   {
-    label: "Ring Fight Action (Desktop Clean)",
-    path: "/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png",
+    label: "Aksi Duel Ring Utama (Desktop)",
+    path: "/images/jkbf-photo/crimson_strong_desktop/jkbf-hero-fight-desktop-1920x1080.webp",
   },
   {
-    label: "Ring Action (Portrait Clean)",
-    path: "/images/v9/05_FOTO_FIGHT_MOBILE_TANPA_TEKST.png",
+    label: "Fighter Closeup Sudut Ring (Mobile)",
+    path: "/images/jkbf-photo/crimson_strong_mobile/jkbf-fighter-closeup-mobile-1080x1350.webp",
   },
   {
-    label: "Sparring / Mitt Work",
-    path: "/images/jkb/hero-concert.jpg",
+    label: "Pertarungan Intensitas Tinggi (WAKO Rules)",
+    path: "/images/jkbf-photo/crimson_strong_desktop/jkbf-fight-intensity-desktop-1920x1080.webp",
   },
   {
-    label: "Walkout Menuju Ring",
-    path: "/images/jkb/boxing-ring.jpg",
+    label: "Aksi Ring & Wasit Berlisensi",
+    path: "/images/jkbf-photo/desktop/jkbf-ring-action-desktop-1920x1080.webp",
   },
   {
-    label: "Sarung Tinju Kanvas",
-    path: "/images/event/boxing-gloves.jpg",
+    label: "SMA Open / Atlet Pelajar & Putri",
+    path: "/images/jkbf-photo/desktop/jkbf-women-fight-desktop-1920x1080.webp",
   },
   {
-    label: "Sabuk Juara",
-    path: "/images/championship/belt-hero.jpg",
+    label: "Momen Keputusan Partai / Hitungan Wasit",
+    path: "/images/jkbf-photo/desktop/jkbf-match-decision-desktop-1200x1500.webp",
   },
   {
-    label: "Poster Resmi JKBF 2026",
+    label: "Persiapan Atlet & Pelatih",
+    path: "/images/jkbf-photo/desktop/jkbf-fighter-preparation-desktop-1600x1200.webp",
+  },
+  {
+    label: "Suasana Komunitas & Penonton",
+    path: "/images/jkbf-photo/desktop/jkbf-audience-community-desktop-1920x1080.webp",
+  },
+  {
+    label: "Poster Resmi Brand JKBF 2026",
     path: "/images/jkbf-brand-poster.png",
   },
 ];
@@ -66,7 +74,7 @@ const EMPTY_FORM = {
   category: "SMA OPEN",
   contentType: "image",
   instagramUrl: "",
-  coverImage: "/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png",
+  coverImage: "/images/jkbf-photo/crimson_strong_desktop/jkbf-hero-fight-desktop-1920x1080.webp",
   previewVideo: "",
   publishedAt: "",
   priority: 10,

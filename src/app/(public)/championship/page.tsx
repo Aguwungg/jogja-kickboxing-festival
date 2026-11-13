@@ -1,4 +1,3 @@
-import Image from "next/image";
 import ChampionshipClient from "@/components/championship/ChampionshipClient";
 import { EVENT_CONFIG } from "@/lib/event-config";
 
@@ -14,15 +13,20 @@ export default function ChampionshipPage() {
       {/* Fight Poster Editorial Header */}
       <section className="relative overflow-hidden border-b border-white/10">
         <div className="absolute inset-0">
-          <Image
-            src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
-            alt="Arena kejuaraan Jogja Kickboxing Festival 2026"
-            fill
-            priority
-            fetchPriority="high"
-            sizes="100vw"
-            className="object-cover object-center opacity-35 grayscale contrast-125"
-          />
+          <picture className="absolute inset-0 w-full h-full">
+            <source
+              media="(max-width: 767px)"
+              srcSet="/images/jkbf-photo/crimson_strong_mobile/jkbf-ring-action-mobile-1080x1350.webp"
+              type="image/webp"
+            />
+            <img
+              src="/images/jkbf-photo/crimson_strong_desktop/jkbf-ring-action-desktop-1920x1080.webp"
+              alt="Atmosfer ring kejuaraan Jogja Kickboxing Festival 2026"
+              fetchPriority="high"
+              decoding="async"
+              className="w-full h-full object-cover object-center opacity-35 grayscale contrast-125"
+            />
+          </picture>
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/75 to-black/80" />
           <div className="absolute inset-0 combat-grain pointer-events-none" />
         </div>

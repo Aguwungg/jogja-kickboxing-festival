@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Calendar, ArrowUpRight, ShieldCheck } from "lucide-react";
 import { EVENT_CONFIG, jkbfLinks } from "@/lib/event-config";
@@ -41,15 +40,20 @@ export default function VenuePage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border border-white/10 bg-[#111114] rounded-sm overflow-hidden shadow-2xl">
           {/* Editorial Combat Arena Photo (No LED) */}
           <div className="lg:col-span-7 relative min-h-[280px] sm:min-h-[380px] lg:min-h-[460px] bg-black overflow-hidden">
-            <Image
-              src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
-              alt="Ring pertandingan Jogja Kickboxing Festival di GOR Pancasila UGM Yogyakarta"
-              fill
-              priority
-              fetchPriority="high"
-              className="object-cover object-center filter contrast-115 brightness-90"
-              sizes="(max-width: 1024px) 100vw, 58vw"
-            />
+            <picture className="absolute inset-0 w-full h-full">
+              <source
+                media="(max-width: 767px)"
+                srcSet="/images/jkbf-photo/mobile/jkbf-ring-action-mobile-1080x1350.webp"
+                type="image/webp"
+              />
+              <img
+                src="/images/jkbf-photo/desktop/jkbf-ring-action-desktop-1920x1080.webp"
+                alt="Atmosfer ring dan pertandingan kickboxing berstandar resmi WAKO"
+                fetchPriority="high"
+                decoding="async"
+                className="w-full h-full object-cover object-center filter contrast-115 brightness-90"
+              />
+            </picture>
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-black/25 lg:to-[#111114]" />
             <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-10 px-3.5 py-1.5 bg-black/85 border border-white/15 backdrop-blur-md rounded-xs">
               <span className="font-technical text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#F5F5F7] font-bold">

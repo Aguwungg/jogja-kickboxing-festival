@@ -19,7 +19,7 @@ export default async function AdminLineupPage() {
     const name = (formData.get("name") as string)?.trim();
     const stage = (formData.get("stage") as string)?.trim() || "Panggung Utama (The Stage)";
     const description = (formData.get("description") as string)?.trim() || null;
-    const image = (formData.get("image") as string)?.trim() || "/images/jkb/hero-concert.jpg";
+    const image = (formData.get("image") as string)?.trim() || "/images/jkbf-photo/desktop/jkbf-ring-action-desktop-1920x1080.webp";
     const isPublished = formData.get("isPublished") === "on";
 
     if (!name) return;
@@ -128,7 +128,7 @@ export default async function AdminLineupPage() {
             <input
               type="text"
               name="image"
-              defaultValue="/images/jkb/hero-concert.jpg"
+              defaultValue="/images/jkbf-photo/desktop/jkbf-ring-action-desktop-1920x1080.webp"
               className="w-full bg-[#09090b] border border-white/10 rounded-sm px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-amber-400"
             />
           </div>
@@ -176,7 +176,7 @@ export default async function AdminLineupPage() {
             <div className="flex items-start gap-4">
               <div className="relative w-16 h-16 rounded-sm bg-black overflow-hidden shrink-0 border border-white/10">
                 <Image
-                  src={p.image || "/images/jkb/hero-concert.jpg"}
+                  src={p.image || "/images/jkbf-photo/desktop/jkbf-ring-action-desktop-1920x1080.webp"}
                   alt={p.name}
                   fill
                   className="object-cover"

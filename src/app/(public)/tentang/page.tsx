@@ -131,7 +131,32 @@ export default function TentangPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-4 p-8 bg-[#111114] border border-white/10 rounded-sm shadow-xl space-y-4 flex flex-col justify-between">
+            <div className="lg:col-span-4 flex flex-col gap-6">
+              {/* Authentic Documentary Photo */}
+              <div className="relative aspect-[16/10] overflow-hidden rounded-sm border border-white/10 bg-[#111114] shadow-xl group">
+                <picture className="absolute inset-0 w-full h-full">
+                  <source
+                    media="(max-width: 767px)"
+                    srcSet="/images/jkbf-photo/mobile/jkbf-audience-community-mobile-1080x1350.webp"
+                    type="image/webp"
+                  />
+                  <img
+                    src="/images/jkbf-photo/desktop/jkbf-audience-community-desktop-1920x1080.webp"
+                    alt="Atmosfer komunitas dan penonton kejuaraan kickboxing"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover object-center filter contrast-110 brightness-90 group-hover:scale-105 transition-transform duration-700"
+                  />
+                </picture>
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 z-10 px-2.5 py-1 bg-black/85 border border-white/15 backdrop-blur-md rounded-xs">
+                  <span className="font-technical text-[10px] uppercase tracking-[0.2em] text-[#F5F5F7] font-semibold block">
+                    ATMOSFER KOMUNITAS &amp; SUPORTER
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-8 bg-[#111114] border border-white/10 rounded-sm shadow-xl space-y-4 flex flex-col justify-between flex-1">
               <div className="space-y-4">
                 <div className="flex items-center gap-2.5 text-[#D91F2C]">
                   <div className="p-2.5 bg-[#D91F2C]/10 border border-[#D91F2C]/30 rounded-xs">
@@ -164,7 +189,8 @@ export default function TentangPage() {
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
         {/* ═══════════════════════════════════════════════════════════════════
             SECTION 2: PROGRAM KEJUARAAN — COMBAT SPORT GRID

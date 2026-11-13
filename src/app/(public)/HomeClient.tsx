@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowUpRight,
@@ -32,15 +31,20 @@ export default function HomeClient() {
       >
         {/* Full-bleed authentic combat photo background with enhanced atmosphere */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
-          <Image
-            src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
-            alt="Pertandingan Kickboxing JKBF 2026"
-            fill
-            priority
-            quality={90}
-            className="object-cover object-center scale-105 opacity-45 brightness-90 contrast-125 transition-transform duration-1000 ease-out"
-            sizes="100vw"
-          />
+          <picture className="absolute inset-0 w-full h-full">
+            <source
+              media="(max-width: 767px)"
+              srcSet="/images/jkbf-photo/crimson_strong_mobile/jkbf-fighter-closeup-mobile-1080x1350.webp"
+              type="image/webp"
+            />
+            <img
+              src="/images/jkbf-photo/crimson_strong_desktop/jkbf-hero-fight-desktop-1920x1080.webp"
+              alt="Dokumentasi pertarungan kickboxing resmi Jogja Kickboxing Festival"
+              fetchPriority="high"
+              decoding="async"
+              className="w-full h-full object-cover object-center scale-105 opacity-55 brightness-90 contrast-125 transition-transform duration-1000 ease-out"
+            />
+          </picture>
           {/* Multi-layered directional gradients for stadium lighting & seamless blend */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-black/60 to-black/80" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.45)_50%,#0A0A0C_100%)]" />
@@ -202,14 +206,20 @@ export default function HomeClient() {
             className="group relative h-[520px] sm:h-[580px] lg:h-[640px] overflow-hidden border border-white/10 bg-[#111114] flex flex-col justify-between p-8 sm:p-12 transition-all duration-500 hover:border-[#D91F2C] hover:shadow-[0_0_50px_rgba(217,31,44,0.2)] rounded-sm"
           >
             <div className="absolute inset-0 z-0 overflow-hidden">
-              <Image
-                src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
-                alt="Pertandingan Kickboxing JKBF 2026"
-                fill
-                quality={85}
-                className="object-cover object-center filter grayscale contrast-125 brightness-75 transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 group-hover:brightness-90"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+              <picture className="absolute inset-0 w-full h-full">
+                <source
+                  media="(max-width: 767px)"
+                  srcSet="/images/jkbf-photo/crimson_strong_mobile/jkbf-fight-intensity-mobile-1080x1350.webp"
+                  type="image/webp"
+                />
+                <img
+                  src="/images/jkbf-photo/crimson_strong_desktop/jkbf-fight-intensity-desktop-1920x1080.webp"
+                  alt="Pertandingan kickboxing intensitas tinggi WAKO Rules"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover object-center filter grayscale contrast-125 brightness-75 transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 group-hover:brightness-90"
+                />
+              </picture>
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/65 to-transparent" />
             </div>
 
@@ -264,14 +274,20 @@ export default function HomeClient() {
             className="group relative h-[520px] sm:h-[580px] lg:h-[640px] overflow-hidden border border-white/10 bg-[#111114] flex flex-col justify-between p-8 sm:p-12 transition-all duration-500 hover:border-[#D91F2C] hover:shadow-[0_0_50px_rgba(217,31,44,0.2)] rounded-sm"
           >
             <div className="absolute inset-0 z-0 overflow-hidden">
-              <Image
-                src="/images/v9/05_FOTO_FIGHT_MOBILE_TANPA_TEKST.png"
-                alt="University Open & SMA Open JKBF 2026"
-                fill
-                quality={85}
-                className="object-cover object-center filter grayscale contrast-125 brightness-75 transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 group-hover:brightness-90"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+              <picture className="absolute inset-0 w-full h-full">
+                <source
+                  media="(max-width: 767px)"
+                  srcSet="/images/jkbf-photo/mobile/jkbf-women-fight-mobile-1080x1350.webp"
+                  type="image/webp"
+                />
+                <img
+                  src="/images/jkbf-photo/desktop/jkbf-women-fight-desktop-1920x1080.webp"
+                  alt="Wadah prestasi atlet kickboxing muda pelajar dan mahasiswa"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover object-center filter grayscale contrast-125 brightness-75 transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 group-hover:brightness-90"
+                />
+              </picture>
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/65 to-transparent" />
             </div>
 
@@ -332,13 +348,20 @@ export default function HomeClient() {
       <section id="registration" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-12 max-w-[1440px] mx-auto">
         <div className="relative overflow-hidden bg-[#111114] border border-white/15 p-8 sm:p-12 lg:p-16 rounded-sm shadow-2xl">
           <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-25">
-            <Image
-              src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
-              alt="Fighter Kickboxing JKBF 2026"
-              fill
-              className="object-cover object-right filter grayscale contrast-125"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+            <picture className="absolute inset-0 w-full h-full">
+              <source
+                media="(max-width: 767px)"
+                srcSet="/images/jkbf-photo/mobile/jkbf-fighter-preparation-mobile-1080x1350.webp"
+                type="image/webp"
+              />
+              <img
+                src="/images/jkbf-photo/desktop/jkbf-fighter-preparation-desktop-1600x1200.webp"
+                alt="Persiapan fighter kickboxing dan pelatih"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover object-right filter grayscale contrast-125"
+              />
+            </picture>
             <div className="absolute inset-0 bg-gradient-to-r from-[#111114] via-[#111114]/90 to-transparent" />
           </div>
 

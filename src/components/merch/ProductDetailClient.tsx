@@ -56,7 +56,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
       productId: product.id,
       name: product.name,
       slug: product.slug,
-      imageUrl: product.imageUrl || "/images/v9/08_REFERENSI_FOTO_DAN_TEKSTUR.png",
+      imageUrl: product.imageUrl || "/images/jkbf-brand-poster.png",
       size: selectedVariant.size,
       color: selectedVariant.color,
       price: product.price,
@@ -76,7 +76,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
       productId: product.id,
       name: product.name,
       slug: product.slug,
-      imageUrl: product.imageUrl || "/images/v9/08_REFERENSI_FOTO_DAN_TEKSTUR.png",
+      imageUrl: product.imageUrl || "/images/jkbf-brand-poster.png",
       size: selectedVariant.size,
       color: selectedVariant.color,
       price: product.price,
@@ -108,7 +108,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
           <div className="lg:col-span-7">
             <div className="relative aspect-[4/5] w-full bg-[#141416] border border-white/10 overflow-hidden">
               <Image
-                src={product.imageUrl || "/images/v9/08_REFERENSI_FOTO_DAN_TEKSTUR.png"}
+                src={product.imageUrl || "/images/jkbf-brand-poster.png"}
                 alt={product.name}
                 fill
                 priority
@@ -273,7 +273,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Props)
               >
                 <div className="relative aspect-[4/5] w-full bg-[#1c1c1f] overflow-hidden mb-3">
                   <Image
-                    src={rel.imageUrl || "/images/v9/08_REFERENSI_FOTO_DAN_TEKSTUR.png"}
+                    src={rel.imageUrl || "/images/jkbf-brand-poster.png"}
                     alt={rel.name}
                     fill
                     sizes="(max-width: 640px) 100vw, 33vw"
