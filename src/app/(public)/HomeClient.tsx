@@ -31,9 +31,10 @@ const TICKER_ITEMS = [
 export default function HomeClient() {
   return (
     <div className="w-full overflow-x-hidden bg-[#000000] text-[#F5F5F7]">
-      {/* ─── 1. HERO FIGHT BANNER (ALUR BYON: BANNER UTAMA DI ATAS) ─────────── */}
-      <section className="relative min-h-[46dvh] sm:min-h-[52dvh] flex items-center justify-center pt-24 sm:pt-28 pb-10 sm:pb-14 overflow-hidden border-b border-white/10">
-        <div className="absolute inset-0">
+      {/* ─── 1. HERO FIGHT SECTION (SEAMLESS BYON FLOW: BANNER + COUNTDOWN + CTA) ─── */}
+      <section className="relative pt-24 sm:pt-28 pb-12 sm:pb-16 overflow-hidden">
+        {/* Background photo at top that smoothly dissolves into pure pitch black (NO dividing line) */}
+        <div className="absolute inset-x-0 top-0 h-[65%] sm:h-[70%] pointer-events-none">
           <Image
             src="/images/v9/04_FOTO_FIGHT_DESKTOP_TANPA_TEKST.png"
             alt="Pertarungan kickboxing di atas ring Jogja Kickboxing Festival 2026"
@@ -43,12 +44,15 @@ export default function HomeClient() {
             sizes="100vw"
             className="object-cover object-center opacity-45 contrast-125 grayscale"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/60 to-[#000000]/80" />
+          {/* Multi-layered smooth gradient fade down to #000000 */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/70 to-[#000000]/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#000000]/60 via-transparent to-[#000000]" />
           <div className="absolute inset-0 combat-grain pointer-events-none" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,31,44,0.25),transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,31,44,0.22),transparent_70%)]" />
         </div>
 
         <div className="editorial-container relative z-10 w-full text-center flex flex-col items-center">
+          {/* Top Banner Content: Sanction, Massive Title, Dates & Venue */}
           <div className="max-w-4xl mx-auto space-y-4 sm:space-y-5 flex flex-col items-center">
             {/* Sanction Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/85 border-l-4 border-l-[#D91F2C] border-y border-r border-white/15 rounded-xs shadow-xl">
@@ -84,42 +88,40 @@ export default function HomeClient() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* ─── 2. BYON COUNTDOWN & BUY TICKET CTA (DIRECTLY BELOW BANNER) ──────── */}
-      <section className="bg-[#000000] py-8 sm:py-12 border-b border-white/10 relative overflow-hidden">
-        <div className="editorial-container relative z-10 flex flex-col items-center justify-center space-y-6 sm:space-y-8 text-center">
-          {/* 4 White Cards ala Byon */}
-          <CountdownTimer
-            targetIso={EVENT_CONFIG.dates.startIso}
-            label="COUNTDOWN MENUJU HARI H"
-          />
+          {/* Smooth Natural Flow into Countdown & CTA (Zero Divider Lines) */}
+          <div className="pt-8 sm:pt-11 flex flex-col items-center justify-center space-y-6 sm:space-y-8 w-full">
+            {/* 4 White Cards ala Byon */}
+            <CountdownTimer
+              targetIso={EVENT_CONFIG.dates.startIso}
+              label="COUNTDOWN MENUJU HARI H"
+            />
 
-          {/* Action CTA: Exactly under Countdown like "BUY TICKET →" on Byon */}
-          <div className="flex flex-col items-center justify-center gap-3 w-full sm:w-auto">
-            <a
-              href={jkbfLinks.fighterRegistration}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-10 sm:px-14 py-4 sm:py-4.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-[0.98] text-white font-display text-xl sm:text-2xl tracking-wider uppercase rounded-xs transition-all shadow-[0_0_35px_rgba(217,31,44,0.55)]"
-            >
-              DAFTAR SEBAGAI FIGHTER
-              <ArrowUpRight className="w-6 h-6" />
-            </a>
+            {/* Action CTA: Exactly under Countdown like "BUY TICKET →" on Byon */}
+            <div className="flex flex-col items-center justify-center gap-3 w-full sm:w-auto">
+              <a
+                href={jkbfLinks.fighterRegistration}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-10 sm:px-14 py-4 sm:py-4.5 bg-[#D91F2C] hover:bg-[#B81521] active:scale-[0.98] text-white font-display text-xl sm:text-2xl tracking-wider uppercase rounded-xs transition-all shadow-[0_0_35px_rgba(217,31,44,0.55)]"
+              >
+                DAFTAR SEBAGAI FIGHTER
+                <ArrowUpRight className="w-6 h-6" />
+              </a>
 
-            <Link
-              href="/championship"
-              className="inline-flex items-center gap-1.5 font-technical text-xs font-bold uppercase tracking-[0.18em] text-[#A1A1AA] hover:text-white transition-colors group pt-1"
-            >
-              <span>LIHAT 7 PROGRAM KEJUARAAN</span>
-              <ChevronRight className="w-4 h-4 text-[#D91F2C] transition-transform group-hover:translate-x-1" />
-            </Link>
+              <Link
+                href="/championship"
+                className="inline-flex items-center gap-1.5 font-technical text-xs font-bold uppercase tracking-[0.18em] text-[#A1A1AA] hover:text-white transition-colors group pt-1"
+              >
+                <span>LIHAT 7 PROGRAM KEJUARAAN</span>
+                <ChevronRight className="w-4 h-4 text-[#D91F2C] transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ─── 3. OFFICIAL MARQUEE TICKER ──────────────────────────────────────── */}
+      {/* ─── 2. OFFICIAL MARQUEE TICKER ──────────────────────────────────────── */}
       <div className="bg-[#D91F2C] text-white py-3 border-b border-black/20 overflow-hidden">
         <div className="flex w-max animate-marquee items-center">
           {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, idx) => (
